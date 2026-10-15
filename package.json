@@ -1,0 +1,17 @@
+{
+  "name": "projects24",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Projects 24 - Production AI Agent Digital Design & Front-End Needs",
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/agents-sync.mjs",
+    "check": "node scripts/agents-sync.mjs --check --all-markdown",
+    "check:links": "node scripts/check-links.mjs",
+    "test": "node --test scripts/*.test.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "typescript": "^7.0.2"
+  }
+}

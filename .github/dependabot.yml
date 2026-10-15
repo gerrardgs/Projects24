@@ -1,0 +1,58 @@
+# Keeps the SHA-pinned actions and the template dependencies current.
+# The 7-day cooldown lets a compromised release be detected before it is proposed here.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    ignore:
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: npm
+    directory: /.agents/skills/native-from-scratch/assets/node-http-service
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    ignore:
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: docker
+    directories:
+      - /.agents/skills/native-from-scratch/assets/node-http-service
+      - /.agents/skills/native-from-scratch/assets/python-http-service
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    ignore:
+      - dependency-name: "node"
+        update-types: ["version-update:semver-major"]
+  - package-ecosystem: npm
+    directories:
+      - /.agents/skills/design-system-and-tokens/assets/design-tokens
+      - /.agents/skills/frontend-from-scratch/assets/static-site
+      - /.agents/skills/accessibility-audit/assets/axe-check
+      - /.agents/skills/figma-integration/assets/figma-variables-sync
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      front-end-templates:
+        patterns: ["*"]
+    ignore:
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]

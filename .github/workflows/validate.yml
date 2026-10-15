@@ -1,0 +1,223 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  spec:
+    name: Spec, scripts and workflows
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.14"
+      - name: Script self-tests
+        run: node --test "scripts/*.test.mjs"
+      - name: Validate rules, skills, mirror and links
+        run: node scripts/agents-sync.mjs --check --all-markdown
+      - name: Install lint tools
+        run: python -m pip install pyyaml==6.0.3 shellcheck-py==0.11.0.1 actionlint-py==1.7.12.25 zizmor==1.30.1
+      - name: Cross-check frontmatter with a full YAML parser
+        shell: python
+        run: |
+          import pathlib, re, sys, yaml
+          files = sorted(pathlib.Path(".agents").rglob("*.md"))
+          failures = 0
+          for path in files:
+              match = re.match(r"^---\n(.*?)\n---", path.read_text(encoding="utf-8"), re.S)
+              if not match:
+                  continue
+              try:
+                  yaml.safe_load(match.group(1))
+              except yaml.YAMLError as error:
+                  failures += 1
+                  print(f"{path}: {error}")
+          print(f"checked {len(files)} files, {failures} invalid")
+          sys.exit(1 if failures else 0)
+      - name: Lint shell scripts
+        run: shellcheck --severity=style scripts/install.sh
+      - name: Lint workflows
+        run: actionlint
+      - name: Audit workflows
+        run: zizmor --offline .
+      - name: Installer leaves an existing project's files alone
+        run: |
+          target="$RUNNER_TEMP/existing-project"
+          mkdir -p "$target"
+          printf '# Existing README\n' > "$target/README.md"
+          printf 'existing agent rules\n' > "$target/AGENTS.md"
+          bash scripts/install.sh --source . "$target"
+          grep -qx '# Existing README' "$target/README.md"
+          grep -qx 'existing agent rules' "$target/AGENTS.md"
+          test ! -e "$target/LICENSE"
+      - name: Installer produces a valid spec in a new project
+        run: |
+          target="$RUNNER_TEMP/new-project"
+          mkdir -p "$target"
+          bash scripts/install.sh --source . "$target"
+          cd "$target" && node scripts/agents-sync.mjs --check
+
+  node-template:
+    name: Node.js template (Node.js ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 24, 26]
+    defaults:
+      run:
+        working-directory: .agents/skills/native-from-scratch/assets/node-http-service
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm audit --audit-level=high
+
+  design-tokens-template:
+    name: Design tokens template (Node.js ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 24, 26]
+    defaults:
+      run:
+        working-directory: .agents/skills/design-system-and-tokens/assets/design-tokens
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - name: Contrast check for every theme
+        run: npm run check
+      - run: npm audit --audit-level=high
+
+  figma-variables-template:
+    name: Figma variables sync template (Node.js ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 24, 26]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+      # The tests import the token pipeline from the design-tokens template, so both need dependencies.
+      - run: npm ci
+        working-directory: .agents/skills/design-system-and-tokens/assets/design-tokens
+      - run: npm ci
+        working-directory: .agents/skills/figma-integration/assets/figma-variables-sync
+      - run: npm run typecheck
+        working-directory: .agents/skills/figma-integration/assets/figma-variables-sync
+      - run: npm test
+        working-directory: .agents/skills/figma-integration/assets/figma-variables-sync
+      - run: npm audit --audit-level=high
+        working-directory: .agents/skills/figma-integration/assets/figma-variables-sync
+
+  static-site-template:
+    name: Static site template (Node.js ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 24, 26]
+    defaults:
+      run:
+        working-directory: .agents/skills/frontend-from-scratch/assets/static-site
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      # The page ships no npm packages to browsers; its dev tools (Stylelint) depend on braces,
+      # whose advisory GHSA-vfj7-8cjw-p6xm had no patched release on 2026-10-15. Dependabot reports it.
+      - run: npm audit --omit=dev --audit-level=high
+
+  accessibility-scan:
+    name: Accessibility scan of the static site (axe-core)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - name: Install the scanner and Chromium
+        working-directory: .agents/skills/accessibility-audit/assets/axe-check
+        run: |
+          npm ci
+          npx --no-install playwright install --with-deps chromium
+      - name: Scan the starter page
+        run: |
+          site=.agents/skills/frontend-from-scratch/assets/static-site
+          PORT=8080 node "$site/serve.js" &
+          for _ in $(seq 1 20); do curl -fsS http://127.0.0.1:8080/ >/dev/null && break; sleep 0.5; done
+          node .agents/skills/accessibility-audit/assets/axe-check/check.mjs http://127.0.0.1:8080/
+
+  python-template:
+    name: Python template (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+    defaults:
+      run:
+        working-directory: .agents/skills/native-from-scratch/assets/python-http-service
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: python -m pip install --upgrade pip "setuptools>=83.0.0"
+      - run: python -m pip install --group dev
+      - run: ruff format --check .
+      - run: ruff check .
+      - run: mypy app.py test_app.py
+      - run: python -m unittest -v
+      - run: pip-audit --strict

@@ -1,0 +1,31 @@
+{
+  "generatedBy": "scripts/agents-sync.mjs",
+  "source": ".agents/skills",
+  "skills": [
+    "accessibility-audit",
+    "change-existing-code",
+    "ci-cd-pipeline",
+    "css-architecture-and-responsive",
+    "data-visualization-design",
+    "deploy-and-release",
+    "design-critique-and-review",
+    "design-system-and-tokens",
+    "design-to-code-handoff",
+    "figma-integration",
+    "framework-frontend-engineering",
+    "frontend-from-scratch",
+    "frontend-testing-and-visual-qa",
+    "graphic-design-production",
+    "mobile-engineering",
+    "motion-and-interaction",
+    "native-from-scratch",
+    "project-bootstrap",
+    "rigorous-code-audit",
+    "security-hardening",
+    "systematic-debugging",
+    "test-engineering",
+    "ui-design-and-prototyping",
+    "ux-research-and-strategy",
+    "web-performance-optimization"
+  ]
+}
