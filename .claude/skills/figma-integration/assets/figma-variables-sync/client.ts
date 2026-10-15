@@ -32,6 +32,53 @@ function describeFailure(status: number, retryAfter: string | null): string {
   }
 }
 
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null && !Array.isArray(value);
+
+const RESOLVED_TYPES: ReadonlySet<unknown> = new Set(["BOOLEAN", "FLOAT", "STRING", "COLOR"]);
+
+function checkVariable(id: string, value: unknown): string | null {
+  if (!isRecord(value)) return `variable ${id} is not an object`;
+  const { name, variableCollectionId, resolvedType, valuesByMode, scopes, codeSyntax, description } = value;
+  if (typeof name !== "string" || typeof variableCollectionId !== "string")
+    return `variable ${id} lacks name or collection`;
+  if (!RESOLVED_TYPES.has(resolvedType)) return `variable ${id} has unknown resolvedType`;
+  if (!isRecord(valuesByMode) || !Array.isArray(scopes) || !isRecord(codeSyntax) || typeof description !== "string") {
+    return `variable ${id} lacks valuesByMode, scopes, codeSyntax or description`;
+  }
+  return null;
+}
+
+function checkCollection(id: string, value: unknown): string | null {
+  if (!isRecord(value)) return `collection ${id} is not an object`;
+  const { name, modes, defaultModeId, variableIds } = value;
+  if (typeof name !== "string" || typeof defaultModeId !== "string")
+    return `collection ${id} lacks name or defaultModeId`;
+  if (!Array.isArray(modes) || !modes.every((mode) => isRecord(mode) && typeof mode.modeId === "string")) {
+    return `collection ${id} has invalid modes`;
+  }
+  return Array.isArray(variableIds) ? null : `collection ${id} lacks variableIds`;
+}
+
+/**
+ * Validates untrusted JSON (an API response or a saved file) before conversion. Checks every field that
+ * convert.ts reads, and throws with the first problem instead of letting a malformed file fail later.
+ */
+export function parseVariablesResponse(body: unknown): GetLocalVariablesResponse {
+  if (!isRecord(body) || !isRecord(body.meta)) throw new Error("not a variables response: missing meta");
+  const { variables, variableCollections } = body.meta;
+  if (!isRecord(variables) || !isRecord(variableCollections)) {
+    throw new Error("not a variables response: missing meta.variables or meta.variableCollections");
+  }
+  const problems = [
+    ...Object.entries(variables).map(([id, value]) => checkVariable(id, value)),
+    ...Object.entries(variableCollections).map(([id, value]) => checkCollection(id, value)),
+  ].filter((problem): problem is string => problem !== null);
+  if (problems.length > 0) throw new Error(`invalid variables response: ${problems[0]}`);
+  // Every field convert.ts reads was checked above; the remaining fields are passed through untouched.
+  return body as GetLocalVariablesResponse;
+}
+
 export async function fetchLocalVariables(
   fileKey: string,
   token: string,
@@ -48,13 +95,5 @@ export async function fetchLocalVariables(
     await response.body?.cancel();
     throw new FigmaApiError(response.status, describeFailure(response.status, response.headers.get("retry-after")));
   }
-  const body: unknown = await response.json();
-  if (typeof body !== "object" || body === null || !("meta" in body)) {
-    throw new FigmaApiError(response.status, "response does not look like a variables response");
-  }
-  const { meta } = body as { meta: unknown };
-  if (typeof meta !== "object" || meta === null || !("variables" in meta) || !("variableCollections" in meta)) {
-    throw new FigmaApiError(response.status, "response is missing meta.variables or meta.variableCollections");
-  }
-  return body as GetLocalVariablesResponse;
+  return parseVariablesResponse(await response.json());
 }

@@ -1,9 +1,8 @@
 // Minimal JSON HTTP service using only Node.js built-ins.
 // Runs directly with `node server.ts` on Node.js 22.18+ / 23.6+ (built-in type stripping).
 
-import http from "node:http";
 import { randomUUID } from "node:crypto";
-import type { AddressInfo } from "node:net";
+import http from "node:http";
 import { fileURLToPath } from "node:url";
 
 export interface User {
@@ -51,26 +50,23 @@ class HttpError extends Error {
   }
 }
 
+function nameProblem(name: unknown): string | null {
+  if (typeof name !== "string" || name.trim().length === 0) return "name is required";
+  return name.length > MAX_NAME_LENGTH ? `name must be at most ${MAX_NAME_LENGTH} characters` : null;
+}
+
+function emailProblem(email: unknown): string | null {
+  if (typeof email !== "string" || !EMAIL_PATTERN.test(email)) return "email must be a valid address";
+  return email.length > MAX_EMAIL_LENGTH ? `email must be at most ${MAX_EMAIL_LENGTH} characters` : null;
+}
+
 /** Pure validation: turns untrusted JSON into a typed NewUser or a list of problems. */
 export function parseNewUser(input: unknown): Validation<NewUser> {
   if (typeof input !== "object" || input === null || Array.isArray(input)) {
     return { ok: false, errors: ["body must be a JSON object"] };
   }
-  const { name, email } = input as Record<string, unknown>;
-  const errors: string[] = [];
-
-  if (typeof name !== "string" || name.trim().length === 0) {
-    errors.push("name is required");
-  } else if (name.length > MAX_NAME_LENGTH) {
-    errors.push(`name must be at most ${MAX_NAME_LENGTH} characters`);
-  }
-
-  if (typeof email !== "string" || !EMAIL_PATTERN.test(email)) {
-    errors.push("email must be a valid address");
-  } else if (email.length > MAX_EMAIL_LENGTH) {
-    errors.push(`email must be at most ${MAX_EMAIL_LENGTH} characters`);
-  }
-
+  const { name, email }: { name?: unknown; email?: unknown } = input;
+  const errors = [nameProblem(name), emailProblem(email)].filter((error): error is string => error !== null);
   if (errors.length > 0 || typeof name !== "string" || typeof email !== "string") {
     return { ok: false, errors };
   }
@@ -117,48 +113,51 @@ function sendJson(
   response.end(payload);
 }
 
-async function route(
+async function handleUsers(
   store: UserStore,
   request: http.IncomingMessage,
   response: http.ServerResponse,
 ): Promise<void> {
-  const { pathname } = new URL(request.url ?? "/", "http://localhost");
-  const method = request.method ?? "GET";
+  if (request.method !== "POST") {
+    sendJson(response, 405, { error: "Method not allowed" }, { Allow: "POST" });
+    return;
+  }
+  const parsed = parseNewUser(await readJsonBody(request));
+  if (!parsed.ok) {
+    sendJson(response, 400, { error: "Validation failed", details: parsed.errors });
+    return;
+  }
+  sendJson(response, 201, store.create(parsed.value));
+}
 
+function handleUser(store: UserStore, id: string, request: http.IncomingMessage, response: http.ServerResponse): void {
+  if (request.method !== "GET") {
+    sendJson(response, 405, { error: "Method not allowed" }, { Allow: "GET" });
+    return;
+  }
+  const user = store.findById(decodeURIComponent(id));
+  if (user === undefined) {
+    sendJson(response, 404, { error: "User not found" });
+    return;
+  }
+  sendJson(response, 200, user);
+}
+
+async function route(store: UserStore, request: http.IncomingMessage, response: http.ServerResponse): Promise<void> {
+  const { pathname } = new URL(request.url ?? "/", "http://localhost");
   if (pathname === "/health") {
     sendJson(response, 200, { status: "ok" });
     return;
   }
-
   if (pathname === "/users") {
-    if (method !== "POST") {
-      sendJson(response, 405, { error: "Method not allowed" }, { Allow: "POST" });
-      return;
-    }
-    const parsed = parseNewUser(await readJsonBody(request));
-    if (!parsed.ok) {
-      sendJson(response, 400, { error: "Validation failed", details: parsed.errors });
-      return;
-    }
-    sendJson(response, 201, store.create(parsed.value));
+    await handleUsers(store, request, response);
     return;
   }
-
-  const userMatch = USER_PATH_PATTERN.exec(pathname);
-  if (userMatch?.[1] !== undefined) {
-    if (method !== "GET") {
-      sendJson(response, 405, { error: "Method not allowed" }, { Allow: "GET" });
-      return;
-    }
-    const user = store.findById(decodeURIComponent(userMatch[1]));
-    if (user === undefined) {
-      sendJson(response, 404, { error: "User not found" });
-      return;
-    }
-    sendJson(response, 200, user);
+  const userId = USER_PATH_PATTERN.exec(pathname)?.[1];
+  if (userId !== undefined) {
+    handleUser(store, userId, request, response);
     return;
   }
-
   sendJson(response, 404, { error: "Route not found" });
 }
 
@@ -189,10 +188,11 @@ function readPort(rawPort: string | undefined): number {
 }
 
 function main(): void {
-  const port = readPort(process.env["PORT"]);
+  const port = readPort(process.env.PORT);
   const server = createServer(new UserStore());
   server.listen(port, () => {
-    const { port: boundPort } = server.address() as AddressInfo;
+    const address = server.address();
+    const boundPort = typeof address === "object" && address !== null ? address.port : port;
     console.log(JSON.stringify({ level: "info", message: "listening", port: boundPort }));
   });
 

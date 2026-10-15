@@ -2,6 +2,36 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.3.0: clean code and clean execution audit (2026-10-16)
+
+The concept is now explicit and the repository follows it.
+
+### Added
+
+- Rule `15-clean-execution` (always on): before acting, while acting, when something fails, leave no mess, tools and scripts you write, report. Same substance as R-09 of Projects 23, with design and front-end additions (shared design files, headless browsers, dev servers, generated `_headers`, token CSS and mirrors). Imported by `CLAUDE.md`.
+- Rule 02 section 8: clean code in HTML, CSS, components, assets and design files, and how ESLint cyclomatic and Biome cognitive complexity map to the rule.
+- `AGENTS.md`: a definition of the concept at the top, the rule in the index, and a "clean working tree" item in the definition of done. README: a concept section.
+- Biome 2.5.15 at the repository root (`biome.json`, `npm run lint`, `npm run format`), run in CI; it formats and lints all 23 JavaScript and TypeScript files, orders imports, and fails on cognitive complexity above 15.
+- Static site: `tsconfig.json` with `checkJs` and a `typecheck` script (TypeScript strict over the JavaScript, with JSDoc types); run in CI.
+- Tests for the validator's new pure check functions (script tests 12 → 14) and for the Figma response parser (template tests 13 → 16).
+
+### Fixed: the code did not follow its own rules
+
+| Rule broken | Where | Fix |
+| :--- | :--- | :--- |
+| Rule 02: cyclomatic complexity at most 10 (measured with ESLint `complexity`) | 12 functions: `convertVariables` (18), `toCssValue` (25), `flattenTokens` (16), `fetchLocalVariables` (15), `mapType` (11), `validateSkill` (19), `validateRules` (12), `parseFrontmatter` (11), `parseNewUser` (13), `route` (11) | Split into small single-purpose functions and lookup tables; ESLint now reports no function above 10, no nesting above 3 and no function with more than 4 parameters; all tests passing |
+| Rule 01: nesting depth of 3 or less | `check.mjs` (6 levels), `convert.ts` (5) | Extracted `scanPage` and `report`; per-mode conversion in its own function |
+| Rule 02: few parameters, grouped into an object | Fixture helper with 7 parameters | One typed options object |
+| Rule 02: formatting is the tool's job | 12 files never formatted by a tool | Biome formats every code file; enforced in CI |
+| Rule 02 and 05: no unchecked `as` casts; validate at the boundary | `cli.ts` cast `JSON.parse` output to the API type; `client.ts` cast after a shallow check; casts in `build.ts`, `server.ts`, `convert.ts` | New `parseVariablesResponse` validates every field the converter reads, used by both the API client and the CLI; other casts replaced with type guards |
+| Rule 02: strictest types | 10 implicit `any` in the static site JavaScript | JSDoc types; strict type-check in CI |
+| Dead code | Unused `AddressInfo` import | Removed; `noUnusedLocals` and `noUnusedParameters` on in every TypeScript template |
+| Duplicate warnings | The Figma converter repeated a type-level warning once per mode | Reported once; covered by a test |
+| Verified facts | `typescript-eslint` 8.71.2 does not support TypeScript 7 (peer range `<6.1.0`), but the references recommended both together | Compatibility note in the framework references, toolchains and anti-hallucination playbook |
+| One writing style | American spellings in README prose among British-English docs | Standardised; style rule added to the contributing guide |
+
+The parameter limit of 4 (ESLint `max-params`) was a measurement aid for this audit; rule 02 itself says "prefer few parameters".
+
 ## 1.2.0: deployment, CI, security headers, tools catalog, prompt library (2026-10-15, stages 2 and 3 of the full audit)
 
 ### Added

@@ -67,7 +67,7 @@ async function probeOnce(url) {
     }
     return { status: response.status };
   } catch (error) {
-    return { error: error instanceof Error ? error.cause?.code ?? error.message : String(error) };
+    return { error: error instanceof Error ? (error.cause?.code ?? error.message) : String(error) };
   }
 }
 

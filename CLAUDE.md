@@ -5,6 +5,7 @@
 @.agents/rules/06-security.md
 @.agents/rules/09-design-principles.md
 @.agents/rules/10-accessibility.md
+@.agents/rules/15-clean-execution.md
 
 ## Claude Code notes
 

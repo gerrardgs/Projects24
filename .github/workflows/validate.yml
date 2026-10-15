@@ -27,6 +27,9 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.14"
+      - run: npm ci
+      - name: Format and lint all code (Biome, including cognitive complexity)
+        run: npm run lint
       - name: Script self-tests
         run: node --test "scripts/*.test.mjs"
       - name: Validate rules, skills, mirror and links
@@ -168,6 +171,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm run lint
+      - run: npm run typecheck
       - run: npm test
       # The page ships no npm packages to browsers; its dev tools (Stylelint) depend on braces,
       # whose advisory GHSA-vfj7-8cjw-p6xm had no patched release on 2026-10-15. Dependabot reports it.

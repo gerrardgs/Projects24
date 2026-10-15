@@ -47,6 +47,16 @@ const warn = (where, message) => warnings.push(`${relative(where)}: ${message}`)
  * It is deliberately strict: anything a real YAML parser could read differently (for example an unquoted
  * value containing ": ") is an error, because tools such as Antigravity drop files with invalid frontmatter.
  */
+/** The indented (or blank) lines that belong to the key on line `index`. */
+function indentedLinesAfter(lines, index) {
+  const nested = [];
+  for (let next = index + 1; next < lines.length; next += 1) {
+    if (!/^\s+\S/.test(lines[next]) && lines[next].trim() !== "") break;
+    nested.push(lines[next]);
+  }
+  return nested;
+}
+
 export function parseFrontmatter(text) {
   const match = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(text);
   if (match === null) {
@@ -63,11 +73,8 @@ export function parseFrontmatter(text) {
     }
     const [, key, rawValue = ""] = pair;
     if (Object.hasOwn(data, key)) throw new Error(`duplicate key "${key}"`);
-    const nested = [];
-    while (index + 1 < lines.length && (/^\s+\S/.test(lines[index + 1]) || lines[index + 1].trim() === "")) {
-      index += 1;
-      nested.push(lines[index]);
-    }
+    const nested = indentedLinesAfter(lines, index);
+    index += nested.length;
     data[key] = parseValue(key, rawValue.trim(), nested);
   }
   return { data, body: text.slice(match[0].length) };
@@ -96,7 +103,11 @@ function parseValue(key, value, nested) {
   if (value.startsWith("[")) {
     const flow = /^\[(.*)\]\s*(?:#.*)?$/.exec(value);
     if (flow === null) throw new Error(`key "${key}" has an unterminated flow list`);
-    return flow[1].split(",").map((item) => item.trim()).filter((item) => item !== "").map((item) => parseScalar(key, item));
+    return flow[1]
+      .split(",")
+      .map((item) => item.trim())
+      .filter((item) => item !== "")
+      .map((item) => parseScalar(key, item));
   }
   return parseScalar(key, value);
 }
@@ -110,7 +121,8 @@ export function parseScalar(key, raw) {
     const quoted = /^"((?:[^"\\]|\\.)*)"\s*(?:#.*)?$/.exec(value);
     if (quoted === null) throw new Error(`key "${key}" has a malformed double-quoted string`);
     return quoted[1].replace(/\\(.)/g, (_, escaped) => {
-      if (!Object.hasOwn(DOUBLE_QUOTE_ESCAPES, escaped)) throw new Error(`key "${key}" uses unsupported escape \\${escaped}`);
+      if (!Object.hasOwn(DOUBLE_QUOTE_ESCAPES, escaped))
+        throw new Error(`key "${key}" uses unsupported escape \\${escaped}`);
       return DOUBLE_QUOTE_ESCAPES[escaped];
     });
   }
@@ -124,7 +136,9 @@ export function parseScalar(key, raw) {
     throw new Error(`key "${key}": a plain value cannot start with "${plain[0]}"; wrap the value in double quotes`);
   }
   if (/:\s/.test(plain) || plain.endsWith(":")) {
-    throw new Error(`key "${key}": unquoted value contains ": ", which is invalid YAML; wrap the value in double quotes`);
+    throw new Error(
+      `key "${key}": unquoted value contains ": ", which is invalid YAML; wrap the value in double quotes`,
+    );
   }
   return plain;
 }
@@ -156,7 +170,10 @@ async function treeFingerprint(directory) {
 async function sourceSkillNames() {
   if (!existsSync(SOURCE_SKILLS)) return [];
   const entries = await readdir(SOURCE_SKILLS, { withFileTypes: true });
-  return entries.filter((entry) => entry.isDirectory() && !IGNORED_NAMES.has(entry.name)).map((entry) => entry.name).sort();
+  return entries
+    .filter((entry) => entry.isDirectory() && !IGNORED_NAMES.has(entry.name))
+    .map((entry) => entry.name)
+    .sort();
 }
 
 async function readManifest(mirror) {
@@ -207,47 +224,89 @@ async function checkMirror(mirror, skillNames) {
   }
 }
 
+/** Parses frontmatter, reporting a failure and returning undefined when it is invalid. */
+function frontmatterOrFail(file, text) {
+  try {
+    return parseFrontmatter(text);
+  } catch (error) {
+    fail(file, `invalid frontmatter: ${error.message}`);
+    return undefined;
+  }
+}
+
+function skillNameProblem(name, directoryName) {
+  if (typeof name !== "string" || name.length === 0 || name.length > SKILL_NAME_MAX) {
+    return `name must be 1-${SKILL_NAME_MAX} characters`;
+  }
+  if (!SKILL_NAME_PATTERN.test(name)) {
+    return "name may contain only lowercase letters, digits and single hyphens, not at the start or end";
+  }
+  return name === directoryName ? null : `name "${name}" must match its directory name "${directoryName}"`;
+}
+
+function descriptionProblem(description) {
+  if (typeof description !== "string" || description.length === 0) return "description is required";
+  return description.length > SKILL_DESCRIPTION_MAX
+    ? `description is ${description.length} characters; maximum is ${SKILL_DESCRIPTION_MAX}`
+    : null;
+}
+
+function optionalFieldsProblems({ compatibility, metadata }) {
+  const problems = [];
+  if (
+    compatibility !== undefined &&
+    (typeof compatibility !== "string" || compatibility.length > SKILL_COMPATIBILITY_MAX)
+  ) {
+    problems.push(`compatibility must be a string of at most ${SKILL_COMPATIBILITY_MAX} characters`);
+  }
+  if (metadata !== undefined && (typeof metadata !== "object" || Array.isArray(metadata))) {
+    problems.push("metadata must be a map of string keys to string values");
+  }
+  return problems;
+}
+
+/** Pure checks of a skill's frontmatter against the Agent Skills specification. Returns error messages. */
+export function skillFrontmatterProblems(data, directoryName) {
+  return [
+    skillNameProblem(data.name, directoryName),
+    descriptionProblem(data.description),
+    ...optionalFieldsProblems(data),
+  ].filter((problem) => problem !== null);
+}
+
 async function validateSkill(name) {
   const skillFile = path.join(SOURCE_SKILLS, name, "SKILL.md");
   if (!existsSync(skillFile)) {
     fail(path.join(SOURCE_SKILLS, name), "missing SKILL.md");
     return;
   }
-  let parsed;
-  try {
-    parsed = parseFrontmatter(await readFile(skillFile, "utf8"));
-  } catch (error) {
-    fail(skillFile, `invalid frontmatter: ${error.message}`);
-    return;
-  }
-  const { data, body } = parsed;
-  if (data === null) {
+  const parsed = frontmatterOrFail(skillFile, await readFile(skillFile, "utf8"));
+  if (parsed === undefined) return;
+  if (parsed.data === null) {
     fail(skillFile, "missing YAML frontmatter");
     return;
   }
-  const skillName = data.name;
-  if (typeof skillName !== "string" || skillName.length === 0 || skillName.length > SKILL_NAME_MAX) {
-    fail(skillFile, `name must be 1-${SKILL_NAME_MAX} characters`);
-  } else if (!SKILL_NAME_PATTERN.test(skillName)) {
-    fail(skillFile, "name may contain only lowercase letters, digits and single hyphens, not at the start or end");
-  } else if (skillName !== name) {
-    fail(skillFile, `name "${skillName}" must match its directory name "${name}"`);
-  }
-  if (typeof data.description !== "string" || data.description.length === 0) {
-    fail(skillFile, "description is required");
-  } else if (data.description.length > SKILL_DESCRIPTION_MAX) {
-    fail(skillFile, `description is ${data.description.length} characters; maximum is ${SKILL_DESCRIPTION_MAX}`);
-  }
-  if (data.compatibility !== undefined && (typeof data.compatibility !== "string" || data.compatibility.length > SKILL_COMPATIBILITY_MAX)) {
-    fail(skillFile, `compatibility must be a string of at most ${SKILL_COMPATIBILITY_MAX} characters`);
-  }
-  if (data.metadata !== undefined && (typeof data.metadata !== "object" || Array.isArray(data.metadata))) {
-    fail(skillFile, "metadata must be a map of string keys to string values");
-  }
-  const bodyLines = body.split("\n").length;
+  for (const problem of skillFrontmatterProblems(parsed.data, name)) fail(skillFile, problem);
+  const bodyLines = parsed.body.split("\n").length;
   if (bodyLines > SKILL_BODY_MAX_LINES) {
-    warn(skillFile, `SKILL.md body has ${bodyLines} lines; keep it under ${SKILL_BODY_MAX_LINES} and move detail to references/`);
+    warn(
+      skillFile,
+      `SKILL.md body has ${bodyLines} lines; keep it under ${SKILL_BODY_MAX_LINES} and move detail to references/`,
+    );
   }
+}
+
+/** Pure checks of a rule's activation frontmatter (Antigravity and Windsurf format). Returns error messages. */
+export function ruleFrontmatterProblems(data) {
+  if (data === null || !RULE_TRIGGERS.has(data.trigger)) {
+    return [
+      `needs frontmatter "trigger: ${[...RULE_TRIGGERS].join(" | ")}" (Antigravity silently ignores rules without it)`,
+    ];
+  }
+  const problems = [];
+  if (data.trigger === "model_decision" && !data.description) problems.push("model_decision rules need a description");
+  if (data.trigger === "glob" && !data.globs && !data.glob) problems.push("glob rules need globs");
+  return problems;
 }
 
 async function validateRules() {
@@ -256,24 +315,14 @@ async function validateRules() {
   const ruleFiles = [];
   for (const file of (await listFiles(RULES_DIR)).filter((candidate) => candidate.endsWith(".md"))) {
     const text = await readFile(file, "utf8");
-    if (text.length > RULE_MAX_CHARS) {
+    if (text.length > RULE_MAX_CHARS)
       fail(file, `${text.length} characters; keep rule files at or under ${RULE_MAX_CHARS}`);
-    }
-    let data;
-    try {
-      ({ data } = parseFrontmatter(text));
-    } catch (error) {
-      fail(file, `invalid frontmatter: ${error.message}`);
-      continue;
-    }
+    const parsed = frontmatterOrFail(file, text);
+    if (parsed === undefined) continue;
     ruleFiles.push(file);
-    if (data === null || !RULE_TRIGGERS.has(data.trigger)) {
-      fail(file, `needs frontmatter "trigger: ${[...RULE_TRIGGERS].join(" | ")}" (Antigravity silently ignores rules without it)`);
-      continue;
-    }
-    if (data.trigger === "model_decision" && !data.description) fail(file, "model_decision rules need a description");
-    if (data.trigger === "glob" && !data.globs && !data.glob) fail(file, "glob rules need globs");
-    if (data.trigger === "always_on") {
+    const problems = ruleFrontmatterProblems(parsed.data);
+    for (const problem of problems) fail(file, problem);
+    if (problems.length === 0 && parsed.data.trigger === "always_on") {
       alwaysOnChars += text.length;
       alwaysOnFiles.push(file);
     }
@@ -302,9 +351,13 @@ async function validateClaudeImports(alwaysOnFiles) {
   const claudeFile = path.join(ROOT, "CLAUDE.md");
   if (!existsSync(claudeFile)) return;
   const importLines = new Set(
-    (await readFile(claudeFile, "utf8")).split(/\r?\n/).map((line) => line.trim()).filter((line) => line.startsWith("@")),
+    (await readFile(claudeFile, "utf8"))
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter((line) => line.startsWith("@")),
   );
-  if (!importLines.has("@AGENTS.md")) fail(claudeFile, 'must contain the line "@AGENTS.md" so Claude Code loads the shared rules');
+  if (!importLines.has("@AGENTS.md"))
+    fail(claudeFile, 'must contain the line "@AGENTS.md" so Claude Code loads the shared rules');
   for (const file of alwaysOnFiles) {
     const expected = `@${path.relative(ROOT, file).split(path.sep).join("/")}`;
     if (!importLines.has(expected)) warn(claudeFile, `does not import always-on rule "${expected}"`);
@@ -372,12 +425,18 @@ async function validateLinks(allMarkdown) {
 async function validateLegacyFiles() {
   for (const name of LEGACY_FILES) {
     if (existsSync(path.join(ROOT, name))) {
-      warn(path.join(ROOT, name), "legacy file; its tool also reads AGENTS.md, so this duplicates instructions. Remove it");
+      warn(
+        path.join(ROOT, name),
+        "legacy file; its tool also reads AGENTS.md, so this duplicates instructions. Remove it",
+      );
     }
   }
   const rootSkills = path.join(ROOT, "skills");
   if (existsSync(rootSkills) && (await stat(rootSkills)).isDirectory()) {
-    warn(rootSkills, "duplicates .agents/skills; coding agents load skills from .agents/skills or .claude/skills, not from here (a root skills/ folder is only a convention for publishing skill repositories)");
+    warn(
+      rootSkills,
+      "duplicates .agents/skills; coding agents load skills from .agents/skills or .claude/skills, not from here (a root skills/ folder is only a convention for publishing skill repositories)",
+    );
   }
 }
 

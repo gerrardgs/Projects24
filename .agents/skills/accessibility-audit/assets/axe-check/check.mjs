@@ -23,44 +23,51 @@ if (urls.length === 0) {
   process.exit(2);
 }
 
+/** Loads one URL in one viewport and colour scheme, and collects axe violations, console errors and overflow. */
+async function scanPage(browser, url, viewport, colorScheme) {
+  const context = await browser.newContext({ colorScheme, viewport, reducedMotion: "reduce" });
+  try {
+    const page = await context.newPage();
+    const consoleErrors = [];
+    page.on("console", (message) => {
+      if (message.type() === "error") consoleErrors.push(message.text());
+    });
+    page.on("pageerror", (error) => consoleErrors.push(error.message));
+    await page.goto(url, { waitUntil: "load" });
+    const { violations } = await new AxeBuilder({ page }).withTags(WCAG_TAGS).analyze();
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+    return { label: `${url} [${viewport.name}, ${colorScheme}]`, violations, consoleErrors, overflow };
+  } finally {
+    await context.close();
+  }
+}
+
+/** Prints one scan result and returns the number of problems it found. */
+function report({ label, violations, consoleErrors, overflow }) {
+  // WCAG 1.4.10 Reflow: content should not need horizontal scrolling at 320 CSS px wide.
+  if (overflow) console.log(`WARN ${label}: page scrolls horizontally`);
+  for (const message of consoleErrors) console.log(`FAIL ${label}: console error: ${message}`);
+  for (const violation of violations) {
+    console.log(`FAIL ${label}: ${violation.id} (${violation.impact}) ${violation.help}`);
+    for (const node of violation.nodes) console.log(`       ${node.target.join(" ")}`);
+    console.log(`       ${violation.helpUrl}`);
+  }
+  const problems = consoleErrors.length + violations.reduce((sum, violation) => sum + violation.nodes.length, 0);
+  if (problems === 0) console.log(`pass ${label}`);
+  return problems;
+}
+
+const runs = urls.flatMap((url) =>
+  VIEWPORTS.flatMap((viewport) => SCHEMES.map((colorScheme) => ({ url, viewport, colorScheme }))),
+);
 const browser = await chromium.launch();
-let violationCount = 0;
+let problemCount = 0;
 try {
-  for (const url of urls) {
-    for (const viewport of VIEWPORTS) {
-      for (const colorScheme of SCHEMES) {
-        const context = await browser.newContext({ colorScheme, viewport, reducedMotion: "reduce" });
-        const page = await context.newPage();
-        const consoleErrors = [];
-        page.on("console", (message) => {
-          if (message.type() === "error") consoleErrors.push(message.text());
-        });
-        page.on("pageerror", (error) => consoleErrors.push(error.message));
-        await page.goto(url, { waitUntil: "load" });
-        const { violations } = await new AxeBuilder({ page }).withTags(WCAG_TAGS).analyze();
-        const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
-        const label = `${url} [${viewport.name}, ${colorScheme}]`;
-        if (overflow) {
-          // WCAG 1.4.10 Reflow: content should not need horizontal scrolling at 320 CSS px wide.
-          console.log(`WARN ${label}: page scrolls horizontally`);
-        }
-        for (const message of consoleErrors) {
-          violationCount += 1;
-          console.log(`FAIL ${label}: console error: ${message}`);
-        }
-        if (violations.length === 0 && consoleErrors.length === 0) console.log(`pass ${label}`);
-        for (const violation of violations) {
-          violationCount += violation.nodes.length;
-          console.log(`FAIL ${label}: ${violation.id} (${violation.impact}) ${violation.help}`);
-          for (const node of violation.nodes) console.log(`       ${node.target.join(" ")}`);
-          console.log(`       ${violation.helpUrl}`);
-        }
-        await context.close();
-      }
-    }
+  for (const { url, viewport, colorScheme } of runs) {
+    problemCount += report(await scanPage(browser, url, viewport, colorScheme));
   }
 } finally {
   await browser.close();
 }
-console.log(`${violationCount} problem(s)`);
-process.exitCode = violationCount > 0 ? 1 : 0;
+console.log(`${problemCount} problem(s)`);
+process.exitCode = problemCount > 0 ? 1 : 0;

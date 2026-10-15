@@ -43,7 +43,7 @@ Mobile and desktop with web skills: React Native ([reactnative.dev](https://reac
 | Tool | Package | Latest | Docs |
 | :--- | :--- | :--- | :--- |
 | ESLint | `eslint` | 10.12.0 | [eslint.org/docs](https://eslint.org/docs/latest/) |
-| typescript-eslint | `typescript-eslint` | 8.71.2 | [typescript-eslint.io](https://typescript-eslint.io/) |
+| typescript-eslint | `typescript-eslint` | 8.71.2 | [typescript-eslint.io](https://typescript-eslint.io/). Peer range on 2026-10-16: `typescript >=4.8.4 <6.1.0`, so it does not yet support TypeScript 7; pin TypeScript 5.x or 6.0 where typed linting is needed, or lint with Biome |
 | eslint-plugin-jsx-a11y | `eslint-plugin-jsx-a11y` | 6.10.2 | [GitHub](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y) |
 | Biome (lint and format) | `@biomejs/biome` | 2.5.15 | [biomejs.dev](https://biomejs.dev/) |
 | Prettier | `prettier` | 3.9.10 | [prettier.io/docs](https://prettier.io/docs/) |

@@ -8,6 +8,8 @@ How to add or change rules, skills and templates without breaking any of the too
 - **Every template must run.** Code in `assets/` is executed in CI. Do not add code that you have not run.
 - **Edit sources, not copies.** Edit `AGENTS.md`, `.agents/rules/` and `.agents/skills/`. Never edit `.claude/skills/` by hand.
 - **Prefer primary sources.** Link standards and official documentation first (W3C, WHATWG, MDN, the vendor's docs); add blogs and courses as secondary reading. Check new links with `node scripts/check-links.mjs <file>`.
+- **One writing style.** Plain, direct British English in prose (colour, behaviour, optimise, licence as a noun). Code identifiers, CSS keywords (`forced-colors`), API fields, product and plan names, quotations and titles keep their own spelling.
+- **Clean code and clean execution apply to this repository too.** Code is formatted and linted by Biome (`npm run lint`, fix with `npm run format`), TypeScript templates type-check with `noUnusedLocals` and `noUnusedParameters`, and changes follow [rule 15](../.agents/rules/15-clean-execution.md): verified step by step, generated files regenerated, nothing temporary left behind.
 - **Design facts are facts.** Contrast ratios, Baseline status, platform sizes, licence terms and tool availability need a source and a date, like versions do.
 
 ## 2. Frontmatter
@@ -52,6 +54,7 @@ metadata:
 ## 4. Before you commit
 
 ```sh
+npm ci && npm run lint                            # Biome: format, lint, import order, complexity
 node --test "scripts/*.test.mjs"                  # validator self-tests
 node scripts/agents-sync.mjs                      # regenerate .claude/skills and validate
 node scripts/agents-sync.mjs --check --all-markdown  # what CI runs

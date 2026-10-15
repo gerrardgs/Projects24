@@ -3,14 +3,7 @@
 // Spec: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/
 // No dependencies: Node.js 22.18+ runs this file directly (type stripping).
 
-export type TokenType =
-  | "color"
-  | "dimension"
-  | "fontFamily"
-  | "fontWeight"
-  | "duration"
-  | "cubicBezier"
-  | "number";
+export type TokenType = "color" | "dimension" | "fontFamily" | "fontWeight" | "duration" | "cubicBezier" | "number";
 
 export interface FlatToken {
   readonly path: string;
@@ -56,27 +49,31 @@ const FONT_WEIGHT_NAMES: Readonly<Record<string, number>> = {
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
+const isTokenType = (value: unknown): value is TokenType => typeof value === "string" && TOKEN_TYPES.has(value);
+
+function leafToken(tree: Record<string, unknown>, path: string, type: string | undefined): FlatToken {
+  if (!isTokenType(type)) throw new Error(`${path}: unsupported or missing $type "${String(type)}"`);
+  const token: FlatToken = { path, type, value: tree.$value };
+  return typeof tree.$description === "string" ? { ...token, description: tree.$description } : token;
+}
+
+function assertValidName(key: string, prefix: string): void {
+  if (/[.{}]/.test(key)) {
+    throw new Error(`${prefix}: token and group names cannot contain ".", "{" or "}" (got "${key}")`);
+  }
+}
+
 /** Flattens a token tree into dot-separated paths. `$type` set on a group is inherited by its children. */
 export function flattenTokens(tree: unknown, prefix = "", inheritedType?: string): FlatToken[] {
   if (!isRecord(tree)) throw new Error(`${prefix || "root"}: expected a group object`);
   const groupType = typeof tree.$type === "string" ? tree.$type : inheritedType;
-  if (Object.hasOwn(tree, "$value")) {
-    if (groupType === undefined || !TOKEN_TYPES.has(groupType)) {
-      throw new Error(`${prefix}: unsupported or missing $type "${String(groupType)}"`);
-    }
-    const description = typeof tree.$description === "string" ? tree.$description : undefined;
-    const token: FlatToken = { path: prefix, type: groupType as TokenType, value: tree.$value };
-    return [description === undefined ? token : { ...token, description }];
-  }
-  const tokens: FlatToken[] = [];
-  for (const [key, child] of Object.entries(tree)) {
-    if (key.startsWith("$")) continue;
-    if (key.includes(".") || key.includes("{") || key.includes("}")) {
-      throw new Error(`${prefix}: token and group names cannot contain ".", "{" or "}" (got "${key}")`);
-    }
-    tokens.push(...flattenTokens(child, prefix === "" ? key : `${prefix}.${key}`, groupType));
-  }
-  return tokens;
+  if (Object.hasOwn(tree, "$value")) return [leafToken(tree, prefix, groupType)];
+  return Object.entries(tree)
+    .filter(([key]) => !key.startsWith("$"))
+    .flatMap(([key, child]) => {
+      assertValidName(key, prefix);
+      return flattenTokens(child, prefix === "" ? key : `${prefix}.${key}`, groupType);
+    });
 }
 
 /** Merges several flattened token sets; a later set may not redefine a path from an earlier one. */
@@ -127,7 +124,9 @@ export function colorToHex(value: unknown, path = "color"): string {
       if (typeof component !== "number" || component < 0 || component > 1) {
         throw new Error(`${path}: components must be numbers from 0 to 1`);
       }
-      return Math.round(component * 255).toString(16).padStart(2, "0");
+      return Math.round(component * 255)
+        .toString(16)
+        .padStart(2, "0");
     })
     .join("")}`;
 }
@@ -140,45 +139,52 @@ function measure(value: unknown, path: string, units: readonly string[]): string
   return value.value === 0 ? "0" : `${value.value}${value.unit}`;
 }
 
-const quoteFamily = (family: string): string => (/^[a-z-]+$/i.test(family) ? family : `"${family.replaceAll('"', '\\"')}"`);
+const quoteFamily = (family: string): string =>
+  /^[a-z-]+$/i.test(family) ? family : `"${family.replaceAll('"', '\\"')}"`;
+
+const isNumberArray = (value: unknown): value is number[] =>
+  Array.isArray(value) && value.every((item) => typeof item === "number");
+
+function numberValue(value: unknown, path: string): string {
+  if (typeof value !== "number") throw new Error(`${path}: expected a number`);
+  return String(value);
+}
+
+function fontFamilyValue(value: unknown, path: string): string {
+  const families = typeof value === "string" ? [value] : value;
+  if (!Array.isArray(families) || !families.every((item): item is string => typeof item === "string")) {
+    throw new Error(`${path}: expected a string or an array of strings`);
+  }
+  return families.map(quoteFamily).join(", ");
+}
+
+function fontWeightValue(value: unknown, path: string): string {
+  const weight = typeof value === "string" ? FONT_WEIGHT_NAMES[value] : value;
+  if (typeof weight !== "number" || weight < 1 || weight > 1000) throw new Error(`${path}: invalid font weight`);
+  return String(weight);
+}
+
+function cubicBezierValue(value: unknown, path: string): string {
+  if (!isNumberArray(value) || value.length !== 4) throw new Error(`${path}: expected 4 numbers`);
+  const inUnitRange = (x: number | undefined) => x !== undefined && x >= 0 && x <= 1;
+  if (!inUnitRange(value[0]) || !inUnitRange(value[2]))
+    throw new Error(`${path}: x coordinates must be between 0 and 1`);
+  return `cubic-bezier(${value.join(", ")})`;
+}
+
+const CSS_CONVERTERS: Readonly<Record<TokenType, (value: unknown, path: string) => string>> = {
+  color: (value, path) => colorToHex(value, path),
+  dimension: (value, path) => measure(value, path, ["px", "rem"]),
+  duration: (value, path) => measure(value, path, ["ms", "s"]),
+  number: numberValue,
+  fontFamily: fontFamilyValue,
+  fontWeight: fontWeightValue,
+  cubicBezier: cubicBezierValue,
+};
 
 /** Converts a resolved token to a CSS value. */
 export function toCssValue(token: FlatToken): string {
-  const { path, value } = token;
-  switch (token.type) {
-    case "color":
-      return colorToHex(value, path);
-    case "dimension":
-      return measure(value, path, ["px", "rem"]);
-    case "duration":
-      return measure(value, path, ["ms", "s"]);
-    case "number":
-      if (typeof value !== "number") throw new Error(`${path}: expected a number`);
-      return String(value);
-    case "fontFamily": {
-      const families = typeof value === "string" ? [value] : value;
-      if (!Array.isArray(families) || !families.every((item): item is string => typeof item === "string")) {
-        throw new Error(`${path}: expected a string or an array of strings`);
-      }
-      return families.map(quoteFamily).join(", ");
-    }
-    case "fontWeight": {
-      const weight = typeof value === "string" ? FONT_WEIGHT_NAMES[value] : value;
-      if (typeof weight !== "number" || weight < 1 || weight > 1000) throw new Error(`${path}: invalid font weight`);
-      return String(weight);
-    }
-    case "cubicBezier": {
-      const points = value;
-      if (!Array.isArray(points) || points.length !== 4 || !points.every((point) => typeof point === "number")) {
-        throw new Error(`${path}: expected 4 numbers`);
-      }
-      const [x1, , x2] = points as number[];
-      if (x1 === undefined || x2 === undefined || x1 < 0 || x1 > 1 || x2 < 0 || x2 > 1) {
-        throw new Error(`${path}: x coordinates must be between 0 and 1`);
-      }
-      return `cubic-bezier(${points.join(", ")})`;
-    }
-  }
+  return CSS_CONVERTERS[token.type](token.value, token.path);
 }
 
 /** `color.blue.600` -> `--color-blue-600` */
@@ -212,14 +218,20 @@ export interface ContrastResult extends ContrastPair {
 }
 
 /** Checks each pair. Ratios are not rounded up before comparing: 4.49 fails a 4.5 minimum, as WCAG requires. */
-export function checkContrast(tokens: ReadonlyMap<string, FlatToken>, pairs: readonly ContrastPair[]): ContrastResult[] {
+export function checkContrast(
+  tokens: ReadonlyMap<string, FlatToken>,
+  pairs: readonly ContrastPair[],
+): ContrastResult[] {
   return pairs.map((pair) => {
     const foreground = resolveToken(tokens, pair.foreground);
     const background = resolveToken(tokens, pair.background);
     if (foreground.type !== "color" || background.type !== "color") {
       throw new Error(`${pair.foreground} / ${pair.background}: both tokens must be colors`);
     }
-    const ratio = contrastRatio(colorToHex(foreground.value, pair.foreground), colorToHex(background.value, pair.background));
+    const ratio = contrastRatio(
+      colorToHex(foreground.value, pair.foreground),
+      colorToHex(background.value, pair.background),
+    );
     return { ...pair, ratio, passes: ratio >= pair.minimum };
   });
 }

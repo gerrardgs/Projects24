@@ -1,8 +1,9 @@
 // Run with: node --test
-import { after, before, describe, test } from "node:test";
+
 import assert from "node:assert/strict";
-import type { AddressInfo } from "node:net";
 import type http from "node:http";
+import type { AddressInfo } from "node:net";
+import { after, before, describe, test } from "node:test";
 import { createServer, parseNewUser, UserStore } from "./server.ts";
 
 describe("parseNewUser (pure validation)", () => {

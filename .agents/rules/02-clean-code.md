@@ -73,3 +73,12 @@ type Fetch<T> =
 ## 7. Code smells to fix when you touch them
 
 Duplicated knowledge, long parameter lists, magic numbers and strings (name them), dead code, feature envy, deeply nested conditionals, broad `catch`/`except` clauses, mutable defaults (Python `def f(x=[])`), and stringly-typed data that should be a type.
+
+## 8. Clean code in HTML, CSS, components and design files
+
+- **HTML**: semantic elements, valid markup (validated by a tool), no layout tables, no inline `style` attributes except for dynamic custom properties, no empty wrappers that exist only for styling when CSS can do it.
+- **CSS**: values come from tokens, not magic numbers or one-off colours; low specificity and a defined cascade order (`@layer`); one naming convention across the project; no dead rules, duplicated declarations or hand-written vendor prefixes; `!important` only in utilities and user-preference overrides.
+- **Components**: one component per file with the same name; a small, typed public API; styles, tests and stories next to the component; no business logic or data fetching inside presentational components ([11-frontend-code](11-frontend-code.md)).
+- **Assets**: consistent file names, optimised exports, no unused images, fonts or icons left in the bundle ([13-visual-assets-and-licensing](13-visual-assets-and-licensing.md)).
+- **Design files are code for designers**: named layers and frames, components with variants instead of copies, variables instead of detached values, and no orphaned test frames in shared files ([figma-integration](../skills/figma-integration/SKILL.md) section 2).
+- **Complexity in JavaScript and TypeScript tooling**: ESLint `complexity` measures cyclomatic complexity (keep it at 10 or less); Biome's `noExcessiveCognitiveComplexity` measures cognitive complexity (default limit 15). Use whichever the project runs.

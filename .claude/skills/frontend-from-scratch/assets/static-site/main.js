@@ -13,6 +13,7 @@ function readSavedTheme() {
   }
 }
 
+/** @param {"light" | "dark"} theme */
 function saveTheme(theme) {
   try {
     localStorage.setItem(THEME_KEY, theme);
@@ -26,6 +27,7 @@ function setUpThemeToggle() {
   if (!(toggle instanceof HTMLButtonElement)) return;
   const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
 
+  /** @param {"light" | "dark"} theme */
   const apply = (theme) => {
     document.documentElement.dataset.theme = theme;
     toggle.setAttribute("aria-pressed", String(theme === "dark"));
@@ -40,6 +42,11 @@ function setUpThemeToggle() {
   });
 }
 
+/**
+ * @param {HTMLFormElement} form
+ * @param {"name" | "email"} field
+ * @param {string | null} message
+ */
 function showFieldError(form, field, message) {
   const input = form.elements.namedItem(field);
   const error = document.getElementById(`${field}-error`);
@@ -59,7 +66,7 @@ function setUpForm() {
   form.addEventListener("submit", (event) => {
     const data = new FormData(form);
     const result = validateSignup({ name: data.get("name"), email: data.get("email") });
-    for (const field of ["name", "email"]) showFieldError(form, field, null);
+    for (const field of /** @type {const} */ (["name", "email"])) showFieldError(form, field, null);
     list.replaceChildren();
 
     if (result.ok) {

@@ -14,10 +14,12 @@ import type {
   LocalVariableCollection,
   RGBA,
   VariableAlias,
+  VariableResolvedDataType,
   VariableScope,
 } from "@figma/rest-api-spec";
 
-export type TokenTree = { [key: string]: TokenTree | unknown };
+/** A DTCG group: nested groups and tokens keyed by name. */
+export type TokenTree = Record<string, unknown>;
 
 export interface ConversionResult {
   /** Output file name (`<collection>.<mode>.tokens.json`) mapped to its token tree. */
@@ -66,117 +68,161 @@ const isRgba = (value: unknown): value is RGBA =>
   "r" in value &&
   "g" in value &&
   "b" in value &&
-  ["r", "g", "b"].every((channel) => typeof (value as Record<string, unknown>)[channel] === "number");
+  typeof value.r === "number" &&
+  typeof value.g === "number" &&
+  typeof value.b === "number";
 
-const toByte = (channel: number): string => Math.round(Math.min(1, Math.max(0, channel)) * 255).toString(16).padStart(2, "0");
+const toByte = (channel: number): string =>
+  Math.round(Math.min(1, Math.max(0, channel)) * 255)
+    .toString(16)
+    .padStart(2, "0");
 
 /** Figma colours are sRGB with channels from 0 to 1 (alpha optional). */
 export function colorValue(color: RGBA): Record<string, unknown> {
   const components = [color.r, color.g, color.b].map((channel) => Math.round(channel * 10_000) / 10_000);
   const hex = `#${toByte(color.r)}${toByte(color.g)}${toByte(color.b)}`;
   const alpha = typeof color.a === "number" ? color.a : 1;
-  return alpha < 1 ? { colorSpace: "srgb", components, alpha: Math.round(alpha * 10_000) / 10_000, hex } : { colorSpace: "srgb", components, hex };
+  return alpha < 1
+    ? { colorSpace: "srgb", components, alpha: Math.round(alpha * 10_000) / 10_000, hex }
+    : { colorSpace: "srgb", components, hex };
 }
 
 type Mapped = { readonly type: string; readonly convert: (value: unknown) => unknown } | { readonly skip: string };
 
-/** Chooses the DTCG type for a variable from its resolved type and scopes. */
-export function mapType(variable: LocalVariable): Mapped {
-  const scopes = new Set(variable.scopes);
-  switch (variable.resolvedType) {
-    case "COLOR":
-      return { type: "color", convert: (value) => (isRgba(value) ? colorValue(value) : undefined) };
-    case "FLOAT": {
-      const number = (value: unknown) => (typeof value === "number" ? value : undefined);
-      if (scopes.size > 0 && [...scopes].every((scope) => scope === "FONT_WEIGHT")) {
-        return { type: "fontWeight", convert: number };
-      }
-      if (scopes.size > 0 && [...scopes].every((scope) => DIMENSION_SCOPES.has(scope))) {
-        return {
-          type: "dimension",
-          convert: (value) => (typeof value === "number" ? { value, unit: "px" } : undefined),
-        };
-      }
-      return { type: "number", convert: number };
-    }
-    case "STRING":
-      if (scopes.size === 1 && scopes.has("FONT_FAMILY")) {
-        return { type: "fontFamily", convert: (value) => (typeof value === "string" ? value : undefined) };
-      }
-      return { skip: "STRING variables are only exported when their only scope is FONT_FAMILY" };
-    case "BOOLEAN":
-      return { skip: "BOOLEAN variables have no DTCG token type" };
+const asNumber = (value: unknown) => (typeof value === "number" ? value : undefined);
+const allScopesIn = (scopes: ReadonlySet<VariableScope>, allowed: (scope: VariableScope) => boolean) =>
+  scopes.size > 0 && [...scopes].every(allowed);
+
+function mapFloat(scopes: ReadonlySet<VariableScope>): Mapped {
+  if (allScopesIn(scopes, (scope) => scope === "FONT_WEIGHT")) return { type: "fontWeight", convert: asNumber };
+  if (allScopesIn(scopes, (scope) => DIMENSION_SCOPES.has(scope))) {
+    return { type: "dimension", convert: (value) => (typeof value === "number" ? { value, unit: "px" } : undefined) };
   }
+  return { type: "number", convert: asNumber };
 }
 
-function setPath(tree: TokenTree, path: string, token: Record<string, unknown>): void {
+function mapString(scopes: ReadonlySet<VariableScope>): Mapped {
+  if (scopes.size === 1 && scopes.has("FONT_FAMILY")) {
+    return { type: "fontFamily", convert: (value) => (typeof value === "string" ? value : undefined) };
+  }
+  return { skip: "STRING variables are only exported when their only scope is FONT_FAMILY" };
+}
+
+const MAPPERS: Readonly<Record<VariableResolvedDataType, (scopes: ReadonlySet<VariableScope>) => Mapped>> = {
+  COLOR: () => ({ type: "color", convert: (value) => (isRgba(value) ? colorValue(value) : undefined) }),
+  FLOAT: mapFloat,
+  STRING: mapString,
+  BOOLEAN: () => ({ skip: "BOOLEAN variables have no DTCG token type" }),
+};
+
+/** Chooses the DTCG type for a variable from its resolved type and scopes. */
+export function mapType(variable: LocalVariable): Mapped {
+  return MAPPERS[variable.resolvedType](new Set(variable.scopes));
+}
+
+const isGroup = (value: unknown): value is TokenTree =>
+  typeof value === "object" && value !== null && !Array.isArray(value) && !("$value" in value);
+
+function setPath(tree: TokenTree, path: string, token: TokenTree): void {
   const segments = path.split(".");
   let node = tree;
   for (const segment of segments.slice(0, -1)) {
-    const next = node[segment];
-    if (next !== undefined && (typeof next !== "object" || next === null || "$value" in next)) {
-      throw new Error(`token path "${path}" collides with an existing token at "${segment}"`);
-    }
-    node[segment] ??= {};
-    node = node[segment] as TokenTree;
+    const next = node[segment] ?? {};
+    if (!isGroup(next)) throw new Error(`token path "${path}" collides with an existing token at "${segment}"`);
+    node[segment] = next;
+    node = next;
   }
   const leaf = segments.at(-1) ?? "";
-  if (node[leaf] !== undefined) throw new Error(`token path "${path}" is produced by two variables; rename one in Figma`);
+  if (node[leaf] !== undefined)
+    throw new Error(`token path "${path}" is produced by two variables; rename one in Figma`);
   node[leaf] = token;
 }
 
-export function convertVariables(response: GetLocalVariablesResponse): ConversionResult {
+interface Context {
+  readonly response: GetLocalVariablesResponse;
+  readonly pathById: ReadonlyMap<string, string>;
+}
+
+/** Token paths for every live variable, so aliases can be written as references. */
+function indexPaths(response: GetLocalVariablesResponse): Map<string, string> {
   const { variables, variableCollections } = response.meta;
+  const pathById = new Map<string, string>();
+  for (const variable of Object.values(variables)) {
+    const collection = variableCollections[variable.variableCollectionId];
+    if (collection !== undefined && !variable.deletedButReferenced)
+      pathById.set(variable.id, tokenPath(collection, variable));
+  }
+  return pathById;
+}
+
+type Outcome = { readonly value: unknown } | { readonly reason: string };
+
+function resolveValue(raw: unknown, convert: (value: unknown) => unknown, context: Context): Outcome {
+  if (isAlias(raw)) {
+    const target = context.pathById.get(raw.id);
+    return target === undefined
+      ? { reason: `alias to a variable outside this file (${raw.id})` }
+      : { value: `{${target}}` };
+  }
+  const value = convert(raw);
+  return value === undefined ? { reason: `unsupported value ${JSON.stringify(raw)}` } : { value };
+}
+
+function buildToken(variable: LocalVariable, type: string, value: unknown): TokenTree {
+  const token: TokenTree = { $type: type, $value: value };
+  const description = variable.description.trim();
+  if (description !== "") token.$description = description;
+  const codeSyntax = variable.codeSyntax.WEB;
+  token.$extensions = {
+    "com.figma": { variableId: variable.id, scopes: variable.scopes, ...(codeSyntax ? { codeSyntax } : {}) },
+  };
+  return token;
+}
+
+/** Converts one mode of one collection into a token tree, collecting a warning for every skipped variable. */
+function convertMode(
+  collection: LocalVariableCollection,
+  mode: LocalVariableCollection["modes"][number],
+  context: Context,
+  warnings: string[],
+): TokenTree {
+  const tree: TokenTree = {};
+  for (const variableId of collection.variableIds) {
+    const variable = context.response.meta.variables[variableId];
+    if (variable === undefined || variable.deletedButReferenced) continue;
+    const path = context.pathById.get(variable.id) ?? tokenPath(collection, variable);
+    const mapped = mapType(variable);
+    if ("skip" in mapped) {
+      // Type-level skips are the same in every mode; report them once, for the default mode.
+      if (mode.modeId === collection.defaultModeId) warnings.push(`${path}: skipped, ${mapped.skip}`);
+      continue;
+    }
+    const raw = variable.valuesByMode[mode.modeId] ?? variable.valuesByMode[collection.defaultModeId];
+    const outcome = resolveValue(raw, mapped.convert, context);
+    if ("reason" in outcome) {
+      warnings.push(`${path} (${mode.name}): skipped, ${outcome.reason}`);
+      continue;
+    }
+    setPath(tree, path, buildToken(variable, mapped.type, outcome.value));
+  }
+  return tree;
+}
+
+export function convertVariables(response: GetLocalVariablesResponse): ConversionResult {
+  const context: Context = { response, pathById: indexPaths(response) };
   const files = new Map<string, TokenTree>();
   const warnings: string[] = [];
-  const pathById = new Map<string, string>();
-  const collectionOf = (variable: LocalVariable) => variableCollections[variable.variableCollectionId];
-
-  for (const variable of Object.values(variables)) {
-    const collection = collectionOf(variable);
-    if (collection !== undefined && !variable.deletedButReferenced) pathById.set(variable.id, tokenPath(collection, variable));
-  }
-
-  for (const collection of Object.values(variableCollections).sort((a, b) => a.name.localeCompare(b.name))) {
+  const collections = Object.values(response.meta.variableCollections).sort((a, b) => a.name.localeCompare(b.name));
+  for (const collection of collections) {
     if (collection.remote) {
       warnings.push(`collection "${collection.name}": remote (from a library); convert it from its source file`);
       continue;
     }
     for (const mode of collection.modes) {
-      const tree: TokenTree = {};
-      for (const variableId of collection.variableIds) {
-        const variable = variables[variableId];
-        if (variable === undefined || variable.deletedButReferenced) continue;
-        const path = pathById.get(variable.id) ?? tokenPath(collection, variable);
-        const mapped = mapType(variable);
-        if ("skip" in mapped) {
-          warnings.push(`${path}: skipped, ${mapped.skip}`);
-          continue;
-        }
-        const raw = variable.valuesByMode[mode.modeId] ?? variable.valuesByMode[collection.defaultModeId];
-        let value: unknown;
-        if (isAlias(raw)) {
-          const target = pathById.get(raw.id);
-          if (target === undefined) {
-            warnings.push(`${path} (${mode.name}): skipped, alias to a variable outside this file (${raw.id})`);
-            continue;
-          }
-          value = `{${target}}`;
-        } else {
-          value = mapped.convert(raw);
-        }
-        if (value === undefined) {
-          warnings.push(`${path} (${mode.name}): skipped, unsupported value ${JSON.stringify(raw)}`);
-          continue;
-        }
-        const token: Record<string, unknown> = { $type: mapped.type, $value: value };
-        if (variable.description.trim() !== "") token.$description = variable.description.trim();
-        token.$extensions = {
-          "com.figma": { variableId: variable.id, scopes: variable.scopes, ...(variable.codeSyntax.WEB ? { codeSyntax: variable.codeSyntax.WEB } : {}) },
-        };
-        setPath(tree, path, token);
-      }
-      files.set(`${slug(collection.name)}.${slug(mode.name)}.tokens.json`, tree);
+      files.set(
+        `${slug(collection.name)}.${slug(mode.name)}.tokens.json`,
+        convertMode(collection, mode, context, warnings),
+      );
     }
   }
   return { files, warnings };
@@ -192,7 +238,8 @@ export function parseFileKey(input: string): string {
   } catch {
     throw new Error(`"${input}" is neither a Figma file key nor a URL`);
   }
-  if (url.hostname !== "figma.com" && !url.hostname.endsWith(".figma.com")) throw new Error(`"${url.hostname}" is not a Figma host`);
+  if (url.hostname !== "figma.com" && !url.hostname.endsWith(".figma.com"))
+    throw new Error(`"${url.hostname}" is not a Figma host`);
   const match = /^\/(?:design|file|proto|board|slides)\/([A-Za-z0-9]+)/.exec(url.pathname);
   if (match?.[1] === undefined) throw new Error(`no file key found in "${input}"`);
   return match[1];

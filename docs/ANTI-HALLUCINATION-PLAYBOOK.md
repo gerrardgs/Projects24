@@ -23,6 +23,7 @@ Language models produce fluent, confident text whether or not it is true. In cod
 | Wrong licence | "Free font" used in an app without an embedding licence; a stock photo used in an ad without model release | Legal claims, takedowns | Read the licence on the official source; record source and licence |
 | Stale tool facts | Recommending Adobe XD for a new project, or FID as a Core Web Vital | Unsupported tools, wrong metrics | Date tool and metric facts; check the vendor's current docs |
 | Outdated platform sizes | Social or app-store image sizes from memory | Rejected or cropped artwork | Look up the platform's official spec on the day and note the date |
+| Incompatible versions | Recommending TypeScript 7 together with `typescript-eslint` 8.71, whose peer range (checked 2026-10-16) is `typescript <6.1.0` | Install errors (`ERESOLVE`) or a linter that silently misreads code | Check `npm view <pkg> peerDependencies` for every pair of tools you recommend together, and install them once |
 | Look-alike package (front-end) | Installing `@shadcn/ui` (the old CLI name, last published in March 2023) instead of the current `shadcn` CLI | Outdated or, with other names, malicious code | Copy install commands from the official docs; check the npm publisher |
 
 ## 2. The verification protocol in short

@@ -1,6 +1,7 @@
 // Run with: node --test "scripts/*.test.mjs"
-import { test } from "node:test";
+
 import assert from "node:assert/strict";
+import { test } from "node:test";
 import { extractUrls } from "./check-links.mjs";
 
 test("extracts unique http(s) Markdown link targets", () => {
@@ -9,7 +10,13 @@ test("extracts unique http(s) Markdown link targets", () => {
 });
 
 test("ignores relative links, anchors and links inside code", () => {
-  const markdown = ["[rel](../x.md) [anchor](#top)", "`[inline](https://code.example)`", "```", "[fenced](https://fenced.example)", "```"].join("\n");
+  const markdown = [
+    "[rel](../x.md) [anchor](#top)",
+    "`[inline](https://code.example)`",
+    "```",
+    "[fenced](https://fenced.example)",
+    "```",
+  ].join("\n");
   assert.deepEqual(extractUrls(markdown), []);
 });
 

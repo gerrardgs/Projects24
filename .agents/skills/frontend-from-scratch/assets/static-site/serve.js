@@ -11,6 +11,7 @@ import { DEV_HEADERS } from "./security-headers.js";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 
+/** @type {Readonly<Record<string, string>>} */
 export const CONTENT_TYPES = {
   ".html": "text/html; charset=utf-8",
   ".css": "text/css; charset=utf-8",
@@ -50,6 +51,7 @@ export function resolveRequestPath(root, urlPath) {
 
 export function createServer(root = ROOT) {
   return http.createServer(async (request, response) => {
+    /** @param {number} status @param {string} body */
     const send = (status, body) => {
       response.writeHead(status, { "content-type": "text/plain; charset=utf-8" });
       response.end(body);

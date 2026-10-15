@@ -34,13 +34,19 @@ export const PRODUCTION_HEADERS = {
   "Strict-Transport-Security": "max-age=63072000; includeSubDomains",
 };
 
-/** Renders the Netlify and Cloudflare Pages `_headers` format for every path. */
+/**
+ * Renders the Netlify and Cloudflare Pages `_headers` format for every path.
+ * @param {Record<string, string>} headers
+ */
 export function toHeadersFile(headers) {
   const lines = Object.entries(headers).map(([name, value]) => `  ${name}: ${value}`);
   return ["# Generated from security-headers.js; keep in sync (checked by npm test).", "/*", ...lines, ""].join("\n");
 }
 
-/** Renders the Vercel `vercel.json` headers configuration for every path. */
+/**
+ * Renders the Vercel `vercel.json` headers configuration for every path.
+ * @param {Record<string, string>} headers
+ */
 export function toVercelJson(headers) {
   const config = {
     $schema: "https://openapi.vercel.sh/vercel.json",

@@ -8,19 +8,21 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import type { GetLocalVariablesResponse } from "@figma/rest-api-spec";
-import { fetchLocalVariables } from "./client.ts";
+import { fetchLocalVariables, parseVariablesResponse } from "./client.ts";
 import { convertVariables, parseFileKey } from "./convert.ts";
 
 async function load(args: string[]): Promise<{ response: GetLocalVariablesResponse; rest: string[] }> {
   if (args[0] === "--input") {
     const file = args[1];
     if (file === undefined) throw new Error("--input needs a file path");
-    return { response: JSON.parse(await readFile(file, "utf8")) as GetLocalVariablesResponse, rest: args.slice(2) };
+    return { response: parseVariablesResponse(JSON.parse(await readFile(file, "utf8"))), rest: args.slice(2) };
   }
   const source = args[0];
-  if (source === undefined) throw new Error("usage: node cli.ts <file-key-or-url> [out-dir] | --input <file.json> [out-dir]");
+  if (source === undefined)
+    throw new Error("usage: node cli.ts <file-key-or-url> [out-dir] | --input <file.json> [out-dir]");
   const token = process.env.FIGMA_TOKEN;
-  if (token === undefined || token === "") throw new Error("set FIGMA_TOKEN (a personal access token with file_variables:read)");
+  if (token === undefined || token === "")
+    throw new Error("set FIGMA_TOKEN (a personal access token with file_variables:read)");
   return { response: await fetchLocalVariables(parseFileKey(source), token), rest: args.slice(1) };
 }
 

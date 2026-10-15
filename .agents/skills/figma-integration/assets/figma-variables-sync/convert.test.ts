@@ -1,8 +1,9 @@
 // Run with: node --test
-import { after, before, describe, test } from "node:test";
+
 import assert from "node:assert/strict";
 import http from "node:http";
 import type { AddressInfo } from "node:net";
+import { after, before, describe, test } from "node:test";
 // Integration check with the token pipeline of the design-system-and-tokens skill in this repository.
 import {
   checkContrast,
@@ -11,7 +12,7 @@ import {
   resolveToken,
   toCssValue,
 } from "../../../design-system-and-tokens/assets/design-tokens/tokens.ts";
-import { FigmaApiError, fetchLocalVariables } from "./client.ts";
+import { FigmaApiError, fetchLocalVariables, parseVariablesResponse } from "./client.ts";
 import { colorValue, convertVariables, parseFileKey, slug } from "./convert.ts";
 import { fixture } from "./fixture.ts";
 
@@ -36,7 +37,11 @@ const P = "primitives.value.tokens.json";
 
 describe("convertVariables", () => {
   test("writes one file per local collection and mode", () => {
-    assert.deepEqual([...result.files.keys()].sort(), ["primitives.value.tokens.json", "theme.dark.tokens.json", "theme.light.tokens.json"]);
+    assert.deepEqual([...result.files.keys()].sort(), [
+      "primitives.value.tokens.json",
+      "theme.dark.tokens.json",
+      "theme.light.tokens.json",
+    ]);
   });
 
   test("converts colours, keeps descriptions and records the Figma source", () => {
@@ -44,9 +49,20 @@ describe("convertVariables", () => {
       $type: "color",
       $value: { colorSpace: "srgb", components: [0.1412, 0.3412, 0.8392], hex: "#2457d6" },
       $description: "Primary brand blue",
-      $extensions: { "com.figma": { variableId: "VariableID:1:12", scopes: ["ALL_FILLS", "STROKE_COLOR"], codeSyntax: "var(--color-blue-600)" } },
+      $extensions: {
+        "com.figma": {
+          variableId: "VariableID:1:12",
+          scopes: ["ALL_FILLS", "STROKE_COLOR"],
+          codeSyntax: "var(--color-blue-600)",
+        },
+      },
     });
-    assert.deepEqual(token(P, "primitives.color.overlay").$value, { colorSpace: "srgb", components: [0, 0, 0], alpha: 0.5, hex: "#000000" });
+    assert.deepEqual(token(P, "primitives.color.overlay").$value, {
+      colorSpace: "srgb",
+      components: [0, 0, 0],
+      alpha: 0.5,
+      hex: "#000000",
+    });
   });
 
   test("chooses dimension, fontWeight, number and fontFamily from scopes", () => {
@@ -84,9 +100,15 @@ describe("convertVariables", () => {
     for (const mode of ["light", "dark"]) {
       const tokens = mergeTokenSets(primitives, flattenTokens(file(`theme.${mode}.tokens.json`)));
       assert.equal(toCssValue(resolveToken(tokens, "theme.action.default")), "#2457d6");
-      const [pair] = checkContrast(tokens, [{ foreground: "theme.text.default", background: "theme.surface.default", minimum: 4.5 }]);
+      const [pair] = checkContrast(tokens, [
+        { foreground: "theme.text.default", background: "theme.surface.default", minimum: 4.5 },
+      ]);
       assert.ok(pair?.passes, `${mode}: ${pair?.ratio}`);
     }
+  });
+
+  test("reports each problem once, not once per mode", () => {
+    assert.equal(new Set(result.warnings).size, result.warnings.length);
   });
 
   test("rejects two variables that map to the same token path", () => {
@@ -95,6 +117,25 @@ describe("convertVariables", () => {
     assert.ok(target !== undefined);
     target.name = "Color/Neutral/0";
     assert.throws(() => convertVariables(clash), /produced by two variables/);
+  });
+});
+
+describe("parseVariablesResponse (untrusted JSON)", () => {
+  test("accepts a real response shape", () => {
+    assert.equal(
+      parseVariablesResponse(JSON.parse(JSON.stringify(fixture))).meta.variables["VariableID:1:12"]?.name,
+      "color/blue/600",
+    );
+  });
+
+  test("rejects malformed input with a precise message", () => {
+    assert.throws(() => parseVariablesResponse([]), /missing meta/);
+    assert.throws(() => parseVariablesResponse({ meta: { variables: {} } }), /meta\.variableCollections/);
+    const broken = structuredClone(fixture) as unknown as {
+      meta: { variables: Record<string, Record<string, unknown>> };
+    };
+    delete broken.meta.variables["VariableID:1:10"]?.valuesByMode;
+    assert.throws(() => parseVariablesResponse(broken), /VariableID:1:10 lacks valuesByMode/);
   });
 });
 
@@ -107,7 +148,11 @@ describe("helpers", () => {
   });
 
   test("colorValue clamps and omits opaque alpha", () => {
-    assert.deepEqual(colorValue({ r: 1, g: 0, b: 0, a: 1 }), { colorSpace: "srgb", components: [1, 0, 0], hex: "#ff0000" });
+    assert.deepEqual(colorValue({ r: 1, g: 0, b: 0, a: 1 }), {
+      colorSpace: "srgb",
+      components: [1, 0, 0],
+      hex: "#ff0000",
+    });
   });
 
   test("parseFileKey accepts keys and every Figma URL form", () => {
@@ -149,14 +194,20 @@ describe("fetchLocalVariables against a local stand-in for the API", () => {
   });
 
   test("explains 403 and 429 without leaking the token", async () => {
-    await assert.rejects(fetchLocalVariables("forbidden", "figd_secret", { baseUrl: `${base}/forbidden/` }), (error: unknown) => {
-      assert.ok(error instanceof FigmaApiError);
-      assert.equal(error.status, 403);
-      assert.match(error.message, /file_variables:read/);
-      assert.doesNotMatch(error.message, /figd_secret/);
-      return true;
-    });
-    await assert.rejects(fetchLocalVariables("limited", "t", { baseUrl: `${base}/limited/` }), /retry after 60 seconds/);
+    await assert.rejects(
+      fetchLocalVariables("forbidden", "figd_secret", { baseUrl: `${base}/forbidden/` }),
+      (error: unknown) => {
+        assert.ok(error instanceof FigmaApiError);
+        assert.equal(error.status, 403);
+        assert.match(error.message, /file_variables:read/);
+        assert.doesNotMatch(error.message, /figd_secret/);
+        return true;
+      },
+    );
+    await assert.rejects(
+      fetchLocalVariables("limited", "t", { baseUrl: `${base}/limited/` }),
+      /retry after 60 seconds/,
+    );
   });
 
   test("validates inputs before any request", async () => {

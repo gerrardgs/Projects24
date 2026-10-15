@@ -19,7 +19,7 @@ How the Projects 24 specification is organised, why, and how each AI tool loads 
           ▼                                        ▼
 ┌───────────────────────────────────┐   ┌───────────────────────────────────┐
 │ Rules (.agents/rules/)            │   │ Skills (.agents/skills/)          │
-│ always_on: 01, 02, 03, 06, 09, 10 │   │ Loaded when the task matches (27):│
+│ always_on: 01-03, 06, 09, 10, 15  │   │ Loaded when the task matches (27):│
 │ model_decision (on demand):       │   │ research, UI, graphic, motion,    │
 │   04, 05, 07, 08, 11, 12, 13, 14  │   │ data viz, tokens, Figma, handoff, │
 │ Short, normative "must" rules     │   │ front-end, CSS, mobile, integra-  │
@@ -28,11 +28,11 @@ How the Projects 24 specification is organised, why, and how each AI tool loads 
 └───────────────────────────────────┘   └───────────────────────────────────┘
 ```
 
-- **Rules** say *what* must hold. Six are always on, because they apply to every task (principles, clean code, verification, security, design principles, accessibility). Eight load only when relevant (dependencies, errors, testing, Git, front-end code, performance, assets and licensing, UX writing and ethics).
+- **Rules** say *what* must hold. Seven are always on, because they apply to every task (principles, clean code, verification, security, design principles, accessibility, clean execution). Eight load only when relevant (dependencies, errors, testing, Git, front-end code, performance, assets and licensing, UX writing and ethics).
 - **Skills** say *how* to do a kind of task, step by step. They follow the [Agent Skills specification](https://agentskills.io/specification): only each skill's name and description are loaded at startup, and the body loads when the task matches. Bulky material sits in `references/` and `assets/` and loads only when needed.
 - **Reference library**: [`DESIGN-REFERENCES.md`](DESIGN-REFERENCES.md) collects primary sources (standards, official docs) and learning resources by topic; [`TOOLKIT.md`](TOOLKIT.md) catalogues commonly used tools with official links; [`PROMPT-LIBRARY.md`](PROMPT-LIBRARY.md) holds ready-to-use prompts. None is loaded automatically; rules and skills link into them. `node scripts/check-links.mjs` checks every external link.
 - **Open-ended tool coverage**: no list can name every tool, so [rule 04 section 9](../.agents/rules/04-dependencies.md) defines how to adopt any tool, framework or service safely.
-- **Size**: `node scripts/agents-sync.mjs` prints the current always-on estimate (characters divided by 4). On 2026-10-15 it was about 11,850 tokens for `AGENTS.md` plus the six always-on rules. Antigravity's documented budget for global and always-on rules is 20,000 tokens.
+- **Size**: `node scripts/agents-sync.mjs` prints the current always-on estimate (characters divided by 4). On 2026-10-16 it was about 13,500 tokens for `AGENTS.md` plus the seven always-on rules. Antigravity's documented budget for global and always-on rules is 20,000 tokens.
 
 ## 3. How each tool loads the spec
 

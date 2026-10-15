@@ -1,6 +1,7 @@
 // Run with: node --test
-import { describe, test } from "node:test";
+
 import assert from "node:assert/strict";
+import { describe, test } from "node:test";
 import { build } from "./build.ts";
 import {
   colorToHex,
@@ -44,7 +45,9 @@ describe("token parsing", () => {
     const tokens = flattenTokens({
       space: { $type: "dimension", small: { $value: { value: 4, unit: "px" }, $description: "gap" } },
     });
-    assert.deepEqual(tokens, [{ path: "space.small", type: "dimension", value: { value: 4, unit: "px" }, description: "gap" }]);
+    assert.deepEqual(tokens, [
+      { path: "space.small", type: "dimension", value: { value: 4, unit: "px" }, description: "gap" },
+    ]);
   });
 
   test("rejects tokens without a known type", () => {
@@ -64,7 +67,12 @@ describe("token parsing", () => {
 describe("alias resolution", () => {
   const tokens = mergeTokenSets(
     flattenTokens({
-      color: { $type: "color", blue: { $value: srgb("#2457d6") }, brand: { $value: "{color.blue}" }, link: { $value: "{color.brand}" } },
+      color: {
+        $type: "color",
+        blue: { $value: srgb("#2457d6") },
+        brand: { $value: "{color.blue}" },
+        link: { $value: "{color.brand}" },
+      },
       size: { $type: "dimension", base: { $value: { value: 1, unit: "rem" } } },
       loop: { $type: "number", a: { $value: "{loop.b}" }, b: { $value: "{loop.a}" } },
       wrong: { $type: "color", type: { $value: "{size.base}" }, missing: { $value: "{color.nope}" } },
@@ -88,7 +96,8 @@ describe("alias resolution", () => {
 });
 
 describe("CSS conversion", () => {
-  const token = (type: Parameters<typeof toCssValue>[0]["type"], value: unknown) => toCssValue({ path: "t", type, value });
+  const token = (type: Parameters<typeof toCssValue>[0]["type"], value: unknown) =>
+    toCssValue({ path: "t", type, value });
 
   test("converts each supported type", () => {
     assert.equal(token("color", { colorSpace: "srgb", components: [1, 0.5, 0] }), "#ff8000");
@@ -96,7 +105,10 @@ describe("CSS conversion", () => {
     assert.equal(token("dimension", { value: 0, unit: "px" }), "0");
     assert.equal(token("duration", { value: 200, unit: "ms" }), "200ms");
     assert.equal(token("number", 1.5), "1.5");
-    assert.equal(token("fontFamily", ["Inter Variable", "system-ui", "sans-serif"]), '"Inter Variable", system-ui, sans-serif');
+    assert.equal(
+      token("fontFamily", ["Inter Variable", "system-ui", "sans-serif"]),
+      '"Inter Variable", system-ui, sans-serif',
+    );
     assert.equal(token("fontWeight", "semi-bold"), "600");
     assert.equal(token("cubicBezier", [0.2, 0, 0, 1]), "cubic-bezier(0.2, 0, 0, 1)");
   });
@@ -118,7 +130,10 @@ describe("the shipped token set", () => {
     const { contrast } = await build();
     for (const [theme, results] of Object.entries(contrast)) {
       for (const result of results) {
-        assert.ok(result.passes, `${theme}: ${result.foreground} on ${result.background} is ${result.ratio.toFixed(2)}:1`);
+        assert.ok(
+          result.passes,
+          `${theme}: ${result.foreground} on ${result.background} is ${result.ratio.toFixed(2)}:1`,
+        );
       }
     }
   });

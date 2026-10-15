@@ -1,7 +1,8 @@
 // Run with: node --test
-import { after, before, describe, test } from "node:test";
+
 import assert from "node:assert/strict";
 import path from "node:path";
+import { after, before, describe, test } from "node:test";
 import { fileURLToPath } from "node:url";
 import { createServer, resolveRequestPath } from "./serve.js";
 

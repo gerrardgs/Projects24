@@ -53,6 +53,8 @@ Which rules and skills to use for each kind of task, for AI agents and for the p
 
 ## 2. Execution loop for any scenario
 
+This is clean execution ([rule 15](../.agents/rules/15-clean-execution.md)) in six steps; the result must also be clean code ([rule 02](../.agents/rules/02-clean-code.md)).
+
 1. **Understand**: restate the goal and acceptance criteria; list assumptions.
 2. **Ground**: read the relevant code, manifests and tests; run the baseline build and tests.
 3. **Plan**: the smallest correct change; for multi-step work, a numbered plan with checkpoints.
