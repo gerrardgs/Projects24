@@ -25,7 +25,7 @@ npx playwright install chromium
 node check.mjs https://example.com/ https://example.com/signup
 ```
 
-The script checks WCAG 2.0, 2.1 and 2.2 A/AA rules at phone and desktop widths in light and dark colour schemes, with reduced motion, and warns about horizontal scrolling. Also run Lighthouse's accessibility category, html-validate, and the framework's lint plugin. In component libraries, run the Storybook accessibility addon on every story.
+The script checks WCAG 2.0, 2.1 and 2.2 A/AA rules at phone and desktop widths in light and dark colour schemes, with reduced motion, warns about horizontal scrolling, and also fails on console errors such as Content Security Policy violations. Also run Lighthouse's accessibility category, html-validate, and the framework's lint plugin. In component libraries, run the Storybook accessibility addon on every story.
 
 ## 3. Manual pass (required; automated tools cannot judge most criteria)
 

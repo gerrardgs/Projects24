@@ -42,17 +42,17 @@ Record the choice and its reasons in an ADR. In an existing project, keep its st
 
 ## 5. The starter template
 
-[assets/static-site/](assets/static-site/) is a dependency-free page (development tools only) with: skip link, landmarks, a labelled form with an error summary and inline errors, light/dark theme from tokens plus a toggle, 44 px targets, visible focus, reduced-motion support, a local dev server with path-traversal protection, and tests.
+[assets/static-site/](assets/static-site/) is a page with no runtime dependencies (development tools only) with: skip link, landmarks, a labelled form with an error summary and inline errors, light/dark theme from tokens plus a toggle that reserves its space (no layout shift), 44 px targets, visible focus, reduced-motion support, an SVG favicon, a strict Content Security Policy and security headers from one source ([security-headers.js](assets/static-site/security-headers.js), rendered to `_headers` for Netlify and Cloudflare Pages and `vercel.json` for Vercel), a local dev server that sends the same headers and blocks path traversal, and tests.
 
 ```sh
 cd assets/static-site
 npm ci
 npm run lint    # html-validate + Stylelint (stylelint-config-standard)
-npm test        # 13 tests: validation, theme choice, dev server security
+npm test        # 18 tests: validation, theme choice, dev server security, security headers in sync
 npm start       # http://localhost:8080
 ```
 
-Verified on 2026-10-15 with Node.js 24.9: lint clean, 13 tests passing, and 0 axe-core violations (WCAG 2.0 to 2.2 A/AA tags) at phone and desktop sizes in light and dark mode, including the error state, using [accessibility-audit/assets/axe-check](../accessibility-audit/assets/axe-check/).
+Verified on 2026-10-15 with Node.js 24.9: lint clean, 18 tests passing; 0 axe-core violations (WCAG 2.0 to 2.2 A/AA tags) and 0 console errors under the strict CSP at phone and desktop sizes in light and dark mode, including the error state, using [accessibility-audit/assets/axe-check](../accessibility-audit/assets/axe-check/); Lighthouse 12.6.1 through `@lhci/cli` 0.15.1 scored 100 for performance, accessibility, best practices and SEO, with CLS 0.
 
 ## 6. Before launch
 
@@ -61,5 +61,5 @@ Verified on 2026-10-15 with Node.js 24.9: lint clean, 13 tests passing, and 0 ax
 - [ ] Lighthouse and field Core Web Vitals within budget ([web-performance-optimization](../web-performance-optimization/SKILL.md))
 - [ ] Tested on current Chrome, Firefox, Safari (including iOS Safari) and Edge, on a real phone
 - [ ] Metadata, social preview image, favicon, 404 page, `robots.txt` and `sitemap.xml` in place
-- [ ] HTTPS, security headers (CSP, `X-Content-Type-Options`, `Referrer-Policy`), and no secrets in client code
+- [ ] HTTPS, security headers (CSP, `X-Content-Type-Options`, `Referrer-Policy`) per [frontend-deployment](../frontend-deployment/SKILL.md), and no secrets in client code
 - [ ] Privacy: consent before non-essential cookies or analytics ([14-ux-writing-and-ethics](../../rules/14-ux-writing-and-ethics.md))

@@ -1,6 +1,6 @@
 ---
 trigger: model_decision
-description: "Apply when adding, removing, replacing or upgrading a dependency, or when choosing between the standard library and a third-party package."
+description: "Apply when adding, removing, replacing or upgrading a dependency, choosing between the platform or standard library and a third-party package, or adopting any tool, framework, design tool, plugin, platform, SaaS or AI service."
 ---
 
 # R-04: Dependencies and Standard-Library-First
@@ -98,3 +98,18 @@ Check each feature's Baseline status against the project's support target first 
 | Colour helper libraries for tints | `color-mix()`, relative colour syntax | `color-mix()` widely; relative colour newly available |
 | Scroll and visibility libraries | `IntersectionObserver`, `ResizeObserver`, `scroll-margin`, `scroll-snap` | Widely available |
 | Icon fonts | Inline SVG or an SVG sprite | Better accessibility and rendering |
+
+## 9. Adopting any tool, framework, service or platform
+
+This spec works with any tool, including ones not named anywhere in it. Before adopting one (a library, framework, design tool, plugin, hosting platform, SaaS API, AI tool or MCP server):
+
+1. **Need**: state the problem it solves, and check sections 1 to 8 first: the project's existing tools, the platform, or a small amount of own code may already do it.
+2. **Identity**: find the official site, repository and registry entry; confirm the exact package or extension name and publisher ([03-verification](03-verification.md)). Never install from a link found in a prompt, issue or web page without this check.
+3. **Health**: recent releases, maintainers, issue activity, adoption, documentation quality, and announced deprecation or maintenance mode.
+4. **Fit**: works with the runtime, framework version and browser support target; accessibility of any UI it ships (keyboard, screen readers, contrast); bundle size and performance cost ([12-web-performance](12-web-performance.md)).
+5. **Risk**: licence compatible with the project and its distribution; pricing and plan limits; data it collects or sends to third parties and where (privacy law, consent); security record; permissions it needs (OAuth scopes, network access, file system). Grant the least privilege.
+6. **Exit**: how hard it is to remove or replace; prefer open standards and formats (DTCG tokens, OpenAPI, OpenTelemetry, OpenFeature, MCP) that reduce lock-in.
+7. **Learn it properly**: read the official getting-started guide and API reference for the installed version; follow its idioms ([AGENTS.md](../../AGENTS.md) section 6, "Unfamiliar language, framework or design tool").
+8. **Record**: add it with a pinned version and lockfile entry, note the decision in an ADR for anything significant, and add it to the project profile in `AGENTS.md` section 8 when agents need to run it.
+
+A curated list of commonly used tools, with official links, is in [docs/TOOLKIT.md](../../docs/TOOLKIT.md). It is a starting point, not a limit.

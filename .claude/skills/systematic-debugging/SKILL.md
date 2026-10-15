@@ -1,6 +1,6 @@
 ---
 name: systematic-debugging
-description: Find and fix the root cause of bugs, crashes, wrong output, flaky tests, performance regressions and production incidents through reproduction, isolation, evidence and regression tests instead of guessing. Use when something fails, behaves unexpectedly, is slow, or when a user reports an error message or stack trace.
+description: Find and fix the root cause of bugs, crashes, wrong output, flaky tests, performance regressions and production incidents through reproduction, isolation, evidence and regression tests instead of guessing. Use when something fails, behaves unexpectedly, is slow, or when a user reports an error message or stack trace, including browser, layout, CSS, hydration, CORS and works-locally-but-not-deployed bugs.
 license: MIT
 metadata:
   version: "1.0.0"
@@ -8,7 +8,7 @@ metadata:
 
 # Systematic Debugging
 
-Debugging is the scientific method applied to code: observe, hypothesise, test, conclude. Never change code hoping it helps. Debuggers, profilers and bisection commands per language are in [references/tools.md](references/tools.md).
+Debugging is the scientific method applied to code: observe, hypothesise, test, conclude. Never change code hoping it helps. Debuggers, profilers and bisection commands per language are in [references/tools.md](references/tools.md). Browser and front-end debugging (DevTools, hydration errors, CORS, layout and CSS bugs, deploy-only bugs) is in [references/browser-debugging.md](references/browser-debugging.md).
 
 ## 1. Capture the facts
 

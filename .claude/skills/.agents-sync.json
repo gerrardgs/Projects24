@@ -13,6 +13,7 @@
     "design-to-code-handoff",
     "figma-integration",
     "framework-frontend-engineering",
+    "frontend-deployment",
     "frontend-from-scratch",
     "frontend-testing-and-visual-qa",
     "graphic-design-production",
@@ -26,6 +27,7 @@
     "test-engineering",
     "ui-design-and-prototyping",
     "ux-research-and-strategy",
+    "web-integrations-and-platforms",
     "web-performance-optimization"
   ]
 }

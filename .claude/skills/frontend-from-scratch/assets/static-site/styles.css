@@ -143,6 +143,12 @@
     display: none !important;
   }
 
+  /* Controls that need JavaScript keep their space (no layout shift) but stay invisible and out of the
+     accessibility tree until main.js marks them ready. */
+  .js-only:not(.is-ready) {
+    visibility: hidden;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

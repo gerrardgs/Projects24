@@ -27,6 +27,9 @@ Use the project's own scripts (`npm test`, `make test`, `nox`, ...) in CI so loc
 - [assets/github-actions/ci-python.yml](assets/github-actions/ci-python.yml): Python matrix (3.11 to 3.14): install with a PEP 735 `dev` dependency group, Ruff, mypy, pytest, pip-audit.
 - [assets/github-actions/release-container.yml](assets/github-actions/release-container.yml): on a version tag, build and push an image to GitHub Container Registry with SBOM and signed build provenance.
 - [assets/github-actions/dependabot.yml](assets/github-actions/dependabot.yml): weekly updates for actions and npm, with a 7-day cooldown.
+- [assets/github-actions/ci-frontend.yml](assets/github-actions/ci-frontend.yml): front-end checks (lint, type-check, unit tests, build, production `npm audit`), Playwright end-to-end and accessibility tests with the report kept on failure, and Lighthouse CI budgets.
+- [assets/lighthouse/lighthouserc.json](assets/lighthouse/lighthouserc.json): Lighthouse CI assertions: accessibility score 1.0, best practices 0.9, LCP at most 2.5 s, CLS at most 0.1, script and page weight warnings. Verified on 2026-10-15 with `@lhci/cli` 0.15.1 (Lighthouse 12.6.1) against the static-site template: all four categories scored 100, CLS 0.
+- [assets/github-actions/deploy-github-pages.yml](assets/github-actions/deploy-github-pages.yml): build and deploy a static site with the official GitHub Pages actions (`configure-pages` v6.0.0, `upload-pages-artifact` v5.0.0, `deploy-pages` v5.0.1, pinned to commit SHAs). See [frontend-deployment](../frontend-deployment/SKILL.md).
 
 The action versions are pinned to full commit SHAs, with the version in a comment. These SHAs were resolved from the actions' release tags on 2026-10-14. Dependabot keeps the SHAs and comments updated.
 

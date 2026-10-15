@@ -45,6 +45,11 @@ Which rules and skills to use for each kind of task, for AI agents and for the p
 | Review a front-end pull request | [rigorous-code-audit](../.agents/skills/rigorous-code-audit/SKILL.md) | [design-critique-and-review](../.agents/skills/design-critique-and-review/SKILL.md), rule [11](../.agents/rules/11-frontend-code.md) |
 | Interface copy, error messages, forms, consent | rule [14](../.agents/rules/14-ux-writing-and-ethics.md) | rule [10](../.agents/rules/10-accessibility.md) section 4 |
 | Finding a trustworthy source on any design or front-end topic | [DESIGN-REFERENCES.md](DESIGN-REFERENCES.md) | rule [03](../.agents/rules/03-verification.md) |
+| Deploy a site, hosting, headers, domains, environment variables | [frontend-deployment](../.agents/skills/frontend-deployment/SKILL.md) | [ci-cd-pipeline](../.agents/skills/ci-cd-pipeline/SKILL.md) front-end templates |
+| CMS, WordPress, Shopify, payments, auth UI, email, PWA, analytics | [web-integrations-and-platforms](../.agents/skills/web-integrations-and-platforms/SKILL.md) | rule [04](../.agents/rules/04-dependencies.md) section 9 |
+| Works locally but broken when deployed; hydration, CORS, layout bugs | [systematic-debugging](../.agents/skills/systematic-debugging/SKILL.md) with its [browser-debugging reference](../.agents/skills/systematic-debugging/references/browser-debugging.md) | [frontend-deployment](../.agents/skills/frontend-deployment/SKILL.md) |
+| A tool, framework or service this spec does not mention | rule [04](../.agents/rules/04-dependencies.md) section 9 | [TOOLKIT.md](TOOLKIT.md) |
+| Not sure how to phrase the request | [PROMPT-LIBRARY.md](PROMPT-LIBRARY.md) | |
 
 ## 2. Execution loop for any scenario
 

@@ -7,6 +7,7 @@ import { stat } from "node:fs/promises";
 import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { DEV_HEADERS } from "./security-headers.js";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 
@@ -63,7 +64,8 @@ export function createServer(root = ROOT) {
         "content-type": CONTENT_TYPES[path.extname(filePath)] ?? "application/octet-stream",
         "content-length": info.size,
         "cache-control": "no-store",
-        "x-content-type-options": "nosniff",
+        // Same policy as production (minus HSTS), so CSP violations show up during development.
+        ...DEV_HEADERS,
       });
       if (request.method === "HEAD") return response.end();
       createReadStream(filePath).pipe(response);

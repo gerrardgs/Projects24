@@ -45,6 +45,8 @@ describe("dev server", () => {
     assert.equal(page.status, 200);
     assert.match(page.headers.get("content-type") ?? "", /^text\/html/);
     assert.match(await page.text(), /<main id="main"/);
+    assert.match(page.headers.get("content-security-policy") ?? "", /default-src 'self'/);
+    assert.equal(page.headers.get("strict-transport-security"), null);
     const script = await fetch(`${base}/main.js`);
     assert.match(script.headers.get("content-type") ?? "", /^text\/javascript/);
     await script.body?.cancel();

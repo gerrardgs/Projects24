@@ -1,5 +1,6 @@
 // Runs axe-core in headless Chromium against one or more URLs, in light and dark color schemes,
-// at a phone and a desktop viewport. Exits 1 when any WCAG 2.x A/AA violation is found.
+// at a phone and a desktop viewport. Exits 1 when any WCAG 2.x A/AA violation is found, or when the page logs
+// console errors (for example Content Security Policy violations or failed requests).
 //
 // Usage: node check.mjs <url> [more urls...]
 // Setup: npm ci && npx playwright install chromium
@@ -30,6 +31,11 @@ try {
       for (const colorScheme of SCHEMES) {
         const context = await browser.newContext({ colorScheme, viewport, reducedMotion: "reduce" });
         const page = await context.newPage();
+        const consoleErrors = [];
+        page.on("console", (message) => {
+          if (message.type() === "error") consoleErrors.push(message.text());
+        });
+        page.on("pageerror", (error) => consoleErrors.push(error.message));
         await page.goto(url, { waitUntil: "load" });
         const { violations } = await new AxeBuilder({ page }).withTags(WCAG_TAGS).analyze();
         const overflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
@@ -38,7 +44,11 @@ try {
           // WCAG 1.4.10 Reflow: content should not need horizontal scrolling at 320 CSS px wide.
           console.log(`WARN ${label}: page scrolls horizontally`);
         }
-        if (violations.length === 0) console.log(`pass ${label}`);
+        for (const message of consoleErrors) {
+          violationCount += 1;
+          console.log(`FAIL ${label}: console error: ${message}`);
+        }
+        if (violations.length === 0 && consoleErrors.length === 0) console.log(`pass ${label}`);
         for (const violation of violations) {
           violationCount += violation.nodes.length;
           console.log(`FAIL ${label}: ${violation.id} (${violation.impact}) ${violation.help}`);
@@ -52,5 +62,5 @@ try {
 } finally {
   await browser.close();
 }
-console.log(`${violationCount} violation(s)`);
+console.log(`${violationCount} problem(s)`);
 process.exitCode = violationCount > 0 ? 1 : 0;

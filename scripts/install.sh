@@ -14,7 +14,7 @@
 #
 # Installed: AGENTS.md, CLAUDE.md, GEMINI.md, .aider.conf.yml, .gemini/settings.json,
 #            .github/copilot-instructions.md, .agents/ (rules and skills), scripts/agents-sync.mjs,
-#            docs/DESIGN-REFERENCES.md (the reference library AGENTS.md links to).
+#            docs/DESIGN-REFERENCES.md, docs/TOOLKIT.md, docs/PROMPT-LIBRARY.md (linked from AGENTS.md).
 # Never installed: README, LICENSE, CHANGELOG, .gitignore, other docs or workflows. Those belong to your project.
 
 set -euo pipefail
@@ -35,6 +35,8 @@ SPEC_FILES=(
   ".github/copilot-instructions.md"
   "scripts/agents-sync.mjs"
   "docs/DESIGN-REFERENCES.md"
+  "docs/TOOLKIT.md"
+  "docs/PROMPT-LIBRARY.md"
 )
 SPEC_DIRECTORIES=(".agents")
 

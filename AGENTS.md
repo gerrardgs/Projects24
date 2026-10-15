@@ -8,6 +8,7 @@ This file is the **always-on core**. Deeper guidance loads on demand:
 - **Rules** (short, normative): [`.agents/rules/`](.agents/rules/)
 - **Skills** (step-by-step procedures): [`.agents/skills/`](.agents/skills/) (mirrored to `.claude/skills/` for Claude Code and Cline)
 - **Reference library** (curated, link-checked sources): [`docs/DESIGN-REFERENCES.md`](docs/DESIGN-REFERENCES.md)
+- **Tools catalog** (official links, from sketch to production): [`docs/TOOLKIT.md`](docs/TOOLKIT.md); **prompt library** for every scenario: [`docs/PROMPT-LIBRARY.md`](docs/PROMPT-LIBRARY.md)
 
 If your tool does not load these folders automatically, **open the matching file from the tables in sections 4 and 5 before starting that kind of work.**
 
@@ -55,7 +56,7 @@ If your tool does not load these folders automatically, **open the matching file
 | [06-security.md](.agents/rules/06-security.md) | always | Secrets, untrusted input and content, injection, access control, crypto |
 | [09-design-principles.md](.agents/rules/09-design-principles.md) | always | User goals, hierarchy, tokens and consistency, every state, responsive, no invented design facts |
 | [10-accessibility.md](.agents/rules/10-accessibility.md) | always | WCAG 2.2 AA: semantics, keyboard, focus, contrast, forms, motion, testing |
-| [04-dependencies.md](.agents/rules/04-dependencies.md) | on demand | Adding, replacing or upgrading dependencies; standard library first |
+| [04-dependencies.md](.agents/rules/04-dependencies.md) | on demand | Adding, replacing or upgrading dependencies; platform first; adopting any tool or service |
 | [05-error-handling.md](.agents/rules/05-error-handling.md) | on demand | Errors, boundary validation, logging, timeouts, resource cleanup |
 | [07-testing.md](.agents/rules/07-testing.md) | on demand | Writing, changing or running tests |
 | [08-git-workflow.md](.agents/rules/08-git-workflow.md) | on demand | Commits, branches, pull requests, versioning, releases |
@@ -81,6 +82,7 @@ If your tool does not load these folders automatically, **open the matching file
 | Build | [framework-frontend-engineering](.agents/skills/framework-frontend-engineering/SKILL.md) | React, Next.js, Vue, Nuxt, Svelte, Angular, Astro apps and components |
 | Build | [css-architecture-and-responsive](.agents/skills/css-architecture-and-responsive/SKILL.md) | Styling, layout, responsive design, themes, dark mode |
 | Build | [mobile-engineering](.agents/skills/mobile-engineering/SKILL.md) | iOS, Android, Flutter, React Native apps: platform design, accessibility, security, store release |
+| Build | [web-integrations-and-platforms](.agents/skills/web-integrations-and-platforms/SKILL.md) | CMS, WordPress, Shopify, payments, auth UI, email, PWA, SEO, analytics and third-party scripts |
 | Build | [native-from-scratch](.agents/skills/native-from-scratch/SKILL.md) | Writing a new back-end service, CLI or module, standard library first |
 | Change | [change-existing-code](.agents/skills/change-existing-code/SKILL.md) | Modifying, refactoring, upgrading or migrating existing code |
 | Test | [test-engineering](.agents/skills/test-engineering/SKILL.md) | Adding tests, regression tests, test setup, flaky tests |
@@ -92,6 +94,7 @@ If your tool does not load these folders automatically, **open the matching file
 | Review | [rigorous-code-audit](.agents/skills/rigorous-code-audit/SKILL.md) | Reviewing a diff, pull request or codebase |
 | Secure | [security-hardening](.agents/skills/security-hardening/SKILL.md) | Threat modelling, hardening, security scanning, secrets |
 | Automate | [ci-cd-pipeline](.agents/skills/ci-cd-pipeline/SKILL.md) | CI workflows, release automation, Dependabot |
+| Ship | [frontend-deployment](.agents/skills/frontend-deployment/SKILL.md) | Static and server hosting, environment variables, security headers, caching, domains, previews, monitoring |
 | Ship | [deploy-and-release](.agents/skills/deploy-and-release/SKILL.md) | Containers, configuration, migrations, rollout, monitoring, rollback |
 
 A task often spans several skills. Building a designed page, for example, uses design-to-code handoff, CSS, accessibility audit, testing, then review.
@@ -110,6 +113,7 @@ A task often spans several skills. Building a designed page, for example, uses d
 - **Monorepo or nested instructions**: the `AGENTS.md` nearest to the file being edited takes precedence for that directory. Explicit user instructions override this file, except where they would break section 2, the security rules or the accessibility baseline; then explain the conflict.
 - **Several agents or sub-agents**: give each one a self-contained task with the relevant rule and skill links. Review and verify their results before reporting them as done.
 - **Unfamiliar language, framework or design tool**: read the official documentation and the existing work first, and follow the platform's idioms, not habits from another one.
+- **Tool, framework or service not covered here**: the spec still applies. Evaluate and adopt it with [04-dependencies](.agents/rules/04-dependencies.md) section 9; [docs/TOOLKIT.md](docs/TOOLKIT.md) lists commonly used tools with official links.
 - **Production or shared environments, shared design files**: read-only by default. Never change live data, published sites, shared libraries or deployments without explicit approval.
 
 ## 7. Definition of done and report format

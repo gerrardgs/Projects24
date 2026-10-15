@@ -32,7 +32,7 @@ function setUpThemeToggle() {
   };
 
   apply(resolveTheme(readSavedTheme(), systemDark.matches));
-  toggle.hidden = false;
+  toggle.classList.add("is-ready");
   toggle.addEventListener("click", () => {
     const next = toggle.getAttribute("aria-pressed") === "true" ? "light" : "dark";
     apply(next);
