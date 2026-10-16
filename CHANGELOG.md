@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.6.0: engineering concepts and chaos engineering (2026-10-16)
+
+### Added
+
+- Skill `resilience-and-chaos-engineering`: the Principles of Chaos Engineering (steady state, hypothesis, real-world events, disprove, automation, minimal blast radius), a catalogue of front-end failure modes with expected behaviour, resilience patterns for user interfaces (progressive enhancement, timeouts, retries with backoff and jitter, circuit breakers, error boundaries, fallbacks, kill switches), SLIs, SLOs and error budgets from real-user data, an experiment procedure, and rules for production game days (approval, abort conditions, minimal blast radius). References list fault-injection tools with current versions (Toxiproxy v2.13.0, Chaos Toolkit 1.21.4, LitmusChaos 3.33.0 and Chaos Mesh v2.8.5, both CNCF Incubating) and managed services.
+- Template `browser-chaos`: six experiments (control, scripts unavailable, stylesheet unavailable, 1.5 s delay on every response, storage blocked, offline after load) with a user-visible steady state; faults are injected only in the test browser. Tests prove it can fail: a deliberately fragile fixture page is caught on blocked storage and missing JavaScript. The starter site holds all six hypotheses. Runs in CI after the accessibility scan; Dependabot covers it.
+- `docs/ENGINEERING-CONCEPTS.md`: the 18 knowledge areas of the SWEBOK Guide V4.0, the nine ISO/IEC 25010:2023 quality characteristics, design principles (KISS, YAGNI, DRY, SOLID, separation of concerns, the robustness principle with RFC 9413's caution), architecture (rendering strategies, micro-frontends, BFF, hexagonal, DDD, C4, arc42, ADRs, twelve-factor), delivery (DORA's five metrics, trunk-based development, platform engineering, FinOps), testing, SRE and chaos engineering, security (CISA Secure by Design, NIST SSDF, OWASP SAMM, STRIDE, SLSA), human-centred, sustainability (SCI, ISO/IEC 21031:2024) and AI-assisted engineering, each mapped to the rule or skill that applies it. Linked from `AGENTS.md`, shipped by the installer.
+- Operational manual: two scenarios (chaos and resilience; "which engineering concept applies?").
+
 ## 1.5.0: research update from public and open-source knowledge (2026-10-16)
 
 Every addition below was checked against its primary source on 2026-10-16.

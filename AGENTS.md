@@ -10,7 +10,7 @@ This file is the **always-on core**. Deeper guidance loads on demand:
 - **Rules** (short, normative): [`.agents/rules/`](.agents/rules/)
 - **Skills** (step-by-step procedures): [`.agents/skills/`](.agents/skills/) (mirrored to `.claude/skills/` for Claude Code and Cline)
 - **Reference library** (curated, link-checked sources): [`docs/DESIGN-REFERENCES.md`](docs/DESIGN-REFERENCES.md)
-- **Tools catalog** (official links, from sketch to production): [`docs/TOOLKIT.md`](docs/TOOLKIT.md); **prompt library** for every scenario: [`docs/PROMPT-LIBRARY.md`](docs/PROMPT-LIBRARY.md)
+- **Tools catalog** (official links, from sketch to production): [`docs/TOOLKIT.md`](docs/TOOLKIT.md); **prompt library** for every scenario: [`docs/PROMPT-LIBRARY.md`](docs/PROMPT-LIBRARY.md); **engineering concepts map** (SWEBOK V4.0, ISO/IEC 25010, SRE, DORA, chaos engineering and more, mapped to rules and skills): [`docs/ENGINEERING-CONCEPTS.md`](docs/ENGINEERING-CONCEPTS.md)
 
 If your tool does not load these folders automatically, **open the matching file from the tables in sections 4 and 5 before starting that kind of work.**
 
@@ -92,6 +92,7 @@ If your tool does not load these folders automatically, **open the matching file
 | Test | [frontend-testing-and-visual-qa](.agents/skills/frontend-testing-and-visual-qa/SKILL.md) | Component, end-to-end and visual regression tests; design QA |
 | Test | [accessibility-audit](.agents/skills/accessibility-audit/SKILL.md) | WCAG audits, screen reader testing, accessibility fixes and statements |
 | Tune | [web-performance-optimization](.agents/skills/web-performance-optimization/SKILL.md) | Core Web Vitals, Lighthouse, images, fonts, bundles |
+| Tune | [resilience-and-chaos-engineering](.agents/skills/resilience-and-chaos-engineering/SKILL.md) | Failure modes, resilience patterns, SLOs and error budgets, chaos experiments |
 | Debug | [systematic-debugging](.agents/skills/systematic-debugging/SKILL.md) | Errors, crashes, wrong output, slowness, incidents |
 | Review | [design-critique-and-review](.agents/skills/design-critique-and-review/SKILL.md) | Feedback on designs, prototypes, pages, brand pieces |
 | Review | [rigorous-code-audit](.agents/skills/rigorous-code-audit/SKILL.md) | Reviewing a diff, pull request or codebase |

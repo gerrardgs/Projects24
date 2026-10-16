@@ -48,6 +48,8 @@ Which rules and skills to use for each kind of task, for AI agents and for the p
 | Deploy a site, hosting, headers, domains, environment variables | [frontend-deployment](../.agents/skills/frontend-deployment/SKILL.md) | [ci-cd-pipeline](../.agents/skills/ci-cd-pipeline/SKILL.md) front-end templates |
 | CMS, WordPress, Shopify, payments, auth UI, email, PWA, analytics | [web-integrations-and-platforms](../.agents/skills/web-integrations-and-platforms/SKILL.md) | rule [04](../.agents/rules/04-dependencies.md) section 9 |
 | Works locally but broken when deployed; hydration, CORS, layout bugs | [systematic-debugging](../.agents/skills/systematic-debugging/SKILL.md) with its [browser-debugging reference](../.agents/skills/systematic-debugging/references/browser-debugging.md) | [frontend-deployment](../.agents/skills/frontend-deployment/SKILL.md) |
+| Chaos engineering, resilience, offline or failure handling, SLOs | [resilience-and-chaos-engineering](../.agents/skills/resilience-and-chaos-engineering/SKILL.md) | [systematic-debugging](../.agents/skills/systematic-debugging/SKILL.md), [frontend-deployment](../.agents/skills/frontend-deployment/SKILL.md) |
+| "Which engineering concept applies here?" | [ENGINEERING-CONCEPTS.md](ENGINEERING-CONCEPTS.md) | the rule or skill it points to |
 | A tool, framework or service this spec does not mention | rule [04](../.agents/rules/04-dependencies.md) section 9 | [TOOLKIT.md](TOOLKIT.md) |
 | Not sure how to phrase the request | [PROMPT-LIBRARY.md](PROMPT-LIBRARY.md) | |
 

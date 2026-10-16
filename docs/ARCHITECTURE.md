@@ -19,7 +19,7 @@ How the Projects 24 specification is organised, why, and how each AI tool loads 
           ▼                                        ▼
 ┌───────────────────────────────────┐   ┌───────────────────────────────────┐
 │ Rules (.agents/rules/)            │   │ Skills (.agents/skills/)          │
-│ always_on: 01-03, 06, 09, 10, 15  │   │ Loaded when the task matches (27):│
+│ always_on: 01-03, 06, 09, 10, 15  │   │ Loaded when the task matches (28):│
 │ model_decision (on demand):       │   │ research, UI, graphic, motion,    │
 │   04, 05, 07, 08, 11, 12, 13, 14  │   │ data viz, tokens, Figma, handoff, │
 │ Short, normative "must" rules     │   │ front-end, CSS, mobile, integra-  │

@@ -202,7 +202,7 @@ jobs:
       - run: npm audit --omit=dev --audit-level=high
 
   accessibility-scan:
-    name: Accessibility scan of the static site (axe-core)
+    name: Accessibility and chaos checks of the static site
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -223,6 +223,12 @@ jobs:
           PORT=8080 node "$site/serve.js" &
           for _ in $(seq 1 20); do curl -fsS http://127.0.0.1:8080/ >/dev/null && break; sleep 0.5; done
           node .agents/skills/accessibility-audit/assets/axe-check/check.mjs http://127.0.0.1:8080/
+      - name: Chaos experiments (tests prove they can fail, then run against the starter page)
+        working-directory: .agents/skills/resilience-and-chaos-engineering/assets/browser-chaos
+        run: |
+          npm ci
+          npm test
+          node chaos.mjs http://127.0.0.1:8080/
 
   python-template:
     name: Python template (Python ${{ matrix.python-version }})
