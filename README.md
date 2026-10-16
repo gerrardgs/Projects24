@@ -153,9 +153,9 @@ Projects 24 includes runnable reference implementations that prove design-to-cod
 
 | Template | What It Proves | Verification Status |
 | :--- | :--- | :--- |
-| [figma-variables-sync](.agents/skills/figma-integration/assets/figma-variables-sync/) | Figma REST API variables → DTCG token files per collection and mode; scope-based type mapping; secure API client with zero token leakage | `tsc --noEmit` clean; type-checked against Figma's official `@figma/rest-api-spec` typings; 13 tests including round-trip contrast verification |
-| [design-tokens](.agents/skills/design-system-and-tokens/assets/design-tokens/) | DTCG 2025.10 tokens compiler into CSS custom properties with light and dark themes; alias resolution; automated WCAG contrast checks of every text and UI pair | `tsc --noEmit` clean; 17 tests pass; 22 contrast pairs pass (Node.js 22, 24 and 26 in CI; TypeScript 7.0.2) |
-| [static-site](.agents/skills/frontend-from-scratch/assets/static-site/) | Accessible starter site with no runtime dependencies: skip link, landmarks, labelled form with error summary, theme toggle, 44 px touch targets, reduced motion, strict CSP and security headers for Netlify, Cloudflare Pages and Vercel | html-validate and Stylelint clean; 18 tests pass; axe-core 0 violations and 0 console errors under the CSP (phone and desktop, light and dark); Lighthouse 100 in all four categories, CLS 0 |
+| [figma-variables-sync](.agents/skills/figma-integration/assets/figma-variables-sync/) | Figma REST API variables → DTCG token files per collection and mode plus a standard resolver file; scope-based type mapping; secure API client with zero token leakage | `tsc --noEmit` clean; type-checked against Figma's official `@figma/rest-api-spec` typings; 17 tests including a round trip through the token pipeline with contrast checks |
+| [design-tokens](.agents/skills/design-system-and-tokens/assets/design-tokens/) | DTCG 2025.10 tokens compiler into CSS custom properties, with themes defined by the DTCG Resolver Module; alias resolution; automated WCAG contrast checks of every text and UI pair | `tsc --noEmit` clean; 23 tests pass; 22 contrast pairs pass (Node.js 22, 24 and 26 in CI; TypeScript 7.0.2) |
+| [static-site](.agents/skills/frontend-from-scratch/assets/static-site/) | Accessible starter site with no runtime dependencies: skip link, landmarks, labelled form with error summary, theme toggle, 44 px touch targets, reduced motion, strict CSP with Trusted Types and security headers for Netlify, Cloudflare Pages and Vercel | html-validate and Stylelint clean; 18 tests pass; axe-core 0 violations and 0 console errors under the CSP (phone and desktop, light and dark); Lighthouse 100 in all four categories, CLS 0 |
 | [axe-check](.agents/skills/accessibility-audit/assets/axe-check/) | Automated WCAG 2.0 to 2.2 A/AA scan in headless Chromium using Playwright and axe-core across viewports and colour schemes | Fails on accessibility violations and on console errors (for example CSP violations); validated against the static site: 0 problems, and an inline-script probe was caught |
 | [CI and deploy templates](.agents/skills/ci-cd-pipeline/assets/) | Front-end CI, Lighthouse CI budgets, GitHub Pages deploy with official actions pinned to SHAs | actionlint and zizmor (auditor persona) clean; `lighthouserc.json` run with `@lhci/cli` 0.15.1 |
 | [native-from-scratch](.agents/skills/native-from-scratch/SKILL.md) | Inherited Node.js (TypeScript) and Python microservices with unit tests, Dockerfile, and lockfile | Node.js 22, 24, 26 and Python 3.11 to 3.14 in CI |
@@ -166,14 +166,16 @@ Projects 24 includes runnable reference implementations that prove design-to-cod
 
 Projects 24 installs directly into any existing repository or new project. The installer copies only specification and configuration files and **never overwrites files that already exist and differ** (it lists them for you to inspect and merge).
 
-### One-Line Install
+### Verified Install (recommended)
+
+Pin a full commit SHA from the [commit list](https://github.com/gerrardgs/Projects24/commits/main): unlike a branch or tag, it cannot be changed after you have reviewed it. Download the installer, read it, then run it. Piping a download straight into a shell is what this project's own security rule forbids.
 
 ```sh
-# 1. Preview changes safely without writing anything (dry run)
-curl -fsSL https://raw.githubusercontent.com/gerrardgs/Projects24/main/scripts/install.sh | bash -s -- --dry-run
-
-# 2. Install into current project
-curl -fsSL https://raw.githubusercontent.com/gerrardgs/Projects24/main/scripts/install.sh | bash
+COMMIT=<full-40-character-commit-sha>
+curl -fsSLo install.sh "https://raw.githubusercontent.com/gerrardgs/Projects24/${COMMIT}/scripts/install.sh"
+less install.sh                                   # read it before running it
+bash install.sh --ref "${COMMIT}" --dry-run       # preview: nothing is written
+bash install.sh --ref "${COMMIT}"                 # install into the current directory
 ```
 
 ### Manual Installation
@@ -250,6 +252,7 @@ Detailed architectural and procedural documentation is available in `docs/`:
 - [Prompt Library](docs/PROMPT-LIBRARY.md): Ready-to-use prompts for each scenario, with notes per AI tool.
 - [Anti-Hallucination Playbook](docs/ANTI-HALLUCINATION-PLAYBOOK.md): Common AI design and front-end failure modes and how verification catches them.
 - [Contributing Guidelines](docs/CONTRIBUTING.md): Quality checklist for authoring new design rules, skills, templates, and references.
+- [Security Policy](SECURITY.md): How to report a vulnerability, the controls that run on every push, accepted risks, and the GitHub settings the owner must enable.
 - [Changelog](CHANGELOG.md): Complete chronological record of releases and verified additions.
 
 ---

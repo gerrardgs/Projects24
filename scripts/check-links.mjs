@@ -18,6 +18,16 @@ const CONCURRENCY = 8;
 const TIMEOUT_MS = 20_000;
 const USER_AGENT = "Mozilla/5.0 (compatible; projects24-link-check/1.0; +https://github.com/gerrardgs/Projects24)";
 const FAILING_STATUSES = new Set([404, 410]);
+// Hosts that answer 404 to every automated client, even for pages that exist. Their links were verified in a browser
+// (www.ftc.gov on 2026-10-16); for them a 404 is reported as a warning, not an error.
+const BOT_BLOCKING_HOSTS = new Set(["www.ftc.gov", "ftc.gov"]);
+
+/** Classifies a probe result: "ok", "warning" or "error". */
+export function classify(url, result) {
+  if (result.error !== undefined) return "error";
+  if (FAILING_STATUSES.has(result.status)) return BOT_BLOCKING_HOSTS.has(new URL(url).hostname) ? "warning" : "error";
+  return result.status >= 400 ? "warning" : "ok";
+}
 
 /** Extracts unique http(s) URLs from Markdown link syntax, ignoring fenced and inline code. */
 export function extractUrls(markdown) {
@@ -92,9 +102,10 @@ async function main() {
       const url = urls[next++];
       const result = await probe(url);
       const where = sources.get(url).join(", ");
-      if (result.error !== undefined) failures.push(`${url} -> ${result.error} (in ${where})`);
-      else if (FAILING_STATUSES.has(result.status)) failures.push(`${url} -> HTTP ${result.status} (in ${where})`);
-      else if (result.status >= 400) warnings.push(`${url} -> HTTP ${result.status} (in ${where})`);
+      const outcome = classify(url, result);
+      const detail = `${url} -> ${result.error ?? `HTTP ${result.status}`} (in ${where})`;
+      if (outcome === "error") failures.push(detail);
+      else if (outcome === "warning") warnings.push(detail);
     }
   }
   await Promise.all(Array.from({ length: CONCURRENCY }, worker));

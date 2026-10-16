@@ -48,12 +48,12 @@ Writing to Figma (remote server: `use_figma`, `generate_figma_design`, `upload_a
 
 ## 4. Sync variables to code tokens
 
-The tested converter in [assets/figma-variables-sync/](assets/figma-variables-sync/) turns the REST API response into DTCG 2025.10 token files, one per collection and mode, ready for the [design-system-and-tokens](../design-system-and-tokens/SKILL.md) pipeline:
+The tested converter in [assets/figma-variables-sync/](assets/figma-variables-sync/) turns the REST API response into DTCG 2025.10 token files, one per collection and mode, plus a `tokens.resolver.json` (DTCG Resolver Module 2025.10: one-mode collections become sets, collections with several modes become modifiers such as `theme` with `light` and `dark`), ready for the [design-system-and-tokens](../design-system-and-tokens/SKILL.md) pipeline:
 
 ```sh
 cd assets/figma-variables-sync
 npm ci
-npm run typecheck && npm test                         # 13 tests; fixture type-checked against @figma/rest-api-spec
+npm run typecheck && npm test                         # 17 tests; fixture type-checked against @figma/rest-api-spec
 FIGMA_TOKEN=... node cli.ts https://www.figma.com/design/<file-key>/<name> out/
 node cli.ts --input saved-response.json out/          # offline, from a saved response
 ```
@@ -64,7 +64,7 @@ Run it in CI on a schedule or on demand, open a pull request with the token diff
 
 ## 5. Code Connect
 
-- Install the CLI (`@figma/code-connect`, command `figma`; requires Node.js 18 or newer), create `figma.config.json` at the repository root, write `*.figma.ts` template files (framework-agnostic) or framework-specific files (React, HTML/Web Components/Angular/Vue, SwiftUI, Jetpack Compose), then `npx figma connect publish`.
+- Add the CLI as a pinned dev dependency (`@figma/code-connect`, command `figma`; requires Node.js 18 or newer; avoid global `@latest` installs), create `figma.config.json` at the repository root, write `*.figma.ts` template files (framework-agnostic) or framework-specific files (React, HTML/Web Components/Angular/Vue, SwiftUI, Jetpack Compose), then `npx figma connect publish`.
 - Token for publishing: a personal access token with **Code Connect: Write** and **File content: Read**, passed as `FIGMA_ACCESS_TOKEN` from the CI secret store.
 - Publish from CI on merges to the main branch so Figma always shows the current component API. CLI-created connections can be edited only in the CLI.
 

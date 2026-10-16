@@ -7,6 +7,7 @@ Versions checked against the npm registry on 2026-10-15. Re-check with `npm view
 | Item | Status | Link |
 | :--- | :--- | :--- |
 | Design Tokens Format Module 2025.10 | First stable version (28 October 2025), a W3C Community Group Final Report, not a W3C Standard | [Format](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/), [designtokens.org](https://www.designtokens.org/) |
+| Design Tokens Resolver Module 2025.10 | Final Community Group Report (28 October 2025) for themes, modes and brands; the `version` value is `2025.10` (placeholder dates in the published text were corrected in [PR #357](https://github.com/design-tokens/community-group/pull/357) and [PR #408](https://github.com/design-tokens/community-group/pull/408)) | [Resolver](https://www.w3.org/community/reports/design-tokens/CG-FINAL-resolver-20251028/) |
 | DTCG FAQ and tool support | Lists implementing tools | [FAQ](https://www.designtokens.org/faq/) |
 
 ## Token tools
@@ -14,6 +15,7 @@ Versions checked against the npm registry on 2026-10-15. Re-check with `npm view
 | Tool | Package | Version | Docs |
 | :--- | :--- | :--- | :--- |
 | Style Dictionary | `style-dictionary` | 5.6.1 | [styledictionary.com](https://styledictionary.com/) |
+| Terrazzo (DTCG-native token tool with resolver support) | `@terrazzo/cli` | 2.9.0 | [terrazzo.app](https://terrazzo.app/docs/), [resolvers](https://terrazzo.app/docs/guides/resolvers/) |
 | Tokens Studio transforms for Style Dictionary | `@tokens-studio/sd-transforms` | 2.0.3 | [GitHub](https://github.com/tokens-studio/sd-transforms) |
 | Tokens Studio for Figma | Figma plugin | | [docs.tokens.studio](https://docs.tokens.studio/) |
 | Figma variables | Built into Figma; REST API endpoints for variables | | [Variables guide](https://help.figma.com/hc/en-us/articles/15339657135383-Guide-to-variables-in-Figma), [REST API: variables](https://developers.figma.com/docs/rest-api/variables/) |

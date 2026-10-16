@@ -6,6 +6,11 @@ import type { AddressInfo } from "node:net";
 import { after, before, describe, test } from "node:test";
 // Integration check with the token pipeline of the design-system-and-tokens skill in this repository.
 import {
+  contextsOf,
+  parseResolver,
+  resolveTokens,
+} from "../../../design-system-and-tokens/assets/design-tokens/resolver.ts";
+import {
   checkContrast,
   flattenTokens,
   mergeTokenSets,
@@ -104,6 +109,31 @@ describe("convertVariables", () => {
         { foreground: "theme.text.default", background: "theme.surface.default", minimum: 4.5 },
       ]);
       assert.ok(pair?.passes, `${mode}: ${pair?.ratio}`);
+    }
+  });
+
+  test("writes a standard resolver: one-mode collections as sets, multi-mode collections as modifiers", async () => {
+    assert.deepEqual(result.resolver, {
+      version: "2025.10",
+      sets: { primitives: { sources: [{ $ref: "primitives.value.tokens.json" }] } },
+      modifiers: {
+        theme: {
+          contexts: { light: [{ $ref: "theme.light.tokens.json" }], dark: [{ $ref: "theme.dark.tokens.json" }] },
+          default: "light",
+        },
+      },
+      resolutionOrder: [{ $ref: "#/sets/primitives" }, { $ref: "#/modifiers/theme" }],
+    });
+    // The design-tokens pipeline reads it as is and every theme still passes contrast.
+    const resolver = parseResolver(result.resolver);
+    const load = async (ref: string) => file(ref);
+    assert.deepEqual(contextsOf(resolver, "theme"), ["light", "dark"]);
+    for (const theme of contextsOf(resolver, "theme")) {
+      const tokens = await resolveTokens(resolver, { theme }, load);
+      const [pair] = checkContrast(tokens, [
+        { foreground: "theme.text.default", background: "theme.surface.default", minimum: 4.5 },
+      ]);
+      assert.ok(pair?.passes, theme);
     }
   });
 

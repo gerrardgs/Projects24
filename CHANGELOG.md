@@ -2,6 +2,44 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.5.0: research update from public and open-source knowledge (2026-10-16)
+
+Every addition below was checked against its primary source on 2026-10-16.
+
+### Added
+
+- **DTCG Resolver Module 2025.10** in the design-tokens template: `tokens/resolver.json` (sets, a `theme` modifier with `light` and `dark` contexts, `resolutionOrder`), a validated `resolver.ts` (later sources override earlier ones, references cannot leave the token directory), and 6 new tests (17 → 23). The generated CSS is byte-for-byte identical to before apart from its header comment. The spec's published `version` placeholders are accepted; the intended value `2025.10` (upstream PRs #357 and #408) is written.
+- The Figma converter now also writes `tokens.resolver.json` (one-mode collections as sets, multi-mode collections as modifiers); a new test runs it through the token pipeline with contrast checks (16 → 17 tests).
+- **Trusted Types** enforced in the static site's CSP (`require-trusted-types-for 'script'`, `trusted-types 'none'`; Baseline newly available since February 2026). Verified in Chromium: the page has 0 problems and an `innerHTML` probe is blocked. Rule 11 recommends it.
+- UI design skill, "Make deliberate choices, not generated defaults": the common tells of AI-generated design (from Anthropic's open-source `frontend-design` skill, Apache-2.0) and how to avoid them; Vercel's Web Interface Guidelines (MIT) as an interaction checklist.
+- Platform design languages of 2025: Apple's Liquid Glass and Google's Material 3 Expressive, with contrast guidance for translucent surfaces; `prefers-reduced-transparency` as an enhancement.
+- Mobile: Android 16 removes the edge-to-edge opt-out for apps targeting API level 36; large-screen orientation and resizability restrictions are going away.
+- Accessibility: overlays do not make sites conform (FTC final order against accessiBe, 22 April 2025; Overlay Fact Sheet); W3C cognitive accessibility guidance (COGA).
+- Privacy: Global Privacy Control (`Sec-GPC`) as a legally required opt-out signal in several US states.
+- Performance: a sustainability section based on the W3C Web Sustainability Guidelines (Group Note Draft).
+- Modern CSS reference: Baseline data re-checked with `web-features` 3.43.0; `if()`, `@function` and `prefers-reduced-transparency` listed as limited; Interop 2026 focus areas.
+- References and catalog: Resolver Module, Terrazzo, Anthropic skills, Vercel guidelines, `llms.txt` (labelled as a community proposal), COGA, Overlay Fact Sheet, GPC, Web Sustainability Guidelines, Interop 2026, Liquid Glass, Material 3 Expressive.
+- Anti-hallucination playbook: errors in a published standard, and vendor claims taken as fact.
+- Link checker: hosts that answer 404 to every automated client (verified manually: `www.ftc.gov`) are reported as warnings, with a test (script tests 14 → 15).
+
+## 1.4.0: security audit and updates (2026-10-16)
+
+### Added
+
+- `SECURITY.md`: private vulnerability reporting, the controls in place with dated results, an accepted-risk analysis, and the GitHub account and repository settings only the owner can enable (2FA, private e-mail, secret scanning with push protection, Dependabot security updates, CodeQL, a `main` ruleset, read-only workflow permissions, required SHA pinning).
+- CI job `secrets`: gitleaks 8.30.1 (SHA-256 verified before running) scans every commit and every file.
+- Rule 06 section 7, AI agents and MCP servers: official and pinned servers only, tool poisoning, least privilege, approval for outward actions, agent configuration reviewed as code. References updated to the OWASP Top 10 for LLM Applications 2026 and for Agentic Applications 2026.
+
+### Changed
+
+- Installer instructions: download, read, then run, pinned to an immutable commit SHA, instead of piping a download into a shell (which rule 06 forbids). Same in the installer's own help.
+- Unpinned `@latest` installs replaced with pinned versions (Code Connect CLI as an exact dev dependency; `govulncheck@v1.9.0`).
+- Updates: `zizmor` 1.30.1 → 1.31.1 in CI, `ruff` 0.17.0 → 0.17.1, `@axe-core/playwright` 4.13.0 → 4.14.0, `node:24-slim` base image to its current digest. All 12 pinned actions confirmed at their latest releases.
+
+### Verified (2026-10-16)
+
+gitleaks: 0 secrets in 3 commits and all files. Semgrep 1.181.0 (JavaScript, TypeScript, Node.js, Python, Dockerfile, GitHub Actions, secrets, security audit): 0 findings in 157 files. `npm audit`: 0 vulnerabilities in every lockfile except the documented `braces` advisory (no patch exists; unreachable in this repository). `pip-audit`: no known vulnerabilities. actionlint, zizmor (auditor persona), shellcheck: clean.
+
 ## 1.3.0: clean code and clean execution audit (2026-10-16)
 
 The concept is now explicit and the repository follows it.

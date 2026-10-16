@@ -28,7 +28,7 @@ Use three tiers, and let components depend only on the upper two:
 
 - Store tokens in the [DTCG format 2025.10](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/) (`$value`, `$type`, `$description`, aliases like `"{color.blue.600}"`), the first stable version of the community standard. Tools such as Style Dictionary, Tokens Studio, Penpot and Figma import and export it, with differences in coverage; check each tool's docs.
 - Name by role, not by appearance (`danger`, not `red`). Use one naming scheme in design and code.
-- Themes (light, dark, high contrast, brands) redefine the same semantic token set. The template checks that every theme defines the same paths.
+- Themes (light, dark, high contrast, brands) redefine the same semantic token set. Describe them with the [DTCG Resolver Module 2025.10](https://www.w3.org/community/reports/design-tokens/CG-FINAL-resolver-20251028/): a `resolver.json` with **sets** (shared sources), **modifiers** with **contexts** (for example `theme`: `light`, `dark`), and a `resolutionOrder` in which later sources override earlier ones. Its `version` is `"2025.10"`; the published report shows placeholder dates there, corrected upstream ([PR #357](https://github.com/design-tokens/community-group/pull/357)). The template builds every theme from its `tokens/resolver.json` and checks that every theme defines the same paths.
 
 ## 3. Build the pipeline
 
@@ -39,7 +39,7 @@ Use three tiers, and let components depend only on the upper two:
    ```sh
    cd assets/design-tokens
    npm ci
-   npm run typecheck && npm test   # 17 tests: parsing, aliases, CSS output, WCAG contrast
+   npm run typecheck && npm test   # 23 tests: parsing, aliases, resolver, CSS output, WCAG contrast
    npm run build                   # writes dist/tokens.css and prints every contrast ratio
    ```
 

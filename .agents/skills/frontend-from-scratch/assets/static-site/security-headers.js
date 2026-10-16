@@ -16,6 +16,10 @@ export const CONTENT_SECURITY_POLICY = [
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "object-src 'none'",
+  // Trusted Types (Baseline newly available since 2026-02): string-to-DOM sinks such as innerHTML throw unless they
+  // receive a value from a reviewed policy. This page creates no policies because it never writes HTML from strings.
+  "require-trusted-types-for 'script'",
+  "trusted-types 'none'",
 ].join("; ");
 
 /** Headers that are safe on plain-HTTP localhost as well as in production. */

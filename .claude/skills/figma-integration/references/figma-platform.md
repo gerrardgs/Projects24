@@ -39,7 +39,7 @@ Deprecated: `list_shader_effects`, `list_shader_fills`, `get_shader_effect`, `ge
 | Topic | Fact | Source |
 | :--- | :--- | :--- |
 | Availability | Dev or Full seat on Organization and Enterprise plans | [Code Connect](https://developers.figma.com/docs/code-connect/) |
-| CLI | `npm install --global @figma/code-connect@latest` (Node.js 18+; npm 2.0.2 on 2026-10-15); `npx figma connect publish`; `npx figma connect unpublish --node=<url> --label=<label>`; see `--help` for all commands | [Quickstart](https://developers.figma.com/docs/code-connect/quickstart-guide/) |
+| CLI | Figma documents `npm install --global @figma/code-connect@latest`; in projects using this spec, pin it instead as a dev dependency (`npm install --save-dev --save-exact @figma/code-connect@<version>`, 2.0.2 on 2026-10-15; Node.js 18+) and run `npx --no-install figma connect publish`; `npx figma connect unpublish --node=<url> --label=<label>`; see `--help` for all commands | [Quickstart](https://developers.figma.com/docs/code-connect/quickstart-guide/) |
 | Token | Personal access token with Code Connect Write and File content Read; `FIGMA_ACCESS_TOKEN` environment variable or `--token` | Quickstart |
 | Config | `figma.config.json` at the repository root, with a `codeConnect` object (`include`, `label`, `language`, and more) | Quickstart |
 | Languages | React and React Native; HTML (Web Components, Angular, Vue); SwiftUI; Jetpack Compose; template files (`*.figma.ts`) for any stack | [Code Connect](https://developers.figma.com/docs/code-connect/) |

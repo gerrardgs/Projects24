@@ -128,7 +128,7 @@ describe("CSS conversion", () => {
 describe("the shipped token set", () => {
   test("every contrast pair passes in both themes", async () => {
     const { contrast } = await build();
-    for (const [theme, results] of Object.entries(contrast)) {
+    for (const [theme, results] of contrast) {
       for (const result of results) {
         assert.ok(
           result.passes,

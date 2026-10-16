@@ -51,6 +51,7 @@ All links were checked with `node scripts/check-links.mjs` on 2026-10-15. Some s
 | [WAI-ARIA 1.2](https://www.w3.org/TR/wai-aria-1.2/) | Accessible Rich Internet Applications |
 | [ARIA in HTML](https://www.w3.org/TR/html-aria/) | Which ARIA is allowed on which HTML element |
 | [Design Tokens Format Module 2025.10](https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/) | DTCG token format, first stable version |
+| [Design Tokens Resolver Module 2025.10](https://www.w3.org/community/reports/design-tokens/CG-FINAL-resolver-20251028/) | Themes, modes and brands for DTCG tokens (`version` is `2025.10`) |
 | [Unicode Standard](https://www.unicode.org/standard/standard.html) and [CLDR](https://cldr.unicode.org/) | Characters, emoji, locale data |
 | [OpenType specification (Microsoft)](https://learn.microsoft.com/en-us/typography/opentype/spec/) | Font format |
 | [WOFF 2.0](https://www.w3.org/TR/WOFF2/) | Web font format |
@@ -73,6 +74,8 @@ All links were checked with `node scripts/check-links.mjs` on 2026-10-15. Some s
 | [WCAG-EM](https://www.w3.org/WAI/test-evaluate/conformance/wcag-em/) | Evaluation methodology |
 | [Accessibility statement generator](https://www.w3.org/WAI/planning/statements/generator/) | W3C tool |
 | [WCAG 3.0 Working Draft](https://www.w3.org/TR/wcag-3.0/) | Future guidelines (draft) |
+| [Making Content Usable for People with Cognitive and Learning Disabilities](https://www.w3.org/TR/coga-usable/) | W3C guidance beyond WCAG for cognitive accessibility |
+| [Overlay Fact Sheet](https://overlayfactsheet.com/) | Why accessibility overlays do not make sites conform; see also the [FTC order against accessiBe](https://www.ftc.gov/news-events/news/press-releases/2025/04/ftc-approves-final-order-requiring-accessibe-pay-1-million) (April 2025) |
 | [WebAIM](https://webaim.org/) | Articles, contrast checker, WAVE, surveys |
 | [WebAIM Million](https://webaim.org/projects/million/) | Annual accessibility audit of top home pages |
 | [The A11Y Project](https://www.a11yproject.com/) | Checklist, patterns, resources |
@@ -122,7 +125,8 @@ All links were checked with `node scripts/check-links.mjs` on 2026-10-15. Some s
 | :--- | :--- |
 | [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/) | iOS, iPadOS, macOS, watchOS, visionOS |
 | [Apple design resources](https://developer.apple.com/design/resources/) | UI kits, templates, SF fonts |
-| [Material Design 3](https://m3.material.io/) | Android and web |
+| [Material Design 3](https://m3.material.io/) | Android and web; [Material 3 Expressive](https://m3.material.io/blog/building-with-m3-expressive) (2025) |
+| [Liquid Glass](https://developer.apple.com/documentation/technologyoverviews/liquid-glass) | Apple's 2025 design language and materials |
 | [Android: design and plan](https://developer.android.com/design) | Android UI |
 | [Fluent 2](https://fluent2.microsoft.design/) | Microsoft |
 | [Windows app design](https://learn.microsoft.com/en-us/windows/apps/design/) | Windows |
@@ -152,6 +156,7 @@ All links were checked with `node scripts/check-links.mjs` on 2026-10-15. Some s
 | [GOV.UK Design System](https://design-system.service.gov.uk/), [U.S. Web Design System](https://designsystem.digital.gov/) | Government design systems |
 | [Radix](https://www.radix-ui.com/), [React Aria](https://react-spectrum.adobe.com/react-aria/), [Headless UI](https://headlessui.com/), [Ark UI](https://ark-ui.com/), [shadcn/ui](https://ui.shadcn.com/), [Bits UI](https://bits-ui.com/) | Headless and copy-in component libraries |
 | [Open UI](https://open-ui.org/) | W3C Community Group standardising UI controls |
+| [Terrazzo](https://terrazzo.app/docs/) | DTCG-native token tool with Resolver Module support |
 
 ## 6. Typography
 
@@ -314,6 +319,9 @@ Use AI tools within the rules of this spec: verify output, check licences and te
 | [Model Context Protocol](https://modelcontextprotocol.io/) | The protocol behind MCP servers |
 | [Agent Skills specification](https://agentskills.io/specification) | The skill format used in this repository |
 | [AGENTS.md](https://agents.md/) | The instruction file format used here |
+| [Anthropic skills repository](https://github.com/anthropics/skills) | Open-source Agent Skills, including `frontend-design` (avoiding generic AI-generated aesthetics, Apache-2.0), `canvas-design`, `theme-factory` and `webapp-testing` |
+| [Vercel Web Interface Guidelines](https://vercel.com/design/guidelines) | Practical interaction-quality checklist ([source, MIT](https://github.com/vercel-labs/web-interface-guidelines)) |
+| [llms.txt](https://llmstxt.org/) | Community proposal (not a standard) for a Markdown file that points language models to a site's key docs |
 | [Google PAIR Guidebook](https://pair.withgoogle.com/guidebook/) | Designing human-centred AI products |
 | [Microsoft HAX Toolkit](https://www.microsoft.com/en-us/haxtoolkit/) | Guidelines for human-AI interaction |
 | [NN/g: AI articles](https://www.nngroup.com/topic/ai/) | Research on AI user experience |
@@ -361,7 +369,7 @@ Versions and official docs: [framework-frontend-engineering references](../.agen
 | [web-features explorer](https://web-platform-dx.github.io/web-features-explorer/) | Baseline data per feature |
 | [Can I use](https://caniuse.com/) | Support tables |
 | [MDN browser compat data](https://github.com/mdn/browser-compat-data) | Data behind MDN tables |
-| [Interop dashboard](https://wpt.fyi/interop) | Cross-browser interoperability effort |
+| [Interop dashboard](https://wpt.fyi/interop) | Cross-browser interoperability effort; [Interop 2026 focus areas](https://web.dev/blog/interop-2026) |
 | [Chrome Platform Status](https://chromestatus.com/) | Chromium features |
 | [WebKit features in Safari](https://webkit.org/blog/), [Safari release notes](https://developer.apple.com/documentation/safari-release-notes) | Safari |
 | [Firefox release notes for developers](https://developer.mozilla.org/en-US/docs/Mozilla/Firefox/Releases) | Firefox |
@@ -397,6 +405,7 @@ Versions and official docs: [framework-frontend-engineering references](../.agen
 | [CSS Wizardry](https://csswizardry.com/) | Performance consulting articles |
 | [High Performance Browser Networking](https://hpbn.co/) | Free book |
 | [Bundlephobia](https://bundlephobia.com/) | Package cost |
+| [W3C Web Sustainability Guidelines](https://www.w3.org/TR/web-sustainability-guidelines/) | Sustainable design and development (Group Note Draft) |
 
 ## 19. Front-end security and privacy
 
@@ -444,6 +453,7 @@ Versions and official docs: [framework-frontend-engineering references](../.agen
 | [EDPB guidelines on deceptive design patterns in social media](https://www.edpb.europa.eu/our-work-tools/our-documents/guidelines/guidelines-032022-deceptive-design-patterns-social-media_en) | EU data protection guidance |
 | [FTC: Bringing Dark Patterns to Light (2022 report)](https://www.ftc.gov/reports/bringing-dark-patterns-light) | US regulator report |
 | [GDPR text (EUR-Lex)](https://eur-lex.europa.eu/eli/reg/2016/679/oj) | EU data protection law |
+| [Global Privacy Control](https://globalprivacycontrol.org/) | Browser opt-out signal (`Sec-GPC`) required by several US state laws |
 | [EU Digital Services Act](https://commission.europa.eu/strategy-and-policy/priorities-2019-2024/europe-fit-digital-age/digital-services-act_en) | Online platform rules including dark patterns |
 | [Humane by Design](https://humanebydesign.com/) | Principles for ethical design |
 | [Center for Humane Technology](https://www.humanetech.com/) | Technology and wellbeing |

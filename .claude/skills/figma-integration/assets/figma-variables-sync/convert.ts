@@ -24,8 +24,43 @@ export type TokenTree = Record<string, unknown>;
 export interface ConversionResult {
   /** Output file name (`<collection>.<mode>.tokens.json`) mapped to its token tree. */
   readonly files: Map<string, TokenTree>;
+  /**
+   * A DTCG Resolver Module 2025.10 document for the files: one-mode collections become sets, collections with
+   * several modes become modifiers (for example `theme` with `light` and `dark`). Save it next to the files.
+   */
+  readonly resolver: TokenTree;
   /** Variables that were skipped or need attention, with the reason. */
   readonly warnings: string[];
+}
+
+/** The file name a collection and mode are written to. */
+const fileName = (collection: LocalVariableCollection, modeName: string) =>
+  `${slug(collection.name)}.${slug(modeName)}.tokens.json`;
+
+/** Builds the resolver: sets first (alphabetical), then modifiers, so mode-specific values override shared ones. */
+export function buildResolver(collections: readonly LocalVariableCollection[]): TokenTree {
+  const single = collections.filter((collection) => collection.modes.length === 1);
+  const multi = collections.filter((collection) => collection.modes.length > 1);
+  const sets = Object.fromEntries(
+    single.map((collection) => [
+      slug(collection.name),
+      { sources: collection.modes.map((mode) => ({ $ref: fileName(collection, mode.name) })) },
+    ]),
+  );
+  const modifiers = Object.fromEntries(
+    multi.map((collection) => {
+      const contexts = Object.fromEntries(
+        collection.modes.map((mode) => [slug(mode.name), [{ $ref: fileName(collection, mode.name) }]]),
+      );
+      const defaultMode = collection.modes.find((mode) => mode.modeId === collection.defaultModeId);
+      return [slug(collection.name), { contexts, ...(defaultMode ? { default: slug(defaultMode.name) } : {}) }];
+    }),
+  );
+  const resolutionOrder = [
+    ...Object.keys(sets).map((name) => ({ $ref: `#/sets/${name}` })),
+    ...Object.keys(modifiers).map((name) => ({ $ref: `#/modifiers/${name}` })),
+  ];
+  return { version: "2025.10", sets, modifiers, resolutionOrder };
 }
 
 // Scopes whose values are lengths in pixels in Figma.
@@ -213,19 +248,16 @@ export function convertVariables(response: GetLocalVariablesResponse): Conversio
   const files = new Map<string, TokenTree>();
   const warnings: string[] = [];
   const collections = Object.values(response.meta.variableCollections).sort((a, b) => a.name.localeCompare(b.name));
-  for (const collection of collections) {
-    if (collection.remote) {
-      warnings.push(`collection "${collection.name}": remote (from a library); convert it from its source file`);
-      continue;
-    }
+  for (const collection of collections.filter((candidate) => candidate.remote)) {
+    warnings.push(`collection "${collection.name}": remote (from a library); convert it from its source file`);
+  }
+  const local = collections.filter((collection) => !collection.remote);
+  for (const collection of local) {
     for (const mode of collection.modes) {
-      files.set(
-        `${slug(collection.name)}.${slug(mode.name)}.tokens.json`,
-        convertMode(collection, mode, context, warnings),
-      );
+      files.set(fileName(collection, mode.name), convertMode(collection, mode, context, warnings));
     }
   }
-  return { files, warnings };
+  return { files, resolver: buildResolver(local), warnings };
 }
 
 /** Accepts a file key or any Figma file URL (design, file, proto, board, slides) and returns the key. */

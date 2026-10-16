@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # Installs the Projects 24 agent rules and skills into a project without overwriting existing files.
 #
-# Usage:
-#   curl -fsSL https://raw.githubusercontent.com/gerrardgs/Projects24/main/scripts/install.sh | bash
-#   curl -fsSL https://raw.githubusercontent.com/gerrardgs/Projects24/main/scripts/install.sh | bash -s -- [options] [target-dir]
+# Usage (download, read, then run; pin <commit> to a full commit SHA, which cannot be changed later):
+#   curl -fsSLo install.sh https://raw.githubusercontent.com/gerrardgs/Projects24/<commit>/scripts/install.sh
+#   bash install.sh --ref <commit> [options] [target-dir]
 #
 # Options:
-#   --ref <ref>       branch, tag or commit to install (default: main; a tag is recommended for reproducibility)
+#   --ref <ref>       commit SHA (recommended: immutable), tag or branch to install (default: main)
 #   --source <dir>    install from a local checkout instead of downloading
 #   --force           overwrite files that already exist and differ
 #   --dry-run         show what would happen without writing anything

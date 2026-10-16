@@ -26,7 +26,7 @@ Commands were checked against each tool's official documentation or `--help` out
 | :--- | :--- |
 | npm | `npm audit --audit-level=high` |
 | Python | `pip-audit` (current environment) or `pip-audit -r requirements.txt`; add `--strict` in CI |
-| Go | `govulncheck ./...` (install: `go install golang.org/x/vuln/cmd/govulncheck@latest`) |
+| Go | `govulncheck ./...` (install a pinned version, for example `go install golang.org/x/vuln/cmd/govulncheck@v1.9.0`, latest on 2026-10-16) |
 | Rust | `cargo audit`; policy, licences and bans: `cargo deny check` |
 | .NET | `dotnet list package --vulnerable --include-transitive` |
 | Any (OSV database) | OSV-Scanner v2: `osv-scanner scan -r .`; one lockfile: `osv-scanner scan -L package-lock.json` |

@@ -36,6 +36,7 @@ Do not design or implement deceptive patterns ("dark patterns"), even if asked; 
 - Privacy by default: collect the minimum, keep it the minimum time, and make privacy settings understandable.
 - Consent for non-essential cookies and tracking is opt-in where the law requires it (for example GDPR and the ePrivacy rules in the EU/EEA and UK): "Accept" and "Reject" are equally easy and equally prominent; nothing non-essential loads before consent.
 - Do not add analytics, session replay, pixels or third-party embeds without the project owner's decision; record what each one collects.
+- Honour browser opt-out signals. [Global Privacy Control](https://globalprivacycontrol.org/) arrives as the `Sec-GPC: 1` request header and `navigator.globalPrivacyControl`; several US state laws, including California's and Colorado's, require businesses to treat it as an opt-out of selling or sharing personal data. Check which laws apply to the project, and never re-ask a user who sent the signal.
 
 ## 6. Wellbeing
 

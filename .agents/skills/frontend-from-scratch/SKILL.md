@@ -42,7 +42,7 @@ Record the choice and its reasons in an ADR. In an existing project, keep its st
 
 ## 5. The starter template
 
-[assets/static-site/](assets/static-site/) is a page with no runtime dependencies (development tools only) with: skip link, landmarks, a labelled form with an error summary and inline errors, light/dark theme from tokens plus a toggle that reserves its space (no layout shift), 44 px targets, visible focus, reduced-motion support, an SVG favicon, a strict Content Security Policy and security headers from one source ([security-headers.js](assets/static-site/security-headers.js), rendered to `_headers` for Netlify and Cloudflare Pages and `vercel.json` for Vercel), a local dev server that sends the same headers and blocks path traversal, and tests.
+[assets/static-site/](assets/static-site/) is a page with no runtime dependencies (development tools only) with: skip link, landmarks, a labelled form with an error summary and inline errors, light/dark theme from tokens plus a toggle that reserves its space (no layout shift), 44 px targets, visible focus, reduced-motion support, an SVG favicon, a strict Content Security Policy (with Trusted Types enforced) and security headers from one source ([security-headers.js](assets/static-site/security-headers.js), rendered to `_headers` for Netlify and Cloudflare Pages and `vercel.json` for Vercel), a local dev server that sends the same headers and blocks path traversal, and tests.
 
 ```sh
 cd assets/static-site

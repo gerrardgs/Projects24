@@ -41,6 +41,10 @@ Source: [web.dev/articles/vitals](https://web.dev/articles/vitals). Field data (
 - Compress text responses (Brotli or gzip), use HTTP/2 or HTTP/3, a CDN for static assets, and long-lived immutable caching for fingerprinted files (`Cache-Control: public, max-age=31536000, immutable`).
 - Use `preconnect` for critical third-party origins and `preload` only for resources the browser discovers late.
 
-## 6. Budgets
+## 6. Sustainability
+
+Every byte transferred and every CPU cycle on the device costs energy. The W3C [Web Sustainability Guidelines](https://www.w3.org/TR/web-sustainability-guidelines/) (a Group Note Draft, checked 2026-10-16) collect practices for design, development, hosting and strategy. Most of them coincide with this rule: fewer and smaller assets, less JavaScript, efficient caching, no autoplaying media, and removing what users do not need. Treat page weight as a design decision, not only an engineering one.
+
+## 7. Budgets
 
 Set budgets per page type (for example total JavaScript, LCP image weight, number of requests) and enforce them in CI with Lighthouse CI or bundle-size checks. A regression fails the build, like a failing test.

@@ -37,7 +37,7 @@ Use logical properties (`inline`, `block`, `start`, `end`) so layouts work in ri
 2. Prefer intrinsic and fluid techniques over many breakpoints: `clamp()` for type and spacing, `min()`/`max()`, `auto-fit` grids, container queries for components.
 3. Fluid type example that still respects user zoom (mixing `rem` with `vw`): `font-size: clamp(1.5rem, 1rem + 2.5vw, 2.5rem);`. Generate scales with [Utopia](https://utopia.fyi/).
 4. Responsive images with `srcset`/`sizes` or `<picture>`, and `object-fit` for crops ([12-web-performance](../../rules/12-web-performance.md)).
-5. Respect preferences: `prefers-color-scheme`, `prefers-reduced-motion`, `prefers-contrast`, `forced-colors` (Windows high contrast: use system colours and do not remove borders and outlines).
+5. Respect preferences: `prefers-color-scheme`, `prefers-reduced-motion`, `prefers-contrast`, `forced-colors` (Windows high contrast: use system colours and do not remove borders and outlines), and, as an enhancement where supported, `prefers-reduced-transparency` for translucent, glass-style surfaces.
 
 ## 4. Theming and colour
 

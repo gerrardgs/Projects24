@@ -45,6 +45,7 @@ Every integration starts with [04-dependencies](../../rules/04-dependencies.md) 
 
 - Content that must rank is in the server-rendered or static HTML; JavaScript-only content is at risk ([Google: JavaScript SEO basics](https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics)).
 - Unique titles and descriptions, canonical URLs, `hreflang` for translations, structured data ([intro](https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data)), `sitemap.xml`, `robots.txt`, real 404 status codes, and fast Core Web Vitals.
+- Documentation sites may also publish an [`llms.txt`](https://llmstxt.org/): a community proposal, not a standard, for a Markdown index that points language models to the key pages. It complements, never replaces, accessible HTML and a sitemap.
 
 ## 7. Third-party scripts, embeds and consent
 

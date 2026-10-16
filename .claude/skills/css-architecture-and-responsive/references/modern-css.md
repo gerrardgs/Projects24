@@ -1,6 +1,6 @@
 # Modern CSS and HTML features: support status and references
 
-Baseline status taken from the `web-features` npm package, version 3.42.0, on 2026-10-15. **Widely available** means supported in all core browsers (Chrome, Edge, Firefox, Safari on desktop and mobile) for at least 30 months; **newly available** means supported in all of them, but recently; **limited** means not yet in all core browsers. Always confirm on the feature's page before relying on it: [Baseline](https://web.dev/baseline), [web-features explorer](https://web-platform-dx.github.io/web-features-explorer/), [MDN](https://developer.mozilla.org/), [Can I use](https://caniuse.com/).
+Baseline status taken from the `web-features` npm package, version 3.42.0, on 2026-10-15, and re-checked with 3.43.0 on 2026-10-16 (no status changed). **Widely available** means supported in all core browsers (Chrome, Edge, Firefox, Safari on desktop and mobile) for at least 30 months; **newly available** means supported in all of them, but recently; **limited** means not yet in all core browsers. Always confirm on the feature's page before relying on it: [Baseline](https://web.dev/baseline), [web-features explorer](https://web-platform-dx.github.io/web-features-explorer/), [MDN](https://developer.mozilla.org/), [Can I use](https://caniuse.com/).
 
 To re-check: `npm install web-features` and read `features["<id>"].status`.
 
@@ -53,7 +53,9 @@ To re-check: `npm install web-features` and read `features["<id>"].status`.
 
 ## Limited availability (progressive enhancement only, with `@supports` or a fallback)
 
-Anchor positioning (`anchor-positioning`), cross-document View Transitions, scroll-driven animations, `text-wrap: pretty`, `interpolate-size`, customisable `<select>` (`appearance: base-select`), `attr()` typed values, `corner-shape`, scroll-state container queries, interest invokers, `reading-flow`, grid lanes (masonry), speculation rules.
+Anchor positioning (`anchor-positioning`), cross-document View Transitions, scroll-driven animations, `text-wrap: pretty`, `interpolate-size`, customisable `<select>` (`appearance: base-select`), `attr()` typed values, `corner-shape`, scroll-state container queries, interest invokers, `reading-flow`, grid lanes (masonry), speculation rules, CSS `if()` (`if`), custom functions with `@function` (`function`), and the `prefers-reduced-transparency` media query.
+
+Where browsers are heading: [Interop 2026](https://web.dev/blog/interop-2026) (announced 12 February 2026) commits Apple, Google, Microsoft, Mozilla and others to improving 20 focus areas this year, including anchor positioning, View Transitions, the Navigation API, scroll snap, the `zoom` property, WebRTC and WebTransport. Progress is public on the [Interop dashboard](https://wpt.fyi/interop). Features in focus areas are the likeliest to become Baseline next; they are still not safe without a fallback until they are.
 
 Example of safe enhancement:
 

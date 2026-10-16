@@ -1,7 +1,8 @@
 // Usage:
 //   FIGMA_TOKEN=... node cli.ts <file-key-or-url> [out-dir]     fetch from the Figma REST API
 //   node cli.ts --input variables.json [out-dir]                  convert a saved API response (no token needed)
-// Writes one DTCG token file per collection and mode into out-dir (default: ./out) and prints warnings.
+// Writes one DTCG token file per collection and mode, plus tokens.resolver.json (DTCG Resolver Module 2025.10),
+// into out-dir (default: ./out) and prints warnings.
 // The token is read from the environment only; it is never printed or written to disk.
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
@@ -29,14 +30,14 @@ async function load(args: string[]): Promise<{ response: GetLocalVariablesRespon
 async function main(): Promise<void> {
   const { response, rest } = await load(process.argv.slice(2));
   const outDir = path.resolve(rest[0] ?? "out");
-  const { files, warnings } = convertVariables(response);
+  const { files, resolver, warnings } = convertVariables(response);
   await mkdir(outDir, { recursive: true });
-  for (const [name, tree] of files) {
+  for (const [name, tree] of [...files, ["tokens.resolver.json", resolver] as const]) {
     await writeFile(path.join(outDir, name), `${JSON.stringify(tree, null, 2)}\n`);
     console.log(`wrote ${path.relative(process.cwd(), path.join(outDir, name))}`);
   }
   for (const warning of warnings) console.warn(`warning: ${warning}`);
-  console.log(`${files.size} file(s), ${warnings.length} warning(s)`);
+  console.log(`${files.size} token file(s) and a resolver, ${warnings.length} warning(s)`);
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

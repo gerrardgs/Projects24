@@ -41,7 +41,7 @@ Rules 01 to 03 and 06 apply. This rule adds what is specific to code that runs i
 
 ## 6. Security in the browser
 
-- Never insert untrusted strings as HTML (`innerHTML`, `dangerouslySetInnerHTML`, `v-html`, `{@html}`) without a sanitiser such as DOMPurify; prefer text APIs (`textContent`, framework interpolation).
+- Never insert untrusted strings as HTML (`innerHTML`, `dangerouslySetInnerHTML`, `v-html`, `{@html}`) without a sanitiser such as DOMPurify; prefer text APIs (`textContent`, framework interpolation). Enforce it with [Trusted Types](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) (Baseline newly available since February 2026): the CSP directive `require-trusted-types-for 'script'` makes string-to-DOM sinks throw unless the value comes from a reviewed policy. The [static-site template](../skills/frontend-from-scratch/assets/static-site/security-headers.js) enforces it with no policies at all.
 - Validate URLs before using them in `href` or `src` (block `javascript:`). Use `rel="noopener noreferrer"` on links to untrusted sites with `target="_blank"`.
 - Keep session tokens out of `localStorage` and `sessionStorage` (readable by any script after an XSS); prefer `HttpOnly`, `Secure`, `SameSite` cookies. Protect cookie-authenticated state changes against CSRF (`SameSite` plus a token or an `Origin` check).
 - Ship a Content Security Policy where you control headers; use Subresource Integrity for third-party scripts and styles from CDNs; minimise third-party scripts.

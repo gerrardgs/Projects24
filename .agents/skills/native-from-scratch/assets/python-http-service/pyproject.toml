@@ -6,7 +6,7 @@ dependencies = []
 
 # Development tools (PEP 735). Install with: python -m pip install --group dev  (pip 25.1+)
 [dependency-groups]
-dev = ["mypy==2.4.0", "ruff==0.17.0", "pip-audit==2.10.1", "setuptools>=83.0.0"]
+dev = ["mypy==2.4.0", "ruff==0.17.1", "pip-audit==2.10.1", "setuptools>=83.0.0"]
 
 [tool.ruff]
 line-length = 100
