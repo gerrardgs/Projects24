@@ -3,8 +3,10 @@
   "source": ".agents/skills",
   "skills": [
     "accessibility-audit",
+    "ai-design-and-artifacts",
     "change-existing-code",
     "ci-cd-pipeline",
+    "color-grading-and-color-management",
     "css-architecture-and-responsive",
     "data-visualization-design",
     "deploy-and-release",
@@ -19,7 +21,9 @@
     "graphic-design-production",
     "mobile-engineering",
     "motion-and-interaction",
+    "motion-graphics-and-animation",
     "native-from-scratch",
+    "photo-editing-and-retouching",
     "project-bootstrap",
     "resilience-and-chaos-engineering",
     "rigorous-code-audit",
@@ -28,6 +32,7 @@
     "test-engineering",
     "ui-design-and-prototyping",
     "ux-research-and-strategy",
+    "video-editing-and-post-production",
     "web-integrations-and-platforms",
     "web-performance-optimization"
   ]

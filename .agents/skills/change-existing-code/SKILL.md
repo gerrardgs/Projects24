@@ -30,7 +30,7 @@ Most engineering work happens in code that already exists. The goal is to change
 - After each step: build, run the relevant tests, and keep the code working. Never pile up many unverified edits.
 - Common safe refactorings: rename, extract function, inline function, move code, introduce parameter object, replace conditional with polymorphism or a lookup table. Use the editor's or language server's automated refactorings where available.
 - Keep public interfaces stable. To replace one, add the new interface, migrate callers, deprecate the old one with a clear message, and remove it in a later major version.
-- For large replacements, use the **strangler fig** approach: route a slice of traffic or calls to the new implementation, grow the slice, then delete the old code. Use a feature flag when the switch must be reversible at runtime.
+- For large replacements, use the **strangler fig** approach: route a slice of traffic or calls to the new implementation, grow the slice, then delete the old code once the user approves the removal ([01-core-principles](../../rules/01-core-principles.md) section 8). Use a feature flag when the switch must be reversible at runtime.
 
 ## 4. Upgrades and migrations
 
@@ -49,7 +49,7 @@ Use expand and contract: add new columns or tables in a backward-compatible way,
 
 ## 5. Finish
 
-- Remove dead code that your change made unused, but only if you are sure nothing else uses it (search again).
+- Code that your change made unused: search again for every use, then propose removing it and wait for the user's approval ([01-core-principles](../../rules/01-core-principles.md) section 8). Until then, leave it and list it in the report.
 - Update documentation, configuration examples, and the changelog.
 - Report what changed, what stayed deliberately unchanged, how it was verified, and any follow-up risk (see the report format in [AGENTS.md](../../../AGENTS.md)).
 
@@ -59,3 +59,4 @@ Use expand and contract: add new columns or tables in a backward-compatible way,
 - Tests that encode current behaviour must change for reasons you do not understand.
 - You find security problems or data corruption in nearby code.
 - The task turns out much larger than requested.
+- The change would delete, overwrite or replace existing code, files, tests or features, even ones that look unused ([01-core-principles](../../rules/01-core-principles.md) section 8). Show what would go and why, offer alternatives, and wait for approval.

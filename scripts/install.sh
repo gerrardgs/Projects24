@@ -14,6 +14,7 @@
 #
 # Installed: AGENTS.md, CLAUDE.md, GEMINI.md, .aider.conf.yml, .gemini/settings.json,
 #            .github/copilot-instructions.md, .agents/ (rules and skills), scripts/agents-sync.mjs,
+#            .claude/settings.json and scripts/hooks/guard-deletions.mjs (deletion guard for Claude Code),
 #            docs/DESIGN-REFERENCES.md, TOOLKIT.md, PROMPT-LIBRARY.md, ENGINEERING-CONCEPTS.md (linked from AGENTS.md).
 # Never installed: README, LICENSE, CHANGELOG, .gitignore, other docs or workflows. Those belong to your project.
 
@@ -34,6 +35,8 @@ SPEC_FILES=(
   ".gemini/settings.json"
   ".github/copilot-instructions.md"
   "scripts/agents-sync.mjs"
+  ".claude/settings.json"
+  "scripts/hooks/guard-deletions.mjs"
   "docs/DESIGN-REFERENCES.md"
   "docs/TOOLKIT.md"
   "docs/PROMPT-LIBRARY.md"
@@ -42,7 +45,7 @@ SPEC_FILES=(
 SPEC_DIRECTORIES=(".agents")
 
 usage() {
-  sed -n '2,18p' "$0" 2>/dev/null | sed 's/^# \{0,1\}//' || true
+  sed -n '2,19p' "$0" 2>/dev/null | sed 's/^# \{0,1\}//' || true
 }
 
 die() {

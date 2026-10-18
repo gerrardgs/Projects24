@@ -57,6 +57,46 @@ text, errors (what happened and how to fix it), empty state, confirmation dialog
 Keep terms consistent with <glossary>. Flag any claim, price or legal text I must supply.
 ```
 
+**Claude Design: design to production**
+```text
+Use the ai-design-and-artifacts skill. Set up the design system from <repo/package> (/design-sync),
+then draft <screen/flow/deck> for <user and goal>, with every state and two alternatives.
+Review it against our tokens, measured contrast and licences, then hand it off with the bundle.
+Build on existing components; do not delete or replace existing code without asking me first.
+```
+
+**Video edit and delivery**
+```text
+Use the video-editing-and-post-production skill. Plan the edit and deliverables for <video> on
+<platforms>. Link and date each platform's current specification, set the loudness target per
+deliverable and measure it, write captions and have a person review them, and run technical QC
+with ffprobe. For the website version use the web-media-pipeline template and its tests.
+```
+
+**Colour grade**
+```text
+Use the color-grading-and-color-management skill. Footage: <cameras and log formats>.
+Deliverables: <SDR/HDR/web>. Propose the pipeline (input transforms, working space, ACES or the
+application's colour management, output transforms), then the correction and look steps.
+Name every assumption about the monitor and viewing environment.
+```
+
+**Photo retouch and web export**
+```text
+Use the photo-editing-and-retouching skill. Retouch <photos> for <purpose>: non-destructive,
+skin texture kept, product colour checked against <reference>. Tell me which disclosure labels
+apply in <countries/platforms>. Export for the web with the template (AVIF, WebP, JPEG, sRGB,
+no location data) and give the srcset and alt text.
+```
+
+**Motion graphics**
+```text
+Use the motion-graphics-and-animation skill. Create <title/explainer/logo animation> for
+<platform>, <duration>, <aspect ratios>. Storyboard and animatic first, then animation with
+brand motion rules. Run a flash and pattern test on the final render and give a reduced-motion
+alternative for the web. For Lottie, use dotLottie or a light lottie-web build.
+```
+
 ## 2. Design systems and Figma
 
 **Implement a Figma frame**

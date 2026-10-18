@@ -73,3 +73,5 @@ agentskills validate .agents/skills/<name>   # version 0.1.1 installs the comman
 ## 5. Commits and releases
 
 Follow [rule 08](../.agents/rules/08-git-workflow.md): Conventional Commits, one logical change per commit, a `CHANGELOG.md` entry, and Semantic Versioning for releases. A changed rule meaning or a removed skill is a breaking change.
+
+For each release, bump `version` in `package.json`, add the `CHANGELOG.md` entry, and write `.github/releases/v<version>.md` (first line `# v<version> - <Title>`, then the notes; see the earlier files for the format). CI fails without it. Pushing the tag `v<version>` runs the release workflow, which publishes the notes as the GitHub release; for an older tag, run the workflow by hand with that tag. Removing a skill, rule or file needs the maintainer's explicit approval ([rule 01](../.agents/rules/01-core-principles.md) section 8).

@@ -32,6 +32,7 @@ All links were checked with `node scripts/check-links.mjs` on 2026-10-15. Some s
 24. [Books](#24-books)
 25. [Blogs, newsletters, podcasts and communities](#25-blogs-newsletters-podcasts-and-communities)
 26. [Inspiration and pattern galleries](#26-inspiration-and-pattern-galleries)
+27. [Photo, video, colour and motion production](#27-photo-video-colour-and-motion-production)
 
 ## 1. Standards and specifications
 
@@ -316,6 +317,10 @@ Use AI tools within the rules of this spec: verify output, check licences and te
 | [Guide to the Figma MCP server](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server) | Design context for coding agents |
 | [Claude Code and Figma: set up the MCP server](https://help.figma.com/hc/en-us/articles/39888612464151-Claude-Code-and-Figma-Set-up-the-MCP-server) | Per-client setup |
 | [Cursor and Figma](https://help.figma.com/hc/en-us/articles/39889260656407-Cursor-and-Figma-Set-up-the-MCP-server), [VS Code and Figma](https://help.figma.com/hc/en-us/articles/39890361040535-VS-Code-and-Figma-Set-up-the-MCP-server), [Gemini CLI and Figma](https://help.figma.com/hc/en-us/articles/39889246888855-Gemini-CLI-and-Figma-Set-up-the-MCP-server) | Per-client setup |
+| [Introducing Claude Design](https://www.anthropic.com/news/claude-design-anthropic-labs) | Anthropic's launch of Claude Design (17 April 2026) |
+| [Get started with Claude Design](https://support.claude.com/en/articles/14604416-get-started-with-claude-design) | Access, design systems, editing, export, handoff, limits |
+| [Claude Academy: Claude Design for prototypes and UX](https://academy.claude.com/tutorials/using-claude-design-for-prototypes-and-ux) | Prompting, design-system setup and handoff practice |
+| [Claude Code artifacts](https://code.claude.com/docs/en/artifacts.md) | `/design`, `/slides`, design systems in artifacts, sharing and page constraints |
 | [Model Context Protocol](https://modelcontextprotocol.io/) | The protocol behind MCP servers |
 | [Agent Skills specification](https://agentskills.io/specification) | The skill format used in this repository |
 | [AGENTS.md](https://agents.md/) | The instruction file format used here |
@@ -533,3 +538,19 @@ Study patterns; do not copy proprietary designs or brands.
 | [CodePen](https://codepen.io/) | Front-end experiments |
 | [Collect UI](https://collectui.com/) | UI components |
 | [Storybook showcase](https://storybook.js.org/showcase) | Real component libraries |
+
+## 27. Photo, video, colour and motion production
+
+Checked 2026-10-18. Details, numbers and more sources are in the [video](../.agents/skills/video-editing-and-post-production/references/delivery-and-standards.md), [colour](../.agents/skills/color-grading-and-color-management/references/color-pipelines.md), [photo](../.agents/skills/photo-editing-and-retouching/references/tools-and-provenance.md) and [motion](../.agents/skills/motion-graphics-and-animation/references/tools-and-safety.md) references.
+
+| Topic | Sources |
+| :--- | :--- |
+| Loudness | [ITU-R BS.1770](https://www.itu.int/rec/R-REC-BS.1770), [EBU R 128](https://tech.ebu.ch/publications/r128), [ATSC A/85:2026-07](https://www.atsc.org/wp-content/uploads/2026/07/A85-2026-07.pdf), [AES TD1004](https://aes.org/wp-content/uploads/2024/01/AESTD1004_1_15_10.pdf) |
+| Video signals and HDR | [ITU-R BT.709](https://www.itu.int/rec/R-REC-BT.709), [BT.1886](https://www.itu.int/rec/R-REC-BT.1886), [BT.2020](https://www.itu.int/rec/R-REC-BT.2020), [BT.2100](https://www.itu.int/rec/R-REC-BT.2100), [BT.2408](https://www.itu.int/pub/R-REP-BT.2408) |
+| Colour management | [ACES documentation](https://docs.acescentral.com/), [OpenColorIO](https://opencolorio.org/), [Cinematic Color](https://github.com/jeremyselan/cinematiccolor), [International Color Consortium](https://www.color.org/) |
+| Web video | [MDN web video codec guide](https://developer.mozilla.org/en-US/docs/Web/Media/Guides/Formats/Video_codecs), [WebVTT](https://www.w3.org/TR/webvtt1/), [HLS (RFC 8216)](https://datatracker.ietf.org/doc/html/rfc8216), [DASH Industry Forum](https://dashif.org/), [YouTube upload settings](https://support.google.com/youtube/answer/1722171) |
+| Captions and description | [Netflix English timed text style guide](https://partnerhelp.netflixstudios.com/hc/en-us/articles/217350977-English-USA-Timed-Text-Style-Guide), [BBC subtitle guidelines](https://www.bbc.co.uk/accessibility/forproducts/guides/subtitles/), [W3C Media Accessibility User Requirements](https://www.w3.org/TR/media-accessibility-reqs/) |
+| Provenance and disclosure | [C2PA 2.4](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html), [Content Credentials](https://contentcredentials.org/), [EU AI Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj), [NPPA Code of Ethics](https://nppa.org/resources/code-ethics) |
+| Animation | [Lottie specification](https://lottie.github.io/lottie-spec/), [Rive documentation](https://rive.app/docs), *The Illusion of Life* (Thomas and Johnston), *The Animator's Survival Kit* (Williams) |
+| Flash safety | [WCAG 2.2 SC 2.3.1](https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html), [PEAT](https://trace.umd.edu/peat/), [Harding FPA](https://www.hardingfpa.com/), [ASA on flashing images](https://www.asa.org.uk/news/flashing-images-in-advertising.html) |
+| Editing craft | Walter Murch, *In the Blink of an Eye*; [OpenTimelineIO](https://opentimeline.io/) for timeline interchange |

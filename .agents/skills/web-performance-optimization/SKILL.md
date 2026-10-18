@@ -28,8 +28,8 @@ Targets and rules are in [12-web-performance](../../rules/12-web-performance.md)
 
 - **Images**: right size (`srcset`/`sizes`), AVIF/WebP, compression, lazy-load below the fold, SVG for icons. Tools: Squoosh, `sharp` (0.35.5), SVGO (`svgo` 4.1.0), an image CDN.
 - **Fonts**: system stack or few self-hosted WOFF2 files; subset; `font-display: swap`; preload the critical one; metric-matched fallbacks.
-- **JavaScript**: remove unused dependencies (`knip`, bundle analysers such as `vite-bundle-visualizer` or `@next/bundle-analyzer`); code-split by route; lazy-load below-the-fold and interaction-only components; prefer server rendering and islands; defer third-party scripts or load them after interaction.
-- **CSS**: remove unused CSS; avoid large `@import` chains; inline critical CSS only when it measurably helps.
+- **JavaScript**: propose removing unused dependencies, with approval (`knip`, bundle analysers such as `vite-bundle-visualizer` or `@next/bundle-analyzer`); code-split by route; lazy-load below-the-fold and interaction-only components; prefer server rendering and islands; defer third-party scripts or load them after interaction.
+- **CSS**: propose removing unused CSS, with approval; avoid large `@import` chains; inline critical CSS only when it measurably helps.
 - **Network**: HTTP/2 or HTTP/3, Brotli, CDN, long immutable cache for hashed files, `preconnect` to critical origins, `103 Early Hints` where the host supports it.
 - **Navigation**: prefetch or prerender likely next pages (Speculation Rules API in Chromium browsers, framework link prefetching); back/forward cache eligibility (avoid `unload` handlers, check in DevTools Application panel).
 

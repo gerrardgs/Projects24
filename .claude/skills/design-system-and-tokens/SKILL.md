@@ -33,7 +33,7 @@ Use three tiers, and let components depend only on the upper two:
 ## 3. Build the pipeline
 
 1. Choose the source of truth: token JSON in the repository (recommended; reviewable and versioned), synced to Figma variables through a plugin or the Figma REST API (the Variables endpoints need a Full seat in an Enterprise organisation, per Figma's docs on 2026-10-15).
-2. Generate platform outputs from it: CSS custom properties, a JS/TS module, iOS and Android resources. Use [Style Dictionary](https://styledictionary.com/) for multi-platform output, or start from [assets/design-tokens/](assets/design-tokens/) for web-only.
+2. Generate platform outputs from it: CSS custom properties, a JS/TS module, iOS and Android resources. Use [Style Dictionary](https://styledictionary.com/) for multi-platform output, or start from [assets/design-tokens/](assets/design-tokens/) for web-only. To let Claude Design draw with the same system, upload it with `/design-sync` in Claude Code ([ai-design-and-artifacts](../ai-design-and-artifacts/SKILL.md) section 2); the repository stays the source of truth.
 3. Test the tokens in CI: valid format, no broken aliases or cycles, identical theme shapes, and **contrast for every text/background pair in every theme**. The template does all of this:
 
    ```sh

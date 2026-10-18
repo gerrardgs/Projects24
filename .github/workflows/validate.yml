@@ -83,6 +83,12 @@ jobs:
         run: actionlint
       - name: Audit workflows
         run: zizmor --offline .
+      - name: Release notes exist for the current version
+        run: |
+          version="$(node -p 'require("./package.json").version')"
+          notes=".github/releases/v$version.md"
+          test -f "$notes" || { echo "::error::add $notes (the release workflow publishes it)"; exit 1; }
+          head -n 1 "$notes" | grep -q "^# v$version - " || { echo "::error::$notes must start with '# v$version - <title>'"; exit 1; }
       - name: Installer leaves an existing project's files alone
         run: |
           target="$RUNNER_TEMP/existing-project"
@@ -98,6 +104,7 @@ jobs:
           target="$RUNNER_TEMP/new-project"
           mkdir -p "$target"
           bash scripts/install.sh --source . "$target"
+          test -f "$target/.claude/settings.json" && test -f "$target/scripts/hooks/guard-deletions.mjs"
           cd "$target" && node scripts/agents-sync.mjs --check
 
   node-template:
@@ -200,6 +207,35 @@ jobs:
       # The page ships no npm packages to browsers; its dev tools (Stylelint) depend on braces,
       # whose advisory GHSA-vfj7-8cjw-p6xm had no patched release on 2026-10-15. Dependabot reports it.
       - run: npm audit --omit=dev --audit-level=high
+
+  web-media-template:
+    name: Web media pipeline template (Node.js ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [22, 24, 26]
+    defaults:
+      run:
+        working-directory: .agents/skills/video-editing-and-post-production/assets/web-media-pipeline
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node-version }}
+      # The video tests encode real files, so they need FFmpeg (with libx264, SVT-AV1 and Opus) and ffprobe.
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends ffmpeg
+          ffmpeg -hide_banner -encoders | grep -E 'libx264|libsvtav1|libopus'
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm audit --audit-level=high
 
   accessibility-scan:
     name: Accessibility and chaos checks of the static site

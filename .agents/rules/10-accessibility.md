@@ -26,14 +26,14 @@ Target [WCAG 2.2](https://www.w3.org/TR/WCAG22/) Level AA (a W3C Recommendation 
 - **Contrast** (SC 1.4.3, 1.4.11): text at least 4.5:1; large text (24 px regular, or 18.66 px bold, and larger) at least 3:1; UI component boundaries, focus indicators, icons and chart elements that carry meaning at least 3:1 against adjacent colours. Measure, do not guess; check every theme (light, dark, high contrast) and every state.
 - **Colour is never the only signal** (SC 1.4.1): add text, an icon, a pattern or underline (links in body text are underlined).
 - **Text alternatives** (SC 1.1.1): informative images get `alt` text that conveys their purpose; decorative images get `alt=""`; icon-only buttons get an accessible name; complex images (charts, diagrams) get a text equivalent nearby. SVG icons inside labelled buttons get `aria-hidden="true"`.
-- **Media**: captions for prerecorded video with audio (SC 1.2.2), transcripts for audio, audio description where visuals carry information.
+- **Media**: captions for prerecorded video with audio (SC 1.2.2), reviewed by a person when made by speech recognition; transcripts for audio; audio description where visuals carry information (SC 1.2.5). See [video-editing-and-post-production](../skills/video-editing-and-post-production/SKILL.md) section 6.
 - **Resize and reflow**: content works at 200 percent zoom and at 320 CSS px wide without horizontal scrolling (SC 1.4.4, 1.4.10), and with user text-spacing overrides (SC 1.4.12). Use relative units for type; never disable zoom in the viewport meta tag.
 
 ## 4. Operable and understandable
 
 - **Target size** (SC 2.5.8): pointer targets at least 24 by 24 CSS px or with enough spacing; aim for 44 by 44.
 - **Dragging** (SC 2.5.7): every drag action has a single-pointer alternative.
-- **Motion**: honour `prefers-reduced-motion`; nothing flashes more than three times per second (SC 2.3.1); auto-playing or moving content longer than five seconds can be paused (SC 2.2.2).
+- **Motion**: honour `prefers-reduced-motion`; nothing flashes more than three times per second (SC 2.3.1; test video and animation with PEAT or Harding, see [motion-graphics-and-animation](../skills/motion-graphics-and-animation/SKILL.md) section 5); auto-playing or moving content longer than five seconds can be paused (SC 2.2.2).
 - **Forms**: every input has a visible label (placeholder text is not a label); instructions and formats are given up front; errors are identified in text, linked to the field, and say how to fix them (SC 3.3.1, 3.3.3); use `autocomplete` tokens for personal data (SC 1.3.5); do not make people re-enter information they already gave (SC 3.3.7); authentication does not depend on a cognitive test such as remembering or transcribing a code without allowing paste or a password manager (SC 3.3.8).
 - **Predictable**: no change of context on focus or input alone (SC 3.2.1, 3.2.2); help mechanisms appear in the same place across pages (SC 3.2.6).
 - **Status messages** are announced without moving focus (SC 4.1.3): use `role="status"` or `aria-live="polite"`, `role="alert"` only for urgent errors.

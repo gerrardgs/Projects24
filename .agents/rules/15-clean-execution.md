@@ -33,7 +33,7 @@ Clean code ([02-clean-code](02-clean-code.md)) is about what the result looks li
 
 - Temporary files (screenshots, reports, exports, probe pages, scratch scripts) go in a temporary or scratch directory and are removed when no longer needed; nothing temporary lands in the repository or in a shared design file.
 - Stop dev servers, watchers, headless browsers and background processes you started.
-- Remove debug output, `console.log` calls, temporary styles and outlines, commented-out code and stray artefacts before finishing.
+- Remove the debug output, `console.log` calls, temporary styles and outlines, commented-out code and stray artefacts that *you* added during the task before finishing. Anything that existed before the task stays unless the user approved its removal ([01-core-principles](01-core-principles.md) section 8).
 - Do not change global configuration, shell profiles, system packages, browser profiles or credentials unless that is the task.
 - Finish with a clean, explainable working tree: every changed file is intended and listed in the report, and `git status` shows nothing else.
 

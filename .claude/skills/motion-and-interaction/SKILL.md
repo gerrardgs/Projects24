@@ -8,7 +8,7 @@ metadata:
 
 # Motion and Interaction
 
-Motion should explain (where something came from, what changed, what is happening), not decorate. It must respect people who are made ill or distracted by it ([10-accessibility](../../rules/10-accessibility.md)).
+Motion should explain (where something came from, what changed, what is happening), not decorate. It must respect people who are made ill or distracted by it ([10-accessibility](../../rules/10-accessibility.md)). Animation as content (titles, explainers, Lottie and Rive files, flash testing, safe use of animation runtimes) is in [motion-graphics-and-animation](../motion-graphics-and-animation/SKILL.md).
 
 ## 1. Decide whether to animate
 

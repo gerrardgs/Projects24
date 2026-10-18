@@ -8,7 +8,7 @@ metadata:
 
 # Graphic Design Production
 
-Follow [13-visual-assets-and-licensing](../../rules/13-visual-assets-and-licensing.md) and [09-design-principles](../../rules/09-design-principles.md). Specifications, formats and references are in [references/specs-and-formats.md](references/specs-and-formats.md).
+Follow [13-visual-assets-and-licensing](../../rules/13-visual-assets-and-licensing.md) and [09-design-principles](../../rules/09-design-principles.md). Specifications, formats and references are in [references/specs-and-formats.md](references/specs-and-formats.md). Photo retouching and web image export are in [photo-editing-and-retouching](../photo-editing-and-retouching/SKILL.md); video and animated pieces are in [video-editing-and-post-production](../video-editing-and-post-production/SKILL.md) and [motion-graphics-and-animation](../motion-graphics-and-animation/SKILL.md).
 
 ## 1. Brief
 

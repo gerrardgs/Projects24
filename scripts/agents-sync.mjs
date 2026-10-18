@@ -26,6 +26,9 @@ const SKILL_NAME_MAX = 64;
 const SKILL_DESCRIPTION_MAX = 1024;
 const SKILL_COMPATIBILITY_MAX = 500;
 const SKILL_BODY_MAX_LINES = 500;
+// Claude's Agent Skills (API and claude.ai) reject names containing these words; keep skills portable to them.
+// https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
+const SKILL_NAME_RESERVED_WORDS = ["anthropic", "claude"];
 // Rule activation values shared by Antigravity (.agents/rules) and Windsurf (.windsurf/rules).
 const RULE_TRIGGERS = new Set(["always_on", "model_decision", "glob", "manual"]);
 // Windsurf caps workspace rule files at 12,000 characters; Antigravity at 24,000 bytes. Use the stricter one.
@@ -241,6 +244,8 @@ function skillNameProblem(name, directoryName) {
   if (!SKILL_NAME_PATTERN.test(name)) {
     return "name may contain only lowercase letters, digits and single hyphens, not at the start or end";
   }
+  const reserved = SKILL_NAME_RESERVED_WORDS.find((word) => name.includes(word));
+  if (reserved !== undefined) return `name must not contain the reserved word "${reserved}"`;
   return name === directoryName ? null : `name "${name}" must match its directory name "${directoryName}"`;
 }
 

@@ -84,6 +84,10 @@ test("skill frontmatter: accepts a valid skill and reports each invalid field", 
   ]);
   assert.match(skillFrontmatterProblems({ name: "a", description: "d" }, "b")[0], /must match its directory name "b"/);
   assert.match(skillFrontmatterProblems({ name: "a", description: "x".repeat(1025) }, "a")[0], /maximum is 1024/);
+  assert.match(
+    skillFrontmatterProblems({ name: "claude-design", description: "d" }, "claude-design")[0],
+    /reserved word "claude"/,
+  );
 });
 
 test("rule frontmatter: requires a known trigger and what each trigger needs", () => {

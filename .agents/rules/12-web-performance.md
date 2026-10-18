@@ -31,7 +31,7 @@ Source: [web.dev/articles/vitals](https://web.dev/articles/vitals). Field data (
 
 ## 4. JavaScript and CSS
 
-- Ship less JavaScript: render on the server or statically where possible; split code by route; lazy-load heavy, below-the-fold or interaction-only components; remove unused dependencies (check with `knip`, bundle analysers).
+- Ship less JavaScript: render on the server or statically where possible; split code by route; lazy-load heavy, below-the-fold or interaction-only components; propose removing unused dependencies, with the user's approval (check with `knip`, bundle analysers).
 - Keep the main thread free: break long tasks (over 50 ms), defer non-critical work, use `requestAnimationFrame` for visual updates and Web Workers for heavy computation.
 - Load third-party scripts (analytics, chat, ads, tag managers) last, with `async`/`defer`, and question every one.
 - Inline only the critical CSS when it measurably helps; avoid large render-blocking stylesheets and `@import` chains.

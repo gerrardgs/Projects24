@@ -14,6 +14,7 @@ Status checked on 2026-10-15. Plans, pricing and features change often: check th
 | Framer | Visual site builder with publishing; design and ship marketing sites | [Framer help](https://www.framer.com/help/) |
 | Webflow | Visual development of production websites with CMS | [Webflow University](https://university.webflow.com/) |
 | Adobe XD | In maintenance mode: Adobe no longer funds new features, but still ships bug, security and privacy fixes; no end date announced. Do not start new work in it | [Adobe XD FAQ](https://helpx.adobe.com/xd/desktop/introduction/faq.html) |
+| Claude Design | Anthropic's AI design product: designs, interactive prototypes, slides and one-pagers from a brief, on your imported design system; inline comments, canvas editing, handoff bundle to Claude Code; `/design` and `/design-sync` in Claude Code. In beta; the standalone claude.ai/design closes on 14 December 2026 | [Get started with Claude Design](https://support.claude.com/en/articles/14604416-get-started-with-claude-design), [ai-design-and-artifacts](../../ai-design-and-artifacts/SKILL.md) |
 | ProtoPie | High-fidelity interaction prototypes with sensors and logic | [ProtoPie docs](https://www.protopie.io/learn) |
 | Origami Studio | Meta's free prototyping tool for complex interactions | [origami.design](https://origami.design/) |
 

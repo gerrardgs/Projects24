@@ -1,11 +1,11 @@
 ---
 trigger: model_decision
-description: "Apply when creating, exporting, optimising or sourcing visual assets: logos, icons, illustrations, photos, fonts, video, social media and print artwork, colour profiles, file formats, and the licences and attribution they need."
+description: "Apply when creating, editing, exporting, optimising or sourcing visual and media assets: logos, icons, illustrations, photos and retouching, fonts, video, audio, motion graphics, colour grading, social media and print artwork, colour profiles, file formats, metadata and provenance, and the licences, attribution and disclosures they need."
 ---
 
 # R-13: Visual Assets, Production and Licensing
 
-Applies to graphic design, digital marketing artwork, UI assets and print. Procedures and specifications are in [graphic-design-production](../skills/graphic-design-production/SKILL.md).
+Applies to graphic design, digital marketing artwork, UI assets, print, photography, video, audio and motion. Procedures and specifications are in [graphic-design-production](../skills/graphic-design-production/SKILL.md), [photo-editing-and-retouching](../skills/photo-editing-and-retouching/SKILL.md), [video-editing-and-post-production](../skills/video-editing-and-post-production/SKILL.md), [color-grading-and-color-management](../skills/color-grading-and-color-management/SKILL.md) and [motion-graphics-and-animation](../skills/motion-graphics-and-animation/SKILL.md).
 
 ## 1. Licensing comes first
 
@@ -14,6 +14,7 @@ Applies to graphic design, digital marketing artwork, UI assets and print. Proce
 - Images and icons: record the source, author, licence and any required attribution in the project (for example `CREDITS.md` or the asset metadata). Respect model and property releases for photos of people and places.
 - Never use logos, trademarks, characters or proprietary artwork of other organisations except as permitted (for example official brand assets used according to their guidelines). Never imitate a real brand in a way that could mislead.
 - AI-generated images: follow the tool's terms, the client's policy, and applicable law; disclose AI use where required; do not generate likenesses of real people or copies of living artists' distinctive work without permission.
+- Music, sound effects, stock footage and voice recordings are licensed per use (platform, territory, paid advertising, duration). Record the licence with the project; a track licensed for social posts may not cover a paid advertisement or broadcast.
 
 ## 2. Source files and organisation
 
@@ -46,3 +47,10 @@ Platform-specific sizes (social media, app stores, ad networks) change often. Lo
 - Check accessibility: contrast of text in images, alt text supplied for each image, no text baked into images when live text is possible.
 - Check file weight against the page's performance budget ([12-web-performance](12-web-performance.md)).
 - Print: request or produce a proof; check bleed, trim, safe area, resolution, colour mode, overprint and fonts with a preflight tool.
+
+## 6. Honest media, provenance and metadata
+
+- Do not alter news, documentary or evidence images and video beyond accurate exposure, colour and crop. Never create a realistic altered image, voice or video of a real person without consent.
+- Label retouched and AI-generated media where the law or the platform requires it: the EU AI Act Article 50 disclosure duties for deepfakes and machine-readable marking apply from 2 August 2026; France requires "photographie retouchée" on commercial model photos whose body shape was altered; Norway requires a label on advertising with retouched bodies or skin; UK advertising must not exaggerate a product's effect with filters ([photo-editing-and-retouching](../skills/photo-editing-and-retouching/SKILL.md) section 4).
+- Remove location (GPS), serial numbers and editing history from published photos unless they are needed; keep creator and copyright fields where appropriate. Removing metadata also removes Content Credentials (C2PA), so sign the final export again when provenance is required.
+- Video and audio: measure loudness against the deliverable's standard (for example EBU R 128, ATSC A/85, AES TD1004 or the platform's specification), tag colour correctly (BT.709 for SDR, BT.2100 for HDR), and test the final render for flashing (WCAG 2.2 SC 2.3.1, Harding or PEAT) before delivery.

@@ -47,6 +47,7 @@ updates:
       - /.agents/skills/accessibility-audit/assets/axe-check
       - /.agents/skills/figma-integration/assets/figma-variables-sync
       - /.agents/skills/resilience-and-chaos-engineering/assets/browser-chaos
+      - /.agents/skills/video-editing-and-post-production/assets/web-media-pipeline
     schedule:
       interval: weekly
     cooldown:
