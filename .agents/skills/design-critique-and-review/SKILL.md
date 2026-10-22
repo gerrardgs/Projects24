@@ -29,6 +29,7 @@ Do the passes in order; each has its own reference.
 | States and edge cases | All states, long and translated content, empty and error cases | Rule 09 section 4 |
 | Accessibility | Contrast, target size, focus order, headings, labels, colour-only meaning, motion | [10-accessibility](../../rules/10-accessibility.md) |
 | Content | Clear, specific labels and messages; consistent terms; tone | [14-ux-writing-and-ethics](../../rules/14-ux-writing-and-ethics.md) |
+| Generic AI output | Techniques without a written purpose, fabricated content, template layouts, AI writing tells, slop comments | [anti-slop-filter](../anti-slop-filter/SKILL.md) |
 | Responsive | Smallest and largest layouts, behaviour in between, zoom | [css-architecture-and-responsive](../css-architecture-and-responsive/SKILL.md) |
 | Performance (built work) | Image weight, fonts, layout shift, interaction speed | [12-web-performance](../../rules/12-web-performance.md) |
 | Ethics and trust | No deceptive patterns; privacy and consent honest | Rule 14 sections 4 and 5 |

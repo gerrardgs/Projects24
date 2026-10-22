@@ -40,7 +40,7 @@ An AI-generated design is a draft. Review it with [design-critique-and-review](.
 
 - **Tokens and components**: every colour, size and spacing value maps to a token; every element maps to an existing component or is listed as a new one to design properly.
 - **Accessibility**: contrast measured with a tool, not estimated; visible focus; touch targets; headings and labels; motion with a reduced alternative ([10-accessibility](../../rules/10-accessibility.md)).
-- **Generic AI tells** (default gradients, interchangeable card grids, placeholder copy): see the "Make deliberate choices" section of [ui-design-and-prototyping](../ui-design-and-prototyping/SKILL.md).
+- **Generic AI tells** (default gradients, interchangeable card grids, placeholder copy): see the "Make deliberate choices" section of [ui-design-and-prototyping](../ui-design-and-prototyping/SKILL.md) and run [anti-slop-filter](../anti-slop-filter/SKILL.md).
 - **Facts and content**: no invented brand values, numbers, testimonials, logos or legal text ([09-design-principles](../../rules/09-design-principles.md) section 7); real content in every state.
 - **Licences**: fonts, images and icons it used are licensed for the use; an artifact page loads fonts only from Google Fonts and inlines others, so check that an inlined commercial font's licence allows embedding ([13-visual-assets-and-licensing](../../rules/13-visual-assets-and-licensing.md)).
 

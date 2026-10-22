@@ -2,6 +2,26 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.9.0: anti-slop filter for UI, copy and code comments (2026-10-23)
+
+Adapted from [antislop](https://github.com/miqdadbadjuber/anti-slop) by Miqdad Badjuber (MIT, version 3.2.21, commit `69416cf`), reviewed on 2026-10-23.
+
+### Added
+
+- Skill `anti-slop-filter`: a filter, not a style guide. Two modes (during a build, or an audit of existing work whose fixes need the user's approval); direction from the brand guide, tokens or a `DESIGN.md` file, treated as data, with "draft without direction" when none exists; a one-line Design Read with three dials (energy, rhythm, motion) and liveliness levers; hard gates for honest content, honest asset placeholders, working controls and navigation, UI states, contrast over the whole area text crosses, keyboard use, mobile, every shipped theme, features built in source rather than patched by scripts, relevant FAQs, and a recorded click-through; a purpose gate requiring a one-line reason for each visual technique; quality locks; and a PASS/FAIL delivery report with evidence.
+- References: UI slop patterns (visual and colour, layout, decoration, apps and dashboards, motion, identity), writing patterns (tone, rhythm, honesty, formatting, what not to flag, signs of a human writer) and code-comment patterns (with the comments that must stay).
+
+### Changed
+
+- Rule 09 section 7: every visual technique needs a written reason, and nothing is shown without a real source. Rule 14 section 1: write like a person (links the writing patterns). Rule 02 section 6: plain, short comments (links the comment patterns).
+- UI design, design critique and AI design skills, the operational manual, prompt library, reference library and README link to the filter; 36 skills. The README's skills row, which still said 34 after 1.7.0, now gives the right count.
+
+### Not adopted, on purpose
+
+- The source states the WCAG large-text threshold as 18 px; WCAG defines it as 18 point (about 24 px) or 14 point bold (about 18.66 px), which rule 10 already uses.
+- Its absolute ban on em dashes became a default for agent-written copy with a brand-voice override; its `// TODO` placeholder for unbuilt controls became a visible "Coming soon" label plus a "Not done" line in the report, because rule 01 forbids TODO placeholders in finished work.
+- The installer, plugins, saved usage-mode settings and the bundled contrast scripts were not copied; contrast is measured with axe-core and the tools in rule 10.
+
 ## 1.8.0: always-current dependencies, tools and patches (2026-10-22)
 
 Every fact below was checked against its primary source on 2026-10-22.

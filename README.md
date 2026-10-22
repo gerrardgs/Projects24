@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Format: Agent Skills](https://img.shields.io/badge/Format-Agent%20Skills-blue.svg)](https://agentskills.io/specification)
 [![Validate](https://github.com/gerrardgs/Projects24/actions/workflows/validate.yml/badge.svg)](https://github.com/gerrardgs/Projects24/actions/workflows/validate.yml)
-[![Skills: 35](https://img.shields.io/badge/Skills-35%20Verified-success.svg)](.agents/skills/)
+[![Skills: 36](https://img.shields.io/badge/Skills-36%20Verified-success.svg)](.agents/skills/)
 [![Rules: 15](https://img.shields.io/badge/Rules-15%20Core-blueviolet.svg)](.agents/rules/)
 [![Design References: 470+](https://img.shields.io/badge/Design%20References-470%2B%20Curated-indigo.svg)](docs/DESIGN-REFERENCES.md)
 [![Accessibility: WCAG 2.2 AA](https://img.shields.io/badge/A11y-WCAG%202.2%20AA-brightgreen.svg)](.agents/rules/10-accessibility.md)
@@ -41,7 +41,7 @@ Most AI coding assistants struggle with visual design and front-end engineering:
 3. **Interactive Completeness & Micro-Interactions**:
    Static design mockups only show the happy path. Projects 24 forces AI agents to design and implement every user interface state (default, hover, focus-visible, active, disabled, loading, skeleton, error, and empty), responsive viewports across mobile/tablet/desktop, purposeful micro-interactions (View Transitions, scroll-driven animations as progressive enhancement, GSAP/Motion, reduced-motion preferences), and Core Web Vitals performance budgets (LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1).
 4. **Complete Design-to-Code Lifecycle Mastery**:
-   35 modular skills and 15 normative rules that cover every phase: from UX research, wireframing, high-fidelity UI design, digital graphic assets (SVG, vector, social, print prep), and photo, video, colour grading and motion graphics production, to design-to-code handoff, modern framework engineering, mobile platforms, automated visual QA, and production release inherited from Projects 23.
+   36 modular skills and 15 normative rules that cover every phase: from UX research, wireframing, high-fidelity UI design, digital graphic assets (SVG, vector, social, print prep), and photo, video, colour grading and motion graphics production, to design-to-code handoff, modern framework engineering, mobile platforms, automated visual QA, and production release inherited from Projects 23.
 
 ---
 
@@ -52,15 +52,15 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 ================================================================
 
   +-------------------------------------------------------------------------+
-  | Core (Always Loaded): AGENTS.md (~167 lines)                            |
+  | Core (Always Loaded): AGENTS.md (~168 lines)                            |
   | Design & front-end priorities, non-negotiables, design-to-code workflow |
   +-------------------------------------------------------------------------+
        |                                                 |
        v (links to)                                      v (links to)
   +-----------------------------------+             +-----------------------------------+
   | Rules (.agents/rules/)            |             | Skills (.agents/skills/)          |
-  | 15 normative rules:               |             | 35 on-demand step-by-step guides: |
-  | - 7 Always-On (core, clean code,  |             | - 9 Digital Design & UI/UX Skills |
+  | 15 normative rules:               |             | 36 on-demand step-by-step guides: |
+  | - 7 Always-On (core, clean code,  |             | - 10 Digital Design & UI/UX Skills|
   |   verification, security, design  |             | - 4 Photo, Video, Colour & Motion |
   |   principles, a11y, clean exec.)  |             | - 12 Front-End & Mobile Skills    |
   | - 8 On-Demand (dependencies,      |             | - 10 Software Lifecycle Skills    |
@@ -81,9 +81,9 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 
 | Layer | Location | Loaded | Contents |
 | :--- | :--- | :--- | :--- |
-| **Core** | [`AGENTS.md`](AGENTS.md) | Always | Priorities, non-negotiables, design-to-code workflow, rule and skill indexes, operating conditions, definition of done (about 167 lines) |
+| **Core** | [`AGENTS.md`](AGENTS.md) | Always | Priorities, non-negotiables, design-to-code workflow, rule and skill indexes, operating conditions, definition of done (about 168 lines) |
 | **Rules** | [`.agents/rules/`](.agents/rules/) | Always (7) or when relevant (8) | Core principles, clean code, verification, security, **design principles, accessibility (WCAG 2.2 AA), clean execution**, dependencies, error handling, testing, Git workflow, **front-end code, web performance, visual assets & licensing, UX writing & ethics** |
-| **Skills** | [`.agents/skills/`](.agents/skills/) | When task matches | 34 step-by-step procedures (9 digital design & UI/UX, 4 photo, video, colour & motion, 12 front-end & mobile, 10 software lifecycle) with tested templates and references |
+| **Skills** | [`.agents/skills/`](.agents/skills/) | When task matches | 36 step-by-step procedures (10 digital design & UI/UX, 4 photo, video, colour & motion, 12 front-end & mobile, 10 software lifecycle) with tested templates and references |
 | **Reference Library** | [`docs/DESIGN-REFERENCES.md`](docs/DESIGN-REFERENCES.md) | When needed | About 470 curated, link-checked sources in 27 sections: standards, accessibility, UX, UI, design systems, typography, colour, imagery, branding and print, motion, data viz, tools, AI workflows, HTML/CSS/JS, frameworks, browser support, testing, performance, security, SEO, i18n, ethics and law, courses, books, communities, inspiration, photo, video, colour and motion production |
 | **Tested Templates** | Various under `.agents/skills/` | On demand / in CI | Runnable token pipelines, Figma variables sync, accessible static site with security headers, axe-core scanner, browser chaos experiments, web video and image pipeline, Node.js & Python backend services, front-end CI, Lighthouse CI budgets, GitHub Pages deploy |
 | **Tools Catalog** | [`docs/TOOLKIT.md`](docs/TOOLKIT.md) | When needed | 350+ commonly used tools, libraries, platforms and services by phase, with official links, plus the rule for adopting any tool that is not listed |
@@ -97,7 +97,7 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 
 ## Skills Catalog
 
-### 1. Digital Design, UI/UX, & Graphics Skills (9 Skills)
+### 1. Digital Design, UI/UX, & Graphics Skills (10 Skills)
 
 Step-by-step procedures covering visual research, prototyping, design systems, vector art, and Figma integration:
 
@@ -110,6 +110,7 @@ Step-by-step procedures covering visual research, prototyping, design systems, v
 | **Data Viz** | [data-visualization-design](.agents/skills/data-visualization-design/SKILL.md) | Chart selection by data question, honest visual encoding, colour-blind-safe palettes, responsive charts, modern viz libraries (D3, Chart.js, Observable) |
 | **System** | [design-system-and-tokens](.agents/skills/design-system-and-tokens/SKILL.md) | DTCG 2025.10 tokens, light/dark themes, **tested token pipeline with automated WCAG contrast checks**, headless components, Storybook, token governance |
 | **Handoff** | [design-to-code-handoff](.agents/skills/design-to-code-handoff/SKILL.md) | Mapping design files or screenshots to tokens and components, bridging the gap between design mockups and real-world interactive code |
+| **Anti-Slop** | [anti-slop-filter](.agents/skills/anti-slop-filter/SKILL.md) | Filter for generic AI output adapted from antislop (MIT): direction from the brand or `DESIGN.md` as data, Design Read with energy, rhythm and motion dials, hard gates (honest content, working controls, states, contrast, mobile, themes, click-through evidence), a one-line reason for every technique, UI, writing and code-comment slop catalogues, PASS/FAIL delivery report |
 | **AI Design** | [ai-design-and-artifacts](.agents/skills/ai-design-and-artifacts/SKILL.md) | Claude Design and artifacts: design system first (`/design-sync`), briefs and iteration, review of AI-generated designs (tokens, measured contrast, licences), handoff with the bundle or `/design` **without overwriting existing code**, safe sharing |
 | **Handoff** | [figma-integration](.agents/skills/figma-integration/SKILL.md) | Figma file preparation, MCP server tools and rate limits, Code Connect, **tested Figma variables → DTCG tokens sync**, plugins/codegen, token security, Penpot MCP |
 

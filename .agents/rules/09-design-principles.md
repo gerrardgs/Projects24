@@ -45,6 +45,7 @@ Accessibility is a requirement, not a phase. Follow [10-accessibility](10-access
 
 - Do not invent brand colours, fonts, logos, guidelines, measurements or specs; take them from the source (brand guide, design file, existing code) or ask.
 - Do not claim a contrast ratio, a Lighthouse score, a Core Web Vitals result or a usability finding you did not measure. Run the tool or label the value as unverified.
+- No generic AI defaults: every visual technique (gradient, glow, glass, badge, card grid, animation, icon set) has a one-line written reason tied to hierarchy, identity or readability, and no statistic, testimonial, logo or claim is shown without a real source; an honest labelled placeholder beats a plausible fake ([anti-slop-filter](../skills/anti-slop-filter/SKILL.md)).
 - Use only fonts, images, icons, illustrations, video and audio you are licensed to use, and record the source and licence ([13-visual-assets-and-licensing](13-visual-assets-and-licensing.md)). Never copy another product's proprietary design, logo or trade dress.
 
 ## 8. Hand-off is part of the design

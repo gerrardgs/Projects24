@@ -326,6 +326,7 @@ Use AI tools within the rules of this spec: verify output, check licences and te
 | [punkpeye/awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers), [wong2/awesome-mcp-servers](https://github.com/wong2/awesome-mcp-servers) | Community directories of MCP servers (discovery, not review) |
 | [MCP Toolbox for Databases](https://mcp-toolbox.dev/) | Google's open-source MCP server for databases |
 | [The lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/) | Why private data, untrusted content and external communication must not meet in one agent |
+| [antislop](https://github.com/miqdadbadjuber/anti-slop) | Filter for generic AI output in UI, copy and code comments: purpose test, hard gates, liveliness dials, delivery report (MIT) |
 | [Karpathy-inspired guidelines](https://github.com/multica-ai/andrej-karpathy-skills) | Think before coding, simplicity first, surgical changes, goal-driven execution |
 | [Agent Skills specification](https://agentskills.io/specification) | The skill format used in this repository |
 | [AGENTS.md](https://agents.md/) | The instruction file format used here |

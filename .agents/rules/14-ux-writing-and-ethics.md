@@ -13,6 +13,7 @@ description: "Apply when writing interface copy (labels, buttons, errors, empty 
 - Empty states explain what will appear and offer the next action. Confirmation dialogs name the consequence ("Delete 3 files? You can't undo this.") and label buttons with the action, not "Yes/No".
 - Keep terminology consistent across the product, the help content and the marketing site. Follow the project's voice and tone guide and word list when it exists.
 - Never invent product claims, prices, legal text, testimonials or statistics in copy. Use placeholders that are obviously placeholders, and flag them.
+- Write like a person, not a generator: no buzzwords, empty vocabulary, signposting, chatbot closers or forced groups of three; specific calls to action instead of "Get started" by default ([writing patterns](../skills/anti-slop-filter/references/writing-patterns.md)).
 
 ## 2. Forms and flows
 

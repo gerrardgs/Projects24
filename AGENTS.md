@@ -101,6 +101,7 @@ If your tool does not load these folders automatically, **open the matching file
 | Tune | [web-performance-optimization](.agents/skills/web-performance-optimization/SKILL.md) | Core Web Vitals, Lighthouse, images, fonts, bundles |
 | Tune | [resilience-and-chaos-engineering](.agents/skills/resilience-and-chaos-engineering/SKILL.md) | Failure modes, resilience patterns, SLOs and error budgets, chaos experiments |
 | Debug | [systematic-debugging](.agents/skills/systematic-debugging/SKILL.md) | Errors, crashes, wrong output, slowness, incidents |
+| Review | [anti-slop-filter](.agents/skills/anti-slop-filter/SKILL.md) | Output that looks AI-generated or generic (UI, copy, code comments); purpose test and delivery report |
 | Review | [design-critique-and-review](.agents/skills/design-critique-and-review/SKILL.md) | Feedback on designs, prototypes, pages, brand pieces |
 | Review | [rigorous-code-audit](.agents/skills/rigorous-code-audit/SKILL.md) | Reviewing a diff, pull request or codebase |
 | Secure | [security-hardening](.agents/skills/security-hardening/SKILL.md) | Threat modelling, hardening, security scanning, secrets |

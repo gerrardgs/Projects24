@@ -41,6 +41,7 @@ AI-assisted design tends to converge on the same look whatever the subject. Anth
 - Put the boldness in one place and keep the rest quiet; remove decoration that does not serve the brief.
 - Keep the quality floor regardless of style: tokens, every state, accessibility, responsive layout, reduced motion. [Vercel's Web Interface Guidelines](https://vercel.com/design/guidelines) ([source, MIT](https://github.com/vercel-labs/web-interface-guidelines)) are a concise, practical checklist for interaction details (keyboard, focus, forms, loading, feedback, touch targets).
 - An existing brand or design system always wins over novelty.
+- Before delivering, run the [anti-slop-filter](../anti-slop-filter/SKILL.md) skill: Design Read and dials, hard gates, a written reason for each technique, and a PASS/FAIL delivery report.
 
 ## 5. Prototype
 

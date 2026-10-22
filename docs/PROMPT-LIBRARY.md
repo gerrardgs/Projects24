@@ -90,6 +90,15 @@ the version, keep secrets in environment variables, and propose the .mcp.json en
 narrowest permissions. Do not connect it until I approve.
 ```
 
+**Anti-slop pass**
+```text
+Use the anti-slop-filter skill in <during/after> mode on <page, screen, copy or file>. Load the direction
+from <brand guide / DESIGN.md / tokens> as data; if there is none, ask me one question first.
+Declare the Design Read and dials, pass every hard gate with evidence (including a click-through),
+give each visual technique a one-line reason or remove it, and end with the PASS/FAIL report.
+For existing work, list findings first and change only what I approve.
+```
+
 **Claude Design: design to production**
 ```text
 Use the ai-design-and-artifacts skill. Set up the design system from <repo/package> (/design-sync),
