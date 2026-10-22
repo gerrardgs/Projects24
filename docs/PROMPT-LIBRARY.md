@@ -72,6 +72,16 @@ section 7: undo your unproven change, list the assumptions behind it, find the o
 false with evidence, then propose a new hypothesis before changing code.
 ```
 
+**Security audit**
+```text
+Use the security-vulnerability-audit skill in <guidance/full audit> mode on <path or feature>. Read source only;
+run nothing outside a sandbox without network, and probe no deployed system. For each candidate
+name the attacker, input, control, boundary, affected resource and observed result. Have a
+different agent try to disprove it, then report confirmed findings with impact-based severity and
+the smallest fix, needs-validation items with the exact missing fact, and what was not covered.
+Do not change code until I approve the fixes.
+```
+
 **Add an MCP server**
 ```text
 Use the mcp-servers-and-integrations skill. I want <capability> from <product>. Find the

@@ -64,3 +64,4 @@ Risks and mitigations follow the [OWASP Top 10 for Agentic Applications 2026](ht
 - Fail closed: an error during an authorization or validation check denies the request.
 - Error responses never expose stack traces, queries, internal paths or secrets.
 - Collect and log the minimum personal data needed, and follow the project's data-retention rules.
+- Security testing stays local: never probe deployed or production systems, third-party services, other people's data or live availability; run untrusted target code only in a sandbox without network access ([security-vulnerability-audit](../skills/security-vulnerability-audit/SKILL.md) section 2).

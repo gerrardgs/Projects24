@@ -51,6 +51,7 @@ Record each command and its result. A tool that cannot run (not installed, broke
 - **A07 Authentication Failures**: weak password storage (use Argon2id, scrypt or bcrypt), session fixation, missing MFA hooks where required, tokens without expiry.
 - **A08 Software or Data Integrity Failures**: unsigned updates or artifacts, deserialising untrusted data, CI that runs untrusted code with secrets.
 - **A09 Security Logging and Alerting Failures**: security events not logged, or secrets and personal data logged.
+- Report a security issue as a vulnerability only when you can name the attacker, the crossed boundary and the observed result; a missing extra layer where another control already blocks the attack is a hardening note. For a dedicated security audit use [security-vulnerability-audit](../security-vulnerability-audit/SKILL.md).
 - **A10 Mishandling of Exceptional Conditions**: fail-open error paths, swallowed exceptions, crashes on malformed input, inconsistent state after partial failure.
 
 ### Reliability

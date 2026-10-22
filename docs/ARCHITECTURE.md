@@ -12,14 +12,14 @@ How the Projects 24 specification is organised, why, and how each AI tool loads 
 
 ```text
 ┌──────────────────────────────────────────────────────────────────────┐
-│ Core (always loaded): AGENTS.md, about 166 lines                     │
+│ Core (always loaded): AGENTS.md, about 167 lines                     │
 │ Priorities, non-negotiables, workflow, indexes, operating conditions │
 └──────────────────────────────────────────────────────────────────────┘
           │ links to                               │ links to
           ▼                                        ▼
 ┌───────────────────────────────────┐   ┌───────────────────────────────────┐
 │ Rules (.agents/rules/)            │   │ Skills (.agents/skills/)          │
-│ always_on: 01-03, 06, 09, 10, 15  │   │ Loaded when the task matches (34):│
+│ always_on: 01-03, 06, 09, 10, 15  │   │ Loaded when the task matches (35):│
 │ model_decision (on demand):       │   │ research, UI, graphic, motion,    │
 │   04, 05, 07, 08, 11, 12, 13, 14  │   │ photo, video, colour grading,     │
 │                                   │   │ data viz, tokens, Figma, handoff, │

@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Format: Agent Skills](https://img.shields.io/badge/Format-Agent%20Skills-blue.svg)](https://agentskills.io/specification)
 [![Validate](https://github.com/gerrardgs/Projects24/actions/workflows/validate.yml/badge.svg)](https://github.com/gerrardgs/Projects24/actions/workflows/validate.yml)
-[![Skills: 34](https://img.shields.io/badge/Skills-34%20Verified-success.svg)](.agents/skills/)
+[![Skills: 35](https://img.shields.io/badge/Skills-35%20Verified-success.svg)](.agents/skills/)
 [![Rules: 15](https://img.shields.io/badge/Rules-15%20Core-blueviolet.svg)](.agents/rules/)
 [![Design References: 470+](https://img.shields.io/badge/Design%20References-470%2B%20Curated-indigo.svg)](docs/DESIGN-REFERENCES.md)
 [![Accessibility: WCAG 2.2 AA](https://img.shields.io/badge/A11y-WCAG%202.2%20AA-brightgreen.svg)](.agents/rules/10-accessibility.md)
@@ -41,7 +41,7 @@ Most AI coding assistants struggle with visual design and front-end engineering:
 3. **Interactive Completeness & Micro-Interactions**:
    Static design mockups only show the happy path. Projects 24 forces AI agents to design and implement every user interface state (default, hover, focus-visible, active, disabled, loading, skeleton, error, and empty), responsive viewports across mobile/tablet/desktop, purposeful micro-interactions (View Transitions, scroll-driven animations as progressive enhancement, GSAP/Motion, reduced-motion preferences), and Core Web Vitals performance budgets (LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1).
 4. **Complete Design-to-Code Lifecycle Mastery**:
-   34 modular skills and 15 normative rules that cover every phase: from UX research, wireframing, high-fidelity UI design, digital graphic assets (SVG, vector, social, print prep), and photo, video, colour grading and motion graphics production, to design-to-code handoff, modern framework engineering, mobile platforms, automated visual QA, and production release inherited from Projects 23.
+   35 modular skills and 15 normative rules that cover every phase: from UX research, wireframing, high-fidelity UI design, digital graphic assets (SVG, vector, social, print prep), and photo, video, colour grading and motion graphics production, to design-to-code handoff, modern framework engineering, mobile platforms, automated visual QA, and production release inherited from Projects 23.
 
 ---
 
@@ -52,18 +52,18 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 ================================================================
 
   +-------------------------------------------------------------------------+
-  | Core (Always Loaded): AGENTS.md (~166 lines)                            |
+  | Core (Always Loaded): AGENTS.md (~167 lines)                            |
   | Design & front-end priorities, non-negotiables, design-to-code workflow |
   +-------------------------------------------------------------------------+
        |                                                 |
        v (links to)                                      v (links to)
   +-----------------------------------+             +-----------------------------------+
   | Rules (.agents/rules/)            |             | Skills (.agents/skills/)          |
-  | 15 normative rules:               |             | 34 on-demand step-by-step guides: |
+  | 15 normative rules:               |             | 35 on-demand step-by-step guides: |
   | - 7 Always-On (core, clean code,  |             | - 9 Digital Design & UI/UX Skills |
   |   verification, security, design  |             | - 4 Photo, Video, Colour & Motion |
   |   principles, a11y, clean exec.)  |             | - 12 Front-End & Mobile Skills    |
-  | - 8 On-Demand (dependencies,      |             | - 9 Software Lifecycle Skills     |
+  | - 8 On-Demand (dependencies,      |             | - 10 Software Lifecycle Skills    |
   |   errors, testing, git workflow,  |             | + 8 Verified runnable templates   |
   |   front-end code, web perf,       |             |   + CI, Lighthouse, deploy configs|
   |   assets/licensing, UX writing)   |             |                                   |
@@ -81,9 +81,9 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 
 | Layer | Location | Loaded | Contents |
 | :--- | :--- | :--- | :--- |
-| **Core** | [`AGENTS.md`](AGENTS.md) | Always | Priorities, non-negotiables, design-to-code workflow, rule and skill indexes, operating conditions, definition of done (about 166 lines) |
+| **Core** | [`AGENTS.md`](AGENTS.md) | Always | Priorities, non-negotiables, design-to-code workflow, rule and skill indexes, operating conditions, definition of done (about 167 lines) |
 | **Rules** | [`.agents/rules/`](.agents/rules/) | Always (7) or when relevant (8) | Core principles, clean code, verification, security, **design principles, accessibility (WCAG 2.2 AA), clean execution**, dependencies, error handling, testing, Git workflow, **front-end code, web performance, visual assets & licensing, UX writing & ethics** |
-| **Skills** | [`.agents/skills/`](.agents/skills/) | When task matches | 34 step-by-step procedures (9 digital design & UI/UX, 4 photo, video, colour & motion, 12 front-end & mobile, 9 software lifecycle) with tested templates and references |
+| **Skills** | [`.agents/skills/`](.agents/skills/) | When task matches | 34 step-by-step procedures (9 digital design & UI/UX, 4 photo, video, colour & motion, 12 front-end & mobile, 10 software lifecycle) with tested templates and references |
 | **Reference Library** | [`docs/DESIGN-REFERENCES.md`](docs/DESIGN-REFERENCES.md) | When needed | About 470 curated, link-checked sources in 27 sections: standards, accessibility, UX, UI, design systems, typography, colour, imagery, branding and print, motion, data viz, tools, AI workflows, HTML/CSS/JS, frameworks, browser support, testing, performance, security, SEO, i18n, ethics and law, courses, books, communities, inspiration, photo, video, colour and motion production |
 | **Tested Templates** | Various under `.agents/skills/` | On demand / in CI | Runnable token pipelines, Figma variables sync, accessible static site with security headers, axe-core scanner, browser chaos experiments, web video and image pipeline, Node.js & Python backend services, front-end CI, Lighthouse CI budgets, GitHub Pages deploy |
 | **Tools Catalog** | [`docs/TOOLKIT.md`](docs/TOOLKIT.md) | When needed | 350+ commonly used tools, libraries, platforms and services by phase, with official links, plus the rule for adopting any tool that is not listed |
@@ -143,7 +143,7 @@ Procedures covering production web and mobile implementation, modern frameworks,
 | **QA** | [frontend-testing-and-visual-qa](.agents/skills/frontend-testing-and-visual-qa/SKILL.md) | Component testing (Testing Library), end-to-end testing (Playwright), visual regression snapshots, cross-browser and real-device QA matrices |
 | **Review** | [design-critique-and-review](.agents/skills/design-critique-and-review/SKILL.md) | Heuristic evaluations, visual hierarchy critique, design system token compliance, accessibility and UX writing passes with severity-ranked findings |
 
-### 4. Software Lifecycle Skills (9 Skills Inherited from Projects 23)
+### 4. Software Lifecycle Skills (10 Skills: 9 Inherited from Projects 23)
 
 Complete software engineering lifecycle foundation ensuring bulletproof tooling, security, and automated delivery:
 
@@ -156,6 +156,7 @@ Complete software engineering lifecycle foundation ensuring bulletproof tooling,
 | **Debug** | [systematic-debugging](.agents/skills/systematic-debugging/SKILL.md) | Root cause isolation, a procedure for correcting the agent's own reasoning when a fix fails or the user says it is wrong, `git bisect` recipes, profilers, memory leak detection, production incident response, and a browser debugging reference (hydration, CORS, layout, deploy-only bugs) |
 | **Review** | [rigorous-code-audit](.agents/skills/rigorous-code-audit/SKILL.md) | Toolchain verification, OWASP Top 10 checklist, and severity-ranked audit findings |
 | **Secure** | [security-hardening](.agents/skills/security-hardening/SKILL.md) | Threat modelling, OWASP ASVS 5.0, secret rotation, SAST, dependency audits, container scanning, and SBOM generation |
+| **Audit** | [security-vulnerability-audit](.agents/skills/security-vulnerability-audit/SKILL.md) | Evidence-first vulnerability audits adapted from Cloudflare's security-audit skill (MIT): guidance or full mode, sandboxed local evidence only, a six-part finding contract, confirmed / needs-validation / rejected verdicts, independent verification, impact-based severity, coverage ledger, and front-end attack classes (DOM XSS, prototype pollution, postMessage, CORS, service workers, XS-Leaks, clickjacking, OAuth, CI, AI and MCP) |
 | **Automate** | [ci-cd-pipeline](.agents/skills/ci-cd-pipeline/SKILL.md) | GitHub Actions workflows pinned to commit SHAs, least-privilege token permissions, Dependabot with cooldown timers, plus front-end CI, Lighthouse CI budgets and a GitHub Pages deploy workflow |
 | **Ship** | [deploy-and-release](.agents/skills/deploy-and-release/SKILL.md) | Production launch checklists, zero-downtime deployments, canary/blue-green rollouts, observability, and rollback plans |
 

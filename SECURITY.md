@@ -18,12 +18,14 @@ Checked on 2026-10-16.
 | Secrets in projects that use the spec | Rule 06; `.env` and `.env.*` ignored; pre-commit gitleaks hook in the bootstrap template | `.agents/rules/06-security.md`, `.gitignore`, `project-bootstrap/assets/pre-commit-config.yaml` |
 | Personal data | No personal data, local paths or e-mail addresses in the files (checked with a search over all tracked files) | |
 | Dependencies | Lockfiles for every Node.js package; `npm audit` and `pip-audit` in CI; Dependabot for npm, GitHub Actions and Docker with a 7-day cooldown against freshly compromised releases | `.github/dependabot.yml` |
-| CI and actions | Every action pinned to a full commit SHA (all at their latest release on 2026-10-16); `permissions: contents: read`; `persist-credentials: false`; workflows linted by actionlint and audited by zizmor 1.31.1 (auditor persona: no findings) | `.github/workflows/` |
+| CI and actions | Every action pinned to a full commit SHA (all at their latest release on 2026-10-16); `permissions: contents: read` (the release workflow alone grants `contents: write` to its one job, which publishes notes for a verified version tag); `persist-credentials: false`; workflows linted by actionlint and audited by zizmor 1.31.1 (auditor persona: no findings) | `.github/workflows/` |
 | Container images | Base images pinned to digests and refreshed to the current digest on 2026-10-16; non-root users | `native-from-scratch/assets/*/Dockerfile` |
 | Code | Semgrep 1.181.0 rulesets for JavaScript, TypeScript, Node.js, Python, Dockerfile, GitHub Actions, secrets and security audit: 0 findings on 2026-10-16; strict TypeScript; Biome lint | |
 | Templates | Strict Content Security Policy and security headers; dev server bound to `127.0.0.1` with path-traversal protection; request-size limits and input validation in the service templates; untrusted JSON validated before use; tokens never logged | `frontend-from-scratch/assets/static-site`, `figma-integration/assets/figma-variables-sync`, `native-from-scratch/assets` |
 | Installer | Documented as download, read, then run, pinned to an immutable commit SHA; never overwrites differing files; installs over HTTPS only | `scripts/install.sh` |
 | AI agents | Untrusted content is data, not instructions; MCP servers pinned and least-privilege; human approval for outward-facing actions (OWASP Top 10 for LLM Applications 2026 and for Agentic Applications 2026) | `.agents/rules/06-security.md` |
+| Agent changes | Agents never delete existing work without approval; in Claude Code, `.claude/settings.json` asks before deletion commands and a PreToolUse hook asks before edits that remove existing lines (9 tests) | `.agents/rules/01-core-principles.md` section 8, `scripts/hooks/` |
+| Security reviews | Vulnerability audits follow an evidence-first method adapted from Cloudflare's security-audit skill: source review and sandboxed local tests only, no probing of deployed systems, independent verification, impact-based severity | `.agents/skills/security-vulnerability-audit/` |
 
 ## Accepted risk
 

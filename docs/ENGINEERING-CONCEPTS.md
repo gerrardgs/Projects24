@@ -125,6 +125,7 @@ The [2023 edition](https://www.iso.org/standard/78176.html) defines nine product
 | Supply-chain integrity | [SLSA](https://slsa.dev/), SBOMs, pinned actions and digests | R-06 section 6, [ci-cd-pipeline](../.agents/skills/ci-cd-pipeline/SKILL.md) |
 | Browser security | CSP, Trusted Types, SRI, cookies | R-11 section 6, [frontend-deployment](../.agents/skills/frontend-deployment/SKILL.md) section 3 |
 | AI and agent security | OWASP Top 10 for LLM and for Agentic Applications 2026 | R-06 sections 1 and 7 |
+| Vulnerability auditing (trust boundaries, adversarial validation, coverage ledgers, impact-based severity) | [Cloudflare security-audit skill](https://github.com/cloudflare/security-audit-skill), [CVSS v4.0](https://www.first.org/cvss/v4.0/specification-document) | [security-vulnerability-audit](../.agents/skills/security-vulnerability-audit/SKILL.md) |
 | Privacy engineering | Privacy by design, consent, GPC, data minimisation | R-14 section 5 |
 
 ## 9. Human-centred engineering

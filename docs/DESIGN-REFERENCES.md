@@ -428,6 +428,9 @@ Versions and official docs: [framework-frontend-engineering references](../.agen
 | [MDN: Trusted Types](https://developer.mozilla.org/en-US/docs/Web/API/Trusted_Types_API) | DOM XSS defence |
 | [MDN Observatory](https://developer.mozilla.org/en-US/observatory) | HTTP security header scan |
 | [DOMPurify](https://github.com/cure53/DOMPurify) | HTML sanitiser |
+| [Cloudflare security-audit skill](https://github.com/cloudflare/security-audit-skill), [Build your own vulnerability harness](https://blog.cloudflare.com/build-your-own-vulnerability-harness) | Evidence-first, multi-agent vulnerability auditing (MIT) |
+| [XS-Leaks Wiki](https://xsleaks.dev/) | Cross-site leak techniques and defences |
+| [OWASP DOM-based XSS](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html), [prototype pollution](https://cheatsheetseries.owasp.org/cheatsheets/Prototype_Pollution_Prevention_Cheat_Sheet.html), [clickjacking](https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html) | Client-side prevention cheat sheets |
 | [web.dev: security](https://web.dev/explore/secure) | Guides |
 | [Privacy by design (ICO, UK)](https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/guide-to-accountability-and-governance/data-protection-by-design-and-by-default/) | Data protection by design |
 

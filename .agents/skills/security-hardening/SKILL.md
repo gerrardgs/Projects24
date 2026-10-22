@@ -37,9 +37,10 @@ For any feature that touches authentication, money, personal data, file handling
 | Rate limits | Per user and per IP on authentication, expensive and enumerable endpoints |
 | Errors and logs | Generic error responses; security events logged (login, permission denied, admin actions) without secrets |
 | Files | Size and type limits, stored outside the web root, random names, served with `Content-Disposition` |
+| Client side | No `innerHTML` with untrusted data (Trusted Types in the CSP); exact-origin checks on `postMessage` and a specific `targetOrigin`; no secrets in client-exposed environment variables; Subresource Integrity on third-party scripts; no private responses cached by service workers |
 
 ### Applications that use LLMs
-Apply the [OWASP Top 10 for LLM Applications 2025](https://genai.owasp.org/llm-top-10/): treat model output as untrusted input; keep secrets and authorization decisions out of prompts; give tools the least privilege; require human approval for high-impact actions; mark external content clearly as data.
+Apply the [OWASP Top 10 for LLM Applications 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/) and, for agents with tools, the [OWASP Top 10 for Agentic Applications 2026](https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/): treat model output as untrusted input; keep secrets and authorization decisions out of prompts; give tools the least privilege; require human approval for high-impact actions; mark external content clearly as data.
 
 ## 4. Secure the supply chain and pipeline
 
@@ -62,6 +63,7 @@ Apply the [OWASP Top 10 for LLM Applications 2025](https://genai.owasp.org/llm-t
 - Run the scanners in [references/tools.md](references/tools.md) and triage every finding: fix it, or document why it is a false positive.
 - Write tests for security requirements: authorization denials, input limits, rejected tokens, rate limits.
 - Review the change with the security section of [rigorous-code-audit](../rigorous-code-audit/SKILL.md).
+- For a security review or audit that must find real vulnerabilities, follow [security-vulnerability-audit](../security-vulnerability-audit/SKILL.md): safe local evidence only, a finding contract, confirmed / needs-validation / rejected verdicts, independent verification and impact-based severity.
 
 ## Report
 
