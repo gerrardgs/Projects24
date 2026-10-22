@@ -59,7 +59,8 @@ jobs:
       - name: Validate rules, skills, mirror and links
         run: node scripts/agents-sync.mjs --check --all-markdown
       - name: Install lint tools
-        run: python -m pip install pyyaml==6.0.3 shellcheck-py==0.11.0.1 actionlint-py==1.7.12.25 zizmor==1.31.1
+        # Exact pins in .github/ci-tools/requirements.txt, kept current by Dependabot (pip).
+        run: python -m pip install -r .github/ci-tools/requirements.txt
       - name: Cross-check frontmatter with a full YAML parser
         shell: python
         run: |
@@ -273,7 +274,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.11", "3.12", "3.13", "3.14", "3.15"]
     defaults:
       run:
         working-directory: .agents/skills/native-from-scratch/assets/python-http-service

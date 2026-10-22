@@ -25,6 +25,13 @@ When a package is justified, prefer one that is actively maintained, widely used
 - Audit for known vulnerabilities: `npm audit`, `pip-audit`, `govulncheck ./...`, `cargo audit` (the `cargo-audit` crate), `dotnet list package --vulnerable`, OSV-Scanner for any ecosystem.
 - Do not run untrusted install scripts blindly. Review new packages with install hooks.
 - Upgrade deliberately: one major version at a time, read the changelog, run the full test suite.
+- **Stay current continuously**, not in occasional big jumps:
+  - Turn on the platform's security updates (Dependabot security updates, Renovate vulnerability alerts); apply security patches as soon as they pass CI.
+  - Check for version updates daily with a cooldown of about 7 days after each release, so a compromised release is likely to be caught before it reaches you; security updates skip the cooldown and arrive at once.
+  - Merge patch and minor updates automatically only behind required status checks; majors get a person's review.
+  - Audit every lockfile on a schedule as well as on each change, so new advisories surface without a commit. Accepted risks get a reason and an expiry date.
+  - Watch what the update bot cannot see: tool binaries and versions pinned in CI scripts, runtime versions in CI matrices (drop end-of-life lines, add new ones), and container base images.
+  - Templates: [ci-cd-pipeline](../skills/ci-cd-pipeline/SKILL.md) (`dependabot.yml`, `dependabot-auto-merge.yml`).
 
 ## 3. Version baseline (verified 2026-10-14; re-check before relying on it)
 

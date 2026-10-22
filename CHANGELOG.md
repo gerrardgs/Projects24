@@ -2,6 +2,20 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.8.0: always-current dependencies, tools and patches (2026-10-22)
+
+Every fact below was checked against its primary source on 2026-10-22.
+
+### Added
+
+- **Always current**: Dependabot now checks every ecosystem daily (npm, GitHub Actions, Docker, and the CI's pip tools, which moved to `.github/ci-tools/requirements.txt` so Dependabot can update them); version updates keep the 7-day cooldown that zizmor's `dependabot-cooldown` audit requires, while security updates are raised at once. A `dependabot-auto-merge` workflow (`dependabot/fetch-metadata` v3.1.0) turns on auto-merge for patch and minor updates, but only when the base branch requires status checks, so nothing merges untested; majors wait for a person. A daily `freshness` workflow runs `scripts/check-freshness.mjs` (pins Dependabot cannot see: gitleaks, the Python template's mypy, Ruff and pip-audit, and the Node.js and Python versions tested in CI against endoflife.date) and `scripts/audit-lockfiles.mjs` (npm audit of every lockfile, failing on high or critical advisories unless accepted in `.github/accepted-advisories.json` with an expiry date) plus `pip-audit`. 6 new tests (script tests 24 → 30). Rule 04 adds "stay current continuously"; the ci-cd-pipeline templates gained daily Dependabot and the auto-merge workflow.
+- Python 3.15 (3.15.1 is available to `setup-python`) added to the CI matrix and the `ci-python.yml` template; the Python template passed Ruff, mypy, its tests and pip-audit on Python 3.15.0 locally.
+
+### Changed
+
+- `.github/dependabot.yml` and the ci-cd-pipeline template: weekly checks became daily. The 7-day cooldown on version updates stays, because a shorter one fails zizmor's `dependabot-cooldown` audit and removes the window in which compromised releases are usually caught.
+- SECURITY.md: the dependency controls and a maintainer checklist item for "Allow auto-merge". CONTRIBUTING: what to do when the freshness workflow fails.
+
 ## 1.7.0: media production, Claude Design, MCP, security audits, safer changes and releases (2026-10-22)
 
 Every fact below was checked against its primary source between 2026-10-17 and 2026-10-22; where only a secondary source was available, the reference says so.

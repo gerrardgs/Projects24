@@ -90,7 +90,7 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 | **Prompt Library** | [`docs/PROMPT-LIBRARY.md`](docs/PROMPT-LIBRARY.md) | When needed | Ready-to-use prompts for every design and front-end scenario, with notes per AI tool |
 | **Adapters** | `CLAUDE.md`, `GEMINI.md`, `.gemini/settings.json`, `.github/copilot-instructions.md`, `.aider.conf.yml` | Per tool | Standard loaders connecting each AI assistant to the single core |
 | **Mirror** | `.claude/skills/` | Generated | Automated copy of skills for Claude Code and Cline; kept in sync via script |
-| **Tooling** | [`scripts/`](scripts/) | You or CI | Installer script, test runner, link checker, and mirror validator |
+| **Tooling** | [`scripts/`](scripts/) | You or CI | Installer script, test runner, link checker, mirror validator, deletion guard, and the daily freshness check and lockfile audit that keep dependencies, tools and patches current |
 | **Documentation** | [`docs/`](docs/) | Reference | Architectural design, operational manual, anti-hallucination playbook, contributing guidelines, design reference library, tools catalog, prompt library |
 
 ---
@@ -175,7 +175,7 @@ Projects 24 includes runnable reference implementations that prove design-to-cod
 | [axe-check](.agents/skills/accessibility-audit/assets/axe-check/) | Automated WCAG 2.0 to 2.2 A/AA scan in headless Chromium using Playwright and axe-core across viewports and colour schemes | Fails on accessibility violations and on console errors (for example CSP violations); validated against the static site: 0 problems, and an inline-script probe was caught |
 | [web-media-pipeline](.agents/skills/video-editing-and-post-production/assets/web-media-pipeline/) | Master video to web H.264 MP4 (BT.709 tags, faststart, two-pass loudness normalisation) plus AV1/Opus WebM and a poster; master photo to responsive AVIF, WebP and JPEG in sRGB with EXIF, GPS, serial numbers and XMP removed; FFmpeg run without a shell and option or protocol paths refused | `tsc --noEmit` clean; 8 tests measure every property on generated files with ffprobe, FFmpeg `ebur128` (within 1 LU of the target, true peak at most -1 dBTP) and sharp |
 | [CI and deploy templates](.agents/skills/ci-cd-pipeline/assets/) | Front-end CI, Lighthouse CI budgets, GitHub Pages deploy with official actions pinned to SHAs | actionlint and zizmor (auditor persona) clean; `lighthouserc.json` run with `@lhci/cli` 0.15.1 |
-| [native-from-scratch](.agents/skills/native-from-scratch/SKILL.md) | Inherited Node.js (TypeScript) and Python microservices with unit tests, Dockerfile, and lockfile | Node.js 22, 24, 26 and Python 3.11 to 3.14 in CI |
+| [native-from-scratch](.agents/skills/native-from-scratch/SKILL.md) | Inherited Node.js (TypeScript) and Python microservices with unit tests, Dockerfile, and lockfile | Node.js 22, 24, 26 and Python 3.11 to 3.15 in CI |
 
 ---
 

@@ -1,11 +1,16 @@
-# Keeps the SHA-pinned actions and the template dependencies current.
-# The 7-day cooldown lets a compromised release be detected before it is proposed here.
+# Keeps every dependency current: checks run daily, and Dependabot's security updates are raised as soon as an
+# advisory is published (the cooldown never applies to security updates).
+# Version updates wait 7 days after each release, so that a compromised release is likely to be detected and
+# pulled before it is proposed (zizmor's dependabot-cooldown audit treats anything shorter as insufficient).
+# Patch and minor updates merge automatically once required checks pass (.github/workflows/dependabot-auto-merge.yml).
+# What Dependabot cannot see (gitleaks, the Python template's tools, Node.js and Python versions in CI) is checked
+# daily by .github/workflows/freshness.yml.
 version: 2
 updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: daily
     cooldown:
       default-days: 7
     groups:
@@ -14,18 +19,20 @@ updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
+      interval: daily
     cooldown:
       default-days: 7
+    open-pull-requests-limit: 10
     ignore:
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
   - package-ecosystem: npm
     directory: /.agents/skills/native-from-scratch/assets/node-http-service
     schedule:
-      interval: weekly
+      interval: daily
     cooldown:
       default-days: 7
+    open-pull-requests-limit: 10
     ignore:
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
@@ -34,7 +41,7 @@ updates:
       - /.agents/skills/native-from-scratch/assets/node-http-service
       - /.agents/skills/native-from-scratch/assets/python-http-service
     schedule:
-      interval: weekly
+      interval: daily
     cooldown:
       default-days: 7
     ignore:
@@ -49,12 +56,22 @@ updates:
       - /.agents/skills/resilience-and-chaos-engineering/assets/browser-chaos
       - /.agents/skills/video-editing-and-post-production/assets/web-media-pipeline
     schedule:
-      interval: weekly
+      interval: daily
     cooldown:
       default-days: 7
+    open-pull-requests-limit: 10
     groups:
       front-end-templates:
         patterns: ["*"]
     ignore:
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
+  - package-ecosystem: pip
+    directory: /.github/ci-tools
+    schedule:
+      interval: daily
+    cooldown:
+      default-days: 7
+    groups:
+      ci-tools:
+        patterns: ["*"]
