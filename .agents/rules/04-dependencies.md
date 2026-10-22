@@ -109,7 +109,8 @@ This spec works with any tool, including ones not named anywhere in it. Before a
 4. **Fit**: works with the runtime, framework version and browser support target; accessibility of any UI it ships (keyboard, screen readers, contrast); bundle size and performance cost ([12-web-performance](12-web-performance.md)).
 5. **Risk**: licence compatible with the project and its distribution; pricing and plan limits; data it collects or sends to third parties and where (privacy law, consent); security record; permissions it needs (OAuth scopes, network access, file system). Grant the least privilege.
 6. **Exit**: how hard it is to remove or replace; prefer open standards and formats (DTCG tokens, OpenAPI, OpenTelemetry, OpenFeature, MCP) that reduce lock-in.
-7. **Learn it properly**: read the official getting-started guide and API reference for the installed version; follow its idioms ([AGENTS.md](../../AGENTS.md) section 6, "Unfamiliar language, framework or design tool").
+7. **MCP servers** also follow [mcp-servers-and-integrations](../skills/mcp-servers-and-integrations/SKILL.md): vendor-official first, every exposed tool read, version pinned, least privilege.
+8. **Learn it properly**: read the official getting-started guide and API reference for the installed version; follow its idioms ([AGENTS.md](../../AGENTS.md) section 6, "Unfamiliar language, framework or design tool").
 8. **Record**: add it with a pinned version and lockfile entry, note the decision in an ADR for anything significant, and add it to the project profile in `AGENTS.md` section 8 when agents need to run it.
 
 A curated list of commonly used tools, with official links, is in [docs/TOOLKIT.md](../../docs/TOOLKIT.md). It is a starting point, not a limit.

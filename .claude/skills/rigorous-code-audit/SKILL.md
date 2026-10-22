@@ -66,6 +66,8 @@ Record each command and its result. A tool that cannot run (not installed, broke
 
 ### Maintainability
 - Follows [02-clean-code](../../rules/02-clean-code.md) and the project's conventions; no dead code, debug output or unexplained suppressions.
+- Scope: every changed line traces to the stated request; no drive-by refactors, reformatting or unrelated "improvements"; nothing pre-existing removed without recorded approval ([01-core-principles](../../rules/01-core-principles.md) sections 1 and 8).
+- Size: the solution is proportionate to the problem. Flag speculative options, single-use abstractions and handling for impossible states.
 - Placeholder scan: `rg -n "TODO|FIXME|XXX|HACK|NotImplementedError|not implemented"` (or `grep -rnE` with the same pattern). Judge each hit in context: `...` and `pass` are often legitimate syntax.
 
 ## 4. Verify before reporting

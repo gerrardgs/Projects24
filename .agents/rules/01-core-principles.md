@@ -10,6 +10,8 @@ description: "Core engineering principles for every coding task: scope disciplin
 - Do what was asked. Do not add features, options, abstractions or "improvements" that were not requested. Mention them as suggestions instead.
 - Keep diffs focused. Do not rename, reformat or reorganise code you were not asked to touch. Unrelated changes hide the real change in review.
 - If the request is ambiguous and the choice matters, ask. If it does not matter much, choose the conventional option and say which one you chose.
+- **Think before coding.** State your assumptions. When a request has several reasonable readings, name them instead of picking one silently. When a simpler approach exists, say so and push back. When something is unclear, stop, say exactly what is confusing, and ask.
+- **Surgical changes.** Match the existing style even where you would write it differently. The test for a diff: every changed line traces directly to the user's request. Unrelated problems you notice (dead code, bugs, style) go in the report, not in the diff.
 
 ## 2. Simplicity (KISS, YAGNI)
 
@@ -17,6 +19,8 @@ description: "Core engineering principles for every coding task: scope disciplin
 - Prefer flat control flow: guard clauses and early returns instead of deep `if/else` nesting. Aim for nesting depth of 3 or less.
 - Keep one level of abstraction per function. Orchestration code calls well-named helpers; it does not mix in byte-level or string-buffer details.
 - Prefer the platform's standard library and the project's existing dependencies before adding new ones (see [04-dependencies](04-dependencies.md)).
+- No speculative flexibility: no configuration options, parameters, extension points or error handling for situations the request, the types and the boundary validation ([05-error-handling](05-error-handling.md)) already rule out. If the solution grew far beyond the problem (200 lines where 50 would do), rewrite it smaller. Ask: would a senior engineer call this overcomplicated?
+- These points follow the four principles distilled from Andrej Karpathy's observations on LLM coding pitfalls ([andrej-karpathy-skills](https://github.com/multica-ai/andrej-karpathy-skills), MIT): think before coding, simplicity first, surgical changes, goal-driven execution ([15-clean-execution](15-clean-execution.md) section 1). Where they differ, this specification is stricter: existing code that your change made unused is proposed for removal, not removed (section 8).
 
 ## 3. Completeness
 

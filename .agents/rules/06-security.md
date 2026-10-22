@@ -56,6 +56,8 @@ Risks and mitigations follow the [OWASP Top 10 for Agentic Applications 2026](ht
 - Least privilege: the narrowest OAuth scopes or token permissions, read-only by default, a separate browser profile without personal logins for browser automation, and no production credentials in agent sessions.
 - Writes and outward-facing actions through tools (writing to design files, deploying, publishing, sending, deleting) need human approval (AGENTS.md section 2).
 - Agent configuration files (`.mcp.json`, editor settings, hooks) are code: review changes to them like code, and never commit tokens in them.
+- Do not give one session private data, untrusted content and a way to send data out at the same time (the "lethal trifecta"); remove one, or put a human approval on the outward step. Headless and CI runs of Claude Code load project `.mcp.json` servers without asking, so block unexpected ones there (`disabledMcpjsonServers`, `--strict-mcp-config`).
+- Database servers (for example MCP Toolbox for Databases) connect with a dedicated read-only identity limited to the tables needed, never to production with write access. Procedure and vetted servers: [mcp-servers-and-integrations](../skills/mcp-servers-and-integrations/SKILL.md).
 
 ## 8. Safe failure and privacy
 

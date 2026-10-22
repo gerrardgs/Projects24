@@ -92,6 +92,7 @@ If your tool does not load these folders automatically, **open the matching file
 | Build | [css-architecture-and-responsive](.agents/skills/css-architecture-and-responsive/SKILL.md) | Styling, layout, responsive design, themes, dark mode |
 | Build | [mobile-engineering](.agents/skills/mobile-engineering/SKILL.md) | iOS, Android, Flutter, React Native apps: platform design, accessibility, security, store release |
 | Build | [web-integrations-and-platforms](.agents/skills/web-integrations-and-platforms/SKILL.md) | CMS, WordPress, Shopify, payments, auth UI, email, PWA, SEO, analytics and third-party scripts |
+| Integrate | [mcp-servers-and-integrations](.agents/skills/mcp-servers-and-integrations/SKILL.md) | Choosing, vetting, configuring and securing MCP servers; databases via MCP Toolbox |
 | Build | [native-from-scratch](.agents/skills/native-from-scratch/SKILL.md) | Writing a new back-end service, CLI or module, standard library first |
 | Change | [change-existing-code](.agents/skills/change-existing-code/SKILL.md) | Modifying, refactoring, upgrading or migrating existing code |
 | Test | [test-engineering](.agents/skills/test-engineering/SKILL.md) | Adding tests, regression tests, test setup, flaky tests |

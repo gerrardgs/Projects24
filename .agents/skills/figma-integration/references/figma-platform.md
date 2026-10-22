@@ -80,4 +80,4 @@ Deprecated: `list_shader_effects`, `list_shader_fills`, `get_shader_effect`, `ge
 | Playwright MCP | `@playwright/mcp` 0.0.83 | Drive a browser through accessibility snapshots: navigate, click, fill, read pages | [GitHub](https://github.com/microsoft/playwright-mcp) |
 | Chrome DevTools MCP | `chrome-devtools-mcp` 1.10.1 | Inspect a live Chrome: console with source-mapped stacks, network, performance traces, screenshots | [GitHub](https://github.com/ChromeDevTools/chrome-devtools-mcp) |
 
-Browser-automation servers can read and change browser data. Use a fresh profile without personal logins, and keep secrets out of the session.
+Browser-automation servers can read and change browser data. Use a fresh profile without personal logins, and keep secrets out of the session. More vendor-official servers (Storybook, shadcn/ui, hosting, CMS, databases) with versions checked on 2026-10-22 are in the [MCP catalog](../../mcp-servers-and-integrations/references/mcp-catalog.md); `chrome-devtools-mcp` was at 1.11.0 on that date.

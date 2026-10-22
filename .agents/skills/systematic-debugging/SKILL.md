@@ -50,6 +50,17 @@ Use one technique at a time:
 - Remove temporary debug logging and breakpoints before committing.
 - If the bug reached production, add the monitoring or alert that would have caught it earlier.
 
+## 7. When a fix fails or you were wrong: correct the thinking, not only the code
+
+A failed fix, a test that still fails, or the user saying "that's wrong" is evidence about your reasoning. Treat it the way you treat a failing test.
+
+1. **Stop.** Do not try another variation of the same idea, and do not stack a second fix on the first. Undo the unproven change (it is yours, from this task) so the code is back to the last known state.
+2. **Say what you believed.** Write down the assumptions behind the failed attempt: what you thought the cause was, what you thought the code, data, versions or user meant.
+3. **Find the one that broke.** Check each assumption against evidence (read the code, run the reproduction, print the value, re-read the request). Name the wrong one plainly: "I assumed the API returns UTC; it returns local time."
+4. **Re-plan from the corrected model.** Form a new hypothesis that explains every symptom, including why the first attempt failed, then continue from section 4.
+5. **When the user corrects you, restate their correction in your own words and confirm it before changing code.** Do not defend the earlier answer, and do not over-correct into an unrequested rewrite.
+6. **Report the correction** in the task report: what you assumed, what was true, and what you changed because of it. If the same kind of mistake repeats, propose a rule, a test or a check that would catch it.
+
 ## Special cases
 
 ### Flaky tests and race conditions

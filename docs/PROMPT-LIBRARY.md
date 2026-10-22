@@ -57,6 +57,29 @@ text, errors (what happened and how to fix it), empty state, confirmation dialog
 Keep terms consistent with <glossary>. Flag any claim, price or legal text I must supply.
 ```
 
+**Fix a bug, goal first**
+```text
+Use the systematic-debugging skill. Bug: <symptom>. First state your assumptions and, if the
+report can be read more than one way, list the readings and ask. Write a failing test that
+reproduces it, then make it pass with the smallest change. Every changed line must trace to
+this bug; report anything else you notice instead of changing it.
+```
+
+**You were wrong: correct the thinking**
+```text
+That fix did not work (or: that answer is wrong because <reason>). Follow systematic-debugging
+section 7: undo your unproven change, list the assumptions behind it, find the one that was
+false with evidence, then propose a new hypothesis before changing code.
+```
+
+**Add an MCP server**
+```text
+Use the mcp-servers-and-integrations skill. I want <capability> from <product>. Find the
+vendor's official server, list every tool it exposes and which ones write or send data, pin
+the version, keep secrets in environment variables, and propose the .mcp.json entry with the
+narrowest permissions. Do not connect it until I approve.
+```
+
 **Claude Design: design to production**
 ```text
 Use the ai-design-and-artifacts skill. Set up the design system from <repo/package> (/design-sync),

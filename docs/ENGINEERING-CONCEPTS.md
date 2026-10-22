@@ -154,5 +154,6 @@ The [2023 edition](https://www.iso.org/standard/78176.html) defines nine product
 | Context engineering for agents (always-on core, on-demand rules and skills) | [ARCHITECTURE](ARCHITECTURE.md) |
 | Verification against hallucination | R-03, [ANTI-HALLUCINATION-PLAYBOOK](ANTI-HALLUCINATION-PLAYBOOK.md) |
 | Prompt patterns per scenario | [PROMPT-LIBRARY](PROMPT-LIBRARY.md) |
-| Tool use through MCP, with least privilege | [figma-integration](../.agents/skills/figma-integration/SKILL.md), R-06 section 7 |
+| Tool use through MCP, with least privilege | [mcp-servers-and-integrations](../.agents/skills/mcp-servers-and-integrations/SKILL.md), [figma-integration](../.agents/skills/figma-integration/SKILL.md), R-06 section 7 |
+| Agent behaviour: think before coding, simplicity first, surgical changes, goal-driven execution ([Karpathy guidelines](https://github.com/multica-ai/andrej-karpathy-skills)) | R-01 sections 1, 2 and 8, R-15 section 1, [systematic-debugging](../.agents/skills/systematic-debugging/SKILL.md) section 7 |
 | LLM features, retrieval and agent systems inside products | [Projects 23](https://github.com/gerrardgs/Projects23) (llm-applications, rag-systems, ai-agent-systems skills) |

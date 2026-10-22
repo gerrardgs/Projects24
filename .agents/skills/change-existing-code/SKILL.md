@@ -26,6 +26,7 @@ Most engineering work happens in code that already exists. The goal is to change
 
 ## 3. Change in small, verified steps
 
+- **Surgical changes**: every changed line traces to the request. Do not "improve" nearby code, comments or formatting, do not refactor what is not broken, and match the existing style. Imports, variables or helpers that *you* added and no longer need, remove; anything that existed before and became unused, propose for removal ([01-core-principles](../../rules/01-core-principles.md) section 8).
 - Separate **refactoring** (structure changes, behaviour identical) from **behaviour changes**. Do them in different commits.
 - After each step: build, run the relevant tests, and keep the code working. Never pile up many unverified edits.
 - Common safe refactorings: rename, extract function, inline function, move code, introduce parameter object, replace conditional with polymorphism or a lookup table. Use the editor's or language server's automated refactorings where available.

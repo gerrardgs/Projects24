@@ -8,7 +8,7 @@ metadata:
 
 # Web Integrations and Platforms
 
-Every integration starts with [04-dependencies](../../rules/04-dependencies.md) section 9 (adopting any tool or service: need, identity, health, fit, risk, exit). Commonly used services with official links are in [docs/TOOLKIT.md](../../../docs/TOOLKIT.md). Links checked on 2026-10-15.
+Every integration starts with [04-dependencies](../../rules/04-dependencies.md) section 9 (adopting any tool or service: need, identity, health, fit, risk, exit). Commonly used services with official links are in [docs/TOOLKIT.md](../../../docs/TOOLKIT.md). To let an agent work with these services through MCP (CMS, commerce, payments, hosting), use [mcp-servers-and-integrations](../mcp-servers-and-integrations/SKILL.md). Links checked on 2026-10-15.
 
 ## 1. Content management
 

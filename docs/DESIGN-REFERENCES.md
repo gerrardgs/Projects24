@@ -322,6 +322,11 @@ Use AI tools within the rules of this spec: verify output, check licences and te
 | [Claude Academy: Claude Design for prototypes and UX](https://academy.claude.com/tutorials/using-claude-design-for-prototypes-and-ux) | Prompting, design-system setup and handoff practice |
 | [Claude Code artifacts](https://code.claude.com/docs/en/artifacts.md) | `/design`, `/slides`, design systems in artifacts, sharing and page constraints |
 | [Model Context Protocol](https://modelcontextprotocol.io/) | The protocol behind MCP servers |
+| [MCP Registry](https://registry.modelcontextprotocol.io/) | Published MCP servers |
+| [punkpeye/awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers), [wong2/awesome-mcp-servers](https://github.com/wong2/awesome-mcp-servers) | Community directories of MCP servers (discovery, not review) |
+| [MCP Toolbox for Databases](https://mcp-toolbox.dev/) | Google's open-source MCP server for databases |
+| [The lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/) | Why private data, untrusted content and external communication must not meet in one agent |
+| [Karpathy-inspired guidelines](https://github.com/multica-ai/andrej-karpathy-skills) | Think before coding, simplicity first, surgical changes, goal-driven execution |
 | [Agent Skills specification](https://agentskills.io/specification) | The skill format used in this repository |
 | [AGENTS.md](https://agents.md/) | The instruction file format used here |
 | [Anthropic skills repository](https://github.com/anthropics/skills) | Open-source Agent Skills, including `frontend-design` (avoiding generic AI-generated aesthetics, Apache-2.0), `canvas-design`, `theme-factory` and `webapp-testing` |
