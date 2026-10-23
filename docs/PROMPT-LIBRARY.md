@@ -90,6 +90,15 @@ the version, keep secrets in environment variables, and propose the .mcp.json en
 narrowest permissions. Do not connect it until I approve.
 ```
 
+**Complete project documentation**
+```text
+Use the project-documentation skill and rule 16. Create the full docs/ set from the templates
+without overwriting existing files, and fill every section from real sources: the code, the
+lockfiles, the schema, the CI workflows, the design files and the brief. Run every command you
+document. Mark documents that do not apply as not-applicable with a reason. List the facts you
+could not find as open questions. Finish when check-docs.mjs passes.
+```
+
 **Anti-slop pass**
 ```text
 Use the anti-slop-filter skill in <during/after> mode on <page, screen, copy or file>. Load the direction
