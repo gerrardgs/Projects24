@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.10.0: the complete project documentation set (2026-10-23)
+
+### Added
+
+- Rule 16, project documentation (on demand): every project keeps a complete `docs/` set of 23 documents (`README`, `AGENTS`, `CLAUDE`, `PRD`, `GLOSSARY`, `ARCHITECTURE`, `TECHSTACKS`, `CODE_STYLE`, `RULES`, `DESIGN`, `DESIGN_SYSTEM`, `ASSETS`, `ACCESSIBILITY`, `PERFORMANCE`, `API`, `DATABASE`, `SCHEMA`, `SECURITY`, `PRIVACY`, `TESTING`, `DEBUGGING`, `DEPLOYMENT`, `DOCUMENTATION`) plus `docs/adr/`, and adds `ANALYTICS`, `I18N`, `SEO` and `RUNBOOK` when the project collects analytics, is localised, has public pages or runs services; documents that do not apply say so with a reason; every document has an owner, a review date and a status, is filled from real sources, and changes with the work.
+- Skill `project-documentation` with the docs kit: 27 templates whose sections say what each must answer, and `check-docs.mjs` (Node.js 22+, no dependencies), which fails on missing documents, missing or empty sections, too little content, leftover template guidance, filler text, missing or future review dates and broken relative links, and warns on drafts, stale reviews (180 days by default) and TBD or TODO markers (`--strict` makes warnings fail); optional documents are checked only when present. 13 tests, including one that keeps every template in step with the checker; a new CI step runs them.
+
+### Changed
+
+- Project bootstrap: `CHANGELOG.md`, the linter config, community health files (`CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`) for shared repositories, the documentation set and a JavaScript monorepo layout (`apps/`, `packages/`, `scripts/`, `docs/`).
+- AGENTS.md: rule 16 and the skill in the indexes; the definition of done includes updated docs. CLAUDE.md lists rule 16 among the on-demand rules. README, architecture, operational manual and prompt library updated; 37 skills and 16 rules.
+
 ## 1.9.0: anti-slop filter for UI, copy and code comments (2026-10-23)
 
 Adapted from [antislop](https://github.com/miqdadbadjuber/anti-slop) by Miqdad Badjuber (MIT, version 3.2.21, commit `69416cf`), reviewed on 2026-10-23.

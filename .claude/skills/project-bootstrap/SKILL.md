@@ -29,6 +29,9 @@ Set up the project so that the first commit already builds, lints, type-checks, 
    - [`.vscode/extensions.json`](assets/vscode-extensions.json) (rename and trim to the stack)
    - [`.pre-commit-config.yaml`](assets/pre-commit-config.yaml) with secret scanning and basic hygiene hooks
    - [`README.md`](assets/README.template.md) and an [ADR](assets/adr-template.md) folder (`docs/adr/`) for significant decisions
+   - `CHANGELOG.md` ([Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format) and the linter's config file (for example `eslint.config.mjs` or `biome.json`)
+   - For shared or open-source repositories, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md` and `SECURITY.md` (how to report a vulnerability), which GitHub shows as [community health files](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file) when they are in the root, `docs/` or `.github/`
+   - The complete documentation set in `docs/` from [project-documentation](../project-documentation/SKILL.md) (PRD, glossary, architecture, tech stack, code style, rules, design, design system, assets, accessibility, performance, API, database, schema, security, privacy, testing, debugging, deployment, documentation guide, and the folder's `AGENTS.md` and `CLAUDE.md`), filled from real sources, with its checker added to CI
 5. Configure the formatter, linter and type checker at their strictest practical settings, and make them pass on the empty project.
 6. Add one real test and make `test` pass.
 7. Add CI from [ci-cd-pipeline](../ci-cd-pipeline/SKILL.md) and Dependabot.
@@ -41,6 +44,7 @@ Follow the community layout of the ecosystem rather than inventing one:
 | Language | Typical layout |
 | :--- | :--- |
 | TypeScript / Node.js | `src/`, tests beside code (`*.test.ts`) or in `test/`; `package.json` scripts `build`, `lint`, `typecheck`, `test` |
+| JavaScript or TypeScript monorepo | `apps/<app>/` for deployable apps (web, docs site, mobile), `packages/<package>/` for shared code (UI components, tokens, config), `scripts/` for repository tooling, `docs/` for the documentation set; a workspace tool (npm, pnpm or Yarn workspaces, optionally Turborepo or Nx) |
 | Python | `src/<package>/` with `pyproject.toml`; tests in `tests/` |
 | Go | `go.mod` at the root; `cmd/<app>/main.go` for binaries; `internal/` for private packages; tests beside code (`*_test.go`) |
 | Rust | Cargo layout: `src/main.rs` or `src/lib.rs`, integration tests in `tests/`, a workspace for multiple crates |
@@ -51,6 +55,7 @@ Follow the community layout of the ecosystem rather than inventing one:
 ## 4. Done when
 
 - [ ] A fresh clone can install, build, lint, type-check, test and run by following the README alone
+- [ ] `docs/` holds the complete documentation set and `check-docs.mjs` passes
 - [ ] The runtime version is pinned and the lockfile is committed
 - [ ] CI runs all checks on pull requests; Dependabot is enabled
 - [ ] `.gitignore` excludes dependencies, build output, caches and `.env` files

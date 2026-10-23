@@ -56,6 +56,8 @@ jobs:
         run: npm run lint
       - name: Script self-tests
         run: node --test "scripts/*.test.mjs"
+      - name: Documentation kit tests (templates match the checker; a filled set passes)
+        run: node --test ".agents/skills/project-documentation/assets/docs-kit/*.test.mjs"
       - name: Validate rules, skills, mirror and links
         run: node scripts/agents-sync.mjs --check --all-markdown
       - name: Install lint tools
