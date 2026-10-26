@@ -15,6 +15,7 @@
 # Installed: AGENTS.md, CLAUDE.md, GEMINI.md, .aider.conf.yml, .gemini/settings.json,
 #            .github/copilot-instructions.md, .agents/ (rules and skills), scripts/agents-sync.mjs,
 #            .claude/settings.json and scripts/hooks/guard-deletions.mjs (deletion guard for Claude Code),
+#            scripts/check-authorship.mjs (fails when a commit credits an AI agent),
 #            docs/DESIGN-REFERENCES.md, TOOLKIT.md, PROMPT-LIBRARY.md, ENGINEERING-CONCEPTS.md (linked from AGENTS.md).
 # Never installed: README, LICENSE, CHANGELOG, .gitignore, other docs or workflows. Those belong to your project.
 
@@ -37,6 +38,7 @@ SPEC_FILES=(
   "scripts/agents-sync.mjs"
   ".claude/settings.json"
   "scripts/hooks/guard-deletions.mjs"
+  "scripts/check-authorship.mjs"
   "docs/DESIGN-REFERENCES.md"
   "docs/TOOLKIT.md"
   "docs/PROMPT-LIBRARY.md"

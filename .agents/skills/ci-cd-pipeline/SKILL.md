@@ -44,6 +44,7 @@ The action versions are pinned to full commit SHAs, with the version in a commen
 - Prefer OIDC federation (`id-token: write`) to long-lived cloud credentials.
 - Set `timeout-minutes` on every job and `concurrency` to cancel superseded runs.
 - Lint workflows with `actionlint` and audit them with `zizmor` (see [security-hardening tools](../security-hardening/references/tools.md)).
+- **Authorship**: run an authorship check on the full history (`actions/checkout` with `fetch-depth: 0`, then `node scripts/check-authorship.mjs`) so no commit credits an AI agent; release automation publishes notes without AI attribution ([08-git-workflow](../../rules/08-git-workflow.md) section 2).
 
 ## 4. Speed and reliability
 

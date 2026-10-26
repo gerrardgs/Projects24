@@ -19,7 +19,7 @@ Set up the project so that the first commit already builds, lints, type-checks, 
 
 ## 2. Create the skeleton
 
-1. `git init`, and create the default branch.
+1. `git init`, and create the default branch. Commit with the owner's Git identity only; no AI co-author trailer or "Generated with" line, from the first commit on ([08-git-workflow](../../rules/08-git-workflow.md) section 2).
 2. Pin the runtime version for every developer and CI: `.nvmrc` or `engines` (Node.js), `.python-version` and `requires-python` (Python), the `go` and `toolchain` lines in `go.mod` (Go), `rust-toolchain.toml` (Rust), `global.json` (.NET), the Gradle or Maven toolchain setting (Java).
 3. Initialise the package manager and **commit the lockfile**.
 4. Add the files from [assets/](assets/):
@@ -60,4 +60,5 @@ Follow the community layout of the ecosystem rather than inventing one:
 - [ ] CI runs all checks on pull requests; Dependabot is enabled
 - [ ] `.gitignore` excludes dependencies, build output, caches and `.env` files
 - [ ] Secret scanning runs as a pre-commit hook or in CI
+- [ ] No commit credits an AI agent (`scripts/check-authorship.mjs` passes); the owner is the only contributor
 - [ ] `AGENTS.md` "Project profile" is filled in with the real commands

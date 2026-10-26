@@ -2,6 +2,22 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.11.0: only the human author is credited (2026-10-26)
+
+### Added
+
+- Non-negotiable 12 in `AGENTS.md`: commits, tags, releases and pull requests carry only the repository owner's Git identity; no `Co-Authored-By`, sign-off or similar trailer, "Generated with" line, or author, committer or bot identity that credits an AI agent, so no AI agent appears among the contributors. GitHub lists co-authors as contributors, which is how one trailer made an AI agent appear on this repository.
+- `scripts/check-authorship.mjs` (Node.js 22+, no dependencies): fails when any commit has an AI author or committer, an AI co-author, sign-off or similar trailer, or a "Generated with <AI tool>" line; topics that merely name an AI tool, human co-authors and Dependabot are not flagged. 6 tests (script tests 30 → 36). New `Authorship` CI job runs it on the full history; the installer now copies it into projects.
+
+### Changed
+
+- Rule 08: owner-only authorship (section 2), how to remove an attribution that was already pushed with the tree kept identical and the owner's approval (section 3), and no AI attribution in pull requests or release notes (section 4).
+- Skills `change-existing-code`, `ci-cd-pipeline`, `project-bootstrap` and `project-documentation` point to the rule at the step where commits, release automation, the first commit or release notes are written.
+
+### Fixed
+
+- The v1.10.0 commit carried a `Co-Authored-By` trailer for an AI agent; its message was amended with the tree unchanged.
+
 ## 1.10.0: the complete project documentation set (2026-10-23)
 
 ### Added

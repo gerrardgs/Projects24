@@ -52,6 +52,7 @@ Use expand and contract: add new columns or tables in a backward-compatible way,
 
 - Code that your change made unused: search again for every use, then propose removing it and wait for the user's approval ([01-core-principles](../../rules/01-core-principles.md) section 8). Until then, leave it and list it in the report.
 - Update documentation, configuration examples, and the changelog.
+- Commit as the repository owner only, with no AI co-author trailer or "Generated with" line ([08-git-workflow](../../rules/08-git-workflow.md) section 2).
 - Report what changed, what stayed deliberately unchanged, how it was verified, and any follow-up risk (see the report format in [AGENTS.md](../../../AGENTS.md)).
 
 ## Warning signs: stop and ask the user

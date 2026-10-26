@@ -52,7 +52,7 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 ================================================================
 
   +-------------------------------------------------------------------------+
-  | Core (Always Loaded): AGENTS.md (~171 lines)                            |
+  | Core (Always Loaded): AGENTS.md (~172 lines)                            |
   | Design & front-end priorities, non-negotiables, design-to-code workflow |
   +-------------------------------------------------------------------------+
        |                                                 |
@@ -82,7 +82,7 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 
 | Layer | Location | Loaded | Contents |
 | :--- | :--- | :--- | :--- |
-| **Core** | [`AGENTS.md`](AGENTS.md) | Always | Priorities, non-negotiables, design-to-code workflow, rule and skill indexes, operating conditions, definition of done (about 171 lines) |
+| **Core** | [`AGENTS.md`](AGENTS.md) | Always | Priorities, non-negotiables, design-to-code workflow, rule and skill indexes, operating conditions, definition of done (about 172 lines) |
 | **Rules** | [`.agents/rules/`](.agents/rules/) | Always (7) or when relevant (9) | Core principles, clean code, verification, security, **design principles, accessibility (WCAG 2.2 AA), clean execution**, dependencies, error handling, testing, Git workflow, **front-end code, web performance, visual assets & licensing, UX writing & ethics, project documentation** |
 | **Skills** | [`.agents/skills/`](.agents/skills/) | When task matches | 37 step-by-step procedures (10 digital design & UI/UX, 4 photo, video, colour & motion, 12 front-end & mobile, 11 software lifecycle) with tested templates and references |
 | **Reference Library** | [`docs/DESIGN-REFERENCES.md`](docs/DESIGN-REFERENCES.md) | When needed | About 470 curated, link-checked sources in 27 sections: standards, accessibility, UX, UI, design systems, typography, colour, imagery, branding and print, motion, data viz, tools, AI workflows, HTML/CSS/JS, frameworks, browser support, testing, performance, security, SEO, i18n, ethics and law, courses, books, communities, inspiration, photo, video, colour and motion production |
@@ -247,6 +247,7 @@ Every commit and pull request to Projects 24 is automatically verified through [
   - **Design Tokens Pipeline**: Type-checking, unit tests, and automated WCAG contrast validation across Node.js 22, 24, and 26.
   - **Static Site Starter**: HTML validation (`html-validate`), CSS linting (`stylelint`), unit tests including security-header consistency, and an axe-core headless Chromium scan that also fails on console errors.
 - **Inherited Service Templates**: Node.js and Python microservices tested across Node.js 22/24/26 and Python 3.11/3.12/3.13/3.14.
+- **Owner-Only Authorship**: `scripts/check-authorship.mjs` scans the full history and fails when any commit credits an AI agent (an AI author or committer, a `Co-Authored-By` or sign-off trailer, or a "Generated with" line), so only the human author appears among the contributors.
 - **External Link Integrity**: [`.github/workflows/links.yml`](.github/workflows/links.yml) checks all 650+ external references weekly via `scripts/check-links.mjs`.
 
 ---

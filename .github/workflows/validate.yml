@@ -37,6 +37,21 @@ jobs:
       - name: Scan the checked-out files
         run: '"$RUNNER_TEMP/gitleaks" dir . --redact --no-banner --exit-code 1'
 
+  authorship:
+    name: Authorship (only the human author, full history)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+      - name: No commit credits an AI agent (rule 08 section 2)
+        run: node scripts/check-authorship.mjs
+
   spec:
     name: Spec, scripts and workflows
     runs-on: ubuntu-latest

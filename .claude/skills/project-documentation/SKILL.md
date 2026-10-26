@@ -72,6 +72,7 @@ A document that genuinely does not apply (no database in a static site) is not d
 - Add the checker to CI: a job that runs `node .agents/skills/project-documentation/assets/docs-kit/check-docs.mjs` (and `--strict` on release branches).
 - Every pull request that changes behaviour, configuration, the schema, the API, the design system or the deployment updates the matching document and its `Last reviewed` date.
 - Review the whole set before each release and at least every 180 days (the checker's default stale threshold; change it with `--max-age`).
+- Documents, changelog entries and release notes are written in the owner's name; never add AI attribution lines or badges ([08-git-workflow](../../rules/08-git-workflow.md) section 2).
 
 ## Done when
 
