@@ -32,6 +32,7 @@ Tests prove behaviour and protect it from regression. For procedures and tool co
 
 - Use coverage to find untested code, not as proof of quality. Look at branch coverage on changed code.
 - For critical logic, check that tests detect injected faults: property-based testing, fuzzing, or mutation testing.
+- For critical journeys and integrations, test resilience with the chaos engineering cycle: steady state, failure hypothesis, injected fault, observation against the expectation, evaluation and an improvement plan ([resilience-and-chaos-engineering](../skills/resilience-and-chaos-engineering/SKILL.md) section 5).
 
 ## 5. Test data and secrets
 

@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.12.0: plan first, blind spots and the chaos engineering cycle (2026-10-28)
+
+### Added
+
+- Non-negotiable 13 in `AGENTS.md`, plan first and act only after approval: before any change (files, commands that write, installs, migrations, commits, pushes, deploys, publishing) the agent presents an implementation plan and waits for the user's explicit approval; reading and read-only checks need none, and nothing outside the approved plan is done on the agent's own initiative.
+- Rule 15 section 1: the implementation plan format (goal and its measurable check, context, assumptions and questions, steps with their checks, blind spots, risks, rollback) for every change, small ones included, and the approval gate.
+- `.claude/settings.json` sets `permissions.defaultMode` to `plan`, so Claude Code terminal sessions start in plan mode and edits stay blocked until the plan is approved (checked against the Claude Code settings and permission-mode documentation on 2026-10-28). `CLAUDE.md` notes that the VS Code extension needs `claudeCode.initialPermissionMode` in VS Code's user settings.
+- Rule 03 section 6, blind spots, cross-checks and objective validation: a blind-spot pass before delivery, every fact the user relies on cross-checked against two independent sources, current and actively maintained standards and tools (registries, release notes, endoflife.date), and success judged only by measured evidence defined before the work.
+- Skill `resilience-and-chaos-engineering` section 5 is now the six-step cycle: define the steady state, state the failure hypothesis, create the chaos safely (blast radius, abort conditions), observe against the expectation, evaluate (held or disproved, root cause, impact), and plan, implement and re-test the improvement; new `references/experiment-record.md` template. Rule 07 and `AGENTS.md` step 5 point to it.
+- Prompt library: "Plan first, then wait" and "Chaos experiment".
+
 ## 1.11.0: only the human author is credited (2026-10-26)
 
 ### Added

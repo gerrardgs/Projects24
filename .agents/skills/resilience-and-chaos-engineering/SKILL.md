@@ -1,6 +1,6 @@
 ---
 name: resilience-and-chaos-engineering
-description: Make websites, web apps and their back ends keep working when things go wrong, and prove it with chaos engineering - front-end failure modes (offline, slow or flaky networks, API errors and timeouts, blocked scripts, styles, fonts or storage, third-party outages, deploy version skew, expired sessions), resilience patterns (progressive enhancement, timeouts, retries with backoff and jitter, circuit breakers, error boundaries, fallbacks, kill switches), service-level objectives and error budgets from real-user data, and controlled fault-injection experiments in the browser, in CI and in production game days. Use when asked about chaos engineering, resilience, fault tolerance, graceful degradation, offline support, error handling in the UI, reliability, SLOs, or what happens when a dependency fails.
+description: Make websites, web apps and their back ends keep working when things go wrong, and prove it with chaos engineering - front-end failure modes (offline, slow or flaky networks, API errors and timeouts, blocked scripts, styles, fonts or storage, third-party outages, deploy version skew, expired sessions), resilience patterns (progressive enhancement, timeouts, retries with backoff and jitter, circuit breakers, error boundaries, fallbacks, kill switches), service-level objectives and error budgets from real-user data, and controlled fault-injection experiments in the browser, in CI and in production game days, run as a six-step cycle (steady state, failure hypothesis, injected chaos, observation against the expectation, evaluation, improvement plan) with a written experiment record. Use when asked about chaos engineering, resilience, fault tolerance, graceful degradation, offline support, error handling in the UI, reliability, SLOs, or what happens when a dependency fails.
 license: MIT
 metadata:
   version: "1.0.0"
@@ -55,14 +55,16 @@ Resilience is engineered before it is tested: experiments find the gaps; the pat
 - Set **objectives** below 100 percent (for example 99.5 percent of checkouts succeed over 28 days); the remainder is the **error budget** that pays for releases and experiments. When it is spent, prioritise reliability ([Google SRE: embracing risk](https://sre.google/sre-book/embracing-risk/), [implementing SLOs](https://sre.google/workbook/implementing-slos/)).
 - After incidents, write blameless postmortems ([Google SRE](https://sre.google/sre-book/postmortem-culture/)) and turn each finding into a test or an experiment.
 
-## 5. Run an experiment
+## 5. Run an experiment: the six-step cycle
 
-1. **Pick a journey and its steady state** (from section 4), and a real failure from section 2.
-2. **Write the hypothesis**: "When the analytics script times out, checkout still completes within 3 s."
-3. **Choose the smallest safe environment**: a test browser first, then CI, then staging, and production only with section 6.
-4. **Inject the fault** with the narrowest tool: browser request routing or offline mode (Playwright, Chrome DevTools request blocking and throttling), a mocked API (MSW), a proxy between services (Toxiproxy), or a platform for infrastructure (Chaos Toolkit, LitmusChaos, Chaos Mesh, AWS Fault Injection Service, Azure Chaos Studio, Gremlin); see [references/tools.md](references/tools.md).
-5. **Observe and compare** with the control: user-visible behaviour, console and uncaught errors, metrics.
-6. **Fix and keep**: fix the weakness, then keep the experiment as an automated test so the fix cannot regress.
+Every experiment follows the same cycle and is written down in an [experiment record](references/experiment-record.md), which is part of the implementation plan the user approves before any fault is injected ([15-clean-execution](../../rules/15-clean-execution.md) section 1).
+
+1. **Define the steady state.** Pick a journey (section 4) and write what "normal" means as numbers users experience: the journey completes, within a time, with an error rate below a threshold. Measure it on the control first; without a measured baseline there is nothing to compare.
+2. **State the failure hypothesis.** Choose a real failure from section 2 by likelihood and impact, and predict what the system will do: "When the analytics script times out, checkout still completes within 3 s and shows no error." Write down what would disprove it.
+3. **Create the chaos, safely.** Choose the smallest safe environment (a test browser first, then CI, then staging, and production only with section 6), set the blast radius and the abort conditions, then inject the fault with the narrowest tool: browser request routing or offline mode (Playwright, Chrome DevTools request blocking and throttling), a mocked API (MSW), a proxy between services (Toxiproxy), or a platform for infrastructure (Chaos Toolkit, LitmusChaos, Chaos Mesh, AWS Fault Injection Service, Azure Chaos Studio, Gremlin); see [references/tools.md](references/tools.md).
+4. **Observe against the expectation.** Compare the experiment with the control and the hypothesis: user-visible behaviour, console and uncaught errors, metrics, logs and alerts. Did the system behave as expected? Record the evidence (numbers, screenshots, tool output), not impressions.
+5. **Evaluate.** The hypothesis **held** or was **disproved**. For a disproved one, find the root cause ([systematic-debugging](../systematic-debugging/SKILL.md)), the user impact and the blast radius, and whether monitoring noticed. A held hypothesis still asks: did alerts fire, were fallbacks clear to users?
+6. **Plan and verify the improvement.** Write the fixes (a resilience pattern from section 3, a new state, an alert, an SLO change) with an owner, a priority and a date, get them approved, implement them, then **re-run the same experiment** to prove the fix, and keep it as an automated test so the weakness cannot return.
 
 ### The browser-chaos template
 
@@ -92,3 +94,4 @@ Verified on 2026-10-16: the [static-site template](../frontend-from-scratch/asse
 - [ ] Browser chaos experiments run in CI for the key pages and hold
 - [ ] SLOs and an error-budget policy exist for production services
 - [ ] Production experiments only with approval, a minimal blast radius and abort conditions
+- [ ] Every experiment has a record with its steady state, hypothesis, result, evaluation and an improvement plan whose fixes were re-tested

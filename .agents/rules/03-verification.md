@@ -64,3 +64,10 @@ Check the runtime's own deprecation list when unsure: Node.js `--throw-deprecati
 ## 5. When verification is impossible
 
 If you lack network access or the tool is not installed, do not guess silently. Say what you could not verify, give the command the user can run to check it, and prefer an approach you *can* verify locally.
+
+## 6. Blind spots, cross-checks and objective validation
+
+- **Hunt for blind spots** before you deliver: what have you not looked at? Check failure and edge states, security and privacy, accessibility, performance, other browsers, devices, locales and themes, real and extreme data, concurrency and offline behaviour, and what the tests do not cover. List the ones you could not check.
+- **Cross-check every fact the user will rely on** (a version, API, standard, browser support, figure, date, licence or legal claim) against at least two independent sources, official first. When sources disagree, say so, prefer the primary source, and record the date you checked.
+- **Use current, sustainable standards and tools**: the current version of the standard; tools and libraries that are actively maintained (recent releases, not deprecated or end-of-life, a healthy maintainer base and a compatible licence) with a supported upgrade path. Check registries, release notes and [endoflife.date](https://endoflife.date/) instead of memory ([04-dependencies](04-dependencies.md) section 9).
+- **Validate objectively**: define the success criteria before the work, in measurable terms (tests, thresholds, tool output such as axe-core, Lighthouse, Core Web Vitals, html-validate, coverage), then judge the result only by that evidence and quote it. An agent's own impression is not validation; a criterion that was not measured is reported as unverified.

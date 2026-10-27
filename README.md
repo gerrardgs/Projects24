@@ -24,7 +24,7 @@ Every command, version, package name, extension identifier, Baseline browser fea
 Everything in Projects 24 serves one idea, applied to design files, code and the way an agent works:
 
 - **Clean code** is what the result looks like: readable, idiomatic, strictly typed, tested, accessible, and built from design tokens and shared components ([rule 02](.agents/rules/02-clean-code.md)).
-- **Clean execution** is how the work is done: understand first, preview, one verified step at a time, stop at the first failure, no irreversible action without approval, and leave no mess in the repository, the browser, the design file or the machine ([rule 15](.agents/rules/15-clean-execution.md)).
+- **Clean execution** is how the work is done: understand first, write an implementation plan and wait for your approval, preview, one verified step at a time, stop at the first failure, no irreversible action without approval, and leave no mess in the repository, the browser, the design file or the machine ([rule 15](.agents/rules/15-clean-execution.md)).
 
 The repository follows its own rules: its code is formatted and linted by Biome, TypeScript templates type-check with dead-code detection, and every template runs in CI.
 
@@ -52,7 +52,7 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 ================================================================
 
   +-------------------------------------------------------------------------+
-  | Core (Always Loaded): AGENTS.md (~172 lines)                            |
+  | Core (Always Loaded): AGENTS.md (~173 lines)                            |
   | Design & front-end priorities, non-negotiables, design-to-code workflow |
   +-------------------------------------------------------------------------+
        |                                                 |
@@ -82,7 +82,7 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 
 | Layer | Location | Loaded | Contents |
 | :--- | :--- | :--- | :--- |
-| **Core** | [`AGENTS.md`](AGENTS.md) | Always | Priorities, non-negotiables, design-to-code workflow, rule and skill indexes, operating conditions, definition of done (about 172 lines) |
+| **Core** | [`AGENTS.md`](AGENTS.md) | Always | Priorities, non-negotiables, design-to-code workflow, rule and skill indexes, operating conditions, definition of done (about 173 lines) |
 | **Rules** | [`.agents/rules/`](.agents/rules/) | Always (7) or when relevant (9) | Core principles, clean code, verification, security, **design principles, accessibility (WCAG 2.2 AA), clean execution**, dependencies, error handling, testing, Git workflow, **front-end code, web performance, visual assets & licensing, UX writing & ethics, project documentation** |
 | **Skills** | [`.agents/skills/`](.agents/skills/) | When task matches | 37 step-by-step procedures (10 digital design & UI/UX, 4 photo, video, colour & motion, 12 front-end & mobile, 11 software lifecycle) with tested templates and references |
 | **Reference Library** | [`docs/DESIGN-REFERENCES.md`](docs/DESIGN-REFERENCES.md) | When needed | About 470 curated, link-checked sources in 27 sections: standards, accessibility, UX, UI, design systems, typography, colour, imagery, branding and print, motion, data viz, tools, AI workflows, HTML/CSS/JS, frameworks, browser support, testing, performance, security, SEO, i18n, ethics and law, courses, books, communities, inspiration, photo, video, colour and motion production |
@@ -141,7 +141,7 @@ Procedures covering production web and mobile implementation, modern frameworks,
 | **Ship** | [frontend-deployment](.agents/skills/frontend-deployment/SKILL.md) | Static, server and edge hosting, public vs secret config, **tested security headers (Netlify, Cloudflare Pages, Vercel)**, caching, domains, previews, monitoring, rollback |
 | **Audit** | [accessibility-audit](.agents/skills/accessibility-audit/SKILL.md) | WCAG 2.2 checklist (Level A & AA), legal frameworks (European Accessibility Act [EAA], ADA, Section 508, EN 301 549), manual testing, **automated axe-core scanner** |
 | **Optimise** | [web-performance-optimization](.agents/skills/web-performance-optimization/SKILL.md) | Core Web Vitals diagnostics and fixes (LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1), image optimisation (AVIF/WebP), font loading, bundle splitting, performance budgets |
-| **Resilience** | [resilience-and-chaos-engineering](.agents/skills/resilience-and-chaos-engineering/SKILL.md) | Chaos engineering (Principles of Chaos Engineering), front-end failure modes, resilience patterns, SLOs and error budgets, **tested browser chaos experiments** |
+| **Resilience** | [resilience-and-chaos-engineering](.agents/skills/resilience-and-chaos-engineering/SKILL.md) | Chaos engineering as a six-step cycle (steady state, failure hypothesis, injected chaos, observation, evaluation, improvement plan) with an experiment record template, front-end failure modes, resilience patterns, SLOs and error budgets, **tested browser chaos experiments** |
 | **QA** | [frontend-testing-and-visual-qa](.agents/skills/frontend-testing-and-visual-qa/SKILL.md) | Component testing (Testing Library), end-to-end testing (Playwright), visual regression snapshots, cross-browser and real-device QA matrices |
 | **Review** | [design-critique-and-review](.agents/skills/design-critique-and-review/SKILL.md) | Heuristic evaluations, visual hierarchy critique, design system token compliance, accessibility and UX writing passes with severity-ranked findings |
 
@@ -255,6 +255,8 @@ Every commit and pull request to Projects 24 is automatically verified through [
 ## Limits & Human In The Loop
 
 - **Rules Guide, Toolchains Enforce**: Instructions guide an AI model; they cannot guarantee adherence. For hard guarantees, enforce checks via CI pipelines, pre-commit hooks, lint rules, and agent hooks (e.g., Claude Code `PreToolUse`).
+- **Plan First, Act Only After Approval**: before any change, agents present an implementation plan (goal, steps with their checks, blind spots, risks, rollback) and wait for your explicit approval; they never run commands that change anything on their own initiative ([AGENTS.md](AGENTS.md) non-negotiable 13, [rule 15 section 1](.agents/rules/15-clean-execution.md)). In Claude Code, `.claude/settings.json` starts every terminal session in plan mode, so edits are blocked until you approve the plan.
+- **Blind Spots, Cross-Checks and Objective Validation**: every fact you will rely on is cross-checked against two independent sources, standards and tools must be current and actively maintained, and results are judged only by measured evidence ([rule 03 section 6](.agents/rules/03-verification.md)).
 - **Existing Work Is Never Deleted Silently**: agents must show what they would remove, why and the alternatives, and wait for your approval ([rule 01 section 8](.agents/rules/01-core-principles.md)). In Claude Code this is enforced by `.claude/settings.json` and a `PreToolUse` deletion guard that turns deletion commands and line-removing edits into a confirmation prompt; other tools rely on the rule.
 - **Human Usability & Brand Resonance**: AI agents can compute colour contrast, layout grids, and token mappings, but they cannot replace usability testing with real people (especially people with disabilities) or evaluate emotional brand resonance.
 - **Automated Accessibility Scope**: Automated testing found about 57% of accessibility issues by volume in Deque's 2021 study of 2,000+ audits, but covers only part of the WCAG success criteria ([Deque](https://www.deque.com/blog/automated-testing-study-identifies-57-percent-of-digital-accessibility-issues/)). Manual keyboard navigation and screen reader audits (VoiceOver, NVDA, JAWS, TalkBack) remain essential.

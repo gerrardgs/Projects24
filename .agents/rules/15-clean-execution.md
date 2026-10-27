@@ -11,7 +11,20 @@ Clean code ([02-clean-code](02-clean-code.md)) is about what the result looks li
 
 - Understand the request and read the code, configuration, design source and commands involved ([AGENTS.md](../../AGENTS.md) section 3).
 - Run the baseline first (build, tests, lint) so you know which failures were already there.
-- Plan the smallest change that solves it. For multi-step work, write the steps and the check that proves each one, in the form `1. <step> -> verify: <check>`.
+- Plan the smallest change that solves it, and write it as an **implementation plan** for every change, small ones included. For multi-step work, write the steps and the check that proves each one, in the form `1. <step> -> verify: <check>`:
+
+```text
+Implementation plan
+Goal:        <the outcome, and the measurable check that proves it>
+Context:     <what was read: files, versions, design sources, constraints>
+Assumptions: <assumptions and open questions for the user>
+Steps:       1. <step> -> verify: <check>
+Blind spots: <what could be missed: failure states, security, accessibility, devices, data>
+Risks:       <what could break, and the blast radius>
+Rollback:    <how to undo each step>
+```
+
+- **Wait for the user's explicit approval** of the plan before the first change. Investigating (reading, searching, read-only commands) needs no approval; anything that writes, installs, deletes, commits, pushes, deploys, publishes or contacts an external service does. Never act on your own initiative: no step that is not in the approved plan, no "while I am here" extras. If a step fails or the plan must change, stop and present the revised plan. In Claude Code, `.claude/settings.json` starts sessions in plan mode, which blocks edits until a plan is approved.
 - **Goal-driven execution**: turn the task into a goal you can check, then loop until the check passes. "Fix the bug" becomes "write a test that reproduces it, then make it pass"; "add validation" becomes "write tests for invalid input, then make them pass"; "refactor X" becomes "tests pass before and after". A weak goal ("make it work") needs clarifying before you start.
 - Prefer a preview: dry-run flags (`--dry-run`, `--check`, `plan`, `diff`, `-WhatIf`), a scratch copy, a branch or duplicate of a design file, or a test, before the real action.
 

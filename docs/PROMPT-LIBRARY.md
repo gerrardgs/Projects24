@@ -15,6 +15,14 @@ Every prompt ends the same way on purpose: the agent must report what it changed
 
 ## 1. Discover and design
 
+**Plan first, then wait**
+```text
+Before changing anything, read what you need and give me an implementation plan in the format of
+rule 15 section 1: goal and how it is measured, context you read, assumptions and questions, steps
+each with its check, blind spots, risks and rollback. Do not edit files or run anything that writes
+until I approve the plan. If the plan has to change while you work, stop and show me the new plan.
+```
+
 **Research plan**
 ```text
 Use the ux-research-and-strategy skill. We are building <product/feature> for <users>.
@@ -262,6 +270,15 @@ the same tool and settings.
 Use the frontend-testing-and-visual-qa skill. Add Playwright tests for <journeys> in Chromium,
 Firefox and WebKit, with role-based locators, an axe scan per page, and screenshot tests for
 <components> with animations disabled and dynamic regions masked.
+```
+
+**Chaos experiment**
+```text
+Use the resilience-and-chaos-engineering skill, section 5, on <journey> of <url or service>. Fill in
+the experiment record (references/experiment-record.md) and show it to me as the plan: measured
+steady state, failure hypothesis and what would disprove it, environment, blast radius and abort
+conditions. After I approve, inject the fault, compare with the control, evaluate HELD or
+DISPROVED with evidence, and propose an improvement plan; re-run the experiment after each fix.
 ```
 
 **Front-end pull request review**

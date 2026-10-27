@@ -12,7 +12,7 @@ How the Projects 24 specification is organised, why, and how each AI tool loads 
 
 ```text
 ┌──────────────────────────────────────────────────────────────────────┐
-│ Core (always loaded): AGENTS.md, about 172 lines                     │
+│ Core (always loaded): AGENTS.md, about 173 lines                     │
 │ Priorities, non-negotiables, workflow, indexes, operating conditions │
 └──────────────────────────────────────────────────────────────────────┘
           │ links to                               │ links to
@@ -33,7 +33,7 @@ How the Projects 24 specification is organised, why, and how each AI tool loads 
 - **Skills** say *how* to do a kind of task, step by step. They follow the [Agent Skills specification](https://agentskills.io/specification): only each skill's name and description are loaded at startup, and the body loads when the task matches. Bulky material sits in `references/` and `assets/` and loads only when needed.
 - **Reference library**: [`DESIGN-REFERENCES.md`](DESIGN-REFERENCES.md) collects primary sources (standards, official docs) and learning resources by topic; [`TOOLKIT.md`](TOOLKIT.md) catalogues commonly used tools with official links; [`PROMPT-LIBRARY.md`](PROMPT-LIBRARY.md) holds ready-to-use prompts. None is loaded automatically; rules and skills link into them. `node scripts/check-links.mjs` checks every external link.
 - **Open-ended tool coverage**: no list can name every tool, so [rule 04 section 9](../.agents/rules/04-dependencies.md) defines how to adopt any tool, framework or service safely.
-- **Size**: `node scripts/agents-sync.mjs` prints the current always-on estimate (characters divided by 4). On 2026-10-26 it was about 16,600 tokens for `AGENTS.md` plus the seven always-on rules. Antigravity's documented budget for global and always-on rules is 20,000 tokens.
+- **Size**: `node scripts/agents-sync.mjs` prints the current always-on estimate (characters divided by 4). On 2026-10-28 it was about 17,500 tokens for `AGENTS.md` plus the seven always-on rules. Antigravity's documented budget for global and always-on rules is 20,000 tokens.
 
 ## 3. How each tool loads the spec
 
