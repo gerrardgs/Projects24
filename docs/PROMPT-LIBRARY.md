@@ -272,6 +272,14 @@ Firefox and WebKit, with role-based locators, an axe scan per page, and screensh
 <components> with animations disabled and dynamic regions masked.
 ```
 
+**Run and verify economically**
+```text
+Verify this change through the terminal only. Run `npm run verify` (or the project's own check
+scripts through `node scripts/run-quiet.mjs -- <command>`), start any server in the background and
+stop it afterwards, and read only the failing tail of a log. Report each command with PASS or FAIL;
+use the browser only for the visual check that a command cannot do.
+```
+
 **Chaos experiment**
 ```text
 Use the resilience-and-chaos-engineering skill, section 5, on <journey> of <url or service>. Fill in

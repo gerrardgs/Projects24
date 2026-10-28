@@ -52,7 +52,7 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 ================================================================
 
   +-------------------------------------------------------------------------+
-  | Core (Always Loaded): AGENTS.md (~173 lines)                            |
+  | Core (Always Loaded): AGENTS.md (~174 lines)                            |
   | Design & front-end priorities, non-negotiables, design-to-code workflow |
   +-------------------------------------------------------------------------+
        |                                                 |
@@ -82,7 +82,7 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 
 | Layer | Location | Loaded | Contents |
 | :--- | :--- | :--- | :--- |
-| **Core** | [`AGENTS.md`](AGENTS.md) | Always | Priorities, non-negotiables, design-to-code workflow, rule and skill indexes, operating conditions, definition of done (about 173 lines) |
+| **Core** | [`AGENTS.md`](AGENTS.md) | Always | Priorities, non-negotiables, design-to-code workflow, rule and skill indexes, operating conditions, definition of done (about 174 lines) |
 | **Rules** | [`.agents/rules/`](.agents/rules/) | Always (7) or when relevant (9) | Core principles, clean code, verification, security, **design principles, accessibility (WCAG 2.2 AA), clean execution**, dependencies, error handling, testing, Git workflow, **front-end code, web performance, visual assets & licensing, UX writing & ethics, project documentation** |
 | **Skills** | [`.agents/skills/`](.agents/skills/) | When task matches | 37 step-by-step procedures (10 digital design & UI/UX, 4 photo, video, colour & motion, 12 front-end & mobile, 11 software lifecycle) with tested templates and references |
 | **Reference Library** | [`docs/DESIGN-REFERENCES.md`](docs/DESIGN-REFERENCES.md) | When needed | About 470 curated, link-checked sources in 27 sections: standards, accessibility, UX, UI, design systems, typography, colour, imagery, branding and print, motion, data viz, tools, AI workflows, HTML/CSS/JS, frameworks, browser support, testing, performance, security, SEO, i18n, ethics and law, courses, books, communities, inspiration, photo, video, colour and motion production |
@@ -256,6 +256,7 @@ Every commit and pull request to Projects 24 is automatically verified through [
 
 - **Rules Guide, Toolchains Enforce**: Instructions guide an AI model; they cannot guarantee adherence. For hard guarantees, enforce checks via CI pipelines, pre-commit hooks, lint rules, and agent hooks (e.g., Claude Code `PreToolUse`).
 - **Plan First, Act Only After Approval**: before any change, agents present an implementation plan (goal, steps with their checks, blind spots, risks, rollback) and wait for your explicit approval; they never run commands that change anything on their own initiative ([AGENTS.md](AGENTS.md) non-negotiable 13, [rule 15 section 1](.agents/rules/15-clean-execution.md)). In Claude Code, `.claude/settings.json` starts every terminal session in plan mode, so edits are blocked until you approve the plan.
+- **CLI First, Small Output**: anything that runs goes through the terminal with the project's scripts, and agents read summaries instead of whole logs. `npm run verify` runs every spec check and prints one line per step; `scripts/run-quiet.mjs` does the same for any command and keeps the full log in a file (on this repository's own tests it cut the output from 3,373 to 132 bytes). Browser and MCP tools are kept for what a command cannot do ([rule 15 section 2](.agents/rules/15-clean-execution.md)).
 - **Blind Spots, Cross-Checks and Objective Validation**: every fact you will rely on is cross-checked against two independent sources, standards and tools must be current and actively maintained, and results are judged only by measured evidence ([rule 03 section 6](.agents/rules/03-verification.md)).
 - **Existing Work Is Never Deleted Silently**: agents must show what they would remove, why and the alternatives, and wait for your approval ([rule 01 section 8](.agents/rules/01-core-principles.md)). In Claude Code this is enforced by `.claude/settings.json` and a `PreToolUse` deletion guard that turns deletion commands and line-removing edits into a confirmation prompt; other tools rely on the rule.
 - **Human Usability & Brand Resonance**: AI agents can compute colour contrast, layout grids, and token mappings, but they cannot replace usability testing with real people (especially people with disabilities) or evaluate emotional brand resonance.

@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.13.0: CLI first, small output (2026-10-28)
+
+### Added
+
+- Non-negotiable 14 in `AGENTS.md`: processes (installs, builds, tests, linters, servers, git, deploys) run through the terminal with the project's own scripts, not step by step through chat, a browser or MCP tools, and agents read summaries and exit codes instead of whole logs, because every line read costs tokens.
+- Rule 15 section 2, run processes through the CLI economically: one summarising `verify` command, quiet and summary modes checked against each tool's `--help` (`npm ci --no-audit --no-fund`, `node --test --test-reporter=dot`, `biome ci --reporter=summary`, `playwright test --reporter=line`, `pytest -q`, `ruff check --output-format concise`, `git status --short`), long output written to a file with only the failing part read, long-running processes in the background and stopped afterwards, no re-running what passed, and browser or MCP tools only for what a command cannot show.
+- `scripts/run-quiet.mjs` (Node.js 22+, no dependencies): runs a command or several npm scripts, prints `PASS <step> (<seconds>s)` or `FAIL` with the last lines and the full log path, counts real warning lines, and exits with the first failing code. 5 tests (script tests 36 → 41). On this repository's `npm test` the output fell from 3,373 to 132 bytes. The installer copies it.
+- `npm run verify`: the spec checks, Biome and the script tests in one command with one line per step. `project-bootstrap` adds a `verify` script to new projects; `CLAUDE.md` notes the Bash tool's background option for servers; prompt library: "Run and verify economically".
+
 ## 1.12.0: plan first, blind spots and the chaos engineering cycle (2026-10-28)
 
 ### Added

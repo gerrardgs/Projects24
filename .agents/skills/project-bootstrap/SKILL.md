@@ -33,7 +33,7 @@ Set up the project so that the first commit already builds, lints, type-checks, 
    - For shared or open-source repositories, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md` and `SECURITY.md` (how to report a vulnerability), which GitHub shows as [community health files](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file) when they are in the root, `docs/` or `.github/`
    - The complete documentation set in `docs/` from [project-documentation](../project-documentation/SKILL.md) (PRD, glossary, architecture, tech stack, code style, rules, design, design system, assets, accessibility, performance, API, database, schema, security, privacy, testing, debugging, deployment, documentation guide, and the folder's `AGENTS.md` and `CLAUDE.md`), filled from real sources, with its checker added to CI
 5. Configure the formatter, linter and type checker at their strictest practical settings, and make them pass on the empty project.
-6. Add one real test and make `test` pass.
+6. Add one real test and make `test` pass. Add a `verify` script that runs format check, lint, type check and tests in one command with a summary, for example `"verify": "node scripts/run-quiet.mjs --steps lint,typecheck,test"`, so people and agents check everything without reading full logs ([15-clean-execution](../../rules/15-clean-execution.md) section 2).
 7. Add CI from [ci-cd-pipeline](../ci-cd-pipeline/SKILL.md) and Dependabot.
 8. Add this specification: `AGENTS.md`, `.agents/`, and the adapters for the tools the team uses. Fill in section 8 of `AGENTS.md` ("Project profile") with the real commands.
 

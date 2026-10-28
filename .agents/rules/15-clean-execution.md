@@ -32,6 +32,13 @@ Rollback:    <how to undo each step>
 
 - One logical change at a time; verify it (build, lint, type-check, test, or run and look at the rendered page) before the next one.
 - Use the project's own commands and versions (`npm ci`, `npx --no-install <tool>`, the scripts in `package.json`), not global installs or remembered ones.
+- **Run processes through the CLI, economically.** Every line of output an agent reads costs tokens, so anything that runs (installs, builds, tests, linters, servers, git, deploys, browser checks) goes through the terminal, and the output is kept to what decides the next step:
+  - Prefer one command that checks everything and prints a summary: the project's `verify` script (`npm run verify` here; add one when bootstrapping a project), or `node scripts/run-quiet.mjs -- <command>` for any command (one `PASS` line on success; the last lines and the path of the full log on failure).
+  - Use quiet and summary modes that the tool documents: `npm ci --no-audit --no-fund`, `node --test --test-reporter=dot`, `npx biome ci --reporter=summary`, `playwright test --reporter=line`, `pytest -q`, `ruff check --output-format concise`, `git status --short`, `git diff --stat`, `git log --oneline -n 10`. Check `--help` for the version in use before relying on a flag.
+  - Long output goes to a file; read only the failing part (`grep`, `tail`, the test name), never the whole log or file back into the conversation.
+  - Start long-running processes (dev servers, watchers, preview builds) in the background, wait for readiness with a command (`curl --retry`), and stop them when done.
+  - Batch independent commands, and do not re-run what already passed unless its inputs changed.
+  - Browser, MCP and computer-use tools are for what a command cannot show: the rendered result, a visual comparison, a design file. Script repeatable browser checks (Playwright, axe-core, Lighthouse CLI) instead of clicking through them.
 - Commands are idempotent where possible: running them twice must not duplicate data or break state.
 - Touch only what the task needs. No drive-by reformatting, renames, restyling or "improvements" ([01-core-principles](01-core-principles.md) section 1).
 - Regenerate derived files with their generator after changing sources (lockfiles, the `.claude/skills/` mirror, token CSS, `_headers` and `vercel.json`, generated code); never edit generated output by hand.

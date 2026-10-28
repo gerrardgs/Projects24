@@ -1,6 +1,6 @@
 {
   "name": "projects24",
-  "version": "1.12.0",
+  "version": "1.13.0",
   "private": true,
   "description": "Projects 24 - Production AI Agent Digital Design & Front-End Needs",
   "type": "module",
@@ -10,7 +10,8 @@
     "check:links": "node scripts/check-links.mjs",
     "lint": "biome ci",
     "format": "biome check --write",
-    "test": "node --test scripts/*.test.mjs"
+    "test": "node --test scripts/*.test.mjs",
+    "verify": "node scripts/run-quiet.mjs --steps check,lint,test"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.15",
