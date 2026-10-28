@@ -72,6 +72,7 @@ If your tool does not load these folders automatically, **open the matching file
 | [13-visual-assets-and-licensing.md](.agents/rules/13-visual-assets-and-licensing.md) | on demand | Asset licensing, source files, colour management, export specs, print |
 | [14-ux-writing-and-ethics.md](.agents/rules/14-ux-writing-and-ethics.md) | on demand | Interface copy, forms, localisation, deceptive patterns, privacy, consent |
 | [16-project-documentation.md](.agents/rules/16-project-documentation.md) | on demand | The complete docs/ set (PRD to deployment, accessibility, performance, privacy, glossary), substantial and current, checked by check-docs |
+| [17-text-hygiene-and-provenance.md](.agents/rules/17-text-hygiene-and-provenance.md) | on demand | Text hygiene, AI provenance marks, invisible Unicode, statistical rewrite, C2PA/metadata |
 
 ## 5. Skills index: pick the procedure for the task
 
@@ -106,6 +107,8 @@ If your tool does not load these folders automatically, **open the matching file
 | Tune | [resilience-and-chaos-engineering](.agents/skills/resilience-and-chaos-engineering/SKILL.md) | Failure modes, resilience patterns, SLOs and error budgets, chaos experiments |
 | Debug | [systematic-debugging](.agents/skills/systematic-debugging/SKILL.md) | Errors, crashes, wrong output, slowness, incidents |
 | Review | [anti-slop-filter](.agents/skills/anti-slop-filter/SKILL.md) | Output that looks AI-generated or generic (UI, copy, code comments); purpose test and delivery report |
+| Clean text | [clean-user-facing-text](.agents/skills/clean-user-facing-text/SKILL.md) | Local zero-dependency Unicode hygiene and stylometric rewrite pass for reader-facing prose while preserving voice and facts |
+| Provenance | [remove-ai-marks](.agents/skills/remove-ai-marks/SKILL.md) | Multi-vendor AI mark removal: invisible Unicode (Layer A), rewrite (Layer B), and C2PA/EXIF/container metadata across files |
 | Review | [design-critique-and-review](.agents/skills/design-critique-and-review/SKILL.md) | Feedback on designs, prototypes, pages, brand pieces |
 | Review | [rigorous-code-audit](.agents/skills/rigorous-code-audit/SKILL.md) | Reviewing a diff, pull request or codebase |
 | Secure | [security-hardening](.agents/skills/security-hardening/SKILL.md) | Threat modelling, hardening, security scanning, secrets |
