@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.14.0: text hygiene, Unicode cleaning, and multi-vendor watermark removal (2026-10-29)
+
+### Added
+
+- Rule 17 (`17-text-hygiene-and-provenance.md`): comprehensive text hygiene and provenance rule covering Layer A (invisible Unicode marks, zero-width characters, bidirectional overrides), Layer B (statistical text watermarking rewrite with voice preservation), and container/metadata cleaning.
+- Skill `clean-user-facing-text`: zero-dependency Python toolset (`clean_text.py`, `inspect_text.py`, `score_stylometry.py`, `text_unicode.py`, `common.py`) for stripping invisible Unicode characters, formatting artifacts, and generic stylistic traits while preserving user intent and tone.
+- Skill `remove-ai-marks`: multi-format cleaning engine and asset stack (`compose.yaml`, `Dockerfile.*`, `config/clean_strategy.json`, and cleaning scripts) supporting text, audio, video, images, and container formats (PDF, DOCX, ODT, HTML).
+- Cursor rule definitions in `.cursor/rules/clean-user-facing-text.mdc` and `.cursor/rules/remove-ai-marks.mdc`.
+- Mirror synchronization: all 39 skills fully synchronized to `.claude/skills/`.
+
 ## 1.13.0: CLI first, small output (2026-10-28)
 
 ### Added
