@@ -2,6 +2,44 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.17.0: reverse engineering within the law, and release-artifact audits (2026-10-29)
+
+The repository owner asked to adopt the relevant parts of [morluto/rea](https://github.com/morluto/rea) ("Reverse Engineer Anything", MIT, v6.8.0, commit `d39b300`, read on 2026-10-29) as skills and rules. Mirrors Projects 23 v2.23.0, adapted to this repository. REA's "see a feature you like, build your own" use case is left out, because it conflicts with non-negotiable 8 (never copy another organisation's proprietary design).
+
+### Added
+
+- Rule 19 (`19-reverse-engineering.md`, on demand): written scope and authority before any analysis; allowed purposes; never circumvent protection measures, copy proprietary code, or extract another product's assets, icons, fonts or layouts; static before runtime and untrusted targets in isolation; pinned tools from official sources; observed, inferred and unknown findings; release builds audited before shipping.
+- Skill `reverse-engineering`: scope, release-artifact audit, investigation and domain uses. Studying another product's design stays with user research and critique, and is never extracted from its bundle. References `legal-and-scope.md` (Directive 2009/24/EC Articles 5(3) and 6, 17 U.S.C. §1201(f) and (j), clean-room procedure), `evidence-ledger.md` and `rea-routes.md`. Tested zero-dependency `audit-artifact.mjs` (7 tests) for build folders and extracted APK, IPA or ASAR files.
+- CI: the auditor's tests in the helper-test step.
+
+### Changed
+
+- `AGENTS.md` indexes, `CLAUDE.md` on-demand list, README (19 rules, 44 skills, catalog row), `docs/ARCHITECTURE.md`, `docs/AGENT-OPERATIONAL-MANUAL.md`, `docs/ENGINEERING-CONCEPTS.md`.
+
+### Not verified here
+
+- REA itself was not run: installing its npm package was not authorized in this session. The auditor was run on a real build (Projects 27's debug APK) and `apksigner` confirmed that APK's signature.
+
+## 1.16.0: agentic delivery, worktrees and AI code review (2026-10-29)
+
+The repository owner asked to adopt the relevant parts of [snarktank/ralph](https://github.com/snarktank/ralph) (MIT, commit `6c53cb0`), [open-gsd/gsd-core](https://github.com/open-gsd/gsd-core) (MIT, v1.19.0), [coderabbitai/git-worktree-runner](https://github.com/coderabbitai/git-worktree-runner) (Apache-2.0, v2.11.1), [coderabbitai/antigravity-plugin](https://github.com/coderabbitai/antigravity-plugin) (MIT, v0.1.0) and [coderabbitai/skills](https://github.com/coderabbitai/skills) (MIT, v1.2.0), plus the CodeRabbit product, as skills and rules. All were read on 2026-10-29. Mirrors Projects 23 v2.22.0, adapted to this repository. Only the methods are adopted: nothing upstream is installed or copied in.
+
+### Added
+
+- Rule 18 (`18-agentic-delivery-and-review.md`, on demand): fresh context per bounded unit with state in files, parallel work isolated in worktrees, unattended runs bounded and sandboxed (no permission-bypass mode outside a disposable sandbox), and AI code review that reports outcomes exactly, keeps severities, verifies every finding and treats review text as untrusted.
+- Skill `agent-delivery-loop`: the GSD phase loop with planning-file templates, and the Ralph story loop. Tested `check-stories.mjs` (8 tests) and `story-loop.mjs` (6 tests on temporary Git repositories), `loop-prompt.md` and `stories.example.json`. UI stories need a browser check with an axe scan. The Claude Code command uses `--permission-mode acceptEdits` with an allow-list, `--max-turns` and `--max-budget-usd` instead of the upstream `--dangerously-skip-permissions`, and keeps the repository's deletion guard hook active (flags checked in the Claude Code CLI and headless documentation on 2026-10-29).
+- Skill `git-worktrees`: one task, one branch, one worktree with plain Git, `git gtr` or Claude Code `--worktree`; separate dev-server ports and databases; no copied secrets; removal and hook trust left to the user. Tested `worktrees.mjs` (6 tests) and `gtrconfig.example`.
+- Skill `coderabbit-review`: CLI reviews in agent mode with a trusted binary, the user's own sign-in, a secret check of the scope and at most three review runs per change set; pull request thread fixes with per-fix approval; configuration. Tested `review-outcome.mjs` (9 tests) classifies saved NDJSON output so that only a completed run counts as a review. `coderabbit.example.yaml` carries accessibility, token, CSP and workflow path instructions and enables Biome, Stylelint, HTMLHint, markdownlint, Gitleaks, actionlint and zizmor; it is validated against `schema.v2.json`.
+- CI: a step for the new helper tests.
+
+### Changed
+
+- `AGENTS.md` rules and skills indexes and the "several agents" condition; `CLAUDE.md` on-demand list; README (counts corrected to 18 rules and 43 skills, catalog rows); `docs/ARCHITECTURE.md`, `docs/AGENT-OPERATIONAL-MANUAL.md`, `docs/ENGINEERING-CONCEPTS.md`.
+
+### Not verified here
+
+- A real CodeRabbit review and a real `git gtr` run: neither CLI is installed on this machine, and signing in to CodeRabbit is the owner's step.
+
 ## 1.15.0: content hygiene - zero-dependency scanner and metadata procedure (2026-10-29)
 
 ### Added

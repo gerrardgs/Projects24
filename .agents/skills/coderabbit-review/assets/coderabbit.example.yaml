@@ -1,0 +1,99 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+# Starting point for a design and front-end project that follows this specification. Copy to the
+# repository root as ".coderabbit.yaml" only after the owner has decided to use the CodeRabbit GitHub App,
+# then adjust the paths. Validated against schema.v2.json on 2026-10-29. Unset keys keep CodeRabbit's defaults.
+language: en-US
+
+reviews:
+  profile: chill
+  high_level_summary: true
+  review_status: true
+  poem: false
+  in_progress_fortune: false
+  enable_prompt_for_ai_agents: true
+  auto_review:
+    enabled: true
+    drafts: false
+
+  # Generated, vendored or binary output: review the source instead.
+  path_filters:
+    - "!**/dist/**"
+    - "!**/build/**"
+    - "!**/coverage/**"
+    - "!**/playwright-report/**"
+    - "!**/test-results/**"
+    - "!.claude/skills/**"
+
+  path_instructions:
+    - path: "**/*.{ts,tsx,js,jsx,mjs,vue,svelte,astro}"
+      instructions: |
+        Apply AGENTS.md and the rules in .agents/rules. Accessibility first (WCAG 2.2 AA): semantic
+        elements before ARIA, every control reachable and operable by keyboard with a visible focus,
+        names for icon-only buttons, alt text that matches the image's purpose, form errors announced.
+        Flag hard-coded colours, spacing or type sizes where a design token exists, missing empty,
+        loading and error states, untrusted HTML rendered without sanitising, and invented APIs or props.
+    - path: "**/*.{css,scss}"
+      instructions: |
+        Use design tokens (custom properties) instead of raw values; respect prefers-reduced-motion and
+        prefers-color-scheme; text contrast at least 4.5:1 (3:1 for large text and UI parts); focus
+        indicators never removed without a replacement; no layout that breaks at 320 CSS pixels wide.
+    - path: "**/*.html"
+      instructions: |
+        A lang attribute, one main landmark, a logical heading order, a Content-Security-Policy that
+        does not allow unsafe-inline scripts, width and height on images, and no third-party script
+        without a reason in the pull request.
+    - path: "**/tokens/**"
+      instructions: |
+        Tokens follow the Design Tokens Community Group format; every semantic token has a value for each
+        theme; renamed tokens keep an alias or a documented migration.
+    - path: ".github/workflows/**"
+      instructions: |
+        Third-party actions pinned to a full commit SHA with the version in a comment, least-privilege
+        permissions per job, no secrets printed, no untrusted input interpolated into run scripts.
+    - path: "**/SKILL.md"
+      instructions: |
+        Keep the skill focused on routing and workflow; detail belongs in references. Every referenced
+        file, command and flag must exist and match its current official documentation.
+
+  pre_merge_checks:
+    title:
+      mode: warning
+      requirements: "Conventional Commits format: type(optional scope): summary in the imperative mood."
+    description:
+      mode: warning
+    custom_checks:
+      - name: Verification evidence
+        mode: warning
+        instructions: |
+          Pass when the pull request description lists the checks that were run (for example lint,
+          tests, end-to-end and accessibility scans, Lighthouse) and their results, or states which
+          checks were not run and why. For a visual change, it also includes screenshots or a link to
+          the preview. Fail otherwise.
+      - name: Only the human author is credited
+        mode: error
+        instructions: |
+          Fail when the pull request title or description contains a "Generated with" line naming an
+          AI tool, or a Co-Authored-By or Signed-off-by line naming an AI agent or bot. Pass otherwise.
+
+  tools:
+    biome:
+      enabled: true
+    stylelint:
+      enabled: true
+    htmlhint:
+      enabled: true
+    markdownlint:
+      enabled: true
+    gitleaks:
+      enabled: true
+    actionlint:
+      enabled: true
+    zizmor:
+      enabled: true
+
+knowledge_base:
+  code_guidelines:
+    enabled: true
+    filePatterns:
+      - "AGENTS.md"
+      - ".agents/rules/*.md"

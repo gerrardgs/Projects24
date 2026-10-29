@@ -153,6 +153,10 @@ The [2023 edition](https://www.iso.org/standard/78176.html) defines nine product
 | Concept | Where |
 | :--- | :--- |
 | Context engineering for agents (always-on core, on-demand rules and skills) | [ARCHITECTURE](ARCHITECTURE.md) |
+| Context engineering for delivery: fresh context per unit, planning files, phase loop, unattended story loop ([GSD Core](https://github.com/open-gsd/gsd-core), [Ralph](https://github.com/snarktank/ralph)) | [agent-delivery-loop](../.agents/skills/agent-delivery-loop/SKILL.md), rule [18](../.agents/rules/18-agentic-delivery-and-review.md) |
+| Parallel work isolation with Git worktrees ([git-worktree-runner](https://github.com/coderabbitai/git-worktree-runner)) | [git-worktrees](../.agents/skills/git-worktrees/SKILL.md) |
+| Reverse engineering within the law; release-artifact audits ([REA](https://github.com/morluto/rea), [Directive 2009/24/EC](https://www.legislation.gov.uk/eudr/2009/24/article/6/data.html)) | [reverse-engineering](../.agents/skills/reverse-engineering/SKILL.md), rule [19](../.agents/rules/19-reverse-engineering.md) |
+| AI-assisted code review with honest outcomes and verified findings ([CodeRabbit](https://docs.coderabbit.ai/cli)) | [coderabbit-review](../.agents/skills/coderabbit-review/SKILL.md), [rigorous-code-audit](../.agents/skills/rigorous-code-audit/SKILL.md) |
 | Verification against hallucination | R-03, [ANTI-HALLUCINATION-PLAYBOOK](ANTI-HALLUCINATION-PLAYBOOK.md) |
 | Prompt patterns per scenario | [PROMPT-LIBRARY](PROMPT-LIBRARY.md) |
 | Tool use through MCP, with least privilege | [mcp-servers-and-integrations](../.agents/skills/mcp-servers-and-integrations/SKILL.md), [figma-integration](../.agents/skills/figma-integration/SKILL.md), R-06 section 7 |

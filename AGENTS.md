@@ -73,6 +73,8 @@ If your tool does not load these folders automatically, **open the matching file
 | [14-ux-writing-and-ethics.md](.agents/rules/14-ux-writing-and-ethics.md) | on demand | Interface copy, forms, localisation, deceptive patterns, privacy, consent |
 | [16-project-documentation.md](.agents/rules/16-project-documentation.md) | on demand | The complete docs/ set (PRD to deployment, accessibility, performance, privacy, glossary), substantial and current, checked by check-docs |
 | [17-text-hygiene-and-provenance.md](.agents/rules/17-text-hygiene-and-provenance.md) | on demand | Text hygiene, AI provenance marks, invisible Unicode, statistical rewrite, C2PA/metadata |
+| [18-agentic-delivery-and-review.md](.agents/rules/18-agentic-delivery-and-review.md) | on demand | Multi-session, parallel or unattended agent work, worktrees, AI code review |
+| [19-reverse-engineering.md](.agents/rules/19-reverse-engineering.md) | on demand | Authorized analysis of shipped bundles, apps and binaries; release-build audits; never copying others' design |
 
 ## 5. Skills index: pick the procedure for the task
 
@@ -106,13 +108,17 @@ If your tool does not load these folders automatically, **open the matching file
 | Tune | [web-performance-optimization](.agents/skills/web-performance-optimization/SKILL.md) | Core Web Vitals, Lighthouse, images, fonts, bundles |
 | Tune | [resilience-and-chaos-engineering](.agents/skills/resilience-and-chaos-engineering/SKILL.md) | Failure modes, resilience patterns, SLOs and error budgets, chaos experiments |
 | Debug | [systematic-debugging](.agents/skills/systematic-debugging/SKILL.md) | Errors, crashes, wrong output, slowness, incidents |
+| Deliver | [agent-delivery-loop](.agents/skills/agent-delivery-loop/SKILL.md) | Work beyond one session: phase loop with planning files (GSD), unattended story loop (Ralph) |
+| Deliver | [git-worktrees](.agents/skills/git-worktrees/SKILL.md) | One worktree per parallel or unattended task: create, inspect, set up, merge back |
 | Review | [anti-slop-filter](.agents/skills/anti-slop-filter/SKILL.md) | Output that looks AI-generated or generic (UI, copy, code comments); purpose test and delivery report |
 | Clean text | [clean-user-facing-text](.agents/skills/clean-user-facing-text/SKILL.md) | Local zero-dependency Unicode hygiene and stylometric rewrite pass for reader-facing prose while preserving voice and facts |
 | Provenance | [remove-ai-marks](.agents/skills/remove-ai-marks/SKILL.md) | Multi-vendor AI mark removal: invisible Unicode (Layer A), rewrite (Layer B), and C2PA/EXIF/container metadata across files |
 | Review | [design-critique-and-review](.agents/skills/design-critique-and-review/SKILL.md) | Feedback on designs, prototypes, pages, brand pieces |
 | Review | [rigorous-code-audit](.agents/skills/rigorous-code-audit/SKILL.md) | Reviewing a diff, pull request or codebase |
+| Review | [coderabbit-review](.agents/skills/coderabbit-review/SKILL.md) | CodeRabbit reviews in the CLI or on pull requests, fixing its comments, `.coderabbit.yaml` |
 | Secure | [security-hardening](.agents/skills/security-hardening/SKILL.md) | Threat modelling, hardening, security scanning, secrets |
 | Secure | [content-hygiene](.agents/skills/content-hygiene/SKILL.md) | Hidden Unicode (zero-width, tag characters, Trojan Source bidi controls) and private file metadata; keeps AI disclosures and Content Credentials |
+| Secure | [reverse-engineering](.agents/skills/reverse-engineering/SKILL.md) | Release-build audits of your own bundles and apps; authorized artifact analysis; REA |
 | Secure | [security-vulnerability-audit](.agents/skills/security-vulnerability-audit/SKILL.md) | Security review or audit: safe local evidence, verified findings, impact-based severity |
 | Document | [project-documentation](.agents/skills/project-documentation/SKILL.md) | Creating or updating docs/: PRD, glossary, architecture, tech stack, design, accessibility, performance, API, database, schema, security, privacy, testing, deployment and more |
 | Automate | [ci-cd-pipeline](.agents/skills/ci-cd-pipeline/SKILL.md) | CI workflows, release automation, Dependabot |
@@ -133,7 +139,7 @@ A task often spans several skills. Building a designed page, for example, uses d
 - **No network**: rely on the installed code, lockfiles and local documentation; do not guess versions, APIs or browser support you cannot check.
 - **Non-interactive** (CI, scheduled or background agents): never wait for input. Make only safe, reversible changes, and report blockers instead of guessing past them.
 - **Monorepo or nested instructions**: the `AGENTS.md` nearest to the file being edited takes precedence for that directory. Explicit user instructions override this file, except where they would break section 2, the security rules or the accessibility baseline; then explain the conflict.
-- **Several agents or sub-agents**: give each one a self-contained task with the relevant rule and skill links. Review and verify their results before reporting them as done.
+- **Several agents or sub-agents**: give each one a self-contained task with the relevant rule and skill links, and parallel tasks their own worktree ([agent-delivery-loop](.agents/skills/agent-delivery-loop/SKILL.md), [git-worktrees](.agents/skills/git-worktrees/SKILL.md)). Review and verify their results before reporting them as done.
 - **Unfamiliar language, framework or design tool**: read the official documentation and the existing work first, and follow the platform's idioms, not habits from another one.
 - **Tool, framework or service not covered here**: the spec still applies. Evaluate and adopt it with [04-dependencies](.agents/rules/04-dependencies.md) section 9; [docs/TOOLKIT.md](docs/TOOLKIT.md) lists commonly used tools with official links.
 - **Production or shared environments, shared design files**: read-only by default. Never change live data, published sites, shared libraries or deployments without explicit approval.

@@ -75,6 +75,8 @@ jobs:
         run: node --test ".agents/skills/project-documentation/assets/docs-kit/*.test.mjs"
       - name: Content hygiene scanner tests
         run: node --test ".agents/skills/content-hygiene/assets/*.test.mjs"
+      - name: Agent delivery, worktree, review and artifact audit helper tests
+        run: node --test ".agents/skills/agent-delivery-loop/assets/*.test.mjs" ".agents/skills/git-worktrees/assets/*.test.mjs" ".agents/skills/coderabbit-review/assets/*.test.mjs" ".agents/skills/reverse-engineering/assets/*.test.mjs"
       - name: No hidden or bidirectional Unicode in the spec, scripts and docs
         run: node .agents/skills/content-hygiene/assets/unicode-hygiene.mjs AGENTS.md CLAUDE.md README.md .agents docs scripts
       - name: Validate rules, skills, mirror and links
