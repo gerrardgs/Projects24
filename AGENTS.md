@@ -112,6 +112,7 @@ If your tool does not load these folders automatically, **open the matching file
 | Review | [design-critique-and-review](.agents/skills/design-critique-and-review/SKILL.md) | Feedback on designs, prototypes, pages, brand pieces |
 | Review | [rigorous-code-audit](.agents/skills/rigorous-code-audit/SKILL.md) | Reviewing a diff, pull request or codebase |
 | Secure | [security-hardening](.agents/skills/security-hardening/SKILL.md) | Threat modelling, hardening, security scanning, secrets |
+| Secure | [content-hygiene](.agents/skills/content-hygiene/SKILL.md) | Hidden Unicode (zero-width, tag characters, Trojan Source bidi controls) and private file metadata; keeps AI disclosures and Content Credentials |
 | Secure | [security-vulnerability-audit](.agents/skills/security-vulnerability-audit/SKILL.md) | Security review or audit: safe local evidence, verified findings, impact-based severity |
 | Document | [project-documentation](.agents/skills/project-documentation/SKILL.md) | Creating or updating docs/: PRD, glossary, architecture, tech stack, design, accessibility, performance, API, database, schema, security, privacy, testing, deployment and more |
 | Automate | [ci-cd-pipeline](.agents/skills/ci-cd-pipeline/SKILL.md) | CI workflows, release automation, Dependabot |

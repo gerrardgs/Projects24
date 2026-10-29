@@ -98,7 +98,7 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 
 ## Skills Catalog
 
-### 1. Digital Design, UI/UX, & Graphics Skills (10 Skills)
+### 1. Digital Design, UI/UX, & Graphics Skills (13 Skills)
 
 Step-by-step procedures covering visual research, prototyping, design systems, vector art, and Figma integration:
 
@@ -112,6 +112,7 @@ Step-by-step procedures covering visual research, prototyping, design systems, v
 | **System** | [design-system-and-tokens](.agents/skills/design-system-and-tokens/SKILL.md) | DTCG 2025.10 tokens, light/dark themes, **tested token pipeline with automated WCAG contrast checks**, headless components, Storybook, token governance |
 | **Handoff** | [design-to-code-handoff](.agents/skills/design-to-code-handoff/SKILL.md) | Mapping design files or screenshots to tokens and components, bridging the gap between design mockups and real-world interactive code |
 | **Anti-Slop** | [anti-slop-filter](.agents/skills/anti-slop-filter/SKILL.md) | Filter for generic AI output adapted from antislop (MIT): direction from the brand or `DESIGN.md` as data, Design Read with energy, rhythm and motion dials, hard gates (honest content, working controls, states, contrast, mobile, themes, click-through evidence), a one-line reason for every technique, UI, writing and code-comment slop catalogues, PASS/FAIL delivery report |
+| **Content Hygiene** | [content-hygiene](.agents/skills/content-hygiene/SKILL.md) | Zero-dependency scanner (6 tests) for invisible and bidirectional Unicode: removes zero-width and tag characters (hidden text, prompt smuggling), flags Trojan Source controls in code, keeps what scripts and emoji need; strips GPS, serial and owner metadata from files while keeping AI disclosures, Content Credentials and copyright notices |
 | **Clean Text** | [clean-user-facing-text](.agents/skills/clean-user-facing-text/SKILL.md) | Local zero-dependency Unicode hygiene and stylometric rewrite pass for reader-facing prose while preserving author voice and factual integrity |
 | **Provenance** | [remove-ai-marks](.agents/skills/remove-ai-marks/SKILL.md) | Multi-vendor AI provenance mark removal: invisible Unicode (Layer A), statistical rewrite (Layer B), and C2PA/EXIF/container metadata stripping across files |
 | **AI Design** | [ai-design-and-artifacts](.agents/skills/ai-design-and-artifacts/SKILL.md) | Claude Design and artifacts: design system first (`/design-sync`), briefs and iteration, review of AI-generated designs (tokens, measured contrast, licences), handoff with the bundle or `/design` **without overwriting existing code**, safe sharing |

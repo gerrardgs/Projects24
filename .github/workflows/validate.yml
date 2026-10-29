@@ -73,6 +73,10 @@ jobs:
         run: node --test "scripts/*.test.mjs"
       - name: Documentation kit tests (templates match the checker; a filled set passes)
         run: node --test ".agents/skills/project-documentation/assets/docs-kit/*.test.mjs"
+      - name: Content hygiene scanner tests
+        run: node --test ".agents/skills/content-hygiene/assets/*.test.mjs"
+      - name: No hidden or bidirectional Unicode in the spec, scripts and docs
+        run: node .agents/skills/content-hygiene/assets/unicode-hygiene.mjs AGENTS.md CLAUDE.md README.md .agents docs scripts
       - name: Validate rules, skills, mirror and links
         run: node scripts/agents-sync.mjs --check --all-markdown
       - name: Install lint tools

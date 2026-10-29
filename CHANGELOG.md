@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.15.0: content hygiene - zero-dependency scanner and metadata procedure (2026-10-29)
+
+### Added
+
+- Skill `content-hygiene` (ported from Projects 27): a zero-dependency Node.js scanner, `assets/unicode-hygiene.mjs`, with 6 tests. It removes invisible characters with no legitimate use: zero-width spaces, word joiners, invisible operators, stray byte-order marks, and Unicode tag characters, which can hide text from readers and smuggle instructions to AI models. It reports bidirectional controls, as errors in code (Trojan Source, CVE-2021-42574). It keeps the joiners that emoji, Persian and Indic scripts need. The skill also gives an ExifTool procedure that strips GPS position, serial numbers and owner names from files before publishing, while keeping AI disclosures, C2PA Content Credentials and copyright notices. Indexed in `AGENTS.md` and the README.
+- CI: the scanner's tests, and a scan of `AGENTS.md`, `CLAUDE.md`, `README.md`, `.agents/`, `docs/` and `scripts/` for hidden or bidirectional characters.
+
 ## 1.14.0: text hygiene, Unicode cleaning, and multi-vendor watermark removal (2026-10-29)
 
 ### Added
