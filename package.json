@@ -14,7 +14,7 @@
     "verify": "node scripts/run-quiet.mjs --steps check,lint,test"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.15",
+    "@biomejs/biome": "^2.6.2",
     "@types/node": "^22.18.0",
     "typescript": "^7.0.2"
   }
