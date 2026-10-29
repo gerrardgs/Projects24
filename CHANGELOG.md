@@ -2,6 +2,35 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.18.0: secret scanning in layers, and leaked-secret response (2026-10-29)
+
+The repository owner asked to adopt [gitleaks](https://github.com/gitleaks/gitleaks) (MIT, v8.30.1), [TruffleHog](https://github.com/trufflesecurity/trufflehog) (AGPL-3.0, v3.99.7, used as a tool), [GitHub push protection](https://docs.github.com/en/code-security/concepts/secret-security/push-protection) and [GitHub Secret Protection](https://github.com/security/advanced-security/secret-protection) as skills and rules, checked on 2026-10-29. Mirrors Projects 23 v2.24.0. This repository's CI already scans with gitleaks; the new skill adds the other layers and the response.
+
+### Added
+
+- Rule 20 (`20-secret-scanning.md`, on demand):
+  - layered detection with pinned, checksum-verified scanners and redacted reports;
+  - live verification only where the owner allows it;
+  - narrow, reviewed suppressions;
+  - push protection is never bypassed by an agent;
+  - revoke-first leak response, with history rewrites only on approval;
+  - assembled test fixtures.
+- Skill `secret-scanning`:
+  - references `tools.md`, `github-secret-protection.md` and `leaked-secret-runbook.md`;
+  - assets `gitleaks.example.toml` (TOML parsed, regex tested), `pre-commit-secrets.example.yaml` and `secret-scan.example.yml` (actionlint 1.7.12 with ShellCheck: clean);
+  - tested `secret-report.mjs` (5 tests), which merges gitleaks and TruffleHog reports without ever printing a secret;
+  - public browser keys (maps, analytics, publishable payment keys) are confirmed as restricted and suppressed by fingerprint with that reason.
+- CI: the report merger's tests in the helper-test step.
+
+### Changed
+
+- `AGENTS.md` indexes, `CLAUDE.md` on-demand list, `security-hardening` and `project-bootstrap` link to the new skill.
+- README (20 rules, 45 skills, catalog row), `docs/ARCHITECTURE.md`, `docs/AGENT-OPERATIONAL-MANUAL.md`, `docs/ENGINEERING-CONCEPTS.md`.
+
+### Not verified here
+
+- gitleaks and TruffleHog were not run locally, because neither is installed on this machine. The repository's push protection setting could not be read without signing in.
+
 ## 1.17.0: reverse engineering within the law, and release-artifact audits (2026-10-29)
 
 The repository owner asked to adopt the relevant parts of [morluto/rea](https://github.com/morluto/rea) ("Reverse Engineer Anything", MIT, v6.8.0, commit `d39b300`, read on 2026-10-29) as skills and rules. Mirrors Projects 23 v2.23.0, adapted to this repository. REA's "see a feature you like, build your own" use case is left out, because it conflicts with non-negotiable 8 (never copy another organisation's proprietary design).

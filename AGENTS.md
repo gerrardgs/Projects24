@@ -75,6 +75,7 @@ If your tool does not load these folders automatically, **open the matching file
 | [17-text-hygiene-and-provenance.md](.agents/rules/17-text-hygiene-and-provenance.md) | on demand | Text hygiene, AI provenance marks, invisible Unicode, statistical rewrite, C2PA/metadata |
 | [18-agentic-delivery-and-review.md](.agents/rules/18-agentic-delivery-and-review.md) | on demand | Multi-session, parallel or unattended agent work, worktrees, AI code review |
 | [19-reverse-engineering.md](.agents/rules/19-reverse-engineering.md) | on demand | Authorized analysis of shipped bundles, apps and binaries; release-build audits; never copying others' design |
+| [20-secret-scanning.md](.agents/rules/20-secret-scanning.md) | on demand | Secret scanning layers, push protection, findings, leaked-secret response |
 
 ## 5. Skills index: pick the procedure for the task
 
@@ -118,6 +119,7 @@ If your tool does not load these folders automatically, **open the matching file
 | Review | [coderabbit-review](.agents/skills/coderabbit-review/SKILL.md) | CodeRabbit reviews in the CLI or on pull requests, fixing its comments, `.coderabbit.yaml` |
 | Secure | [security-hardening](.agents/skills/security-hardening/SKILL.md) | Threat modelling, hardening, security scanning, secrets |
 | Secure | [content-hygiene](.agents/skills/content-hygiene/SKILL.md) | Hidden Unicode (zero-width, tag characters, Trojan Source bidi controls) and private file metadata; keeps AI disclosures and Content Credentials |
+| Secure | [secret-scanning](.agents/skills/secret-scanning/SKILL.md) | gitleaks, TruffleHog, push protection; triaging findings; a leaked secret |
 | Secure | [reverse-engineering](.agents/skills/reverse-engineering/SKILL.md) | Release-build audits of your own bundles and apps; authorized artifact analysis; REA |
 | Secure | [security-vulnerability-audit](.agents/skills/security-vulnerability-audit/SKILL.md) | Security review or audit: safe local evidence, verified findings, impact-based severity |
 | Document | [project-documentation](.agents/skills/project-documentation/SKILL.md) | Creating or updating docs/: PRD, glossary, architecture, tech stack, design, accessibility, performance, API, database, schema, security, privacy, testing, deployment and more |
