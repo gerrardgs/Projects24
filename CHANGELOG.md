@@ -2,6 +2,22 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.19.0: skills index out of the always-on context, and the missing release notes (2026-10-29)
+
+### Changed
+
+- **Always-on context made structural, not squeezed**: the per-skill table moved from `AGENTS.md` to `.agents/SKILLS.md`, which is read on demand. Tools that support Agent Skills (Claude Code, Codex, Gemini CLI, Antigravity, Cursor) already load every skill's name and description, so the table in `AGENTS.md` was paid for on every turn twice. `AGENTS.md` keeps the categories and a pointer, and any other tool is told to read the index. Antigravity's documented budget for global and always-on rules is 20,000 tokens, and files beyond it are demoted to pointers ([Antigravity rules](https://antigravity.google/docs/rules), checked 2026-10-29).
+- **Validator** (`scripts/agents-sync.mjs`):
+  - the new pure function `indexProblems` checks that every skill is linked from `AGENTS.md` or listed in `.agents/SKILLS.md` (which `AGENTS.md` must then link), and that the index lists nothing that does not exist;
+  - the always-on check now prints the remaining headroom and warns within 5% of the budget, so the next addition is planned instead of discovered;
+  - one new test.
+- **Docs**: architecture (size, validation), contributing (where to add a skill), debugging (the new messages) and README updated.
+- **Result**: always-on context about 18,670 → 17,050 tokens (headroom about 2,950).
+
+### Fixed
+
+- **CI on `main` was red since 1.14.0**: the step "Release notes exist for the current version" failed because `.github/releases/v1.14.0.md` to `v1.18.0.md` were never written, and the Release workflow failed for the same reason. All five are added, from the changelog. Releases for the existing tags can be published again from the Release workflow (Run workflow, with the tag).
+
 ## 1.18.0: secret scanning in layers, and leaked-secret response (2026-10-29)
 
 The repository owner asked to adopt [gitleaks](https://github.com/gitleaks/gitleaks) (MIT, v8.30.1), [TruffleHog](https://github.com/trufflesecurity/trufflehog) (AGPL-3.0, v3.99.7, used as a tool), [GitHub push protection](https://docs.github.com/en/code-security/concepts/secret-security/push-protection) and [GitHub Secret Protection](https://github.com/security/advanced-security/secret-protection) as skills and rules, checked on 2026-10-29. Mirrors Projects 23 v2.24.0. This repository's CI already scans with gitleaks; the new skill adds the other layers and the response.

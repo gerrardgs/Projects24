@@ -12,7 +12,7 @@ This file is the **always-on core**. Deeper guidance loads on demand:
 - **Reference library** (curated, link-checked sources): [`docs/DESIGN-REFERENCES.md`](docs/DESIGN-REFERENCES.md)
 - **Tools catalog** (official links, from sketch to production): [`docs/TOOLKIT.md`](docs/TOOLKIT.md); **prompt library** for every scenario: [`docs/PROMPT-LIBRARY.md`](docs/PROMPT-LIBRARY.md); **engineering concepts map** (SWEBOK V4.0, ISO/IEC 25010, SRE, DORA, chaos engineering and more, mapped to rules and skills): [`docs/ENGINEERING-CONCEPTS.md`](docs/ENGINEERING-CONCEPTS.md)
 
-If your tool does not load these folders automatically, **open the matching file from the tables in sections 4 and 5 before starting that kind of work.**
+If your tool does not load these folders automatically, **open the matching rule from the table in section 4, or the matching skill from the [skills index](.agents/SKILLS.md), before starting that kind of work.**
 
 ---
 
@@ -77,55 +77,11 @@ If your tool does not load these folders automatically, **open the matching file
 | [19-reverse-engineering.md](.agents/rules/19-reverse-engineering.md) | on demand | Authorized analysis of shipped bundles, apps and binaries; release-build audits; never copying others' design |
 | [20-secret-scanning.md](.agents/rules/20-secret-scanning.md) | on demand | Secret scanning layers, push protection, findings, leaked-secret response |
 
-## 5. Skills index: pick the procedure for the task
+## 5. Skills: pick the procedure for the task
 
-| Phase | Skill | Use it when |
-| :--- | :--- | :--- |
-| Discover | [ux-research-and-strategy](.agents/skills/ux-research-and-strategy/SKILL.md) | Briefs, research, personas, journeys, information architecture |
-| Design | [ui-design-and-prototyping](.agents/skills/ui-design-and-prototyping/SKILL.md) | Wireframes, mockups, prototypes, layout, type, colour, components |
-| Design | [graphic-design-production](.agents/skills/graphic-design-production/SKILL.md) | Logos, brand, social and ad artwork, print files, export specs |
-| Design | [motion-and-interaction](.agents/skills/motion-and-interaction/SKILL.md) | Animation, transitions, micro-interactions, reduced motion |
-| Design | [data-visualization-design](.agents/skills/data-visualization-design/SKILL.md) | Charts, dashboards, infographics |
-| Media | [motion-graphics-and-animation](.agents/skills/motion-graphics-and-animation/SKILL.md) | Animated titles, explainers, logo stings, Lottie and Rive files, flash safety |
-| Media | [video-editing-and-post-production](.agents/skills/video-editing-and-post-production/SKILL.md) | Editing, sound and loudness, captions, codecs, exports, video on the web |
-| Media | [color-grading-and-color-management](.agents/skills/color-grading-and-color-management/SKILL.md) | Grading, ACES and OCIO, LUTs, scopes, SDR and HDR deliverables, calibration |
-| Media | [photo-editing-and-retouching](.agents/skills/photo-editing-and-retouching/SKILL.md) | RAW, retouching, compositing, metadata, Content Credentials, disclosure laws |
-| System | [design-system-and-tokens](.agents/skills/design-system-and-tokens/SKILL.md) | Design tokens, themes, component libraries, Storybook, governance |
-| Handoff | [design-to-code-handoff](.agents/skills/design-to-code-handoff/SKILL.md) | Figma/Penpot or screenshot to code; developer handoff specs |
-| Handoff | [ai-design-and-artifacts](.agents/skills/ai-design-and-artifacts/SKILL.md) | Claude Design, `/design`, `/design-sync`, AI-generated designs and decks to production |
-| Handoff | [figma-integration](.agents/skills/figma-integration/SKILL.md) | Figma MCP server, Code Connect, variables-to-tokens sync, Figma plugins, Penpot MCP |
-| Start | [project-bootstrap](.agents/skills/project-bootstrap/SKILL.md) | Creating a repository: runtime, toolchain, editor extensions, CI, docs |
-| Build | [frontend-from-scratch](.agents/skills/frontend-from-scratch/SKILL.md) | New site or page, platform first; choosing the front-end stack |
-| Build | [framework-frontend-engineering](.agents/skills/framework-frontend-engineering/SKILL.md) | React, Next.js, Vue, Nuxt, Svelte, Angular, Astro apps and components |
-| Build | [css-architecture-and-responsive](.agents/skills/css-architecture-and-responsive/SKILL.md) | Styling, layout, responsive design, themes, dark mode |
-| Build | [mobile-engineering](.agents/skills/mobile-engineering/SKILL.md) | iOS, Android, Flutter, React Native apps: platform design, accessibility, security, store release |
-| Build | [web-integrations-and-platforms](.agents/skills/web-integrations-and-platforms/SKILL.md) | CMS, WordPress, Shopify, payments, auth UI, email, PWA, SEO, analytics and third-party scripts |
-| Integrate | [mcp-servers-and-integrations](.agents/skills/mcp-servers-and-integrations/SKILL.md) | Choosing, vetting, configuring and securing MCP servers; databases via MCP Toolbox |
-| Build | [native-from-scratch](.agents/skills/native-from-scratch/SKILL.md) | Writing a new back-end service, CLI or module, standard library first |
-| Change | [change-existing-code](.agents/skills/change-existing-code/SKILL.md) | Modifying, refactoring, upgrading or migrating existing code |
-| Test | [test-engineering](.agents/skills/test-engineering/SKILL.md) | Adding tests, regression tests, test setup, flaky tests |
-| Test | [frontend-testing-and-visual-qa](.agents/skills/frontend-testing-and-visual-qa/SKILL.md) | Component, end-to-end and visual regression tests; design QA |
-| Test | [accessibility-audit](.agents/skills/accessibility-audit/SKILL.md) | WCAG audits, screen reader testing, accessibility fixes and statements |
-| Tune | [web-performance-optimization](.agents/skills/web-performance-optimization/SKILL.md) | Core Web Vitals, Lighthouse, images, fonts, bundles |
-| Tune | [resilience-and-chaos-engineering](.agents/skills/resilience-and-chaos-engineering/SKILL.md) | Failure modes, resilience patterns, SLOs and error budgets, chaos experiments |
-| Debug | [systematic-debugging](.agents/skills/systematic-debugging/SKILL.md) | Errors, crashes, wrong output, slowness, incidents |
-| Deliver | [agent-delivery-loop](.agents/skills/agent-delivery-loop/SKILL.md) | Work beyond one session: phase loop with planning files (GSD), unattended story loop (Ralph) |
-| Deliver | [git-worktrees](.agents/skills/git-worktrees/SKILL.md) | One worktree per parallel or unattended task: create, inspect, set up, merge back |
-| Review | [anti-slop-filter](.agents/skills/anti-slop-filter/SKILL.md) | Output that looks AI-generated or generic (UI, copy, code comments); purpose test and delivery report |
-| Clean text | [clean-user-facing-text](.agents/skills/clean-user-facing-text/SKILL.md) | Local zero-dependency Unicode hygiene and stylometric rewrite pass for reader-facing prose while preserving voice and facts |
-| Provenance | [remove-ai-marks](.agents/skills/remove-ai-marks/SKILL.md) | Multi-vendor AI mark removal: invisible Unicode (Layer A), rewrite (Layer B), and C2PA/EXIF/container metadata across files |
-| Review | [design-critique-and-review](.agents/skills/design-critique-and-review/SKILL.md) | Feedback on designs, prototypes, pages, brand pieces |
-| Review | [rigorous-code-audit](.agents/skills/rigorous-code-audit/SKILL.md) | Reviewing a diff, pull request or codebase |
-| Review | [coderabbit-review](.agents/skills/coderabbit-review/SKILL.md) | CodeRabbit reviews in the CLI or on pull requests, fixing its comments, `.coderabbit.yaml` |
-| Secure | [security-hardening](.agents/skills/security-hardening/SKILL.md) | Threat modelling, hardening, security scanning, secrets |
-| Secure | [content-hygiene](.agents/skills/content-hygiene/SKILL.md) | Hidden Unicode (zero-width, tag characters, Trojan Source bidi controls) and private file metadata; keeps AI disclosures and Content Credentials |
-| Secure | [secret-scanning](.agents/skills/secret-scanning/SKILL.md) | gitleaks, TruffleHog, push protection; triaging findings; a leaked secret |
-| Secure | [reverse-engineering](.agents/skills/reverse-engineering/SKILL.md) | Release-build audits of your own bundles and apps; authorized artifact analysis; REA |
-| Secure | [security-vulnerability-audit](.agents/skills/security-vulnerability-audit/SKILL.md) | Security review or audit: safe local evidence, verified findings, impact-based severity |
-| Document | [project-documentation](.agents/skills/project-documentation/SKILL.md) | Creating or updating docs/: PRD, glossary, architecture, tech stack, design, accessibility, performance, API, database, schema, security, privacy, testing, deployment and more |
-| Automate | [ci-cd-pipeline](.agents/skills/ci-cd-pipeline/SKILL.md) | CI workflows, release automation, Dependabot |
-| Ship | [frontend-deployment](.agents/skills/frontend-deployment/SKILL.md) | Static and server hosting, environment variables, security headers, caching, domains, previews, monitoring |
-| Ship | [deploy-and-release](.agents/skills/deploy-and-release/SKILL.md) | Containers, configuration, migrations, rollout, monitoring, rollback |
+Skills are step-by-step procedures in [`.agents/skills/`](.agents/skills/). Tools that support Agent Skills (Claude Code, Codex, Gemini CLI, Antigravity, Cursor and others) load each skill's name and description and open the body when a task matches. **Any other tool: read the [skills index](.agents/SKILLS.md) and open the matching skill before starting that kind of work.**
+
+- **Phases**: discover, design (UI, graphic, motion, data visualisation), media (motion graphics, video, colour, photo), design system and handoff (tokens, Figma, AI design), start, build (front-end from scratch, frameworks, CSS, mobile, web integrations, native back end), integrate (MCP), change, test (front-end, visual QA, accessibility), tune (performance, resilience), debug, deliver (agent loops, worktrees), review (anti-slop, design critique, code audit, CodeRabbit), clean text and provenance, secure (hardening, secrets, artifacts, content hygiene, vulnerability audit), document, automate, ship.
 
 A task often spans several skills. Building a designed page, for example, uses design-to-code handoff, CSS, accessibility audit, testing, then review.
 
