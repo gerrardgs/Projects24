@@ -14,6 +14,8 @@ Motion should explain (where something came from, what changed, what is happenin
 
 Animate to: show cause and effect (a button press, an item added to a cart), preserve context across a change (expanding a card into a page), indicate progress or system status, or draw attention to something important once. Do not animate to fill time, delay users, or loop decorations next to reading content.
 
+For the full decision order, review standards, frame-drop diagnosis and how to remove motion that has not earned its place, see [references/motion-craft.md](references/motion-craft.md).
+
 ## 2. Timing and easing tokens
 
 | Token | Typical value | Use |
@@ -26,6 +28,8 @@ Animate to: show cause and effect (a button press, an item added to a cart), pre
 | `motion.easing.exit` (accelerate) | Ease-in curve | Elements leaving (often shorter than entering) |
 
 Keep motion values in tokens ([design-system-and-tokens](../design-system-and-tokens/SKILL.md); the template includes `duration` and `cubicBezier` tokens). Platform guidance: [Material Design 3 motion](https://m3.material.io/styles/motion/overview), [Apple HIG motion](https://developer.apple.com/design/human-interface-guidelines/motion), [Fluent 2 motion](https://fluent2.microsoft.design/motion).
+
+[ui-ux-pro-max](../ui-ux-pro-max/SKILL.md) offers GSAP presets (`--domain gsap`, the `--motion` dial) as starting points. Convert their durations and easings to tokens, keep motion purposeful, and ship the reduced-motion alternative in the same change (section 4).
 
 ## 3. Implement, simplest tool first
 

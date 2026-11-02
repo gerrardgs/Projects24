@@ -43,7 +43,11 @@ This extends [test-engineering](../test-engineering/SKILL.md) and [07-testing](.
 - Review every diff; update baselines only for intended changes, in the same pull request as the change.
 - Capture light and dark themes and the key breakpoints; for components, capture every story.
 
+Before a component ships, try it against the worst realistic data (long and one-letter names, unbreakable emails, missing fields, counts of 0, 1 and 1,000, other languages and widths): [references/break-ui.md](references/break-ui.md).
+
 ## 5. Manual visual QA against the design
+
+For a designed page, loop "look and fix": screenshot at three widths (phone, tablet, desktop), judge each against a written rubric (idea, hierarchy, type, colour, content, craft), fix, and look again; do not stop after one pass ([design-study](../design-study/SKILL.md) section 5).
 
 - [ ] Compare against the design at each designed breakpoint; then resize continuously from 320 px upward
 - [ ] Typography, spacing, colours and radii match tokens; differences explained

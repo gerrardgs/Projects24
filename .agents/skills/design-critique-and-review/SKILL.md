@@ -24,6 +24,8 @@ Do the passes in order; each has its own reference.
 | :--- | :--- | :--- |
 | Goal fit | Does it solve the stated problem for the stated users? Is the primary action obvious? | Brief, [09-design-principles](../../rules/09-design-principles.md) |
 | Usability heuristics | Visibility of status, match with the real world, user control, consistency, error prevention, recognition over recall, flexibility, minimalist design, error recovery, help | [Nielsen's 10 heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) |
+| Identity | Is the design distinct from the other projects in the portfolio, true to the project's brief, and current? Does each audience-based choice cite evidence rather than "users like"? | [project-design-identity](../project-design-identity/SKILL.md), [human-design-nature](../human-design-nature/SKILL.md) |
+| Humane quality | Plain language, forgiving flows, helpful errors, calm tone where stakes are high, respect for attention and time, no manufactured urgency | [09-design-principles](../../rules/09-design-principles.md) section 9, [14-ux-writing-and-ethics](../../rules/14-ux-writing-and-ethics.md) |
 | Visual hierarchy and craft | Focal point, grouping, alignment, spacing rhythm, type scale, colour use, imagery quality | [ui-foundations](../ui-design-and-prototyping/references/ui-foundations.md) |
 | System consistency | Tokens and components used; no detached styles; platform conventions | [design-system-and-tokens](../design-system-and-tokens/SKILL.md) |
 | States and edge cases | All states, long and translated content, empty and error cases | Rule 09 section 4 |
@@ -39,6 +41,7 @@ Do the passes in order; each has its own reference.
 - Point to the exact place (frame name, URL and selector, screenshot region).
 - Back it with evidence: a measured contrast ratio, a heuristic or guideline, a research finding, a platform rule, or a reproducible behaviour. Mark opinions as opinions.
 - Remove findings you cannot support. Do not invent user reactions or data.
+- **Evidence ladder for "this breaks the design system"** (one idea from [KodekaTeam/superior-skills](https://github.com/KodekaTeam/superior-skills) `superior-ui-audit`, MIT, commit `9dbd37b`, read 2026-11-02). Rank what may count as the governing contract, strongest first: accepted brand or design documentation; shipped tokens and component contracts; representative surfaces proven to share the same owner; a direct contradiction inside one user journey; rendered evidence from this review. Drafts and proposals describe intent, not the contract, and a missing document is not itself a defect. A finding stands only with four parts: the **observation** (an exact consequence on this surface), the **contract** that should govern it, the **connection** (proof that the cited owner reaches this surface; similar names and nearby files are candidates, not proof) and one determined **correction** that does not invent product intent. Drop the candidate when the evidence supports incompatible fixes or the difference is a deliberate exception, and look for counter-evidence before you report. A short list of proven findings beats a long list of opinions.
 
 ## 4. Rank and recommend
 

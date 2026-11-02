@@ -60,7 +60,7 @@ If your tool does not load these folders automatically, **open the matching rule
 | [02-clean-code.md](.agents/rules/02-clean-code.md) | always | Naming, functions, types, state, comments, formatting; clean HTML, CSS, components and design files |
 | [03-verification.md](.agents/rules/03-verification.md) | always | Anti-hallucination protocol: APIs, packages, versions, flags, browser support, design facts |
 | [06-security.md](.agents/rules/06-security.md) | always | Secrets, untrusted input and content, injection, access control, crypto |
-| [09-design-principles.md](.agents/rules/09-design-principles.md) | always | User goals, hierarchy, tokens and consistency, every state, responsive, no invented design facts |
+| [09-design-principles.md](.agents/rules/09-design-principles.md) | always | User goals, hierarchy, tokens and consistency, every state, responsive, no invented design facts, humane UX |
 | [10-accessibility.md](.agents/rules/10-accessibility.md) | always | WCAG 2.2 AA: semantics, keyboard, focus, contrast, forms, motion, testing |
 | [15-clean-execution.md](.agents/rules/15-clean-execution.md) | always | How to work: plan, preview, one verified step at a time, stop on failure, leave no mess |
 | [04-dependencies.md](.agents/rules/04-dependencies.md) | on demand | Adding, replacing or upgrading dependencies; platform first; adopting any tool or service |
@@ -76,12 +76,13 @@ If your tool does not load these folders automatically, **open the matching rule
 | [18-agentic-delivery-and-review.md](.agents/rules/18-agentic-delivery-and-review.md) | on demand | Multi-session, parallel or unattended agent work, worktrees, AI code review |
 | [19-reverse-engineering.md](.agents/rules/19-reverse-engineering.md) | on demand | Authorized analysis of shipped bundles, apps and binaries; release-build audits; never copying others' design |
 | [20-secret-scanning.md](.agents/rules/20-secret-scanning.md) | on demand | Secret scanning layers, push protection, findings, leaked-secret response |
+| [21-design-intelligence.md](.agents/rules/21-design-intelligence.md) | on demand | Design databases, component registries and generators: order of authority, tokens, licences, sourced code |
 
 ## 5. Skills: pick the procedure for the task
 
 Skills are step-by-step procedures in [`.agents/skills/`](.agents/skills/). Tools that support Agent Skills (Claude Code, Codex, Gemini CLI, Antigravity, Cursor and others) load each skill's name and description and open the body when a task matches. **Any other tool: read the [skills index](.agents/SKILLS.md) and open the matching skill before starting that kind of work.**
 
-- **Phases**: discover, design (UI, graphic, motion, data visualisation), media (motion graphics, video, colour, photo), design system and handoff (tokens, Figma, AI design), start, build (front-end from scratch, frameworks, CSS, mobile, web integrations, native back end), integrate (MCP), change, test (front-end, visual QA, accessibility), tune (performance, resilience), debug, deliver (agent loops, worktrees), review (anti-slop, design critique, code audit, CodeRabbit), clean text and provenance, secure (hardening, secrets, artifacts, content hygiene, vulnerability audit), document, automate, ship.
+- **Phases**: discover, design (UI, searchable design intelligence, sourced knowledge of human design taste, each project's own design identity, studying other designs (observe, imitate, modify), graphic, motion, data visualisation), media (motion graphics, video, colour, photo), design system and handoff (tokens, Figma, AI design), start, build (front-end from scratch, frameworks, CSS, mobile, web integrations, native back end), integrate (MCP), change, test (front-end, visual QA, accessibility), tune (performance, resilience), debug, deliver (agent loops, worktrees), review (anti-slop, design critique, code audit, CodeRabbit), clean text and provenance, secure (hardening, secrets, artifacts, content hygiene, vulnerability audit), document, automate, ship.
 
 A task often spans several skills. Building a designed page, for example, uses design-to-code handoff, CSS, accessibility audit, testing, then review.
 

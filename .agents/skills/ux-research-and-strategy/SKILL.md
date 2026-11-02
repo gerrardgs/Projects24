@@ -15,6 +15,9 @@ Research reduces the risk of building the wrong thing. Follow [09-design-princip
 1. Write the **design brief**: business goal, target users, the problem or opportunity, constraints (time, budget, technology, legal, brand), and how success is measured (task success, time on task, conversion, retention, support tickets, satisfaction such as SUS or CSAT).
 2. List **what you already know** (analytics, support tickets, sales and support conversations, previous research, competitor products, reviews) and **what you need to learn**. Turn unknowns into 3 to 5 research questions.
 3. Label every assumption. Rank assumptions by risk (how bad if wrong) and uncertainty; research the risky, uncertain ones first.
+4. A design database or generator is not research. Treat what [ui-ux-pro-max](../ui-ux-pro-max/SKILL.md) suggests as hypotheses about users, label them as such ([09-design-principles](../../rules/09-design-principles.md) section 1), and test the risky ones with real people.
+
+What is already known about how people perceive, feel and differ by culture, age, ability and context is stored, sourced and graded in [human-design-nature](../human-design-nature/SKILL.md); use it to form hypotheses about your audience, then test them. Do not present a literature tendency as a finding about your own users.
 
 ## 2. Choose the method
 

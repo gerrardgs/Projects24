@@ -77,6 +77,17 @@ jobs:
         run: node --test ".agents/skills/content-hygiene/assets/*.test.mjs"
       - name: Agent delivery, worktree, review, artifact audit and secret report helper tests
         run: node --test ".agents/skills/agent-delivery-loop/assets/*.test.mjs" ".agents/skills/git-worktrees/assets/*.test.mjs" ".agents/skills/coderabbit-review/assets/*.test.mjs" ".agents/skills/reverse-engineering/assets/*.test.mjs" ".agents/skills/secret-scanning/assets/*.test.mjs"
+      - name: UI/UX Pro Max skill tests (Python standard library only)
+        env:
+          PYTHONDONTWRITEBYTECODE: "1"
+        run: python -m unittest discover -s .agents/skills/ui-ux-pro-max/scripts/tests -p "test_*.py"
+      - name: Plan checker, design evidence, design identity and design study checker tests
+        run: node --test ".agents/skills/improve-plans/assets/*.test.mjs" ".agents/skills/human-design-nature/assets/*.test.mjs" ".agents/skills/project-design-identity/assets/*.test.mjs" ".agents/skills/design-study/assets/*.test.mjs"
+      - name: Evidence register is well formed; the example identities are distinct, cite real evidence and match the example study ledger
+        run: |
+          node .agents/skills/human-design-nature/assets/check-evidence.mjs
+          node .agents/skills/project-design-identity/assets/check-identity.mjs --registry .agents/skills/project-design-identity/assets/registry.example.json --evidence .agents/skills/human-design-nature/references/evidence-register.md
+          node .agents/skills/design-study/assets/check-study.mjs .agents/skills/design-study/assets/example-study.md --brief .agents/skills/project-design-identity/assets/example-health-companion.identity.md
       - name: No hidden or bidirectional Unicode in the spec, scripts and docs
         run: node .agents/skills/content-hygiene/assets/unicode-hygiene.mjs AGENTS.md CLAUDE.md README.md .agents docs scripts
       - name: Validate rules, skills, mirror and links

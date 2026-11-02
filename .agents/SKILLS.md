@@ -6,6 +6,10 @@ Every skill in this specification, with when to use it. Tools that support Agent
 | :--- | :--- | :--- |
 | Discover | [ux-research-and-strategy](skills/ux-research-and-strategy/SKILL.md) | Briefs, research, personas, journeys, information architecture |
 | Design | [ui-design-and-prototyping](skills/ui-design-and-prototyping/SKILL.md) | Wireframes, mockups, prototypes, layout, type, colour, components |
+| Design | [ui-ux-pro-max](skills/ui-ux-pro-max/SKILL.md) | Searchable UI styles, palettes, type pairings, UX guidelines, chart and stack guidance for a new product or page; humane UX checks; never overrides brand or research |
+| Design | [design-study](skills/design-study/SKILL.md) | Learning from other designs honestly: observe, imitate, modify, with a study ledger, twenty study cards, dated tells and a checker that stops restricted references being copied as assets, text or code |
+| Design | [project-design-identity](skills/project-design-identity/SKILL.md) | Each project's own documented design identity: an identity brief, a check that no two projects look alike, and review dates that keep it current |
+| Design | [human-design-nature](skills/human-design-nature/SKILL.md) | Sourced knowledge of human design taste and perception (first impressions, familiarity, colour and emotion, culture, age, ability, context, trends) with an evidence register and a taste-to-design table |
 | Design | [graphic-design-production](skills/graphic-design-production/SKILL.md) | Logos, brand, social and ad artwork, print files, export specs |
 | Design | [motion-and-interaction](skills/motion-and-interaction/SKILL.md) | Animation, transitions, micro-interactions, reduced motion |
 | Design | [data-visualization-design](skills/data-visualization-design/SKILL.md) | Charts, dashboards, infographics |
@@ -38,6 +42,7 @@ Every skill in this specification, with when to use it. Tools that support Agent
 | Clean text | [clean-user-facing-text](skills/clean-user-facing-text/SKILL.md) | Local zero-dependency Unicode hygiene and stylometric rewrite pass for reader-facing prose while preserving voice and facts |
 | Provenance | [remove-ai-marks](skills/remove-ai-marks/SKILL.md) | Multi-vendor AI mark removal: invisible Unicode (Layer A), rewrite (Layer B), and C2PA/EXIF/container metadata across files |
 | Review | [design-critique-and-review](skills/design-critique-and-review/SKILL.md) | Feedback on designs, prototypes, pages, brand pieces |
+| Plan for others | [improve-plans](skills/improve-plans/SKILL.md) | Read-only audit of an existing codebase or interface that ends in prioritized, self-contained handoff plans, a drift check and a plan checker |
 | Review | [rigorous-code-audit](skills/rigorous-code-audit/SKILL.md) | Reviewing a diff, pull request or codebase |
 | Review | [coderabbit-review](skills/coderabbit-review/SKILL.md) | CodeRabbit reviews in the CLI or on pull requests, fixing its comments, `.coderabbit.yaml` |
 | Secure | [security-hardening](skills/security-hardening/SKILL.md) | Threat modelling, hardening, security scanning, secrets |

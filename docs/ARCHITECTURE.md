@@ -12,16 +12,16 @@ How the Projects 24 specification is organised, why, and how each AI tool loads 
 
 ```text
 ┌──────────────────────────────────────────────────────────────────────┐
-│ Core (always loaded): AGENTS.md, about 143 lines                     │
+│ Core (always loaded): AGENTS.md, about 144 lines                     │
 │ Priorities, non-negotiables, workflow, indexes, operating conditions │
 └──────────────────────────────────────────────────────────────────────┘
           │ links to                               │ links to
           ▼                                        ▼
 ┌───────────────────────────────────┐   ┌───────────────────────────────────┐
 │ Rules (.agents/rules/)            │   │ Skills (.agents/skills/)          │
-│ always_on: 01-03, 06, 09, 10, 15  │   │ Loaded when the task matches (45):│
+│ always_on: 01-03, 06, 09, 10, 15  │   │ Loaded when the task matches (50):│
 │ model_decision (on demand):       │   │ research, UI, graphic, motion,    │
-│   04, 05, 07, 08, 11-14, 16-20    │   │ photo, video, colour grading,     │
+│   04, 05, 07, 08, 11-14, 16-21    │   │ photo, video, colour grading,     │
 │                                   │   │ data viz, tokens, Figma, handoff, │
 │ Short, normative "must" rules     │   │ front-end, CSS, mobile, integra-  │
 │                                   │   │ tions, a11y, perf, test, deploy,  │
@@ -33,7 +33,7 @@ How the Projects 24 specification is organised, why, and how each AI tool loads 
 - **Skills** say *how* to do a kind of task, step by step. They follow the [Agent Skills specification](https://agentskills.io/specification): only each skill's name and description are loaded at startup, and the body loads when the task matches. Bulky material sits in `references/` and `assets/` and loads only when needed.
 - **Reference library**: [`DESIGN-REFERENCES.md`](DESIGN-REFERENCES.md) collects primary sources (standards, official docs) and learning resources by topic; [`TOOLKIT.md`](TOOLKIT.md) catalogues commonly used tools with official links; [`PROMPT-LIBRARY.md`](PROMPT-LIBRARY.md) holds ready-to-use prompts. None is loaded automatically; rules and skills link into them. `node scripts/check-links.mjs` checks every external link.
 - **Open-ended tool coverage**: no list can name every tool, so [rule 04 section 9](../.agents/rules/04-dependencies.md) defines how to adopt any tool, framework or service safely.
-- **Size**: `node scripts/agents-sync.mjs` prints the current always-on estimate (characters divided by 4). On 2026-10-29 it was about 17,100 tokens for `AGENTS.md` plus the seven always-on rules, leaving about 2,900 tokens of headroom; the check warns within 5% of the budget. The per-skill table lives in [`.agents/SKILLS.md`](../.agents/SKILLS.md), read on demand, because tools that support skills already load each skill's name and description; `AGENTS.md` keeps the phases and a pointer. Antigravity's documented budget for global and always-on rules is 20,000 tokens; files beyond it are demoted to pointers that the agent reads on demand ([Antigravity rules](https://antigravity.google/docs/rules), checked 2026-10-29).
+- **Size**: `node scripts/agents-sync.mjs` prints the current always-on estimate (characters divided by 4). On 2026-10-29 it was about 17,600 tokens for `AGENTS.md` plus the seven always-on rules, leaving about 2,400 tokens of headroom; the check warns within 5% of the budget. The per-skill table lives in [`.agents/SKILLS.md`](../.agents/SKILLS.md), read on demand, because tools that support skills already load each skill's name and description; `AGENTS.md` keeps the phases and a pointer. Antigravity's documented budget for global and always-on rules is 20,000 tokens; files beyond it are demoted to pointers that the agent reads on demand ([Antigravity rules](https://antigravity.google/docs/rules), checked 2026-10-29).
 
 ## 3. How each tool loads the spec
 

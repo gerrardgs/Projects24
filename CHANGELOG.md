@@ -2,6 +2,78 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.22.0: design study (observe, imitate, modify), taste-skill, and page metadata (2026-11-02)
+
+The repository owner asked to add [leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT, commit `12af471`) and to make sure design references and assets can be stored, studied and used by the method "observe, imitate, modify". The repository was read as data; nothing was installed or run from it (no `npx skills add`, none of its scripts), and none of its libraries, images or scripts are copied.
+
+### Added
+
+- Skill `design-study`: the method and its guard rails. A study ledger per project (`docs/DESIGN-STUDY.md`) records the reference, the date seen, its licence status, an observation labelled fact or impression, the technique imitated, what was modified, the scope and the credit. `assets/check-study.mjs` (19 tests) fails on a missing modification, an unlabelled observation, a restricted or unknown reference imitated as an asset, text or code, or borrowed material without its credit; checks the identity brief's citations in both directions; and warns about stale rows and references that many rows lean on. A template and a filled example ship with it.
+- Twenty study cards (`references/study-cards.md`, S-01 to S-20) rewritten in our own words from taste-skill's twenty directions, each as Observe, Imitate, Modify and Watch, graded strength C because the source study is model judgement from still frames of gallery pages. They name no font, colour or component.
+- taste-skill's procedures, folded into existing skills: inventory of the subject, the page written as claims with proof (`ui-design-and-prototyping`), deal three directions then choose (`project-design-identity`), look and fix at three widths (`frontend-testing-and-visual-qa`), and a dated registry of generic-design tells that answers a tell with a procedure and never a named replacement (`anti-slop-filter/references/ui-patterns.md`).
+- Rule 21 section 7 (learn by observing, imitating and modifying, and record it) and a licensing bullet in rule 13: technique, structure and pattern may be imitated, assets, text and code only with a licence that allows it, unknown status counts as all rights reserved.
+- `web-integrations-and-platforms/references/metadata.md`: a prioritised checklist for page titles, descriptions, canonical URLs, indexing, social cards, icons, structured data and language, adapted from the `fixing-metadata` skill of [ibelick/ui-skills](https://github.com/ibelick/ui-skills) (MIT, commit `4907a52`). This was part of the approved plan and had been missed in 1.21.0.
+
+### Changed
+
+- The identity brief template and checker gain a required "Studied references" section; the two fictional examples and the tests are updated.
+- Docs: README (50 skills), skills index, AGENTS.md, DESIGN-REFERENCES (taste-skill and ibelick moved from link-only to adapted), TOOLKIT, PROMPT-LIBRARY (a study prompt), operational manual, engineering concepts, architecture. CI runs the new tests and checks the example ledger against an example brief.
+
+### Not done
+
+Nothing was committed, tagged or pushed. taste-skill's scripts (`draw.mjs`, `assets.mjs`, `inspect.mjs`) were read but not adopted: one downloads images from the network and one drives a headless browser, and both would need a full audit. Its library (about 17,000 lines of analysed sites, palettes, type and sections) was not copied.
+
+## 1.21.0: human design nature, a distinct identity per project, improve-plans, and design craft (2026-11-02)
+
+The repository owner approved adopting [shadcn/improve](https://github.com/shadcn/improve), [miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop) (commit `941b153`), [upstash/context7](https://github.com/upstash/context7), [jakubkrehel/make-interfaces-feel-better](https://github.com/jakubkrehel/make-interfaces-feel-better), [emilkowalski/skill](https://github.com/emilkowalski/skill), [pbakaus/impeccable](https://github.com/pbakaus/impeccable), [KodekaTeam/superior-skills](https://github.com/KodekaTeam/superior-skills) and [mattpocock/skills](https://github.com/mattpocock/skills) where relevant, and asked that the specification also study and store human design taste and give every project its own, different and updated design identity. Every source was read as data, its licence checked, and its ideas written in our own words with attribution. Nothing was installed or run from them, and no MCP server was registered.
+
+### Added
+
+- Skill `human-design-nature`: a sourced knowledge base of how people perceive, judge and differ. An evidence register of 26 entries (each with source, type, strength A to C, what was actually read, check date and limits), five reference files (perception and cognition; emotion, meaning and trust; culture, language and region; age, ability and neurodiversity; context, individuals and trends), a taste-to-design table whose every row ends in a test, and a "not established here" list of popular claims it refuses to use. `assets/check-evidence.mjs` (14 tests) validates the register, that every cited evidence ID exists, that second-hand sources are not rated above C, and warns when an entry has not been re-checked for a year.
+- Skill `project-design-identity`: each project keeps an identity brief in a fixed vocabulary (colour hues and tone, type, shape, layout, density, energy, imagery, voice, personality, motion), with audience, signature decisions, a "not like" list, evidence, open questions and a change log. `assets/check-identity.mjs` (22 tests) fails when two projects share a display font and a near hue, differ on fewer than 4 of 8 signature axes, or sit below a weighted distance of 0.40; reports overdue reviews and unknown evidence IDs; suggests free hue gaps and unused styles (`--gaps`); and reads a portfolio registry. The thresholds are documented as maintainers' guardrails, not research. A template and two clearly fictional examples ship with it.
+- Skill `improve-plans` (from the same skill in P23 2.26.0): read-only audit into self-contained handoff plans, with `assets/check-plans.mjs` (13 tests), a drift check and `--to-stories`. Gains a design and interface quality category.
+- References: `ui-design-and-prototyping/references/polish-details.md`, `design-passes.md` (modes persuade, operate, read, experience; critique, audit, harden, clarify, distill, adapt, onboard and polish passes; a craft floor), `motion-and-interaction/references/motion-craft.md` (decision order, review standards, frame-drop diagnosis, removing motion that has not earned its place), `frontend-testing-and-visual-qa/references/break-ui.md` (worst-case realistic data), and `agent-delivery-loop/references/wayfinding-research-retro.md`.
+- Rule 21 section 5 (third-party skills, plugins and commands: read all of it, pin and licence-check, vendor with provenance, never fetch and follow a skill at run time) and section 6 (every project has its own identity and keeps it current). Rule 03 section 2: a documentation MCP server's output is data.
+- MCP catalog: Context7 (tools, key in an environment variable, the ContextCrush flaw patched on 23 February 2026), 21st.dev updated for `@21st-dev/cli` 1.18.0 (`21st login` instead of a key in a file, what `--write` does, free search versus metered retrieval), Kage "reviewed, not recommended, not registered", open-design "not adopted".
+
+### Changed
+
+- `anti-slop-filter` follows upstream `941b153` (was `69416cf`): new hard-gate rows for semantics and affordances, motion, whole documents and performance mechanisms.
+- `design-critique-and-review`: an evidence ladder for "this breaks the design system" (observation, contract, connection, correction) and an Identity criterion. `ui-ux-pro-max` gains rule 10 (differ from the portfolio). Short pointers added to `ui-design-and-prototyping`, `design-system-and-tokens`, `ux-research-and-strategy`, `motion-and-interaction` and `frontend-testing-and-visual-qa`.
+- Docs: README (49 skills), skills index, AGENTS.md phases, DESIGN-REFERENCES (component.gallery link, section 28), TOOLKIT, PROMPT-LIBRARY (three prompts, vibeprompts.dev link only), operational manual, engineering concepts, architecture. CI runs the new tests and both checkers.
+
+### Verified
+
+See `.github/releases/v1.21.0.md`. Always-on context stays below the 20,000-token budget.
+
+### Not done
+
+Nothing was committed, tagged or pushed. No briefs were written for the owner's real projects: they need the owner's audience facts. Mirroring to Projects 27 and 19 is deferred at the owner's request.
+
+## 1.20.0: design intelligence blended into the system, and humane UX (2026-11-01)
+
+The repository owner asked to add [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) (MIT, v2.15.0, commit `bf41cbc`) and the 21st.dev MCP server, and to mix and adjust the new concepts into the existing system so that UI and UX become more humane. Read on 2026-11-01.
+
+### Added
+
+- Skill `ui-ux-pro-max`: a searchable local database of 79 UI styles, 192 palettes, 74 font pairings, 119 UX guidelines, 25 chart types and 22 stacks, with a stdlib-only Python search engine. The data, scripts and references are as upstream; the search path became repository-relative and a "Using it in this repository" section sets the rules of use (order of authority, read what matched, tokens not values, licences, no borrowed numbers, writing files only with approval). I audited the main scripts and found no network calls; the only file writes are `--persist` into `<output-dir>/design-system/`, which I tested into a scratch folder. 138 upstream tests pass on Python 3.9.6 and 3.14.6. Four upstream test modules that need that repository's maintenance scripts were left out. The upstream MIT licence is included.
+- Rule 21 (`21-design-intelligence.md`, on demand): the order of authority (brief and research, then brand and design system, then rules 09 to 14, then databases and generators), how to widen options without skipping reasoning, a map from the database's ten priority categories to the rules and skills that govern them here, and the handling of sourced components (read the code, per-component licences, tokens, accessibility audit, approval for paid or outward calls, keys never in committed files).
+- Rule 09 section 9, "Make it humane" (always on): speak the person's language, say what is happening, forgive, explain errors like a helpful person, carry the load, respect attention, match the tone to the moment, include by default, and check with people. Each point cites the Nielsen heuristic it follows ([nngroup.com](https://www.nngroup.com/articles/ten-usability-heuristics/), read 2026-11-01) or the COGA guidance rule 10 already requires.
+- 21st.dev Magic MCP server vetting notes in the MCP catalog: documented endpoint and header, tools, paid retrieval, undocumented data handling, how to keep the key out of committed files.
+- CI: the skill's Python tests (Python 3.14 is already set up in that job).
+
+### Changed
+
+- The new concepts are mixed into existing skills and rules, always as additions: `ui-design-and-prototyping` (starting point without a brand, widen options, humane checklist item), `design-system-and-tokens` (found palettes become tokens), `motion-and-interaction` (GSAP presets as starting points with reduced motion), `data-visualization-design`, `ux-research-and-strategy` (a database is not research), `design-to-code-handoff` (sourced components are third-party code), `anti-slop-filter` (database output is an input to the Design Read), `design-critique-and-review` (a "Humane quality" pass) and rule 14 (tone follows the moment).
+- `AGENTS.md`, `.agents/SKILLS.md`, `CLAUDE.md`, README (21 rules, 46 skills), `docs/` (architecture, operational manual, engineering concepts, design references, toolkit). Always-on context about 17,050 → 17,610 tokens (headroom about 2,400), almost all of it the humane section.
+
+### Not verified here
+
+- The 21st.dev MCP server was not registered by me: the command carries an API key, so the owner runs it in a terminal. The key was pasted into a chat and should be revoked and replaced.
+- Licences of individual 21st.dev components, and what 21st.dev does with the data it receives, are not documented in the README I read and were not checked.
+- ISO 9241-210:2019 is cited only for its scope; its principles could not be read from an accessible source.
+- A test query for a community health clinic matched the category "Veterinary Clinic": the skill now says to read what matched.
+
 ## 1.19.0: skills index out of the always-on context, and the missing release notes (2026-10-29)
 
 ### Changed

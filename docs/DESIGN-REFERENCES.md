@@ -325,6 +325,8 @@ Use AI tools within the rules of this spec: verify output, check licences and te
 | [MCP Registry](https://registry.modelcontextprotocol.io/) | Published MCP servers |
 | [punkpeye/awesome-mcp-servers](https://github.com/punkpeye/awesome-mcp-servers), [wong2/awesome-mcp-servers](https://github.com/wong2/awesome-mcp-servers) | Community directories of MCP servers (discovery, not review) |
 | [MCP Toolbox for Databases](https://mcp-toolbox.dev/) | Google's open-source MCP server for databases |
+| [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | Searchable UI/UX design database and skill (MIT), adapted in [ui-ux-pro-max](../.agents/skills/ui-ux-pro-max/SKILL.md) |
+| [21st-dev/magic-mcp](https://github.com/21st-dev/magic-mcp) | 21st.dev's MCP server for searching, retrieving and generating UI components (ISC); see [rule 21](../.agents/rules/21-design-intelligence.md) |
 | [The lethal trifecta](https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/) | Why private data, untrusted content and external communication must not meet in one agent |
 | [antislop](https://github.com/miqdadbadjuber/anti-slop) | Filter for generic AI output in UI, copy and code comments: purpose test, hard gates, liveliness dials, delivery report (MIT) |
 | [Karpathy-inspired guidelines](https://github.com/multica-ai/andrej-karpathy-skills) | Think before coding, simplicity first, surgical changes, goal-driven execution |
@@ -546,6 +548,7 @@ Study patterns; do not copy proprietary designs or brands.
 | [Savee](https://savee.it/), [Pinterest](https://www.pinterest.com/), [Are.na](https://www.are.na/) | Mood boards |
 | [CodePen](https://codepen.io/) | Front-end experiments |
 | [Collect UI](https://collectui.com/) | UI components |
+| [The Component Gallery](https://component.gallery/) | How real design systems name and build components (a project by Iain Bean; 60 components, 95 design systems and 2,671 examples on 2026-11-02; no licence stated, so link, do not copy) |
 | [Storybook showcase](https://storybook.js.org/showcase) | Real component libraries |
 
 ## 27. Photo, video, colour and motion production
@@ -563,3 +566,17 @@ Checked 2026-10-18. Details, numbers and more sources are in the [video](../.age
 | Animation | [Lottie specification](https://lottie.github.io/lottie-spec/), [Rive documentation](https://rive.app/docs), *The Illusion of Life* (Thomas and Johnston), *The Animator's Survival Kit* (Williams) |
 | Flash safety | [WCAG 2.2 SC 2.3.1](https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html), [PEAT](https://trace.umd.edu/peat/), [Harding FPA](https://www.hardingfpa.com/), [ASA on flashing images](https://www.asa.org.uk/news/flashing-images-in-advertising.html) |
 | Editing craft | Walter Murch, *In the Blink of an Eye*; [OpenTimelineIO](https://opentimeline.io/) for timeline interchange |
+
+## 28. Human design taste and perception, and design skills we read
+
+The sourced findings on how people perceive, judge and differ are in the [evidence register](../.agents/skills/human-design-nature/references/evidence-register.md), with strength, what was read and limits for each entry. Read it there rather than from this list. Starting points behind it:
+
+| Source | Focus |
+| :--- | :--- |
+| [Reinecke and Gajos, Quantifying Visual Preferences Around the World](https://eecs.harvard.edu/~kgajos/papers/2014/reinecke14visual.shtml) | Demographic differences in website visual preference |
+| [Jonauskaite et al. 2020](https://doi.org/10.1177/0956797620948810) | Colour-emotion associations across 30 countries |
+| [Tuch et al. 2012](https://research.google/blog/users-love-simple-and-familiar-designs-why-websites-need-to-make-a-great-first-impression/) | Visual complexity, prototypicality and first impressions |
+| [W3C WAI: older users](https://www.w3.org/WAI/older-users/), [COGA Note](https://www.w3.org/TR/coga-usable/) | Ageing and cognitive accessibility |
+| [Nielsen Norman Group](https://www.nngroup.com/articles/aesthetic-usability-effect/) | Aesthetic-usability effect, flat design and signifiers, dark mode, children |
+
+Design-skill repositories read on 2026-11-02 and adapted (permissive licences, attribution in each file): [jakubkrehel/make-interfaces-feel-better](https://github.com/jakubkrehel/make-interfaces-feel-better) (MIT), [emilkowalski/skill](https://github.com/emilkowalski/skill) (MIT), [pbakaus/impeccable](https://github.com/pbakaus/impeccable) (Apache-2.0, concepts only, nothing installed), [KodekaTeam/superior-skills](https://github.com/KodekaTeam/superior-skills) (MIT, one idea), [leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT, commit `12af471`; twenty design ideas rewritten as study cards plus its procedures and dated tells, no library, script or image copied), [ibelick/ui-skills](https://github.com/ibelick/ui-skills) (MIT, commit `4907a52`; the `fixing-metadata` checklist). Read and not adopted: [nexu-io/open-design](https://github.com/nexu-io/open-design) (other brands' design systems conflict with a distinct identity per project), Kage (see the [MCP catalog](../.agents/skills/mcp-servers-and-integrations/references/mcp-catalog.md)). Link only, not reviewed in depth: [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills).

@@ -56,7 +56,11 @@ Details and safety setup: [references/story-loop.md](references/story-loop.md).
 4. Run `node assets/story-loop.mjs --stories stories.json --prompt assets/loop-prompt.md --max-iterations 10 -- <agent command>`. The loop stops at the first failed check, uncommitted change or branch switch.
 5. Review the whole branch before anything merges.
 
-## 5. Blind spots to check
+## 5. Around the loops
+
+When the route to the goal is not clear yet, chart the decisions first (wayfinding). Delegate fact-finding to a research note, script the steps only a human can do, and run a retrospective after a painful session: [references/wayfinding-research-retro.md](references/wayfinding-research-retro.md).
+
+## 6. Blind spots to check
 
 - **Shared resources between parallel units**: ports, databases, caches, generated files, lockfiles. Give each worktree its own port and database, or serialise those units.
 - **Checks that prove too little**: a story marked passing because a weak test passed. Read the tests the agent wrote, not only the result.

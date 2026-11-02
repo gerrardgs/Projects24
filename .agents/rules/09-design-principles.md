@@ -51,3 +51,17 @@ Accessibility is a requirement, not a phase. Follow [10-accessibility](10-access
 ## 8. Hand-off is part of the design
 
 A design is ready for build when it names its tokens and components, defines every state and breakpoint, specifies interactions and motion, includes real content and accessibility notes (headings, labels, focus order, alt text), and lists open questions. Developers should never have to guess.
+
+## 9. Make it humane
+
+Usable is the floor. Humane means the interface respects people's time, attention, abilities and mistakes. The points follow [Nielsen's ten usability heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) (the number in brackets) and the [COGA guidance](https://www.w3.org/TR/coga-usable/) that rule 10 already requires.
+
+- **Speak the person's language.** Words, order and concepts from the user's world, never internal jargon, codes or system terms (2). Take them from research and real content.
+- **Say what is happening.** Every action gets timely feedback, waits show progress, nothing fails silently (1).
+- **Forgive.** Prevent the mistake first, confirm only what is destructive, and always give a clearly marked way out or an undo (3, 5).
+- **Explain errors like a helpful person.** Plain language, no blame, what went wrong and how to fix it, and keep what the person already entered (9; [14-ux-writing-and-ethics](14-ux-writing-and-ethics.md) section 2).
+- **Carry the load.** Show options instead of making people remember (6), ask one thing at a time, set safe defaults, and reveal the rare options only when needed.
+- **Respect attention.** Remove what is irrelevant (8). No manufactured urgency, guilt or streak pressure ([14-ux-writing-and-ethics](14-ux-writing-and-ethics.md) sections 4 and 6). Motion has a purpose and stops when asked.
+- **Match the tone to the moment.** Calm and brief when the person is worried (errors, money, health, security), light only when nothing is at stake. Never fake warmth, and never present a system or an AI as a person.
+- **Include by default.** Design for tired, distracted, older, low-vision, low-literacy and one-handed use, in the person's language.
+- **Check with people.** A claim that a design is humane needs evidence: a usability test, a comprehension check or support data. Without it, report the claim as unverified ([ux-research-and-strategy](../skills/ux-research-and-strategy/SKILL.md)).

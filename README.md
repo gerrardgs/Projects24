@@ -52,25 +52,25 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 ================================================================
 
   +-------------------------------------------------------------------------+
-  | Core (Always Loaded): AGENTS.md (~143 lines)                            |
+  | Core (Always Loaded): AGENTS.md (~144 lines)                            |
   | Design & front-end priorities, non-negotiables, design-to-code workflow |
   +-------------------------------------------------------------------------+
        |                                                 |
        v (links to)                                      v (links to)
   +-----------------------------------+             +-----------------------------------+
   | Rules (.agents/rules/)            |             | Skills (.agents/skills/)          |
-  | 20 normative rules:               |             | 45 on-demand step-by-step guides: |
-  | - 7 Always-On (core, clean code,  |             | - 13 Digital Design & UI/UX Skills|
+  | 21 normative rules:               |             | 50 on-demand step-by-step guides: |
+  | - 7 Always-On (core, clean code,  |             | - 17 Digital Design & UI/UX Skills|
   |   verification, security, design  |             | - 4 Photo, Video, Colour & Motion |
   |   principles, a11y, clean exec.)  |             | - 12 Front-End & Mobile Skills    |
-  | - 13 On-Demand (dependencies,     |             | - 16 Software Lifecycle Skills    |
+  | - 14 On-Demand (dependencies,     |             | - 17 Software Lifecycle Skills    |
   |   errors, testing, git workflow,  |             | + 8 Verified runnable templates   |
   |   front-end code, web perf,       |             |   + CI, Lighthouse, deploy configs|
   |   assets/licensing, UX writing,   |             |                                   |
   |   project docs, text hygiene,     |             |                                   |
   |   agentic delivery, AI review,    |             |                                   |
-  |   reverse engineering, secret     |             |                                   |
-  |   scanning)                       |             |                                   |
+  |   reverse engineering, secrets,   |             |                                   |
+  |   design intelligence)            |             |                                   |
   +-----------------------------------+             +-----------------------------------+
        |                                                 |
        +-----------------------+-------------------------+
@@ -86,8 +86,8 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 | Layer | Location | Loaded | Contents |
 | :--- | :--- | :--- | :--- |
 | **Core** | [`AGENTS.md`](AGENTS.md) | Always | Priorities, non-negotiables, design-to-code workflow, rules index and a pointer to the skills index ([`.agents/SKILLS.md`](.agents/SKILLS.md)), operating conditions, definition of done (about 143 lines) |
-| **Rules** | [`.agents/rules/`](.agents/rules/) | Always (7) or when relevant (13) | Core principles, clean code, verification, security, **design principles, accessibility (WCAG 2.2 AA), clean execution**, dependencies, error handling, testing, Git workflow, **front-end code, web performance, visual assets & licensing, UX writing & ethics, project documentation** |
-| **Skills** | [`.agents/skills/`](.agents/skills/) | When task matches | 45 step-by-step procedures (13 digital design & UI/UX, 4 photo, video, colour & motion, 12 front-end & mobile, 16 software lifecycle) with tested templates and references |
+| **Rules** | [`.agents/rules/`](.agents/rules/) | Always (7) or when relevant (14) | Core principles, clean code, verification, security, **design principles, accessibility (WCAG 2.2 AA), clean execution**, dependencies, error handling, testing, Git workflow, **front-end code, web performance, visual assets & licensing, UX writing & ethics, project documentation**, text hygiene and provenance, agentic delivery and AI review, reverse engineering, secret scanning, design intelligence and sourced UI |
+| **Skills** | [`.agents/skills/`](.agents/skills/) | When task matches | 50 step-by-step procedures (17 digital design & UI/UX, 4 photo, video, colour & motion, 12 front-end & mobile, 17 software lifecycle) with tested templates and references |
 | **Reference Library** | [`docs/DESIGN-REFERENCES.md`](docs/DESIGN-REFERENCES.md) | When needed | About 470 curated, link-checked sources in 27 sections: standards, accessibility, UX, UI, design systems, typography, colour, imagery, branding and print, motion, data viz, tools, AI workflows, HTML/CSS/JS, frameworks, browser support, testing, performance, security, SEO, i18n, ethics and law, courses, books, communities, inspiration, photo, video, colour and motion production |
 | **Tested Templates** | Various under `.agents/skills/` | On demand / in CI | Runnable token pipelines, Figma variables sync, accessible static site with security headers, axe-core scanner, browser chaos experiments, web video and image pipeline, Node.js & Python backend services, front-end CI, Lighthouse CI budgets, GitHub Pages deploy |
 | **Tools Catalog** | [`docs/TOOLKIT.md`](docs/TOOLKIT.md) | When needed | 350+ commonly used tools, libraries, platforms and services by phase, with official links, plus the rule for adopting any tool that is not listed |
@@ -101,7 +101,7 @@ Projects 24 Architecture: Digital Design & Front-End Engineering
 
 ## Skills Catalog
 
-### 1. Digital Design, UI/UX, & Graphics Skills (13 Skills)
+### 1. Digital Design, UI/UX, & Graphics Skills (17 Skills)
 
 Step-by-step procedures covering visual research, prototyping, design systems, vector art, and Figma integration:
 
@@ -109,6 +109,10 @@ Step-by-step procedures covering visual research, prototyping, design systems, v
 | :--- | :--- | :--- |
 | **Discover** | [ux-research-and-strategy](.agents/skills/ux-research-and-strategy/SKILL.md) | User research briefs, qualitative/quantitative sample sizes, research ethics, synthesis, user personas, journey mapping, and information architecture |
 | **Design** | [ui-design-and-prototyping](.agents/skills/ui-design-and-prototyping/SKILL.md) | Wireframe to hi-fi prototyping, layout grids, responsive typography scales, colour palettes, interactive states, design tooling documentation |
+| **Design intelligence** | [ui-ux-pro-max](.agents/skills/ui-ux-pro-max/SKILL.md) | Searchable UI styles, palettes, type pairings, UX guidelines, chart and stack guidance (adapted from [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), MIT; 138 tests on Python 3.9 and 3.14), blended into this specification: brand and design system win, results become tokens, contrast is measured, font licences recorded, database claims never quoted as research, and a humane-UX check (rule 09 section 9) on every result. Rule 21 also governs components sourced from 21st.dev, shadcn registries and generators |
+| **Human nature** | [human-design-nature](.agents/skills/human-design-nature/SKILL.md) | Sourced knowledge of how people perceive, feel and differ (first impressions, familiarity, colour and emotion, culture, age, ability, context, trends) with a dated evidence register, a taste-to-design table and a checker (14 tests) |
+| **Identity** | [project-design-identity](.agents/skills/project-design-identity/SKILL.md) | Each project's own design identity: a brief, a tested check that no two projects look alike, and review dates that keep it current (22 tests) |
+| **Study** | [design-study](.agents/skills/design-study/SKILL.md) | Observe, imitate, modify: a study ledger per project, twenty study cards (from taste-skill, MIT), dated tells, and a checker (19 tests) that stops restricted references being copied as assets, text or code |
 | **Design** | [graphic-design-production](.agents/skills/graphic-design-production/SKILL.md) | Brand identities, logos, digital social/ad banners, print preparation (bleed, CMYK, PDF/X), vector formats (SVG), official platform spec sources |
 | **Motion** | [motion-and-interaction](.agents/skills/motion-and-interaction/SKILL.md) | Purposeful UI motion, duration and easing tokens, View Transitions API, scroll-driven animations, reduced-motion preferences, Motion/GSAP/Lottie/Rive |
 | **Data Viz** | [data-visualization-design](.agents/skills/data-visualization-design/SKILL.md) | Chart selection by data question, honest visual encoding, colour-blind-safe palettes, responsive charts, modern viz libraries (D3, Chart.js, Observable) |
@@ -151,7 +155,7 @@ Procedures covering production web and mobile implementation, modern frameworks,
 | **QA** | [frontend-testing-and-visual-qa](.agents/skills/frontend-testing-and-visual-qa/SKILL.md) | Component testing (Testing Library), end-to-end testing (Playwright), visual regression snapshots, cross-browser and real-device QA matrices |
 | **Review** | [design-critique-and-review](.agents/skills/design-critique-and-review/SKILL.md) | Heuristic evaluations, visual hierarchy critique, design system token compliance, accessibility and UX writing passes with severity-ranked findings |
 
-### 4. Software Lifecycle Skills (16 Skills: 9 Inherited from Projects 23)
+### 4. Software Lifecycle Skills (17 Skills: 10 Inherited from Projects 23)
 
 Complete software engineering lifecycle foundation ensuring bulletproof tooling, security, and automated delivery:
 
@@ -162,6 +166,7 @@ Complete software engineering lifecycle foundation ensuring bulletproof tooling,
 | **Change** | [change-existing-code](.agents/skills/change-existing-code/SKILL.md) | Surgical changes (every changed line traces to the request), characterization tests, small verified steps, dependency upgrades, automated codemods, and strangler fig migrations |
 | **Test** | [test-engineering](.agents/skills/test-engineering/SKILL.md) | Test pyramid, determinism, property-based testing, fuzz testing, mutation testing, and language-specific tooling |
 | **Debug** | [systematic-debugging](.agents/skills/systematic-debugging/SKILL.md) | Root cause isolation, a procedure for correcting the agent's own reasoning when a fix fails or the user says it is wrong, `git bisect` recipes, profilers, memory leak detection, production incident response, and a browser debugging reference (hydration, CORS, layout, deploy-only bugs) |
+| **Plan for others** | [improve-plans](.agents/skills/improve-plans/SKILL.md) | Read-only audit that ends in self-contained handoff plans (adapted from shadcn/improve, MIT), a drift check and a tested plan checker (13 tests) |
 | **Review** | [rigorous-code-audit](.agents/skills/rigorous-code-audit/SKILL.md) | Toolchain verification, OWASP Top 10 checklist, and severity-ranked audit findings |
 | **AI review** | [coderabbit-review](.agents/skills/coderabbit-review/SKILL.md) | CodeRabbit CLI reviews in agent mode with the outcome classified by a tested script (skipped, failed or truncated runs are never called clean), severities kept, every finding verified, at most three review runs per change set; pull request thread fixes with per-fix approval; a schema-validated `.coderabbit.yaml` with accessibility, token and CSP path instructions (adapted from [coderabbitai/skills](https://github.com/coderabbitai/skills) and [coderabbitai/antigravity-plugin](https://github.com/coderabbitai/antigravity-plugin)) |
 | **Deliver** | [agent-delivery-loop](.agents/skills/agent-delivery-loop/SKILL.md) | Work beyond one session: the phase loop with planning files adapted from [open-gsd/gsd-core](https://github.com/open-gsd/gsd-core), and the unattended story loop adapted from [snarktank/ralph](https://github.com/snarktank/ralph) with a tested stories checker (UI stories need a browser and axe check) and a loop runner that stops on failed checks and never bypasses permissions |
@@ -258,6 +263,7 @@ Every commit and pull request to Projects 24 is automatically verified through [
   - **Design Tokens Pipeline**: Type-checking, unit tests, and automated WCAG contrast validation across Node.js 22, 24, and 26.
   - **Static Site Starter**: HTML validation (`html-validate`), CSS linting (`stylelint`), unit tests including security-header consistency, and an axe-core headless Chromium scan that also fails on console errors.
 - **Inherited Service Templates**: Node.js and Python microservices tested across Node.js 22/24/26 and Python 3.11/3.12/3.13/3.14.
+- **Design Knowledge, Identity and Study Checks**: tests for the plan checker, the evidence-register checker, the design-identity checker and the study-ledger checker, plus a run of the checkers on the shipped register, the two example identities and the example study ledger.
 - **Owner-Only Authorship**: `scripts/check-authorship.mjs` scans the full history and fails when any commit credits an AI agent (an AI author or committer, a `Co-Authored-By` or sign-off trailer, or a "Generated with" line), so only the human author appears among the contributors.
 - **External Link Integrity**: [`.github/workflows/links.yml`](.github/workflows/links.yml) checks all 650+ external references weekly via `scripts/check-links.mjs`.
 

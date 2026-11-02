@@ -16,6 +16,7 @@ Follow [09-design-principles](../../rules/09-design-principles.md) and [10-acces
 - The existing design system, brand guide, tokens and components. Reuse them; list any gaps instead of improvising new styles.
 - Real content: actual copy, data ranges, image ratios, longest names, translations. Design with it, not with lorem ipsum.
 - Target platforms, breakpoints and the support target (web, iOS, Android, desktop) and their guidelines: [Apple HIG](https://developer.apple.com/design/human-interface-guidelines/), [Material Design 3](https://m3.material.io/), [Fluent 2](https://fluent2.microsoft.design/). Both mobile platforms changed their visual language in 2025: Apple's **Liquid Glass** (translucent, refractive materials across iOS 26 and Apple's other platforms; [technology overview](https://developer.apple.com/documentation/technologyoverviews/liquid-glass), [HIG materials](https://developer.apple.com/design/human-interface-guidelines/materials)) and Google's **Material 3 Expressive** (an update of Material 3, not a Material 4, with bolder shape, colour, type and spring-based motion; [building with M3 Expressive](https://m3.material.io/blog/building-with-m3-expressive)). Translucent surfaces lower text contrast: check contrast over the real backgrounds behind them, and design for the Reduce Transparency and Increase Contrast settings.
+- No brand or design system yet: get a data-backed starting point with [ui-ux-pro-max](../ui-ux-pro-max/SKILL.md) (`--design-system`), then choose and justify as in section 4 and [21-design-intelligence](../../rules/21-design-intelligence.md). It never overrides the brief, the research or an existing system.
 
 ## 2. Low fidelity: structure and flow
 
@@ -32,6 +33,10 @@ Follow [09-design-principles](../../rules/09-design-principles.md) and [10-acces
 5. **Iconography and imagery**: one icon family with a consistent grid, stroke and corner style; licensed imagery with consistent treatment ([13-visual-assets-and-licensing](../../rules/13-visual-assets-and-licensing.md)).
 6. **Responsive variants**: design the smallest and largest breakpoints at least, plus any where the layout changes. Show long content, empty states and errors.
 
+## 3a. Polish and review passes
+
+After the structure and states are right, use [polish-details](references/polish-details.md) for the small things that make a screen feel finished, and [design-passes](references/design-passes.md) to choose the surface's mode (persuade, operate, read, experience) and to improve it in focused passes (critique, audit, harden, clarify, distill, adapt, onboard, polish) with a craft floor.
+
 ## 4. Make deliberate choices, not generated defaults
 
 AI-assisted design tends to converge on the same look whatever the subject. Anthropic's open-source [frontend-design skill](https://github.com/anthropics/skills/tree/main/skills/frontend-design) (Apache-2.0) names the common tells: identical rounded cards with the same soft shadow everywhere, decorative gradient washes, an all-caps eyebrow label above every heading, one accented word in each headline, numbered markers on content that is not a sequence, and fade-and-slide entrance animations on every section. None is wrong in itself; each is wrong as a default.
@@ -41,7 +46,10 @@ AI-assisted design tends to converge on the same look whatever the subject. Anth
 - Put the boldness in one place and keep the rest quiet; remove decoration that does not serve the brief.
 - Keep the quality floor regardless of style: tokens, every state, accessibility, responsive layout, reduced motion. [Vercel's Web Interface Guidelines](https://vercel.com/design/guidelines) ([source, MIT](https://github.com/vercel-labs/web-interface-guidelines)) are a concise, practical checklist for interaction details (keyboard, focus, forms, loading, feedback, touch targets).
 - An existing brand or design system always wins over novelty.
+- Write the page as claims with proof, one line per section, and delete a section that has no claim; this avoids the stock hero, logos, three features, testimonial, pricing sequence. Studying other designs follows observe, imitate, modify with a ledger ([design-study](../design-study/SKILL.md)).
+- Every project has its own identity brief, different from the others and kept current: [project-design-identity](../project-design-identity/SKILL.md). What is known about how people perceive and judge a design is in [human-design-nature](../human-design-nature/SKILL.md); cite its evidence IDs for choices that rest on a human tendency.
 - Before delivering, run the [anti-slop-filter](../anti-slop-filter/SKILL.md) skill: Design Read and dials, hard gates, a written reason for each technique, and a PASS/FAIL delivery report.
+- Use the searchable database to widen options (two or three directions), not to skip the reasoning: check the matched category, write the one-line reason for each choice, and make the result humane with [rule 09 section 9](../../rules/09-design-principles.md).
 
 ## 5. Prototype
 
@@ -57,4 +65,5 @@ AI-assisted design tends to converge on the same look whatever the subject. Anth
 - [ ] All states and breakpoints designed, with real and extreme content
 - [ ] Touch targets at least 24 by 24 px (aim for 44); nothing depends on hover alone
 - [ ] Copy reviewed against [14-ux-writing-and-ethics](../../rules/14-ux-writing-and-ethics.md); no deceptive patterns
+- [ ] Humane check ([rule 09 section 9](../../rules/09-design-principles.md)): plain language, forgiving flows, helpful errors, calm tone where stakes are high, no manufactured urgency
 - [ ] Ready for [design-to-code-handoff](../design-to-code-handoff/SKILL.md)

@@ -25,6 +25,8 @@ A chart answers a question. Start from the question and the audience, not from t
 
 References: [Financial Times Visual Vocabulary](https://github.com/Financial-Times/chart-doctor/tree/main/visual-vocabulary), [Data Viz Project](https://datavizproject.com/), [From Data to Viz](https://www.data-to-viz.com/).
 
+The `chart` domain of [ui-ux-pro-max](../ui-ux-pro-max/SKILL.md) (25 chart types) can list candidates for a question. Confirm the choice against sections 2 and 5 before building.
+
 ## 2. Honest encoding
 
 - Bar charts start at zero. Line charts may zoom in but label the axis clearly.

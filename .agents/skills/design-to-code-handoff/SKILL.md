@@ -29,6 +29,8 @@ The goal is code that matches the design's intent, uses the system's tokens and 
 | Prototype interactions | Real HTML behaviour plus motion tokens ([motion-and-interaction](../motion-and-interaction/SKILL.md)) | |
 | Images and icons | Exported, optimised assets ([13-visual-assets-and-licensing](../../rules/13-visual-assets-and-licensing.md)); icon components from the icon library | |
 
+Components taken from a registry or generator (21st.dev, shadcn registries, AI tools) are third-party code: follow [21-design-intelligence](../../rules/21-design-intelligence.md) section 4. Read the code, check each component's licence, map its values to tokens, audit accessibility, and drop dependencies you do not need before adopting it.
+
 ## 3. Fill the gaps a mockup never shows
 
 Before coding, list and resolve (with the designer, or by stating the assumption): all states (rule 09 section 4), keyboard and focus behaviour, screen-reader names and headings, error and empty content, loading behaviour, long and translated text, zoom and reflow, reduced motion, dark mode, and what happens between breakpoints.

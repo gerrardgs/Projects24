@@ -8,7 +8,7 @@ metadata:
 
 # Anti-Slop Filter
 
-A filter, not a style guide: it removes technique without purpose and fabricated content, then requires the result to have its own character. It never prescribes colours, fonts or layouts; direction comes from the brand. Adapted from [antislop](https://github.com/miqdadbadjuber/anti-slop) by Miqdad Badjuber (MIT; version 3.2.21, reviewed at commit `69416cf` on 2026-10-23). Pattern catalogues: [UI](references/ui-patterns.md), [writing](references/writing-patterns.md), [code comments](references/code-comments.md). This skill sits on top of [09-design-principles](../../rules/09-design-principles.md), [10-accessibility](../../rules/10-accessibility.md) and [14-ux-writing-and-ethics](../../rules/14-ux-writing-and-ethics.md); where they are stricter, they win.
+A filter, not a style guide: it removes technique without purpose and fabricated content, then requires the result to have its own character. It never prescribes colours, fonts or layouts; direction comes from the brand. Adapted from [antislop](https://github.com/miqdadbadjuber/anti-slop) by Miqdad Badjuber (MIT; version 3.2.21, reviewed at commit `69416cf` on 2026-10-23; the two gates for semantics and for performance mechanisms follow commit `941b153` of 2026-11-01, version 3.2.25, in our own words). Pattern catalogues: [UI](references/ui-patterns.md), [writing](references/writing-patterns.md), [code comments](references/code-comments.md). This skill sits on top of [09-design-principles](../../rules/09-design-principles.md), [10-accessibility](../../rules/10-accessibility.md) and [14-ux-writing-and-ethics](../../rules/14-ux-writing-and-ethics.md); where they are stricter, they win.
 
 ## 1. Choose the mode
 
@@ -22,6 +22,8 @@ A filter, not a style guide: it removes technique without purpose and fabricated
 - No direction and the user can be asked: ask one decisive question ("closer to calm and editorial, or bold and experimental?").
 - No direction and nobody to ask: label the result **draft without direction**, use calm dials (1, 1, 1), and do not present it as a deliverable.
 - When the direction asks for a pattern this filter flags, name the element and the rule it collides with and ask the owner to keep or drop it; record the answer in one line. A bold palette or an unusual typeface is identity, not slop.
+- The project's own identity brief ([project-design-identity](../project-design-identity/SKILL.md)) is the direction when it exists; when it does not, write one before building, so the result differs from the portfolio's other projects.
+- A design database ([ui-ux-pro-max](../ui-ux-pro-max/SKILL.md)) or a component generator is an input to the Design Read, not a substitute for it. A result that would be identical for any similar product is a default and needs a written reason or a revision ([21-design-intelligence](../../rules/21-design-intelligence.md) section 2).
 
 ## 3. Declare a Design Read and three dials
 
@@ -44,6 +46,10 @@ Hold the dials from the first section to the last; the output must match them (r
 | Working controls | Every link, button, menu, form and toggle does something real; no navigation to pages that do not exist. Unbuilt features are left out, or shown as "Coming soon" and listed under "Not done" in the report | [09-design-principles](../../rules/09-design-principles.md) section 4 |
 | States | Empty, loading and error states for everything that shows data | [09-design-principles](../../rules/09-design-principles.md) section 4 |
 | Accessibility | Contrast measured over the whole area text crosses (gradients and photos included): 4.5:1, or 3:1 for large text (24 px, or 18.66 px bold); keyboard operable with visible focus | [10-accessibility](../../rules/10-accessibility.md) |
+| Semantics and affordances | Actions are `<button>`, navigation is `<a href>` to a real destination, never a clickable `div` or `span`. Every control has an accessible name (icon-only buttons get an `aria-label` or visually hidden text; the icon is hidden from assistive technology); every image has `alt` (empty when decorative); every field has a visible label. Enabled controls show a pointer cursor, set once in the base styles, disabled ones a not-allowed cursor. Hover, active and disabled states differ from each other and never rely on colour alone. ARIA never contradicts the native role | [10-accessibility](../../rules/10-accessibility.md) sections 1 and 2 |
+| Motion | Non-essential motion stops under `prefers-reduced-motion: reduce`; anything moving for more than 5 seconds has a pause control ([SC 2.2.2](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html)) | [motion-and-interaction](../motion-and-interaction/SKILL.md) |
+| Whole documents | When the task produces a page or app shell (not a component): `<html lang>`, a unique `<title>`, landmarks (`header`, `nav`, `main`, `footer`), one `h1` without skipped levels, no `user-scalable=no` or `maximum-scale=1` in the viewport meta | [10-accessibility](../../rules/10-accessibility.md) |
+| Performance mechanisms | `<img>`, `<video>` and `<iframe>` have `width` and `height` or `aspect-ratio`, and space is reserved for late content. The hero image is an `<img>` in the HTML, not lazy, with `fetchpriority="high"`. No third-party script blocks rendering in `<head>`. Never report a Lighthouse score or Core Web Vitals number that was not measured; say "not measured" (the thresholds are field data from real users) | [12-web-performance](../../rules/12-web-performance.md) sections 1, 2 and 4 |
 | Mobile | No horizontal overflow or clipped text at 320 CSS px; comfortable targets (aim for 44 by 44 px, never below 24 by 24) | [css-architecture-and-responsive](../css-architecture-and-responsive/SKILL.md) |
 | Themes | Every theme you ship works in full, with contrast checked in each | [10-accessibility](../../rules/10-accessibility.md) section 3 |
 | Built in source | Features live in the source where they belong, never added by a script that rewrites CSS or code with string replacement | [02-clean-code](../../rules/02-clean-code.md) |
@@ -81,6 +87,7 @@ Not done:     <placeholders left, with labels>
 
 - [ ] Direction loaded (or the output labelled as a draft), Design Read and dials declared and matched
 - [ ] Every hard gate passes with recorded evidence, including a click-through
+- [ ] Controls are native with names, pointer cursor and distinct states; media has dimensions; the hero image is not lazy; every performance number was measured or says "not measured"
 - [ ] Every flagged technique has a one-line written reason, or is gone
 - [ ] Copy and code comments checked against the writing and comment catalogues
 - [ ] Delivery report attached

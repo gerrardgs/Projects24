@@ -82,3 +82,15 @@ A diagnostic scan, not a ban list. One pattern on its own is fine when it serves
 | :--- | :--- |
 | No visual identity | Swap the name and logo: if it still fits another product, it is generic |
 | Clone of a famous product | Looks like a well-known product's site without being asked; use references as inspiration, never as a template |
+
+## Dated tells: when the fix becomes the look
+
+A tell is a device that reads as generated because it is produced by default, not because it is bad: most began as good ideas on good sites. Entries are dated, because the list moves. A published "use this instead" becomes the next wave within months, so the answer to a tell is a procedure (derive the choice from the subject, deal several directions, choose one), never a named replacement. Observed in the registry of [leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT, commit `12af471`, read 2026-11-02); the waves are the author's reading of generated pages, not a measurement.
+
+| Wave (as dated there) | Tell | Keep it only when |
+| :--- | :--- | :--- |
+| 2023 to 2024 | Violet or indigo gradients, gradient-filled headline text, glass panels, a glowing "Get started" button, soft shadow under every card, three icon cards in rounded squares, emoji as icons | A brand reason is written down |
+| 2025 | An eyebrow label above every heading, a pill badge above the hero ("New", "Beta"), one word of the headline in italic or colour, a bento grid as the feature section, near-black with one neon accent and a glow, a floating blurred pill navigation, a fake dashboard of grey bars, a pulsing "available" dot, fade-and-rise on every section | The element carries real information or state |
+| 2025 to 2026 | The "fix" for the above that became the look: a cream ground with a terracotta or rust accent, a high-contrast or soft serif display as the shortcut to "premium", an oversized italic serif headline | It comes from the subject and the audience, not from the last fix |
+
+Also read: [design-study](../../design-study/SKILL.md) section 5. Record the date when you add a row.

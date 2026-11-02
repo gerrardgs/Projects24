@@ -156,6 +156,45 @@ brand motion rules. Run a flash and pattern test on the final render and give a 
 alternative for the web. For Lottie, use dotLottie or a light lottie-web build.
 ```
 
+**Design identity for a project**
+```text
+Use the human-design-nature and project-design-identity skills. Project: <name>. Mode: <persuade,
+operate, read or experience>. Audience and context: <what you know; mark unknowns>. First run
+the identity check against my portfolio registry with --gaps and show me the free space. Then write
+the identity brief from the template: personality, signature decisions with reasons and evidence
+IDs, a "Not like" list, open questions and a change log. Do not copy another product's look. Run
+the check again and show me the result. Wait for my approval before implementing any tokens.
+```
+
+**Study a reference (observe, imitate, modify)**
+```text
+Use the design-study skill. Reference: <link, or a study card S-nn>. For this project: <name>.
+Observe it: write what you can state as fact apart from your impression, and what idea it
+expresses. Check its licence status; if it is restricted or unknown, we imitate only the
+technique, structure or pattern, never its assets, text or code. Practise the technique in a
+scratch page with our own content, then modify it to fit our identity brief and write down what
+changed. Add the row to docs/DESIGN-STUDY.md, run check-study.mjs with --brief, and show me the
+result next to the reference. Wait for my approval before touching real screens.
+```
+
+**Source a claim about what users like**
+```text
+Someone wrote: "<claim about users' taste or behaviour>". Use the human-design-nature skill. Find the
+evidence register entry that supports it. If there is none, say so, list what the register does
+support, and propose the research needed to add an entry (primary source, date, strength, limits).
+Do not state the claim as a fact in the meantime.
+```
+
+**Audit into plans for another agent**
+```text
+Use the improve-plans skill in read-only mode on <repository or folder>. Do recon, audit at the
+<quick, standard or deep> level, open every cited location yourself, and show me the vetted findings
+with leverage order and what you did not audit. Wait for my selection before writing any plan file.
+Never write a secret value. Then run check-plans.mjs on the plans folder and report the result.
+```
+
+Layout prompt collections such as [vibeprompts.dev](https://vibeprompts.dev/) (286 prompts on 2026-11-02, no reuse terms stated) are for inspiration only: write your own prompts and keep the brief, the tokens and the identity check in charge.
+
 ## 2. Design systems and Figma
 
 **Implement a Figma frame**

@@ -1,0 +1,6 @@
+{
+  "projects": [
+    { "name": "Example Health Companion", "path": "example-health-companion.identity.md" },
+    { "name": "Example Harbour Journal", "path": "example-harbour-journal.identity.md" }
+  ]
+}
