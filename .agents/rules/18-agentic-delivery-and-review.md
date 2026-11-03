@@ -25,6 +25,7 @@ Agents lose quality as their context fills, collide when they share a folder, an
 
 - Run an agent unattended only when the user approved the units, the iteration limit and the exact agent command, and every unit ends in checks a machine runs.
 - Run it on a feature branch in its own worktree, preferably in a container or VM without credentials. Never use a mode that skips permission checks (`--dangerously-skip-permissions`, `bypassPermissions` and similar) outside a disposable sandbox. Give the agent an allow-list of the project's commands instead.
+- Choose the loop on purpose ([loop-engineering](../skills/agent-delivery-loop/references/loop-engineering.md)): turn-based when a person owns the check, goal-based (`/goal`) when a machine can verify the end state, time-based (`/loop`, cloud scheduled tasks) for a trigger, proactive for recurring well-defined work. A goal condition names its check and its limit and is checked with `check-goal.mjs` first; creating a cloud scheduled task, which gives a service access to repositories and connectors, needs the owner's approval.
 - After every iteration, the project's verify command passes and the tree is clean. Otherwise the loop stops for a person. No pushing, deploying or publishing from a loop.
 - Set limits on iterations, time and spending. A unit that does not progress over two iterations is split or clarified, not retried with a larger limit.
 - A finished loop is not a reviewed change. Review the whole branch and confirm each acceptance criterion before anything merges.

@@ -2,6 +2,15 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.23.0: loop engineering (2026-11-04)
+
+The repository owner approved adding the four loop types of Anthropic's "Loop engineering with Claude" (turn-based, goal-based, time-based, proactive). The Claude Code documentation pages for [/goal](https://code.claude.com/docs/en/goal), [/loop](https://code.claude.com/docs/en/scheduled-tasks) and [cloud scheduled tasks](https://code.claude.com/docs/en/routines) were read on 2026-11-04 to check each feature, limit and version.
+
+- **`agent-delivery-loop`**: new reference `loop-engineering.md` and a "Which loop keeps the agent working?" table in the skill.
+- **Tested helper `assets/check-goal.mjs`** (12 tests): rejects a goal condition with no bound, no stated check, more than 4,000 characters, or an outward action (push, deploy, publish, merge, delete); warns about vague words, stacked conditions and missing constraints.
+- **Rule 18 section 3**: choose the loop on purpose; a goal names its check and limit; creating a cloud scheduled task needs the owner's approval.
+- Docs: operational manual row.
+
 ## 1.22.0: design study (observe, imitate, modify), taste-skill, and page metadata (2026-11-02)
 
 The repository owner asked to add [leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT, commit `12af471`) and to make sure design references and assets can be stored, studied and used by the method "observe, imitate, modify". The repository was read as data; nothing was installed or run from it (no `npx skills add`, none of its scripts), and none of its libraries, images or scripts are copied.

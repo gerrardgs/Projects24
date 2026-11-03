@@ -26,6 +26,17 @@ Both were read on 2026-10-29 and are adapted to this specification. Approval com
 
 The modes combine. A phase can end its Plan step with a stories file, and the story loop then becomes its Execute step.
 
+**Which loop keeps the agent working?** Four kinds of loop differ in what you hand off ([references/loop-engineering.md](references/loop-engineering.md)):
+
+| Loop | You hand off | Use it when | Reach for |
+| :--- | :--- | :--- | :--- |
+| Turn-based | the check | exploring or deciding | your own verification skill or checklist |
+| Goal-based | the stop condition | you can state and verify "done" | `/goal`, checked first with `node assets/check-goal.mjs "<condition>"`; the story loop for large work |
+| Time-based | the trigger | work on a schedule or outside the project | `/loop` in a session, a cloud scheduled task for work that must run unattended |
+| Proactive | the prompt | recurring, well-defined work | the above, with a person deciding what merges |
+
+Loops never push, deploy, publish or merge on their own, and never start before the user approved the plan, the limits and the exact prompt or condition.
+
 ## 2. Principles that apply in both modes
 
 1. **State lives on disk, not in the conversation.** Decisions, plans, progress and verdicts go into files a fresh session can read: `STATE.md` and the phase files, or the stories file and `progress.md`. After a reset, read them first.
@@ -70,6 +81,7 @@ When the route to the goal is not clear yet, chart the decisions first (wayfindi
 
 ## Done when
 
+- [ ] The loop type fits the work, a goal condition was checked with `check-goal.mjs`, and every loop has a turn, time or spending limit
 - [ ] The mode fits the work, and the user approved the plans or the stories file
 - [ ] State files show the current position and survive a session reset
 - [ ] Every unit fits one fresh context and ends in machine-checked criteria
