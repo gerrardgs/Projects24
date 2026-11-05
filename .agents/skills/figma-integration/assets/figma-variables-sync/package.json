@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@figma/rest-api-spec": "^0.44.0",
+    "@figma/rest-api-spec": "^0.46.0",
     "@types/node": "^22.18.0",
     "typescript": "^7.0.2"
   }
