@@ -53,6 +53,11 @@ A new worktree has the tracked files only: no dependencies, no `.env`, no build 
 2. Merge or rebase the branch into the integration branch in the order the plan defines (one wave at a time, see [agent-delivery-loop](../agent-delivery-loop/SKILL.md)), then run the checks again on the integration branch.
 3. Review the integration branch as a whole ([rigorous-code-audit](../rigorous-code-audit/SKILL.md)).
 4. Report each worktree's path, branch and state, and propose removal. Remove only after the user agrees, and only worktrees without uncommitted work.
+5. **Finishing a branch** (ideas adapted, in our own words, from the `finishing-a-development-branch` skill of [obra/superpowers](https://github.com/obra/superpowers), MIT, commit `2ce8aa1`, read 2026-11-05). Verify first: the full test suite passes, otherwise report the failures and stop. Confirm the base branch with the user instead of guessing it; merging into the wrong base is expensive to undo. Then present the options and wait for the user's decision:
+   - merge into the base branch locally, run the checks on the merged result, then clean up;
+   - push the branch and open a pull request, only when the user asks for it and approves each GitHub action; keep the worktree for review feedback;
+   - keep the branch and the worktree as they are for later.
+   Discarding the work happens only when the user asks for exactly that, after you list what would be lost. In a detached-HEAD worktree that another tool manages, offer no merge and leave it in place.
 
 ## Done when
 

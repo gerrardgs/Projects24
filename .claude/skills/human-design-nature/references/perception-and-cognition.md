@@ -35,6 +35,6 @@ What the registry supports about seeing, judging and processing an interface. En
 | Campaign or portfolio | Raise novelty and complexity on purpose, and still keep controls legible |
 | A flow is failing | Fix the flow; do not add polish |
 
-## 7. Not used, deliberately
+## 7. The popular UX laws, with their limits
 
-Laws and numbers that circulate widely (Hick's law, Fitts's law, "7 plus or minus 2", golden-ratio layouts) are not in the register because their primary papers were not checked in this review. They may be right; cite them only after adding an entry.
+Four laws that circulate widely are now in the register with the strength their sources support. Read [ux-laws](ux-laws.md) before citing one: each has a narrow original meaning and a common over-reading.

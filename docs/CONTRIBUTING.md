@@ -46,6 +46,18 @@ metadata:
 - Body under 500 lines; move detail to `references/` and templates to `assets/`, linked one level deep from `SKILL.md`.
 - Add the skill to the skills index `.agents/SKILLS.md` (and its category to `AGENTS.md` section 5 if it is new) and, if relevant, to the scenario router in `docs/AGENT-OPERATIONAL-MANUAL.md`.
 
+#### Writing a skill that works
+
+Practices adapted, in our own words, from Anthropic's `skill-creator` ([anthropics/skills](https://github.com/anthropics/skills), Apache-2.0, commit `ca45fc4`, read 2026-11-05):
+
+- **Capture intent first**: what the skill lets an agent do, which phrases and situations should trigger it, what output it produces, and how you will know it works. Skills with checkable output (file transforms, fixed procedures, generated code) deserve test prompts; skills about taste or style need review by a person.
+- **The description is the trigger.** Put what the skill does and every situation to use it in the description, in the words a user would type; the body is loaded only after the skill is chosen. Keep it within the limit above.
+- **Load in three levels**: the name and description are always in context, the body when the skill is chosen (aim under 500 lines), and references, assets and scripts only when needed. Give a long reference (over about 300 lines) a table of contents, and say in `SKILL.md` when to read each file. Organise by variant (one reference per framework or domain) so the agent reads only the one it needs.
+- **Explain why**, in the imperative, instead of a wall of capitals. A reason lets the agent handle a case you did not foresee; a bare MUST does not. Re-read the draft with fresh eyes and cut what does not change behaviour.
+- **No surprises**: a skill's contents must match what its description says, and it contains no malicious or deceptive instructions.
+- **Test with realistic prompts**, two or three that a real user would write, and compare the agent with the skill against the agent without it. Revise from what you see, then widen the set. Check the trigger separately: does the description cause the skill to load for the right requests and stay out of the wrong ones?
+- **Record sources and licences** of anything adapted ([21-design-intelligence](../.agents/rules/21-design-intelligence.md) section 5 in the design repository).
+
 ## 3. Links
 
 - Relative paths only; never `file://`.

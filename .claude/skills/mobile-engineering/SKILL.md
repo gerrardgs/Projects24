@@ -67,6 +67,10 @@ API keys shipped in an app are public. Anything secret stays on the server.
 - Accessibility: labels for every control (`contentDescription`, `accessibilityLabel`, `Semantics`, React Native `accessibilityLabel` and `accessibilityRole`), logical focus order, dynamic type, contrast, target sizes, and tests with TalkBack and VoiceOver. Guides: [Android](https://developer.android.com/guide/topics/ui/accessibility), [Flutter](https://docs.flutter.dev/ui/accessibility-and-internationalization/accessibility), [React Native](https://reactnative.dev/docs/accessibility).
 - Crash and error reporting in release builds, without collecting personal data beyond policy.
 
+To review an app against Apple's guidelines, use [apple-hig-review](references/apple-hig-review.md) (a method with five lenses, severity and report format, and a topic map to the HIG pages; it does not copy Apple's text) and [apple-cross-platform-and-glass](references/apple-cross-platform-and-glass.md) (Apple's vocabulary in Flutter, React Native, Tauri and Electron terms, a Liquid Glass checklist, auditing code, and Apple Pay marks).
+
+Reference notes for two common stacks: [modern Swift](references/swift-modern.md) (value types, Swift 6.2 concurrency, SwiftUI) and [animation in React Native and Expo](references/expo-animation.md) (decision order, UI-thread rules, haptics). For a web app that must feel native on a phone see [mobile-web-native-feel](../css-architecture-and-responsive/references/mobile-web-native-feel.md).
+
 ## 6. Release
 
 - Version code and version name (Android) or build and marketing version (iOS) incremented on every release.

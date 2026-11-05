@@ -14,7 +14,7 @@ Motion should explain (where something came from, what changed, what is happenin
 
 Animate to: show cause and effect (a button press, an item added to a cart), preserve context across a change (expanding a card into a page), indicate progress or system status, or draw attention to something important once. Do not animate to fill time, delay users, or loop decorations next to reading content.
 
-For the full decision order, review standards, frame-drop diagnosis and how to remove motion that has not earned its place, see [references/motion-craft.md](references/motion-craft.md).
+For the full decision order, review standards, frame-drop diagnosis and how to remove motion that has not earned its place, see [references/motion-craft.md](references/motion-craft.md). For touch and pointer gestures, springs, momentum and translucent layers see [fluid-motion](references/fluid-motion.md); for how much motion fits the product and which motion tells to refuse see [motion-context-and-tells](references/motion-context-and-tells.md); for choosing and licensing a library (CSS, Motion, GSAP, Lenis, React Bits) see [motion-tools](references/motion-tools.md).
 
 ## 2. Timing and easing tokens
 

@@ -21,6 +21,12 @@ const COLUMNS = ["ID", "Finding we use", "Source", "Type", "Strength", "Read as"
 const ID_PATTERN = /^E-\d{2}$/;
 const DAY_MS = 86_400_000;
 
+/** Today's calendar date in the user's own time zone, as midnight UTC, so that a date written today is never "in the future". */
+const localToday = () => {
+  const now = new Date();
+  return new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+};
+
 /** Entries from the register table: rows whose first cell is an id. Pure. */
 export function parseRegister(text) {
   const entries = [];
@@ -128,7 +134,7 @@ const VALUE_FLAGS = {
 };
 
 function parseOptions(argv) {
-  const options = { register: DEFAULT_REGISTER, today: new Date(), maxAgeDays: 365, strict: false };
+  const options = { register: DEFAULT_REGISTER, today: localToday(), maxAgeDays: 365, strict: false };
   const rest = [...argv];
   while (rest.length > 0) {
     const argument = rest.shift();

@@ -20,6 +20,12 @@ export const SCOPES = new Set(["technique", "structure", "pattern", "asset", "te
 const BORROWING_SCOPES = new Set(["asset", "text", "code"]);
 const COLUMNS = ["ID", "Reference", "Seen", "Status", "Observed", "Imitated", "Modified", "Scope", "Credit", "Used in"];
 const DAY_MS = 86_400_000;
+
+/** Today's calendar date in the user's own time zone, as midnight UTC, so that a date written today is never "in the future". */
+const localToday = () => {
+  const now = new Date();
+  return new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+};
 const REUSE_WARNING_ROWS = 3;
 const DEFAULT_CARDS = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "references", "study-cards.md");
 
@@ -175,7 +181,7 @@ function applyArgument(options, argument, rest) {
 }
 
 function parseOptions(argv) {
-  const options = { ledgers: [], cards: DEFAULT_CARDS, today: new Date(), maxAgeDays: 365, strict: false };
+  const options = { ledgers: [], cards: DEFAULT_CARDS, today: localToday(), maxAgeDays: 365, strict: false };
   const rest = [...argv];
   while (rest.length > 0) applyArgument(options, rest.shift(), rest);
   if (options.ledgers.length === 0) throw new Error("give at least one ledger file");

@@ -53,6 +53,8 @@ Use three tiers, and let components depend only on the upper two:
 - Document each component in Storybook (or the project's docs site): purpose, when not to use it, props, every state as a story, do and don't examples, accessibility notes, and the matching Figma component (Code Connect).
 - Test components: unit or interaction tests, accessibility checks on every story (Storybook a11y addon / axe), and visual regression ([frontend-testing-and-visual-qa](../frontend-testing-and-visual-qa/SKILL.md)).
 
+Using shadcn/ui (source you copy and own) under your own tokens: [references/shadcn-ui.md](references/shadcn-ui.md).
+
 ## 5. Govern and release
 
 - Version the package with Semantic Versioning ([08-git-workflow](../../rules/08-git-workflow.md)): renaming or removing a token or component prop is a breaking change. Deprecate first (DTCG `$deprecated`, JSDoc `@deprecated`, console warnings in development), then remove in the next major version.

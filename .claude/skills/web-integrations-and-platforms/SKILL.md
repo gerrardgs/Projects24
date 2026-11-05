@@ -48,6 +48,8 @@ Every integration starts with [04-dependencies](../../rules/04-dependencies.md) 
 - Audit and fix the head of a page (title, description, canonical, indexing, social cards, icons, structured data, language) with [references/metadata.md](references/metadata.md).
 - Documentation sites may also publish an [`llms.txt`](https://llmstxt.org/): a community proposal, not a standard, for a Markdown index that points language models to the key pages. It complements, never replaces, accessible HTML and a sitemap.
 
+Hosted services that often back these features (Clerk for sign-in, UploadThing for uploads, PostHog for analytics, Upstash for cache, Better Stack for monitoring) have integration notes in [references/services.md](references/services.md).
+
 ## 7. Third-party scripts, embeds and consent
 
 - Every script runs with full page privileges: load it only when needed, after consent where required, with `async` or `defer`, from the vendor's official URL, with Subresource Integrity where the vendor publishes stable files, and allowed explicitly in the CSP.

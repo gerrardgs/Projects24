@@ -2,6 +2,24 @@
 
 All notable changes to this project are documented here. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.24.0: motion, mobile, UX laws, connectors and services (2026-11-05)
+
+The repository owner asked to add a further list of skills, connectors, services and design references (Apple Look and Apple Motion, UX laws, Perplexity, Firecrawl, PostHog, Composio, Graphify, Strix, Clerk, UploadThing, Upstash, Better Stack, GSAP, Lenis, React Bits and others), each to be relevant, accountable and audited. Every source was read as data in its own repository or documentation on 2026-11-05, its licence checked, and nothing was installed, run or registered. Versions were looked up in the npm and PyPI registries and cross-checked against the text. Where a page could not be read (Apple's JavaScript-rendered guidelines) no claim is made from it.
+
+### Added
+- **Mobile and web feel**: `mobile-engineering/references/` gains `apple-hig-review.md` (the five-lens review method, severity scale, report format and a topic map to Apple's HIG pages) and `apple-cross-platform-and-glass.md` (Apple's vocabulary for Flutter, React Native, Tauri and Electron, a Liquid Glass checklist, auditing code, and Apple Pay marks with App Review Guideline 4.9 read on Apple's page); the concepts come from `dickwu/apple-design-skill` as the owner decided (concepts only, in our own words: it has no licence file and bundles copies of Apple's HIG text, so no text, table or script is copied), `swift-modern.md` and `expo-animation.md`; a web-app-feels-native-on-a-phone reference (`mobile-web-native-feel.md`). All three adapted from `emilkowalski/skill` (MIT, commit `f1090be`).
+- **Connectors**: the MCP references list Perplexity, Firecrawl, PostHog, Graphify, Composio and an updated Playwright entry with the facts read from their documentation (tools, authentication, credits, security notes), and record reviews: claude-mem and the Superpowers plugin not adopted, Roo Code retired (archived 2026-05-15), `npx skills add` discovery only.
+- **Security tools**: a Strix section (Apache-2.0, `strix-agent` 1.7.0): authorised testing only, no piping an installer into a shell, findings are leads to reproduce.
+- **Ideas adopted in our own words**: receiving review feedback (rigorous-code-audit), finishing a branch (git-worktrees), a claim-versus-evidence table (anti-hallucination playbook) and an observation log (retrospectives), from obra/superpowers (MIT) and rebelytics/one-skill-to-rule-them-all (CC BY 4.0); skill-authoring practices (CONTRIBUTING) from Anthropic's `skill-creator` (Apache-2.0).
+- **Catalog**: Clerk, UploadThing, PostHog, Upstash and Better Stack with licences and versions looked up the same day.
+- **Design repository only**: `fluid-motion.md`, `motion-context-and-tells.md` (adapted from `kylezantos/design-motion-principles`, MIT) and `motion-tools.md` (GSAP Standard licence, Lenis, React Bits with the Commons Clause) in motion-and-interaction; `ux-laws.md` and evidence entries E-27 to E-30 (Fitts A, Jakob B, Hick-Hyman and Doherty C because only secondary sources could be read); `shadcn-ui.md`; `services.md`; DESIGN-REFERENCES (Refero, awesome-claude-design and MotionSites as link-only study references).
+- **Fix**: the evidence, identity and study checkers now use the local calendar date, so an entry dated today is no longer rejected as "in the future" for users east of UTC.
+
+### Not adopted
+
+- **claude-mem** and the **Superpowers** plugin (hooks and a background service; their non-duplicate ideas were rewritten into our own skills), **Roo Code** (archived on 2026-05-15, the extension shut down), **`npx skills add`** (discovery only), **Composio** (not recommended by default), and the unlicensed `dickwu/apple-design-skill` copy of Apple's guidelines. The repositories named `claude-code-apple-design-skill` and `kingkongshot/task-observer` do not exist; the real ones are `dickwu/apple-design-skill` and `rebelytics/one-skill-to-rule-them-all`.
+- Nothing was committed, tagged or pushed.
+
 ## 1.23.0: loop engineering (2026-11-04)
 
 The repository owner approved adding the four loop types of Anthropic's "Loop engineering with Claude" (turn-based, goal-based, time-based, proactive). The Claude Code documentation pages for [/goal](https://code.claude.com/docs/en/goal), [/loop](https://code.claude.com/docs/en/scheduled-tasks) and [cloud scheduled tasks](https://code.claude.com/docs/en/routines) were read on 2026-11-04 to check each feature, limit and version.

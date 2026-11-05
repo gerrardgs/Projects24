@@ -48,6 +48,22 @@ graph LR
 5. **Run**: tests or a minimal reproduction; read the actual output.
 6. **Label**: say explicitly what could not be checked and how the user can check it.
 
+## 2a. What counts as evidence for a claim
+
+A claim of success needs output from a command run in this task. Idea adapted, in our own words, from the `verification-before-completion` skill of [obra/superpowers](https://github.com/obra/superpowers) (MIT, commit `2ce8aa1`, read 2026-11-05).
+
+| Claim | Requires | Not enough |
+| :--- | :--- | :--- |
+| Tests pass | the test command's output showing no failures | an earlier run, "should pass" |
+| Linter is clean | the linter's output with zero errors | a partial check, extrapolation |
+| Build succeeds | the build command exiting with 0 | the linter passing, logs that look good |
+| A bug is fixed | the original symptom reproduced, then gone | the code changed, so it must be fixed |
+| A regression test works | it fails without the fix and passes with it | it passes once |
+| A sub-agent finished the work | the diff shows the changes | the agent reports success |
+| The requirements are met | a line-by-line check against them | the tests pass |
+
+Red flags in your own wording: "should", "probably", "seems to"; a success word ("done", "perfect") before the check ran; about to commit or open a pull request without running it; trusting an agent's report; "just this once". Confidence is not evidence.
+
 ## 3. When the environment blocks verification
 
 No network, missing tools, or a chat-only model: do not guess. Report like this:

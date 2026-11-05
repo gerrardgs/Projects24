@@ -72,3 +72,9 @@ A design skill, plugin or slash command is text that steers the agent plus, ofte
 - Imitate techniques freely; borrow assets, text or code only with a licence that allows it and the credit written down. A restricted or unknown reference is never imitated as an asset, text or code ([13-visual-assets-and-licensing](13-visual-assets-and-licensing.md)).
 - A modification is required. If the result would be recognised as its source, it is not finished.
 - Name no replacement font, colour or component as "the fix" for a generic look. Derive the choice from the subject, deal several directions and choose one, then run the identity check.
+
+## 8. Platform guidelines are read at their source
+
+- When a platform publishes design guidelines (Apple's Human Interface Guidelines, Material Design, the web platform's own documents), review against the live page and quote it with the date read ([03-verification](03-verification.md)). A third-party copy or summary is a lead, not a source, and a copy of the platform owner's text is not vendored ([13-visual-assets-and-licensing](13-visual-assets-and-licensing.md)).
+- Keep the platform's vocabulary and translate it for the framework in use; apply the principles everywhere and the platform conventions only on that platform.
+- A guideline that cannot be read with the tools at hand is reported as unverified, never stated as fact. The review method and the topic map are in [apple-hig-review](../skills/mobile-engineering/references/apple-hig-review.md).

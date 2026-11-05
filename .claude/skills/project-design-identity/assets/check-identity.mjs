@@ -70,6 +70,12 @@ const MIN_DIFFERING_SIGNATURE_AXES = 4;
 export const DEFAULT_MIN_DISTANCE = 0.4;
 const DAY_MS = 86_400_000;
 
+/** Today's calendar date in the user's own time zone, as midnight UTC, so that a date written today is never "in the future". */
+const localToday = () => {
+  const now = new Date();
+  return new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+};
+
 const validDate = (value) => {
   if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return undefined;
   const date = new Date(`${value}T00:00:00Z`);
@@ -303,7 +309,7 @@ function applyArgument(options, argument, rest) {
 }
 
 function parseOptions(argv) {
-  const options = { inputs: [], today: new Date(), minDistance: DEFAULT_MIN_DISTANCE, gaps: false, strict: false };
+  const options = { inputs: [], today: localToday(), minDistance: DEFAULT_MIN_DISTANCE, gaps: false, strict: false };
   const rest = [...argv];
   while (rest.length > 0) applyArgument(options, rest.shift(), rest);
   if (options.inputs.length === 0 && !options.registry)
